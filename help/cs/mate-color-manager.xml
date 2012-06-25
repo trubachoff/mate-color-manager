@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN" "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd" [
+<!ENTITY legal SYSTEM "legal.xml">
+<!ENTITY GFDL SYSTEM "fdl-appendix.xml">
+<!ENTITY app "MATE Color Manager">
+<!ENTITY application "<application>&app;</application>">
+<!ENTITY appversion "2.29.1">
+<!ENTITY manrevision "2.29.1">
+]>
+<!--
+      (Do not remove this comment block.)
+  Template Maintained by the MATE Documentation Project:
+    http://developer.gnome.org/projects/gdp
+  Template version: 2.0 beta
+  Template last modified Feb 12, 2002
+-->
+<!-- =============Document Header ============================= -->
+<article id="index" lang="cs">
+<!-- please do not change the id; for translations, change lang to -->
+<!-- appropriate code -->
+
+  <articleinfo>
+    <title><application>Správce barev MATE</application> Příručka uživatele</title>
+    <abstract role="description">
+      <para><application>Správce barev MATE</application> je program, který usnadňuje správu, instalaci a vytvoření profilů barev v pracovním prostředí MATE.</para>
+    </abstract>
+    <copyright>
+      <year>2009</year>
+      <holder>Richard Hughes (richard@hughsie.com)</holder>
+    </copyright><copyright><year>2010</year><holder>Milan Knížek (knizek@volny.cz)</holder></copyright>
+
+  <!-- translators: uncomment this:
+
+  <copyright>
+   <year>2006</year>
+   <holder>ME-THE-TRANSLATOR (Latin translation)</holder>
+  </copyright>
+
+  -->
+
+<!-- An address can be added to the publisher information.  If a role is
+     not specified, the publisher/author is the same for all versions of the
+     document.  -->
+    <publisher role="maintainer">
+      <publishername>Richard Hughes</publishername>
+    </publisher>
+
+     <legalnotice id="legalnotice">
+	<para>Je povoleno kopírovat, šířit a/nebo upravovat tento dokument za podmínek GNU Free Documentation License, verze 1.1 nebo jakékoli další verze vydané nadací Free Software Foundation; bez neměnných oddílů, bez textů předních desek a bez textů zadních desek. Kopie této licence je zahrnuta v oddílu jménem <ulink type="help" url="ghelp:fdl">GNU Free Documentation License</ulink> nebo v souboru COPYING-DOCS dodávaném s touto příručkou.</para>
+         <para>Tato příručka je součástí kolekce příruček MATE, distribuovaných pod licencí GNU FDL. Pokud chcete tento dokument šířit odděleně od kolekce, musíte přiložit kopii licence dle popisu v sekci 6 dané licence.</para>
+
+	<para>Mnoho užívaných jmen určených k zviditelnění produktů nebo služeb jsou ochranné známky. Na místech, kde jsou tato jména v dokumentaci užita a členové Dokumentačního projektu MATE jsou si vědomi skutečnosti, že se jedná o ochrannou známku, je takové jméno psáno velkými písmeny celé nebo s velkým písmenem na začátku.</para>
+
+	<para>DOKUMENT A JEHO UPRAVENÉ VERZE JSOU ŠÍŘENY V SOULADU SE ZNĚNÍM LICENCE GNU FREE DOCUMENTATION LICENSE S NÁSLEDUJÍCÍM USTANOVENÍM: <orderedlist>
+		<listitem>
+		  <para>DOKUMENT JE POSKYTOVÁN V PODOBĚ "JAK JE" BEZ ZÁRUKY V JAKÉKOLIV PODOBĚ, NEPOSKYTUJÍ SE ANI ODVOZENÉ ZÁRUKY, ZÁRUKY, ŽE DOKUMENT, NEBO JEHO UPRAVENÁ VERZE, JE BEZCHYBNÝ NEBO ZÁRUKY PRODEJNOSTI, VHODNOSTI PRO URČITÝ ÚČEL NEBO NEPORUŠENOSTI. RIZIKO NEKVALITY, NEPŘESNOSTI A ŠPATNÉHO PROVEDENÍ DOKUMENTU, NEBO JEHO UPRAVENÉ VERZE, LEŽÍ NA VÁS. POKUD KVŮLI TOMUTO DOKUMENTU, NEBO JEHO UPRAVENÉ VERZI, NASTANE PROBLÉM, VY (NIKOLIV PŮVODNÍ AUTOR NEBO JAKÝKOLIV PŘISPĚVATEL) PŘEBÍRÁTE JAKÉKOLIV NÁKLADY ZA NUTNÉ ÚPRAVY, OPRAVY ČI SLUŽBY. TOTO PROHLÁŠENÍ O ZÁRUCE PŘEDSTAVUJE ZÁKLADNÍ SOUČÁST TÉTO LICENCE. BEZ TOHOTO PROHLÁŠENÍ NENÍ, PODLE TÉTO DOHODY, POVOLENO UŽÍVÁNÍ ANI ÚPRAVY TOHOTO DOKUMENTU; DÁLE</para>
+		</listitem>
+		<listitem>
+		  <para>ZA ŽÁDNÝCH OKOLNOSTÍ A ŽÁDNÝCH PRÁVNÍCH PŘEDPOKLADŮ, AŤ SE JEDNÁ O PŘEČIN (VČETNĚ NEDBALOSTNÍCH), SMLOUVU NEBO JINÉ, NENÍ AUTOR, PŮVODNÍ PISATEL, KTERÝKOLIV PŘISPĚVATEL NEBO KTERÝKOLIV DISTRIBUTOR TOHOTO DOKUMENTU NEBO UPRAVENÉ VERZE DOKUMENTU NEBO KTERÝKOLIV DODAVATEL NĚKTERÉ Z TĚCHTO STRAN ODPOVĚDNÝ NĚJAKÉ OSOBĚ ZA PŘÍMÉ, NEPŘÍMÉ, SPECIÁLNÍ, NAHODILÉ NEBO NÁSLEDNÉ ŠKODY JAKÉHOKOLIV CHARAKTERU, VČETNĚ, ALE NEJEN, ZA POŠKOZENÍ ZE ZTRÁTY DOBRÉHO JMÉNA, PŘERUŠENÍ PRÁCE, PORUCHY NEBO NESPRÁVNÉ FUNKCE POČÍTAČE NEBO JINÉHO A VŠECH DALŠÍCH ŠKOD NEBO ZTRÁT VYVSTÁVAJÍCÍCH Z NEBO VZTAHUJÍCÍCH SE K POUŽÍVÁNÍ TOHOTO DOKUMENTU NEBO UPRAVENÝCH VERZÍ DOKUMENTU, I KDYŽ BY TAKOVÁTO STRANA BYLA INFORMOVANÁ O MOŽNOSTI TAKOVÉHOTO POŠKOZENÍ.</para>
+		</listitem>
+	  </orderedlist></para>
+  </legalnotice>
+
+
+   <!-- This file  contains link to license for the documentation (GNU FDL), and
+        other legal stuff such as "NO WARRANTY" statement. Please do not change
+        any of this. -->
+
+    <authorgroup>
+      <author role="maintainer">
+        <firstname>Richard</firstname>
+        <surname>Hughes</surname>
+        <email>richard@hughsie.com</email>
+      </author>
+<!-- This is appropriate place for other contributors: translators,
+      maintainers,  etc. Commented out by default.
+       <othercredit role="translator">
+        <firstname>Latin</firstname>
+        <surname>Translator 1</surname>
+        <affiliation>
+          <orgname>Latin Translation Team</orgname>
+          <address> <email>translator@gnome.org</email> </address>
+        </affiliation>
+        <contrib>Latin translation</contrib>
+      </othercredit>
+-->
+    </authorgroup>
+
+    <revhistory>
+      <revision>
+        <revnumber>2.0</revnumber>
+        <date>1. 11. 2009</date>
+        <revdescription>
+          <para role="author">Richard Hughes <email>richard@hughsie.com</email></para>
+          <para role="publisher">Richard Hughes</para>
+        </revdescription>
+      </revision>
+    </revhistory>
+
+    <legalnotice>
+      <title>Ohlasy</title>
+      <para>Pokud chcete oznámit chybu nebo navrhnout vylepšení vztahující se k aplikaci Správce barev MATE nebo této příručce, postupujte dle instrukcí na <ulink url="http://projects.gnome.org/mate-color-manager/bugs.html" type="http">kontaktní stránce <application>Správce barev MATE</application></ulink>.</para>
+<!-- Translators may also add here feedback address for translations -->
+    </legalnotice>
+  </articleinfo>
+
+  <indexterm zone="index">
+    <primary><application>Správce barev MATE</application></primary>
+  </indexterm>
+  <indexterm zone="index">
+    <primary>mate-color-manager</primary>
+  </indexterm>
+
+<!-- ============= Document Body ============================= -->
+<!-- ============= Introduction ============================== -->
+<section id="intro">
+  <title>Úvod</title>
+  <!-- manrevision 2.0 compatibility -->
+  <anchor id="aboutex"/>
+  <anchor id="notice"/>
+  <indexterm>
+    <primary><application>Správce barev MATE</application></primary>
+    <secondary>Příručka</secondary>
+    <tertiary>mate-color-manager</tertiary>
+  </indexterm>
+
+  <para>Správce barev MATE je souhrn aplikací, které uživateli pomáhají vytvořit, instalovat a spravovat profily barev zařízení v rámci <systemitem>pracovního prostředí MATE</systemitem>. Účelem je pomoci uživateli sladit barvy mezi všemi zařízeními. Výsledkem jsou konzistentní barvy obrázků či dokumentů bez ohledu na to, čím jsou zobrazeny či vytištěny.</para>
+  <para>Správce barev MATE poskytne vybrané profily ICC aplikacím podporujícím správu barev, čímž zajistí konzistentní správu barev v různých aplikacích.</para>
+  <para>Správce barev MATE používá profily ICC definované <ulink url="http://www.color.org" type="http"> International Color Consortium</ulink> k převodu barev charakteristických pro různá zařízení do standardního prostoru barev používaného <systemitem>pracovním prostředím MATE</systemitem>.</para>
+  <warning>
+    <para>Správce barev MATE by NEMĚL být používán k úpravě vzhledu (barev) vašeho pracovního prostředí. Nástroj na úpravu vzhledu najdete v menu Volby / Vzhled.</para>
+  </warning>
+
+</section>
+
+<section id="using">
+  <title>Použití</title>
+  <para><application>Správce barev MATE</application> se obvykle spouští při spuštění MATE, ale můžete jej spustit i ručně:</para>
+  <screen>
+    <prompt>bash$</prompt><userinput>mcm-apply <parameter>--verbose</parameter></userinput>
+  </screen>
+  <para>Okno s předvolbami <application>Správce barev MATE</application> může být spuštěno z hlavní nabídky MATE, ale též jej můžete spustit pomocí:</para>
+  <screen>
+    <prompt>bash$</prompt><userinput>mcm-prefs <parameter>--verbose</parameter></userinput>
+  </screen>
+  <para>Profily ICC by měly být importovány do <application>Správce barev MATE</application> pomocí zvolení souboru v okně Nautilu. Též můžete naimportovat soubor pomocí:</para>
+  <screen>
+    <prompt>bash$</prompt><userinput>mcm-import <filename><![CDATA[<filepath>]]></filename></userinput>
+  </screen>
+</section>
+
+<section id="import">
+  <title>Import profilů</title>
+  <para><application>Správce barev MATE</application> obsahuje program pro instalaci profilů pomocí prostého dvojitého kliknutí na ikonu souboru s profilem.</para>
+
+  <section id="import-install">
+    <title>Importovat profil ICC</title>
+    <figure>
+      <title>Okno Správce barev MATE po dvojitém kliknutí na soubor ICC nebo ICM</title>
+      <screenshot>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="figures/mcm-import.png" format="PNG"/>
+          </imageobject>
+        </mediaobject>
+      </screenshot>
+    </figure>
+    <note>
+      <para>Tlačítko pro instalaci se neobjeví v případě, je-li profil již nainstalován.</para>
+    </note>
+  </section>
+</section>
+
+<section id="preferences">
+  <title>Předvolby</title>
+
+  <para>Okno předvoleb vám umožňuje nastavit:</para>
+
+  <itemizedlist>
+    <listitem>
+      <para>Profil zařízení.</para>
+    </listitem>
+    <listitem>
+      <para>Gama, jas a kontrast.</para>
+    </listitem>
+  </itemizedlist>
+
+  <section id="preferences-basic">
+    <title>Základní předvolby</title>
+    <figure id="prefs-basic">
+      <title>Základní karta Správce barev MATE</title>
+      <screenshot>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="figures/mcm-basic.png" format="PNG"/>
+          </imageobject>
+        </mediaobject>
+      </screenshot>
+    </figure>
+    <para>Změna profilu zařízení. <orderedlist>
+        <listitem>
+          <para>Vyberte zařízení.</para>
+        </listitem>
+        <listitem>
+          <para>Vyberte požadovaný profil ze seznamu v rozbalovací nabídce.</para>
+        </listitem>
+      </orderedlist><tip>
+        <para>Pokud požadovaný profil není v seznamu, pak <orderedlist>
+            <listitem>
+              <para>Vyberte "jiný profil..."</para>
+            </listitem>
+            <listitem>
+              <para>Vyberte profil ICC pomocí zobrazeného okna Otevřít soubor.</para>
+            </listitem>
+            <listitem>
+              <para>V okně zvolte tlačítko Otevřít.</para>
+            </listitem>
+          </orderedlist></para>
+      </tip><tip>
+        <para>Pokud je profil chybný, pak se původní profil pro zvolené zařízení nezmění. Může se objevit informativní zpráva.</para>
+      </tip></para>
+  </section>
+
+  <section id="preferences-advanced">
+    <title>Pokročilé předvolby</title>
+    <figure id="prefs-advanced">
+      <title>Pokročilé předvolby Správce barev MATE</title>
+      <screenshot>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="figures/mcm-adjust.png" format="PNG"/>
+          </imageobject>
+        </mediaobject>
+      </screenshot>
+    </figure>
+    <para>Umožní vám upravit nastavení kalibrovaného zařízení nebo vytvořeného profilu.</para>
+    <tip>
+      <para>Volba pro jemné doladění je k dispozici pouze, pokud jste tuto volbu umožnili v MateConf (<menuchoice><guimenu>apps</guimenu><guisubmenu>mate-color-manager</guisubmenu><guimenuitem>show-fine-tuning</guimenuitem></menuchoice>).</para>
+    </tip>
+    <para>Klasické (CRT) monitory mají přirozené gama kolem 2,4 - 2,5 a LCD displeje obvykle emulují tutéž hodnotu.</para>
+    <para>Operační systémy Linux a MS Windows původně používaly kódování obrázků (grafiky) s kompenzací gama monitoru (tj. 1/2,2) a neaplikovaly žádné úpravy gama obrázků nebo vyhledávací tabulky barev (LUT) videokarty. Proto celkové gama vycházelo okolo 1,1 (což je užitečné pro pozorování obrazovky v prostředí domácnosti).</para>
+    <para>Apple kdysi používal kódování obrázků s gama blízkým 1/1,8, které se shodovalo s přirozenou gama tehdejších tiskáren (a aby se obrázky zobrazily správně na monitoru, Apple interně navíc aplikoval úpravu gama obrázků ve výši 1/1,45).</para>
+    <para>Nicméně, aby se Apple přiblížil požadavkům spotřebních výrobků, od OS X (verze 10.6 Snow Leopard) je výchozí kódování obrázků též s gama 1/2,2.</para>
+    <para>Dříve než budete dolaďovat gama ve Spráci barev MATE, měli byste vědět, jaké je gama vašeho monitoru, jakého gama chcete dosáhnout a spočíst si nutnou úpravu sami.</para>
+  </section>
+
+  <section id="preferences-profiles">
+    <title>Prohlížeč profilu</title>
+    <figure id="prefs-profiles">
+      <title>Karta s profily Správce barev MATE</title>
+      <screenshot>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="figures/mcm-scanner.png" format="PNG"/>
+          </imageobject>
+        </mediaobject>
+      </screenshot>
+    </figure>
+    <para>Umožní vám prohlédnout si detaily o nainstalovaných profilech.</para>
+  </section>
+
+  <section id="preferences-calibration">
+    <title>Kalibrace a vytvoření profilu</title>
+    <para><application>Správce barev MATE</application> může vytvořit profily ICC pomocí podporovaných měřících sond.</para>
+
+    <figure>
+      <title>První fáze je kalibrace, která zabere jen několik minut.</title>
+      <screenshot>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="figures/mcm-calibrate-default.png" format="PNG"/>
+          </imageobject>
+        </mediaobject>
+      </screenshot>
+    </figure>
+    <figure>
+      <title>Poslední fáze je charakterizace zařízení, která může trvat přes 15 minut.</title>
+      <screenshot>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="figures/mcm-calibrate-drawing.png" format="PNG"/>
+          </imageobject>
+        </mediaobject>
+      </screenshot>
+    </figure>
+
+    <para>Při kalibraci a vytváření profilu pro displej může být nutné změnit nastavení měřící sondy, aby fungovala v různých režimech. Může být nutné sundat sondu z obrazovky, aby šla změna režimu provést. Ujistěte se, že po změně nastavení sondy jste ji vrátili zpět na obrazovku.</para>
+    <figure id="prefs-dialogs-device-configure">
+      <title>Okno Správce barev MATE pro konfiguraci měřící sondy</title>
+      <screenshot>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="figures/mcm-device-configure.png" format="PNG"/>
+          </imageobject>
+        </mediaobject>
+      </screenshot>
+    </figure>
+
+    <para>Při kalibraci a vytváření profilu pro displej připojený pomocí VGA nebo DVI kabelu často nelze zjistit typ displeje. Pokud odpovíte správně, <application>Správce barev MATE</application> vytvoří kvalitnější profil pro dané zařízení.</para>
+    <figure id="prefs-dialogs-screen-type">
+      <title>Okno Správce barev MATE pro nastavení typu obrazovky</title>
+      <screenshot>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="figures/mcm-screen-type.png" format="PNG"/>
+          </imageobject>
+        </mediaobject>
+      </screenshot>
+    </figure>
+
+    <para>Při vytváření profilu pro tiskárnu můžete též vytvořit obrázky, které zašlete do minilabu. Detaily ohledně vytvoření těchto obrázků zůstanou uloženy ve vašem počítači, při obdržení vytištěných obrázků je pouze znovu vyberete a následně bude vytvořen profil pro minilab.</para>
+    <figure id="prefs-dialogs-print-mode">
+      <title>Okno Správce barev MATE pro nastavení režimu tisku</title>
+      <screenshot>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="figures/mcm-print-mode.png" format="PNG"/>
+          </imageobject>
+        </mediaobject>
+      </screenshot>
+    </figure>
+
+  </section>
+</section>
+
+<section id="faq">
+  <title>Často kladené otázky</title>
+  <para>Tento oddíl uvádí často kladené otázky na téma správy barev.</para>
+
+  <section id="faq-calibration-and-characterization">
+    <title>Jaký je rozdíl mezi kalibrací a charakterizací zařízení?</title>
+    <para>Mnoho lidí je z počátku zmateno ohledně rozdílu mezi kalibrací a charakterizací. Kalibrace je proces pozměňování chování zařízení z pohledu snímání či zobrazování barev. Obvykle se tak činí pomocí dvou mechanizmů: <orderedlist>
+        <listitem>
+          <para>Změna nastavení ovládání (tlačítek) nebo interních nastavení, které dané zařízení má.</para>
+        </listitem>
+        <listitem>
+          <para>Aplikace křivek na úpravu tonality kanálů barev v zařízení.</para>
+        </listitem>
+      </orderedlist></para>
+    <para>Podstatou kalibrace je uvedení zařízení do definovaného stavu s ohledem na jeho odezvu vůči barvám. Často se kalibrace používá jako každodenní prostředek k dosažení opakovatelného chování. Obvykle se kalibrace ukládá přímo v zařízení nebo ve specifických souborových formátech, které ukládají nastavení zařízení nebo kalibračních křivek pro jednotlivé kanály.</para>
+    <para>Charakterizace je <emphasis>uložení</emphasis> způsobu, jakým dané zařízení reprodukuje nebo reaguje na barvu. Výsledek charakterizace je obvykle uložen v profilu ICC daného zařízení. Profil sám o sobě barvy nijak nemodifikuje, avšak poskytne informace systémům jako je CMM (Color Management Modul - modul správy barev) nebo aplikaci podporující správu barev, aby tyto mohly upravit barvy, dojde-li ke kombinaci s jiným profilem zařízení. Zachovat shodu barev při převodu mezi různými zařízeními lze pouze v případě, kdy je známa charakteristika těchto zařízení.</para>
+    <tip>
+      <para>Všimněte si, že charakterizace (profil) je platná pouze pro zařízení, které je ve stejném stavu (kalibraci) jako když toto zařízení byl profil vytvářen.</para>
+    </tip>
+    <para>V případě profilů displejů je situace ještě zmatenější, neboť z důvodu "pohodlí" se velmi často informace o kalibraci ukládá přímo do profilu ICC. Zvykem je ukládat kalibraci do tzv. údaje <type>vcgt</type>. Ačkoliv je tento údaj uložen v profilu, žádný z běžných programů (CMM) pro práci s převody barev mezi jednotlivými zařízeními tuto informaci nepoužívá. A obdobně, programy pro kalibraci zařízení naopak nepracují s charakterizačními daty v profilu a používají pouze vcgt údaj.</para>
+  </section>
+
+  <section id="faq-missing-vcgt">
+    <title>Chybějí informace pro korekci celé obrazovky</title>
+    <para>Bohužel, mnoho profilů ICC dodaných výrobci displejů neobsahuje informaci nutnou pro korekci barev celé obrazovky. Tyto profily lze přesto použít pro aplikace, které umějí transformovat barvy pro zobrazení na displeji.</para>
+    <para>Abyste mohli vytvořit profil displeje, který obsahuje jak kalibrační tak i charakterizační údaje, potřebujete použít speciální měřící sondu zvanou kolorimetr nebo spektrofotometr.</para>
+  </section>
+
+  <section id="faq-supported-colorimeters">
+    <title>Které měřící sondy jsou podporovány?</title>
+    <para>Při práci s měřícími sondami spoléhá Správce barev MATE na ArgyllCMS. Následující měřící sondy pro displeje jsou podporovány:</para>
+    <itemizedlist>
+      <listitem>
+        <para>Gretag-Macbeth Eye-One Pro (spectrometer)</para>
+      </listitem>
+      <listitem>
+        <para>Gretag-Macbeth Eye-One Monitor (spectrometer)</para>
+      </listitem>
+      <listitem>
+        <para>Gretag-Macbeth Eye-One Display 1, 2 nebo LT (colorimeter)</para>
+      </listitem>
+      <listitem>
+        <para>X-Rite ColorMunki Design nebo Photo (spectrometer)</para>
+      </listitem>
+      <listitem>
+        <para>X-Rite ColorMunki Create (colorimeter)</para>
+      </listitem>
+      <listitem>
+        <para>Pantone Huey (colorimeter)</para>
+      </listitem>
+      <listitem>
+        <para>MonacoOPTIX (colorimeter)</para>
+      </listitem>
+      <listitem>
+        <para>ColorVision Spyder 2 a 3 (colorimeter)</para>
+      </listitem>
+      <listitem>
+        <para>Colorimètre HCFR (colorimeter)</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+  <section id="faq-supported-targets">
+    <title>Které typy obrazců jsou podporovány?</title>
+    <para>Správce barev MATE podporuje následující typy obrazců:</para>
+    <itemizedlist>
+      <listitem>
+        <para>CMP DigitalTarget</para>
+      </listitem>
+      <listitem>
+        <para>ColorChecker 24</para>
+      </listitem>
+      <listitem>
+        <para>ColorChecker DC</para>
+      </listitem>
+      <listitem>
+        <para>ColorChecker SG</para>
+      </listitem>
+      <listitem>
+        <para>i1 RGB Scan 14</para>
+      </listitem>
+      <listitem>
+        <para>LaserSoft DC Pro</para>
+      </listitem>
+      <listitem>
+        <para>QPcard 201</para>
+      </listitem>
+      <listitem>
+        <para>IT8.7/2</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+  <section id="faq-where-to-purchase-targets">
+    <title>Kde mohu koupit obrazce?</title>
+    <para>Obrazce můžete koupit od známých výrobců jako jsou KODAK, X-Rite a LaserSoft v různých internetových obchodech. Můžete je též koupit od <ulink url="http://www.targets.coloraid.de/" type="http">Wolfa Fausta</ulink> za velmi příznivou cenu.</para>
+  </section>
+</section>
+
+<section id="about">
+  <title>O programu</title>
+  <para>Správce barev MATE byl napsán Richardem Hughesem <email>richard@hughsie.com</email>. Další informace o tomto programu najdete na <ulink url="http://projects.gnome.org/mate-color-manager/" type="http">webové stránce <application>Správce barev MATE</application></ulink>.</para>
+  <para>Pokud chcete oznámit chybu nebo navrhnout vylepšení vztahující se k aplikaci Správce barev MATE nebo této příručce, postupujte dle instrukcí na <ulink url="http://projects.gnome.org/mate-color-manager/bugs.html" type="http">stránce chyb <application>Správce barev MATE</application></ulink>.</para>
+  <para>Tento program je šířen podle ustanovení GNU General Public License, vydávané Free Software Foundation; a to buď verze 2 této licence anebo (podle vlastního uvážení) kterékoliv pozdější verze. Kopii této licence naleznete na <ulink url="http://www.gnu.org/licenses/gpl.html" type="http">stránce projektu GNU</ulink> nebo v souboru COPYING přiloženém ke zdrojovým kódům tohoto programu. </para>
+</section>
+
+</article>

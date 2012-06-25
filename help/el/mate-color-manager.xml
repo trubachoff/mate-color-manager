@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN" "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd" [
+<!ENTITY legal SYSTEM "legal.xml">
+<!ENTITY GFDL SYSTEM "fdl-appendix.xml">
+<!ENTITY app "MATE Color Manager">
+<!ENTITY application "<application>&app;</application>">
+<!ENTITY appversion "2.29.1">
+<!ENTITY manrevision "2.29.1">
+]>
+<!--
+      (Do not remove this comment block.)
+  Template Maintained by the MATE Documentation Project:
+    http://developer.gnome.org/projects/gdp
+  Template version: 2.0 beta
+  Template last modified Feb 12, 2002
+-->
+<!-- =============Document Header ============================= -->
+<article id="index" lang="el">
+<!-- please do not change the id; for translations, change lang to -->
+<!-- appropriate code -->
+
+  <articleinfo>
+    <title>Εγχειρίδιο της <application>Διαχείρισης χρώματος του MATE</application></title>
+    <abstract role="description">
+      <para>Η <application>Διαχείριση χρώματος MATE</application> είναι ένα πρόγραμμα της συνεδρίας που καθιστά εύκολη τη διαχείριση, εγκατάσταση και δημιουργία προφίλ χρώματος στην επιφάνεια εργασίας του MATE.</para>
+    </abstract>
+    <copyright>
+      <year>2009</year>
+      <holder>Richard Hughes (richard@hughsie.com)</holder>
+    </copyright><copyright><year>2010</year><holder>Michael Kotsarinis (mk73628@hotmail.com)</holder></copyright>
+
+  <!-- translators: uncomment this:
+
+  <copyright>
+   <year>2006</year>
+   <holder>ME-THE-TRANSLATOR (Latin translation)</holder>
+  </copyright>
+
+  -->
+
+<!-- An address can be added to the publisher information.  If a role is
+     not specified, the publisher/author is the same for all versions of the
+     document.  -->
+    <publisher role="maintainer">
+      <publishername>Richard Hughes</publishername>
+    </publisher>
+
+     <legalnotice id="legalnotice">
+	<para>Χορηγείται η άδεια για αντιγραφή, διανομή ή/και τροποποίηση αυτού του εγγράφου κάτω από τους όρους του GNU Free Documentation License (GFDL) έκδοσης 1.1 ή οποιαδήποτε μεταγενέστερης έκδοσης δημοσιευμένης από το Free Software Foundation χωρίς Αναλλοίωτα στοιχεία, χωρίς κείμενα Εξώφυλλου και κείμενα Οπισθόφυλλου. Μπορείτε να βρείτε ένα αντίγραφο της GFDL σ' αυτό το <ulink type="help" url="ghelp:fdl">σύνδεσμο</ulink> ή στο αρχείο COPYING-DOCS που διανέμεται με αυτό το εγχειρίδιο.</para>
+         <para>Αυτό το εγχειρίδιο αποτελεί μέρος της συλλογής εγχειριδίων του MATE που διανέμονται υπό τους όρους της GFDL. Αν επιθυμείτε να διανείμετε το παρόν εγχειρίδιο ξεχωριστά από τη συλλογή, οφείλετε να προσθέσετε στο εγχειρίδιο αντίγραφο της άδειας χρήσης, όπως προβλέπεται στην ενότητα 6 της άδειας.</para>
+
+	<para>Πολλά ονόματα που χρησιμοποιούν οι εταιρίες για να διακρίνουν τα προϊόντα τους και τις υπηρεσίες τους διεκδικούνται ως εμπορικά σήματα. Όπου τα ονόματα αυτά εμφανίζονται σε οποιαδήποτε τεκμηρίωση του MATE, και τα μέλη του Έργου Τεκμηρίωσης του MATE είναι ενήμερα αυτών των εμπορικών σημάτων, τότε τα ονόματά τους εμφανίζονται με κεφαλαία γράμματα ή με κεφαλαία τα αρχικά γράμματα.</para>
+
+	<para>ΤΟ ΕΓΓΡΑΦΟ ΚΑΙ ΤΡΟΠΟΠΟΙΗΜΕΝΕΣ ΕΚΔΟΣΕΙΣ ΑΥΤΟΥ ΠΑΡΕΧΟΝΤΑΙ ΥΠΟ ΤΟΥΣ ΟΡΟΥΣ ΤΗΣ ΑΔΕΙΑΣ GNU FREE DOCUMENTATION ΜΕ ΤΗΝ ΠΕΡΑΙΤΕΡΩ ΔΙΕΥΚΡΙΝΙΣΗ ΟΤΙ: <orderedlist>
+		<listitem>
+		  <para>1. ΤΟ ΕΓΓΡΑΦΟ ΠΑΡΕΧΕΤΑΙ "ΩΣ ΕΧΕΙ", ΧΩΡΙΣ ΚΑΝΕΝΟΣ ΕΙΔΟΥΣ ΕΓΓΥΗΣΗ, ΡΗΤΗ Η ΝΟΟΥΜΕΝΗ, ΣΥΜΠΕΡΙΛΑΜΒΑΝΟΜΕΝΩΝ, ΜΗ ΕΞΑΝΤΛΗΤΙΚΑ, ΕΓΓΥΗΣΕΩΝ ΟΤΙ ΤΟ ΕΓΓΡΑΦΟ 'Η ΤΡΟΠΟΠΟΙΗΜΕΝΕΣ ΕΚΔΟΣΕΙΣ ΤΟΥ ΕΓΓΡΑΦΟΥ ΕΙΝΑΙ ΕΛΕΥΘΕΡΟ ΟΠΟΙΩΝΔΗΠΟΤΕ ΕΛΑΤΤΩΜΑΤΩΝ, ΕΜΠΟΡΕΥΣΙΜΟ, ΚΑΤΑΛΛΗΛΟ ΓΙΑ ΣΥΓΚΕΚΡΙΜΕΝΟ ΣΚΟΠΟ, Ή ΜΗ ΠΑΡΑΒΑΤΙΚΟ. ΟΛΟΚΛΗΡΗ Η ΕΥΘΥΝΗ ΩΣ ΠΡΟΣ ΤΗΝ ΠΟΙΟΤΗΤΑ, ΑΚΡΙΒΕΙΑ, ΚΑΙ ΑΠΟΔΟΣΗ ΤΩΝ ΕΓΓΡΑΦΩΝ Η ΤΡΟΠΟΠΟΙΗΜΕΝΗΝ ΕΚΔΟΣΕΩΝ ΤΟΥΣ ΕΙΝΑΙ ΔΙΚΗ ΣΑΣ. ΑΝ ΟΠΟΙΟΔΗΠΟΤΕ ΕΓΓΡΑΦΟ ΑΠΟΔΕΙΧΘΕΙ ΕΛΑΤΤΩΜΑΤΙΚΟ ΜΕ ΟΠΟΙΟΔΗΠΟΤΕ ΤΡΟΠΟ, ΕΣΕΙΣ (ΟΧΙ Ο ΑΡΧΙΚΟΣ ΣΥΓΓΡΑΦΕΑΣ, ΔΗΜΙΟΥΡΓΟΣ Η ΑΛΛΟΣ ΣΥΝΕΙΣΦΕΡΟΝΤΑΣ) ΑΝΑΛΑΜΒΑΝΕΤΕ ΤΟ ΚΟΣΤΟΣ ΟΠΟΙΟΝΔΗΠΟΤΕ ΑΝΑΓΚΑΙΩΝ ΣΥΝΤΗΡΗΣΕΩΝ, ΕΠΙΔΙΟΡΘΩΣΕΩΝ Η ΔΙΟΡΘΩΣΕΩΝ. ΑΥΤΗ Η ΑΠΟΠΟΙΗΣΗ ΕΥΘΥΝΗΣ ΑΠΟΤΕΛΕΙ ΟΥΣΙΩΔΕΣ ΜΕΡΟΣ ΑΥΤΗΣ ΤΗΣ ΑΔΕΙΑΣ. ΔΕΝ ΕΠΙΤΡΕΠΕΤΑΙ ΚΑΜΙΑ ΧΡΗΣΗ ΤΟΥ ΕΓΓΡΑΦΟΥ Η ΤΡΟΠΟΠΟΙΗΜΕΝΗΣ ΕΚΔΟΣΗΣ ΑΥΤΟΥ ΕΚΤΟΣ ΑΠΟ ΑΥΤΗ ΤΗΝ ΑΠΟΠΟΙΗΣΗ, ΚΑΙ</para>
+		</listitem>
+		<listitem>
+		  <para>2. ΣΕ ΚΑΜΙΑ ΠΕΡΙΠΤΩΣΗ ΚΑΙ ΥΠΟ ΚΑΜΙΑ ΝΟΜΙΚΗ ΣΥΝΘΗΚΗ, ΕΙΤΕ ΜΕΣΩ ΣΥΜΒΟΛΑΙΩΝ Ή ΑΛΛΙΩΣ, ΔΕΝ ΕΥΘΥΝΟΝΤΑΙ Ο ΣΥΓΓΡΑΦΕΑΣ, Ο ΔΙΑΝΟΜΕΑΣ, Η ΑΛΛΟΣ ΣΥΝΥΠΕΥΘΥΝΟΣ ΓΙΑ ΤΗΝ ΣΥΓΓΡΑΦΗ ΤΗΣ ΤΕΚΜΗΡΙΩΣΗΣ, ΓΙΑ ΕΜΜΕΣΕΣ Η ΑΜΕΣΕΣ, ΤΥΧΑΙΕΣ Ή ΜΗ ΖΗΜΙΕΣ ΠΑΝΤΩΣ ΦΥΣΕΩΣ ΠΟΥ ΠΡΟΕΡΧΟΝΤΑΙ ΑΠΟ ΤΗΝ ΧΡΗΣΗ ΤΗΣ ΤΕΚΜΗΡΙΩΣΗΣ ΚΑΙ/Ή ΠΑΡΑΛΛΑΓΩΝ ΑΥΤΗΣ ΑΚΟΜΑ ΚΑΙ ΕΑΝ ΕΧΕΙ ΥΠΑΡΞΕΙ ΠΡΟΕΙΔΟΠΟΙΗΣΗ ΓΙΑ ΤΗΝ ΠΙΘΑΝΟΤΗΤΑ ΥΠΑΡΞΗΣ ΤΕΤΟΙΩΝ ΖΗΜΙΩΝ.</para>
+		</listitem>
+	  </orderedlist></para>
+  </legalnotice>
+
+
+   <!-- This file  contains link to license for the documentation (GNU FDL), and
+        other legal stuff such as "NO WARRANTY" statement. Please do not change
+        any of this. -->
+
+    <authorgroup>
+      <author role="maintainer">
+        <firstname>Richard</firstname>
+        <surname>Hughes</surname>
+        <email>richard@hughsie.com</email>
+      </author>
+<!-- This is appropriate place for other contributors: translators,
+      maintainers,  etc. Commented out by default.
+       <othercredit role="translator">
+        <firstname>Latin</firstname>
+        <surname>Translator 1</surname>
+        <affiliation>
+          <orgname>Latin Translation Team</orgname>
+          <address> <email>translator@gnome.org</email> </address>
+        </affiliation>
+        <contrib>Latin translation</contrib>
+      </othercredit>
+-->
+    </authorgroup>
+
+    <revhistory>
+      <revision>
+        <revnumber>2.0</revnumber>
+        <date>2009-11-01</date>
+        <revdescription>
+          <para role="author">Richard Hughes <email>richard@hughsie.com</email></para>
+          <para role="publisher">Richard Hughes</para>
+        </revdescription>
+      </revision>
+    </revhistory>
+
+    <legalnotice>
+      <title>Ανάδραση</title>
+      <para>Για να αναφέρετε ένα σφάλμα ή να κάνετε μια πρόταση σχετικά με την εφαρμογή Διαχείριση χρώματος του MATE ή αυτό το εγχειρίδιο, ακολουθήστε τις οδηγίες στο <ulink url="http://projects.gnome.org/mate-color-manager/bugs.html" type="http"><application>MATE Color Manager</application> Bug Page</ulink>.</para>
+<!-- Translators may also add here feedback address for translations -->
+    </legalnotice>
+  </articleinfo>
+
+  <indexterm zone="index">
+    <primary><application>Διαχείριση χρώματος του MATE</application></primary>
+  </indexterm>
+  <indexterm zone="index">
+    <primary>mate-color-manager</primary>
+  </indexterm>
+
+<!-- ============= Document Body ============================= -->
+<!-- ============= Introduction ============================== -->
+<section id="intro">
+  <title>Εισαγωγή</title>
+  <!-- manrevision 2.0 compatibility -->
+  <anchor id="aboutex"/>
+  <anchor id="notice"/>
+  <indexterm>
+    <primary><application>Διαχείριση χρώματος του MATE</application></primary>
+    <secondary>Εγχειρίδιο</secondary>
+    <tertiary>mate-color-manager</tertiary>
+  </indexterm>
+
+  <para>Η Διαχείριση χρώματος του MATE είναι ένα πλαίσιο που βοηθά το χρήστη να δημιουργήσει, εγκαταστήσει και διαχειριστεί τα χρώματα των συσκευών σε ένα <systemitem>σύστημα MATE</systemitem>. Αυτό γίνεται για να βοηθηθεί ο χρήστης να ταιριάξει τα χρώματα σε όλες τις συσκευές. Έτσι μια εικόνα ή ένα έγγραφο εμφανίζεται με την ίδια απόχρωση όπου και να εμφανίζεται.</para>
+  <para>Η Διαχείριση χρώματος MATE γνωστοποιεί τα επιλεγμένα προφίλ σε όλες τις εφαρμογές που σχετίζονται με χρώματα, διατηρώντας τα από εφαρμογή σε εφαρμογή.</para>
+  <para>Η Διαχείριση χρώματος MATE χρησιμοποιεί προφίλ <ulink url="http://www.color.org" type="http"> International Color Consortium</ulink> (ICC) για να χαρτογραφήσει τα χαρακτηριστικά του χρώματος των συσκευών σε ένα τυποποιημένο χρωματικό χώρο που χρησιμοποιεί το <systemitem>MATE</systemitem>.</para>
+  <warning>
+    <para>Η Διαχείριση χρώματος MATE ΔΕΝ πρέπει να χρησιμοποιείται για να αλλάξει την εμφάνιση της επιφάνειας εργασίας σας. Το εργαλείο Εμφάνιση στις προτιμήσεις συστήματος σας επιτρέπει να διαμορφώσετε διάφορα σημεία της εμφάνισης της επιφάνειας εργασίας σας.</para>
+  </warning>
+
+</section>
+
+<section id="using">
+  <title>Χρήση</title>
+  <para>Η <application>Διαχείριση χρώματος MATE</application> συνήθως περιλαμβάνεται στην εκκίνηση του συστήματος αλλά μπορείτε να την εκκινήσετε χειροκίνητα με:</para>
+  <screen>
+    <prompt>bash$</prompt><userinput>mcm-apply <parameter>--verbose</parameter></userinput>
+  </screen>
+  <para>Το παράθυρο διαλόγου με τις προτιμήσεις για τη <application>Διαχείριση χρώματος MATE</application> μπορεί να εκκινηθεί από το μενού Προτιμήσεις του MATE αλλά μπορείτε να το εκκινήσετε με:</para>
+  <screen>
+    <prompt>bash$</prompt><userinput>mcm-prefs <parameter>--verbose</parameter></userinput>
+  </screen>
+  <para>Τα προφίλ ICC θα πρέπει να εισαχθούν στη <application>Διαχείριση χρώματος MATE</application> επιλέγοντας ένα αρχείο σε παράθυρο του περιηγητή αρχείων. Μπορείτε επίσης να εισάγετε το αρχείο με χρήση:</para>
+  <screen>
+    <prompt>bash$</prompt><userinput>mcm-import <filename><![CDATA[<filepath>]]></filename></userinput>
+  </screen>
+</section>
+
+<section id="import">
+  <title>Εισαγωγή προφίλ</title>
+  <para>Η <application>Διαχείριση χρώματος MATE</application> περιλαμβάνει ένα πρόγραμμα για την εγκατάσταση προφίλ κάνοντας διπλό κλικ επάνω τους.</para>
+
+  <section id="import-install">
+    <title>Εισαγωγή προφίλ ICC</title>
+    <figure>
+      <title>Παράθυρο διαλόγου της Διαχείρισης χρώματος MATE μετά από διπλό κλικ σε αρχείο ICC ή ICM.</title>
+      <screenshot>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="figures/mcm-import.png" format="PNG"/>
+          </imageobject>
+        </mediaobject>
+      </screenshot>
+    </figure>
+    <note>
+      <para>Το κουμπί εγκατάστασης δεν θα εμφανισθεί αν το προφίλ είναι ήδη εγκατεστημένο.</para>
+    </note>
+  </section>
+</section>
+
+<section id="preferences">
+  <title>Προτιμήσεις</title>
+
+  <para>Το παράθυρο προτιμήσεις σας επιτρέπει να ελέγξετε:</para>
+
+  <itemizedlist>
+    <listitem>
+      <para>Προφίλ συσκευής.</para>
+    </listitem>
+    <listitem>
+      <para>Γάμμα, φωτεινότητα και αντίθεση</para>
+    </listitem>
+  </itemizedlist>
+
+  <section id="preferences-basic">
+    <title>Βασικές προτιμήσεις</title>
+    <figure id="prefs-basic">
+      <title>Βασική καρτέλα της Διαχείρισης χρώματος του MATE</title>
+      <screenshot>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="figures/mcm-basic.png" format="PNG"/>
+          </imageobject>
+        </mediaobject>
+      </screenshot>
+    </figure>
+    <para>Για να αλλάξετε το προφίλ για μια συσκευή. <orderedlist>
+        <listitem>
+          <para>Επιλογή συσκευής.</para>
+        </listitem>
+        <listitem>
+          <para>Επιλέξτε το απαιτούμενο προφίλ από τη λίστα που εμφανίζεται στο πεδίο προφίλ χρώματος.</para>
+        </listitem>
+      </orderedlist><tip>
+        <para>Αν το απαιτούμενο προφίλ δεν είναι στη λίστα τότε <orderedlist>
+            <listitem>
+              <para>Επιλέξτε "Άλλο προφίλ..."</para>
+            </listitem>
+            <listitem>
+              <para>Βρείτε το αρχείο με το προφίλ ICC χρησιμοποιώντας το παράθυρο Άνοιγμα αρχείου που εμφανίζεται.</para>
+            </listitem>
+            <listitem>
+              <para>Πατήστε στο κουμπί Άνοιγμα του παραθύρου διαλόγου.</para>
+            </listitem>
+          </orderedlist></para>
+      </tip><tip>
+        <para>Αν το προφίλ δεν είναι έγκυρο τότε δεν θα αλλάξει το επιλεγμένο προφίλ για τη συσκευή. Μπορεί να εμφανισθούν κάποια μηνύματα.</para>
+      </tip></para>
+  </section>
+
+  <section id="preferences-advanced">
+    <title>Προτιμήσεις για προχωρημένους</title>
+    <figure id="prefs-advanced">
+      <title>Καρτέλα για προχωρημένους της Διαχείρισης χρώματος του MATE</title>
+      <screenshot>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="figures/mcm-adjust.png" format="PNG"/>
+          </imageobject>
+        </mediaobject>
+      </screenshot>
+    </figure>
+    <para>Αυτό σας επιτρέπει να ρυθμίσετε μια βαθμονομημένη συσκευή ή ένα προφίλ που έχει δημιουργηθεί.</para>
+    <tip>
+      <para>Η επιλογή Λεπτομερής ρύθμιση είναι διαθέσιμη μόνο αν την ενεργοποιήσετε από το MateConf (<menuchoice><guimenu>apps</guimenu><guisubmenu>mate-color-manager</guisubmenu><guimenuitem>show-fine-tuning</guimenuitem></menuchoice>).</para>
+    </tip>
+    <para>Οι οθόνες CRT (καθοδικού σωλήνα) έχουν εγγενές γάμμα περίπου 2.4 - 2.5 και οι LCD (επίπεδες - υγρών κρυστάλλων) συνήθως εξομοιώνουν αυτή την τιμή.</para>
+    <para>Παραδοσιακά, τα λειτουργικά συστήματα Linux και MS Windows χρησιμοποιούν κωδικοποίηση εικόνας στο 1/2.2 και δεν εφαρμόζουν κάποια προσαρμογή του γάμμα στην εικόνα ή στο LUT της κάρτας γραφικών. Έτσι, το συνολικό γάμμα αναμένεται να είναι περίπου 1.1 (το οποίο είναι χρήσιμο για συνθήκες μειωμένου φωτισμού σε οικιακό περιβάλλον).</para>
+    <para>Η Apple χρησιμοποιούσε κωδικοποίηση εικόνας με γάμμα κοντά στο 1/1.8 για να ταιριάξει το εγγενές γάμμα των συσκευών εκτύπωσης (και έτσι εφάρμοζε εσωτερικά προσαρμογή του γάμμα στο 1/1.45 πριν εμφανίσει τις εικόνες στην οθόνη έτσι ώστε οι εικόνες να εμφανίζονται σωστά).</para>
+    <para>Μολαταύτα από το OS X (v10.6 Snow Leopard) και μετά η προεπιλεγμένη κωδικοποίηση εικόνας έχει επίσης την τιμή γάμμα 1/1.2 για να ικανοποιήσει τις απαιτήσεις της βιομηχανίας των καταναλωτικών συσκευών εικόνας.</para>
+    <para>Πριν τη λεπτομερή ρύθμιση του γάμμα στη Διαχείριση χρώματος MATE, θα πρέπει να ξέρετε ποιο είναι το εγγενές γάμμα της οθόνης σας, σε ποια τιμή γάμμα θέλετε να φτάσετε και μετά να κάνετε τους υπολογισμούς μόνοι σας.</para>
+  </section>
+
+  <section id="preferences-profiles">
+    <title>Προβολή προφίλ</title>
+    <figure id="prefs-profiles">
+      <title>Καρτέλα προφίλ της Διαχείρισης χρώματος του MATE</title>
+      <screenshot>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="figures/mcm-scanner.png" format="PNG"/>
+          </imageobject>
+        </mediaobject>
+      </screenshot>
+    </figure>
+    <para>Αυτό σας επιτρέπει να δείτε λεπτομέρειες για τα εγκατεστημένα προφίλ.</para>
+  </section>
+
+  <section id="preferences-calibration">
+    <title>Βαθμονόμηση και δημιουργία προφίλ</title>
+    <para>Η <application>Διαχείριση χρώματος MATE</application> μπορεί να δημιουργήσει προφίλ ICC με υποστηριζόμενα όργανα μέτρησης χρώματος (φασματοφωτόμετρα).</para>
+
+    <figure>
+      <title>Το πρώτο στάδιο είναι η βαθμονόμηση, η οποία διαρκεί μερικά λεπτά.</title>
+      <screenshot>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="figures/mcm-calibrate-default.png" format="PNG"/>
+          </imageobject>
+        </mediaobject>
+      </screenshot>
+    </figure>
+    <figure>
+      <title>Το τελικό στάδιο είναι ο χαρακτηρισμός (δημιουργία προφίλ), ο οποίος μπορεί να διαρκέσει πάνω από 15 λεπτά.</title>
+      <screenshot>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="figures/mcm-calibrate-drawing.png" format="PNG"/>
+          </imageobject>
+        </mediaobject>
+      </screenshot>
+    </figure>
+
+    <para>Όταν βαθμονομείτε και χαρακτηρίζετε μια συσκευή απεικόνισης μπορεί να πρέπει να αλλάξετε την κατάσταση λειτουργίας του οργάνου μέτρησης. Μπορεί να χρειασθεί να αφαιρέσετε το όργανο από την οθόνη για να αλλάξετε την κατάσταση λειτουργίας. Βεβαιωθείτε ότι το όργανο είναι τοποθετημένο ξανά στην οθόνη αφού κάνετε οποιεσδήποτε αλλαγές ρυθμίσεων.</para>
+    <figure id="prefs-dialogs-device-configure">
+      <title>Παράθυρο διαλόγου διαμόρφωσης οργάνου της Διαχείρισης χρώματος MATE</title>
+      <screenshot>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="figures/mcm-device-configure.png" format="PNG"/>
+          </imageobject>
+        </mediaobject>
+      </screenshot>
+    </figure>
+
+    <para>Όταν βαθμονομείτε και χαρακτηρίζετε μια οθόνη συνδεδεμένη μέσω VGA ή DVI, συχνά ο τύπος της συσκευής δεν αναγνωρίζεται αυτόματα. Απαντώντας σωστά η <application>Διαχείριση χρώματος MATE</application> μπορεί να δημιουργήσει καλύτερα προφίλ για τη συσκευή.</para>
+    <figure id="prefs-dialogs-screen-type">
+      <title>Παράθυρο διαλόγου Τύπος οθόνης της Διαχείρισης χρώματος MATE</title>
+      <screenshot>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="figures/mcm-screen-type.png" format="PNG"/>
+          </imageobject>
+        </mediaobject>
+      </screenshot>
+    </figure>
+
+    <para>Όταν δημιουργείτε προφίλ για ένα εκτυπωτή μπορείτε επίσης να δημιουργήσετε εικόνες που θα αποσταλούν σε κάποιο τυπογραφείο ή φωτογραφείο προς εκτύπωση (δοκίμια). Οι λεπτομέρειες του προφίλ θα αποθηκευτούν και θα πρέπει να επιλέξτε τα σωστά αποτελέσματα της διαδικασίας δημιουργίας προφίλ όταν λάβετε τα δοκίμια που στείλατε για εκτύπωση.</para>
+    <figure id="prefs-dialogs-print-mode">
+      <title>Παράθυρο διαλόγου Λειτουργία εκτύπωσης της Διαχείρισης χρώματος MATE</title>
+      <screenshot>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="figures/mcm-print-mode.png" format="PNG"/>
+          </imageobject>
+        </mediaobject>
+      </screenshot>
+    </figure>
+
+  </section>
+</section>
+
+<section id="faq">
+  <title>Συχνές ερωτήσεις</title>
+  <para>Αυτή η ενότητα περιλαμβάνει συχνές ερωτήσεις σχετικά με τη διαχείριση χρώματος</para>
+
+  <section id="faq-calibration-and-characterization">
+    <title>Ποια η διαφορά μεταξύ βαθμονόμησης και χαρακτηρισμού;</title>
+    <para>Πολλοί αρχικά συγχέουν τη διαφορά μεταξύ βαθμονόμησης και χαρακτηρισμού. Η βαθμονόμηση είναι η διαδικασία τροποποίησης της χρωματικής συμπεριφοράς μιας συσκευής. Αυτό τυπικά γίνεται με χρήση δύο μηχανισμών: <orderedlist>
+        <listitem>
+          <para>Αλλαγή ρυθμιστικών ή εσωτερικών ρυθμίσεων που έχει</para>
+        </listitem>
+        <listitem>
+          <para>Εφαρμογή καμπυλών στα κανάλια χρώματός του.</para>
+        </listitem>
+      </orderedlist></para>
+    <para>Η ιδέα πίσω από τη βαθμονόμηση είναι να τεθεί μια συσκευή σε μια καθορισμένη κατάσταση όσον αφορά τη χρωματική της απόκριση. Συχνά χρησιμοποιείται ως καθημερινό μέσο για να εξασφαλιστεί αναπαράξιμη συμπεριφορά. Τυπικά η βαθμονόμηση θα αποθηκευτεί σε μορφές αρχείων ειδικές για τη συσκευή ή για το σύστημα, τα οποία καταγράφουν τις ρυθμίσεις της συσκευής ή τις καμπύλες βαθμονόμησης ανά κανάλι χρώματος.</para>
+    <para>Ο χαρακτηρισμός (ή δημιουργία προφίλ) είναι η <emphasis>καταγραφή</emphasis> του τρόπου με τον οποίο μια συσκευή αποδίδει ή ανταποκρίνεται στο χρώμα. Συνήθως το αποτέλεσμα αποθηκεύεται σε ένα αρχείο προφίλ ICC συσκευής. Ένα τέτοιο προφίλ δεν τροποποιεί αυτό καθεαυτό τα χρώματα. Επιτρέπει σε ένα σύστημα όπως ένα CMM (άρθρωμα διαχείρισης χρώματος) ή σε μια εφαρμογή που αντιλαμβάνεται χρώματα να τροποποιεί τα χρώματα σε συνδυασμό με ένα προφίλ άλλης συσκευής. Μόνο αν είναι γνωστά τα χαρακτηριστικά των δύο συσκευών μπορεί να πραγματοποιηθεί μεταφορά της χρωματικής απόδοσης από μια συσκευή σε μια άλλη.</para>
+    <tip>
+      <para>Σημειώστε ότι ένας χαρακτηρισμός (προφίλ) μιας συσκευής θα είναι έγκυρος μόνο αν αυτή βρίσκεται στην ίδια κατάσταση βαθμονόμησης όπως όταν έγινε το προφίλ.</para>
+    </tip>
+    <para>Στην περίπτωση των προφίλ οθονών υπάρχει επιπλέον σύγχυση επειδή συχνά οι πληροφορίες βαθμονόμησης αποθηκεύονται στο προφίλ για λόγους ευκολίας. Συμβατικά αποθηκεύονται υπό μια ετικέτα που ονομάζεται<type>vcgt</type>. Παρόλο που είναι αποθηκευμένες στο προφίλ κανένα από τα κανονικά εργαλεία που βασίζονται στο ICC ή εφαρμογές δεν μπορούν να τις αντιληφθούν ή να κάνουν κάτι με αυτές. Κατά παρόμοιο τρόπο, τα συνήθη εργαλεία και εφαρμογές βαθμονόμησης οθόνης δεν αντιλαμβάνονται ή αξιοποιούν τις πληροφορίες των προφίλ ICC.</para>
+  </section>
+
+  <section id="faq-missing-vcgt">
+    <title>Ελλιπείς πληροφορίες για διόρθωση χρώματος πλήρους οθόνης</title>
+    <para>Δυστυχώς, πολλά εμπορικά προφίλ ICC δεν περιλαμβάνουν τις πληροφορίες που απαιτούνται για διόρθωση χρώματος πλήρους οθόνης. Αυτά τα προφίλ μπορούν να φανούν χρήσιμα για εφαρμογές που μπορούν να κάνουν προσαρμογή χρώματος αλλά δεν θα δείτε να αλλάζουν όλα τα χρώματα της οθόνης σας.</para>
+    <para>Για να δημιουργήσετε ένα προφίλ οθόνης, το οποίο να περιέχει τα δεδομένα και της βαθμονόμησης και του προφίλ, θα χρειαστεί να χρησιμοποιήσετε ειδικά όργανα μέτρησης χρώματος που ονομάζονται χρωματόμετρα ή φασματοφωτόμετρα.</para>
+  </section>
+
+  <section id="faq-supported-colorimeters">
+    <title>Ποια όργανα μέτρησης χρώματος υποστηρίζονται;</title>
+    <para>Η Διαχείριση χρώματος του MATE βασίζεται στο ArgyllCMS για την υποστήριξη οργάνων μέτρησης χρώματος. Έτσι υποστηρίζονται τα ακόλουθα όργανα μέτρησης οθόνης:</para>
+    <itemizedlist>
+      <listitem>
+        <para>Gretag-Macbeth Eye-One Pro (φασματόμετρο)</para>
+      </listitem>
+      <listitem>
+        <para>Gretag-Macbeth Eye-One Monitor (φασματόμετρο)</para>
+      </listitem>
+      <listitem>
+        <para>Gretag-Macbeth Eye-One Display 1, 2 or LT (χρωματόμετρο)</para>
+      </listitem>
+      <listitem>
+        <para>X-Rite ColorMunki Design or Photo (φασματόμετρο)</para>
+      </listitem>
+      <listitem>
+        <para>X-Rite ColorMunki Create (χρωματόμετρο)</para>
+      </listitem>
+      <listitem>
+        <para>Pantone Huey (χρωματόμετρο)</para>
+      </listitem>
+      <listitem>
+        <para>MonacoOPTIX (χρωματόμετρο)</para>
+      </listitem>
+      <listitem>
+        <para>ColorVision Spyder 2 and 3 (χρωματόμετρο)</para>
+      </listitem>
+      <listitem>
+        <para>Colorimètre HCFR (χρωματόμετρο)</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+  <section id="faq-supported-targets">
+    <title>Ποιοι τύποι αρχείων υποστηρίζονται;</title>
+    <para>Η Διαχείριση χρώματος του MATE υποστηρίζει τους ακόλουθους τύπους στόχων (δοκιμίων):</para>
+    <itemizedlist>
+      <listitem>
+        <para>CMP Digital Target 3</para>
+      </listitem>
+      <listitem>
+        <para>ColorChecker 24</para>
+      </listitem>
+      <listitem>
+        <para>ColorChecker DC</para>
+      </listitem>
+      <listitem>
+        <para>ColorChecker SG</para>
+      </listitem>
+      <listitem>
+        <para>i1 RGB Scan 14</para>
+      </listitem>
+      <listitem>
+        <para>LaserSoft DC Pro</para>
+      </listitem>
+      <listitem>
+        <para>QPcard 201</para>
+      </listitem>
+      <listitem>
+        <para>IT8.7/2</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+  <section id="faq-where-to-purchase-targets">
+    <title>Από πού αγοράζω στόχους (δοκίμια);</title>
+    <para>Μπορείτε να αγοράσετε δοκίμια από γνωστές εταιρείες όπως KODAK, X-Rite και LaserSoft σε διάφορα διαδικτυακά καταστήματα. Εναλλακτικά μπορείτε να αγοράσετε δοκίμια από <ulink url="http://www.targets.coloraid.de/" type="http">Wolf Faust</ulink> σε πολύ λογικές τιμές.</para>
+  </section>
+</section>
+
+<section id="about">
+  <title>Περί</title>
+  <para>Η Διαχείριση χρώματος του MATE γράφτηκε από τον Richard Hughes <email>richard@hughsie.com</email>. Για περισσότερες πληροφορίες για τη Διαχείριση χρώματος του MATE, παρακαλούμε επισκεφθείτε το <ulink url="http://projects.gnome.org/mate-color-manager/" type="http"><application>MATE Color Manager</application> web page</ulink>.</para>
+  <para>Για να αναφέρετε ένα σφάλμα ή να κάνετε μια πρόταση σχετικά με αυτή την εφαρμογή ή το εγχειρίδιο, ακολουθήστε τις οδηγίες στο <ulink url="http://projects.gnome.org/mate-color-manager/bugs.html" type="http"><application>MATE Color Manager</application> Bug Page</ulink>.</para>
+  <para>Αυτό το πρόγραμμα διανέμεται υπό τους όρους της GNU General Public License όπως δημοσιεύεται από το Free Software Foundation. Είτε υπό την έκδοση 2 της άδειας είτε (κατ' επιλογήν σας) υπό οποιαδήποτε μεταγενέστερη. Αντίγραφο αυτής της άδειας μπορεί να βρεθεί στο <ulink url="mate-color-manager:gpl" type="help">link</ulink> ή στο αρχείο COPYING το οποίο περιλαμβάνεται με τον πηγαίο κώδικα αυτού του προγράμματος.</para>
+</section>
+
+</article>

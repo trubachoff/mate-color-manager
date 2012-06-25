@@ -1,0 +1,29 @@
+##############################################################################################################
+# Copyright (C) 2009-2010 Richard Hughes <richard@hughsie.com>
+#
+# Licensed under the GNU General Public License Version 2
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# Devices that may have profiles.
+#
+# These are properties defining the behavior:
+#  MCM_DEVICE		Can be assinged a profile
+#  MCM_TYPE		The type of device
+#  MCM_RESCAN		If we should rescan a particualr device class
+
+# Cameras with gphoto drivers
+SUBSYSTEM=="usb", ENV{ID_GPHOTO2}!="", ENV{MCM_DEVICE}="1", ENV{MCM_TYPE}="camera"
+
+# video cameras
+SUBSYSTEM=="video4linux", ENV{ID_V4L_PRODUCT}!="", ENV{MCM_DEVICE}="1", ENV{MCM_TYPE}="camera"
+
+# USB SANE scanners
+SUBSYSTEM=="usb", ENV{libsane_matched}!="", ENV{MCM_RESCAN}="scanner"
+
+# HP Printers
+SUBSYSTEM=="usb", ENV{ID_HPLIP}!="", ENV{MCM_RESCAN}="printer"
+

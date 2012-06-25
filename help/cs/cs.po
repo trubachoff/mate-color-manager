@@ -1,0 +1,896 @@
+# Czech translation for mate-color-manager help.
+# Copyright (C) 2009 mate-color-manager's COPYRIGHT HOLDER
+# This file is distributed under the same license as the mate-color-manager help.
+# Milan Knizek <knizek@volny.cz>, 2010.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: mate-color-manager help master\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=mate-"
+"color-manager\n"
+"POT-Creation-Date: 2010-09-18 04:23+0000\n"
+"PO-Revision-Date: 2010-09-18 21:28+0100\n"
+"Last-Translator: Milan Knížek <knizek@volny.cz>\n"
+"Language-Team: Czech <mate-cs-list@gnome.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-Poedit-Language: Czech\n"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/mate-color-manager.xml:188(None)
+msgid "@@image: 'figures/mcm-import.png'; md5=3fb16ccbdd31be0a2c610077ac1d0a5a"
+msgstr ""
+"@@image: 'figures/mcm-import.png'; md5=3fb16ccbdd31be0a2c610077ac1d0a5a"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/mate-color-manager.xml:226(None)
+msgid "@@image: 'figures/mcm-basic.png'; md5=2341688974dc94a026330d66e2d2b193"
+msgstr "@@image: 'figures/mcm-basic.png'; md5=2341688974dc94a026330d66e2d2b193"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/mate-color-manager.xml:285(None)
+msgid "@@image: 'figures/mcm-adjust.png'; md5=5cde9fc4e9d23b4b753ba5afceb12114"
+msgstr ""
+"@@image: 'figures/mcm-adjust.png'; md5=5cde9fc4e9d23b4b753ba5afceb12114"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/mate-color-manager.xml:340(None)
+msgid ""
+"@@image: 'figures/mcm-scanner.png'; md5=7b634191ede46f7b7c7af2f987270c49"
+msgstr ""
+"@@image: 'figures/mcm-scanner.png'; md5=7b634191ede46f7b7c7af2f987270c49"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/mate-color-manager.xml:364(None)
+msgid ""
+"@@image: 'figures/mcm-calibrate-default.png'; "
+"md5=21815551aae222d703032db710598b70"
+msgstr ""
+"@@image: 'figures/mcm-calibrate-default.png'; "
+"md5=21815551aae222d703032db710598b70"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/mate-color-manager.xml:376(None)
+msgid ""
+"@@image: 'figures/mcm-calibrate-drawing.png'; "
+"md5=8fcee7383b49c1d2fd487f5e9b6beb25"
+msgstr ""
+"@@image: 'figures/mcm-calibrate-drawing.png'; "
+"md5=8fcee7383b49c1d2fd487f5e9b6beb25"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/mate-color-manager.xml:395(None)
+msgid ""
+"@@image: 'figures/mcm-device-configure.png'; "
+"md5=b322b0ebc3ad1b7af4a80f71e7ec6b06"
+msgstr ""
+"@@image: 'figures/mcm-device-configure.png'; "
+"md5=b322b0ebc3ad1b7af4a80f71e7ec6b06"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/mate-color-manager.xml:412(None)
+msgid ""
+"@@image: 'figures/mcm-screen-type.png'; md5=1f87ec2557bf4890bc6906e030a505b2"
+msgstr ""
+"@@image: 'figures/mcm-screen-type.png'; md5=1f87ec2557bf4890bc6906e030a505b2"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/mate-color-manager.xml:429(None)
+msgid ""
+"@@image: 'figures/mcm-print-mode.png'; md5=0b8a7747fedd33b22d38dd447e1dd902"
+msgstr ""
+"@@image: 'figures/mcm-print-mode.png'; md5=0b8a7747fedd33b22d38dd447e1dd902"
+
+#: C/mate-color-manager.xml:25(title)
+msgid "<application>MATE Color Manager</application> Manual"
+msgstr "<application>Správce barev MATE</application> Příručka uživatele"
+
+#: C/mate-color-manager.xml:27(para)
+msgid ""
+"<application>MATE Color Manager</application> is a session program that "
+"makes it easy to manage, install and generate color profiles in the MATE "
+"desktop."
+msgstr ""
+"<application>Správce barev MATE</application> je program, který usnadňuje "
+"správu, instalaci a vytvoření profilů barev v pracovním prostředí MATE."
+
+#: C/mate-color-manager.xml:33(year)
+msgid "2009"
+msgstr "2009"
+
+#: C/mate-color-manager.xml:34(holder)
+msgid "Richard Hughes (richard@hughsie.com)"
+msgstr "Richard Hughes (richard@hughsie.com)"
+
+#: C/mate-color-manager.xml:50(publishername)
+#: C/mate-color-manager.xml:86(para)
+msgid "Richard Hughes"
+msgstr "Richard Hughes"
+
+#: C/mate-color-manager.xml:2(para)
+msgid ""
+"Permission is granted to copy, distribute and/or modify this document under "
+"the terms of the GNU Free Documentation License (GFDL), Version 1.1 or any "
+"later version published by the Free Software Foundation with no Invariant "
+"Sections, no Front-Cover Texts, and no Back-Cover Texts. You can find a copy "
+"of the GFDL at this <ulink type=\"help\" url=\"ghelp:fdl\">link</ulink> or "
+"in the file COPYING-DOCS distributed with this manual."
+msgstr ""
+"Je povoleno kopírovat, šířit a/nebo upravovat tento dokument za podmínek GNU "
+"Free Documentation License, verze 1.1 nebo jakékoli další verze vydané "
+"nadací Free Software Foundation; bez neměnných oddílů, bez textů předních "
+"desek a bez textů zadních desek. Kopie této licence je zahrnuta v oddílu "
+"jménem <ulink type=\"help\" url=\"ghelp:fdl\">GNU Free Documentation "
+"License</ulink> nebo v souboru COPYING-DOCS dodávaném s touto příručkou."
+
+#: C/mate-color-manager.xml:12(para)
+msgid ""
+"This manual is part of a collection of MATE manuals distributed under the "
+"GFDL. If you want to distribute this manual separately from the collection, "
+"you can do so by adding a copy of the license to the manual, as described in "
+"section 6 of the license."
+msgstr ""
+"Tato příručka je součástí kolekce příruček MATE, distribuovaných pod "
+"licencí GNU FDL. Pokud chcete tento dokument šířit odděleně od kolekce, "
+"musíte přiložit kopii licence dle popisu v sekci 6 dané licence."
+
+#: C/mate-color-manager.xml:19(para)
+msgid ""
+"Many of the names used by companies to distinguish their products and "
+"services are claimed as trademarks. Where those names appear in any MATE "
+"documentation, and the members of the MATE Documentation Project are made "
+"aware of those trademarks, then the names are in capital letters or initial "
+"capital letters."
+msgstr ""
+"Mnoho užívaných jmen určených k zviditelnění produktů nebo služeb jsou "
+"ochranné známky. Na místech, kde jsou tato jména v dokumentaci užita a "
+"členové Dokumentačního projektu MATE jsou si vědomi skutečnosti, že se "
+"jedná o ochrannou známku, je takové jméno psáno velkými písmeny celé nebo s "
+"velkým písmenem na začátku."
+
+#: C/mate-color-manager.xml:35(para)
+msgid ""
+"DOCUMENT IS PROVIDED ON AN \"AS IS\" BASIS, WITHOUT WARRANTY OF ANY KIND, "
+"EITHER EXPRESSED OR IMPLIED, INCLUDING, WITHOUT LIMITATION, WARRANTIES THAT "
+"THE DOCUMENT OR MODIFIED VERSION OF THE DOCUMENT IS FREE OF DEFECTS "
+"MERCHANTABLE, FIT FOR A PARTICULAR PURPOSE OR NON-INFRINGING. THE ENTIRE "
+"RISK AS TO THE QUALITY, ACCURACY, AND PERFORMANCE OF THE DOCUMENT OR "
+"MODIFIED VERSION OF THE DOCUMENT IS WITH YOU. SHOULD ANY DOCUMENT OR "
+"MODIFIED VERSION PROVE DEFECTIVE IN ANY RESPECT, YOU (NOT THE INITIAL "
+"WRITER, AUTHOR OR ANY CONTRIBUTOR) ASSUME THE COST OF ANY NECESSARY "
+"SERVICING, REPAIR OR CORRECTION. THIS DISCLAIMER OF WARRANTY CONSTITUTES AN "
+"ESSENTIAL PART OF THIS LICENSE. NO USE OF ANY DOCUMENT OR MODIFIED VERSION "
+"OF THE DOCUMENT IS AUTHORIZED HEREUNDER EXCEPT UNDER THIS DISCLAIMER; AND"
+msgstr ""
+"DOKUMENT JE POSKYTOVÁN V PODOBĚ \"JAK JE\" BEZ ZÁRUKY V JAKÉKOLIV PODOBĚ, "
+"NEPOSKYTUJÍ SE ANI ODVOZENÉ ZÁRUKY, ZÁRUKY, ŽE DOKUMENT, NEBO JEHO UPRAVENÁ "
+"VERZE, JE BEZCHYBNÝ NEBO ZÁRUKY PRODEJNOSTI, VHODNOSTI PRO URČITÝ ÚČEL NEBO "
+"NEPORUŠENOSTI. RIZIKO NEKVALITY, NEPŘESNOSTI A ŠPATNÉHO PROVEDENÍ DOKUMENTU, "
+"NEBO JEHO UPRAVENÉ VERZE, LEŽÍ NA VÁS. POKUD KVŮLI TOMUTO DOKUMENTU, NEBO "
+"JEHO UPRAVENÉ VERZI, NASTANE PROBLÉM, VY (NIKOLIV PŮVODNÍ AUTOR NEBO "
+"JAKÝKOLIV PŘISPĚVATEL) PŘEBÍRÁTE JAKÉKOLIV NÁKLADY ZA NUTNÉ ÚPRAVY, OPRAVY "
+"ČI SLUŽBY. TOTO PROHLÁŠENÍ O ZÁRUCE PŘEDSTAVUJE ZÁKLADNÍ SOUČÁST TÉTO "
+"LICENCE. BEZ TOHOTO PROHLÁŠENÍ NENÍ, PODLE TÉTO DOHODY, POVOLENO UŽÍVÁNÍ ANI "
+"ÚPRAVY TOHOTO DOKUMENTU; DÁLE"
+
+#: C/mate-color-manager.xml:55(para)
+msgid ""
+"UNDER NO CIRCUMSTANCES AND UNDER NO LEGAL THEORY, WHETHER IN TORT (INCLUDING "
+"NEGLIGENCE), CONTRACT, OR OTHERWISE, SHALL THE AUTHOR, INITIAL WRITER, ANY "
+"CONTRIBUTOR, OR ANY DISTRIBUTOR OF THE DOCUMENT OR MODIFIED VERSION OF THE "
+"DOCUMENT, OR ANY SUPPLIER OF ANY OF SUCH PARTIES, BE LIABLE TO ANY PERSON "
+"FOR ANY DIRECT, INDIRECT, SPECIAL, INCIDENTAL, OR CONSEQUENTIAL DAMAGES OF "
+"ANY CHARACTER INCLUDING, WITHOUT LIMITATION, DAMAGES FOR LOSS OF GOODWILL, "
+"WORK STOPPAGE, COMPUTER FAILURE OR MALFUNCTION, OR ANY AND ALL OTHER DAMAGES "
+"OR LOSSES ARISING OUT OF OR RELATING TO USE OF THE DOCUMENT AND MODIFIED "
+"VERSIONS OF THE DOCUMENT, EVEN IF SUCH PARTY SHALL HAVE BEEN INFORMED OF THE "
+"POSSIBILITY OF SUCH DAMAGES."
+msgstr ""
+"ZA ŽÁDNÝCH OKOLNOSTÍ A ŽÁDNÝCH PRÁVNÍCH PŘEDPOKLADŮ, AŤ SE JEDNÁ O PŘEČIN "
+"(VČETNĚ NEDBALOSTNÍCH), SMLOUVU NEBO JINÉ, NENÍ AUTOR, PŮVODNÍ PISATEL, "
+"KTERÝKOLIV PŘISPĚVATEL NEBO KTERÝKOLIV DISTRIBUTOR TOHOTO DOKUMENTU NEBO "
+"UPRAVENÉ VERZE DOKUMENTU NEBO KTERÝKOLIV DODAVATEL NĚKTERÉ Z TĚCHTO STRAN "
+"ODPOVĚDNÝ NĚJAKÉ OSOBĚ ZA PŘÍMÉ, NEPŘÍMÉ, SPECIÁLNÍ, NAHODILÉ NEBO NÁSLEDNÉ "
+"ŠKODY JAKÉHOKOLIV CHARAKTERU, VČETNĚ, ALE NEJEN, ZA POŠKOZENÍ ZE ZTRÁTY "
+"DOBRÉHO JMÉNA, PŘERUŠENÍ PRÁCE, PORUCHY NEBO NESPRÁVNÉ FUNKCE POČÍTAČE NEBO "
+"JINÉHO A VŠECH DALŠÍCH ŠKOD NEBO ZTRÁT VYVSTÁVAJÍCÍCH Z NEBO VZTAHUJÍCÍCH SE "
+"K POUŽÍVÁNÍ TOHOTO DOKUMENTU NEBO UPRAVENÝCH VERZÍ DOKUMENTU, I KDYŽ BY "
+"TAKOVÁTO STRANA BYLA INFORMOVANÁ O MOŽNOSTI TAKOVÉHOTO POŠKOZENÍ."
+
+#: C/mate-color-manager.xml:28(para)
+msgid ""
+"DOCUMENT AND MODIFIED VERSIONS OF THE DOCUMENT ARE PROVIDED UNDER THE TERMS "
+"OF THE GNU FREE DOCUMENTATION LICENSE WITH THE FURTHER UNDERSTANDING THAT: "
+"<placeholder-1/>"
+msgstr ""
+"DOKUMENT A JEHO UPRAVENÉ VERZE JSOU ŠÍŘENY V SOULADU SE ZNĚNÍM LICENCE GNU "
+"FREE DOCUMENTATION LICENSE S NÁSLEDUJÍCÍM USTANOVENÍM: <placeholder-1/>"
+
+#: C/mate-color-manager.xml:60(firstname)
+msgid "Richard"
+msgstr "Richard"
+
+#: C/mate-color-manager.xml:61(surname)
+msgid "Hughes"
+msgstr "Hughes"
+
+#: C/mate-color-manager.xml:62(email)
+msgid "richard@hughsie.com"
+msgstr "richard@hughsie.com"
+
+#: C/mate-color-manager.xml:80(revnumber)
+msgid "2.0"
+msgstr "2.0"
+
+#: C/mate-color-manager.xml:81(date)
+msgid "2009-11-01"
+msgstr "1. 11. 2009"
+
+#: C/mate-color-manager.xml:83(para)
+msgid "Richard Hughes <email>richard@hughsie.com</email>"
+msgstr "Richard Hughes <email>richard@hughsie.com</email>"
+
+#: C/mate-color-manager.xml:92(title)
+msgid "Feedback"
+msgstr "Ohlasy"
+
+#: C/mate-color-manager.xml:93(para)
+msgid ""
+"To report a bug or make a suggestion regarding the MATE Color Manager "
+"application or this manual, follow the directions in the <ulink url=\"http://"
+"projects.gnome.org/mate-color-manager/bugs.html\" type=\"http"
+"\"><application>MATE Color Manager</application> Contact Page</ulink>."
+msgstr ""
+"Pokud chcete oznámit chybu nebo navrhnout vylepšení vztahující se k aplikaci "
+"Správce barev MATE nebo této příručce, postupujte dle instrukcí na <ulink "
+"url=\"http://projects.gnome.org/mate-color-manager/bugs.html\" type=\"http"
+"\">kontaktní stránce <application>Správce barev MATE</application></ulink>."
+
+#: C/mate-color-manager.xml:0(application)
+msgid "MATE Color Manager"
+msgstr "Správce barev MATE"
+
+#: C/mate-color-manager.xml:107(primary)
+#: C/mate-color-manager.xml:120(tertiary)
+msgid "mate-color-manager"
+msgstr "mate-color-manager"
+
+#: C/mate-color-manager.xml:113(title)
+msgid "Introduction"
+msgstr "Úvod"
+
+#: C/mate-color-manager.xml:119(secondary)
+msgid "Manual"
+msgstr "Příručka"
+
+#: C/mate-color-manager.xml:123(para)
+msgid ""
+"The MATE Color Manager is a framework that helps the user generate, install "
+"and manage device colors on a <systemitem>MATE desktop</systemitem>. It "
+"does this to help a user match color across all devices. This gives a "
+"consistent color to an image or document, wherever it is output."
+msgstr ""
+"Správce barev MATE je souhrn aplikací, které uživateli pomáhají vytvořit, "
+"instalovat a spravovat profily barev zařízení v rámci <systemitem>pracovního "
+"prostředí MATE</systemitem>. Účelem je pomoci uživateli sladit barvy mezi "
+"všemi zařízeními. Výsledkem jsou konzistentní barvy obrázků či dokumentů bez "
+"ohledu na to, čím jsou zobrazeny či vytištěny."
+
+#: C/mate-color-manager.xml:129(para)
+msgid ""
+"The MATE Color Manager communicates the selected profiles to color-aware "
+"applications, maintaining the color across applications."
+msgstr ""
+"Správce barev MATE poskytne vybrané profily ICC aplikacím podporujícím "
+"správu barev, čímž zajistí konzistentní správu barev v různých aplikacích."
+
+#: C/mate-color-manager.xml:133(para)
+msgid ""
+"The MATE Color Manager uses <ulink url=\"http://www.color.org\" type=\"http"
+"\"> International Color Consortium</ulink> (ICC) profiles to map device "
+"color characteristics onto a standard color space used by the "
+"<systemitem>MATE desktop</systemitem>."
+msgstr ""
+"Správce barev MATE používá profily ICC definované <ulink url=\"http://www."
+"color.org\" type=\"http\"> International Color Consortium</ulink> k převodu "
+"barev charakteristických pro různá zařízení do standardního prostoru barev "
+"používaného <systemitem>pracovním prostředím MATE</systemitem>."
+
+#: C/mate-color-manager.xml:140(para)
+msgid ""
+"MATE Color Manager should NOT be used to alter the appearance of your "
+"desktop. The Appearance preference tool lets you configure various aspects "
+"of how your desktop looks."
+msgstr ""
+"Správce barev MATE by NEMĚL být používán k úpravě vzhledu (barev) vašeho "
+"pracovního prostředí. Nástroj na úpravu vzhledu najdete v menu Volby / "
+"Vzhled."
+
+#: C/mate-color-manager.xml:150(title)
+msgid "Usage"
+msgstr "Použití"
+
+#: C/mate-color-manager.xml:151(para)
+msgid ""
+"<application>MATE Color Manager</application> is usually started at MATE "
+"start-up, but you can manually start <application>MATE Color Manager</"
+"application> using:"
+msgstr ""
+"<application>Správce barev MATE</application> se obvykle spouští při "
+"spuštění MATE, ale můžete jej spustit i ručně:"
+
+#: C/mate-color-manager.xml:156(prompt) C/mate-color-manager.xml:163(prompt)
+#: C/mate-color-manager.xml:170(prompt)
+msgid "bash$"
+msgstr "bash$"
+
+#: C/mate-color-manager.xml:156(parameter)
+#: C/mate-color-manager.xml:163(parameter)
+msgid "--verbose"
+msgstr "--verbose"
+
+#: C/mate-color-manager.xml:156(userinput)
+#, no-wrap
+msgid "mcm-apply <placeholder-1/>"
+msgstr "mcm-apply <placeholder-1/>"
+
+#: C/mate-color-manager.xml:158(para)
+msgid ""
+"<application>MATE Color Manager</application> preferences dialog can be "
+"started from the MATE Preferences Menu, but you can start this using:"
+msgstr ""
+"Okno s předvolbami <application>Správce barev MATE</application> může být "
+"spuštěno z hlavní nabídky MATE, ale též jej můžete spustit pomocí:"
+
+#: C/mate-color-manager.xml:163(userinput)
+#, no-wrap
+msgid "mcm-prefs <placeholder-1/>"
+msgstr "mcm-prefs <placeholder-1/>"
+
+#: C/mate-color-manager.xml:165(para)
+msgid ""
+"ICC profiles should be imported into the <application>MATE Color Manager</"
+"application> by selecting a file in a caja window. You can also import "
+"the file using:"
+msgstr ""
+"Profily ICC by měly být importovány do <application>Správce barev MATE</"
+"application> pomocí zvolení souboru v okně Nautilu. Též můžete naimportovat "
+"soubor pomocí:"
+
+#: C/mate-color-manager.xml:170(userinput)
+#, no-wrap
+msgid "mcm-import <filename><![CDATA[<filepath>]]></filename>"
+msgstr "mcm-import <filename><![CDATA[<filepath>]]></filename>"
+
+#: C/mate-color-manager.xml:175(title)
+msgid "Importing profiles"
+msgstr "Import profilů"
+
+#: C/mate-color-manager.xml:176(para)
+msgid ""
+"<application>MATE Color Manager</application> includes a program to install "
+"profiles by simply double clicking on them."
+msgstr ""
+"<application>Správce barev MATE</application> obsahuje program pro "
+"instalaci profilů pomocí prostého dvojitého kliknutí na ikonu souboru s "
+"profilem."
+
+#: C/mate-color-manager.xml:182(title)
+msgid "Import a ICC profile"
+msgstr "Importovat profil ICC"
+
+#: C/mate-color-manager.xml:184(title)
+msgid "MATE Color Manager dialog after double clicking an ICC or ICM file"
+msgstr "Okno Správce barev MATE po dvojitém kliknutí na soubor ICC nebo ICM"
+
+#: C/mate-color-manager.xml:194(para)
+msgid ""
+"The install button will not show if the profile has been already installed."
+msgstr ""
+"Tlačítko pro instalaci se neobjeví v případě, je-li profil již nainstalován."
+
+#: C/mate-color-manager.xml:202(title)
+msgid "Preferences"
+msgstr "Předvolby"
+
+#: C/mate-color-manager.xml:204(para)
+msgid "The preferences window allows you to control:"
+msgstr "Okno předvoleb vám umožňuje nastavit:"
+
+#: C/mate-color-manager.xml:208(para)
+msgid "A device profile."
+msgstr "Profil zařízení."
+
+#: C/mate-color-manager.xml:213(para)
+msgid "The gamma, brightness and contrast."
+msgstr "Gama, jas a kontrast."
+
+#: C/mate-color-manager.xml:220(title)
+msgid "Basic Preferences"
+msgstr "Základní předvolby"
+
+#: C/mate-color-manager.xml:222(title)
+msgid "MATE Color Manager basic tab"
+msgstr "Základní karta Správce barev MATE"
+
+#: C/mate-color-manager.xml:235(para)
+msgid "Select the device."
+msgstr "Vyberte zařízení."
+
+#: C/mate-color-manager.xml:240(para)
+msgid ""
+"Select the required profile from the list in the color profile drop down box."
+msgstr "Vyberte požadovaný profil ze seznamu v rozbalovací nabídce."
+
+#: C/mate-color-manager.xml:251(para)
+msgid "Select \"Other profile...\""
+msgstr "Vyberte \"jiný profil...\""
+
+#: C/mate-color-manager.xml:256(para)
+msgid "Find the ICC profile file using the MATE Open File dialog presented."
+msgstr "Vyberte profil ICC pomocí zobrazeného okna Otevřít soubor."
+
+#: C/mate-color-manager.xml:262(para)
+msgid "Press the Open button on the dialog."
+msgstr "V okně zvolte tlačítko Otevřít."
+
+#: C/mate-color-manager.xml:247(para)
+msgid "If the required profile is not in the list then <placeholder-1/>"
+msgstr "Pokud požadovaný profil není v seznamu, pak <placeholder-1/>"
+
+#: C/mate-color-manager.xml:270(para)
+msgid ""
+"If the profile is invalid then the profile selected for the device will not "
+"alter. Messages may be shown."
+msgstr ""
+"Pokud je profil chybný, pak se původní profil pro zvolené zařízení nezmění. "
+"Může se objevit informativní zpráva."
+
+#: C/mate-color-manager.xml:231(para)
+msgid ""
+"To alter a profile for a device. <placeholder-1/><placeholder-2/"
+"><placeholder-3/>"
+msgstr ""
+"Změna profilu zařízení. <placeholder-1/><placeholder-2/><placeholder-3/>"
+
+#: C/mate-color-manager.xml:279(title)
+msgid "Advanced Preferences"
+msgstr "Pokročilé předvolby"
+
+#: C/mate-color-manager.xml:281(title)
+msgid "MATE Color Manager advanced tab"
+msgstr "Pokročilé předvolby Správce barev MATE"
+
+#: C/mate-color-manager.xml:290(para)
+msgid "This allows you to adjust a calibrated device or generated profile."
+msgstr ""
+"Umožní vám upravit nastavení kalibrovaného zařízení nebo vytvořeného profilu."
+
+#: C/mate-color-manager.xml:294(para)
+msgid ""
+"The Fine Tuning Option is only available if you configure MateConf to enable it "
+"( <menuchoice><guimenu>apps</guimenu><guisubmenu>mate-color-manager</"
+"guisubmenu><guimenuitem>show-fine-tuning</guimenuitem></menuchoice>)."
+msgstr ""
+"Volba pro jemné doladění je k dispozici pouze, pokud jste tuto volbu "
+"umožnili v MateConf (<menuchoice><guimenu>apps</guimenu><guisubmenu>mate-color-"
+"manager</guisubmenu><guimenuitem>show-fine-tuning</guimenuitem></"
+"menuchoice>)."
+
+#: C/mate-color-manager.xml:304(para)
+msgid ""
+"CRT monitors have native gamma around 2.4 - 2.5 and LCD monitors usually "
+"emulate the same value."
+msgstr ""
+"Klasické (CRT) monitory mají přirozené gama kolem 2,4 - 2,5 a LCD displeje "
+"obvykle emulují tutéž hodnotu."
+
+#: C/mate-color-manager.xml:308(para)
+msgid ""
+"Traditionally, Linux and MS Windows operating systems use image encoding of "
+"1/2.2 and do not apply any gamma adjustment to the image or video card LUT. "
+"Therefore the overall gamma is expected to be around 1.1 (which is useful to "
+"allow for dim viewing conditions at home environment)."
+msgstr ""
+"Operační systémy Linux a MS Windows původně používaly kódování obrázků "
+"(grafiky) s kompenzací gama monitoru (tj. 1/2,2) a neaplikovaly žádné úpravy "
+"gama obrázků nebo vyhledávací tabulky barev (LUT) videokarty. Proto celkové "
+"gama vycházelo okolo 1,1 (což je užitečné pro pozorování obrazovky v "
+"prostředí domácnosti)."
+
+#: C/mate-color-manager.xml:315(para)
+msgid ""
+"Apple used to use image encoding gamma close to 1/1.8 to naturally match the "
+"native gamma of printing devices (and therefore internally applied gamma "
+"adjustment of 1/1.45 before displaying images on monitor so that the images "
+"displayed correctly)."
+msgstr ""
+"Apple kdysi používal kódování obrázků s gama blízkým 1/1,8, které se "
+"shodovalo s přirozenou gama tehdejších tiskáren (a aby se obrázky zobrazily "
+"správně na monitoru, Apple interně navíc aplikoval úpravu gama obrázků ve "
+"výši 1/1,45)."
+
+#: C/mate-color-manager.xml:321(para)
+msgid ""
+"Nonetheless, since OS X (v10.6 Snow Leopard) the default image encoding "
+"gamma has also the value of 1/2.2 to meet the requirements of consumer "
+"imaging industry."
+msgstr ""
+"Nicméně, aby se Apple přiblížil požadavkům spotřebních výrobků, od OS X "
+"(verze 10.6 Snow Leopard) je výchozí kódování obrázků též s gama 1/2,2."
+
+#: C/mate-color-manager.xml:326(para)
+msgid ""
+"Before fine tuning the gamma in MATE Color Manager, you should know what "
+"your monitor native gamma is, what display gamma you want to reach and then "
+"do the math yourself."
+msgstr ""
+"Dříve než budete dolaďovat gama ve Spráci barev MATE, měli byste vědět, "
+"jaké je gama vašeho monitoru, jakého gama chcete dosáhnout a spočíst si "
+"nutnou úpravu sami."
+
+#: C/mate-color-manager.xml:334(title)
+msgid "Profile viewer"
+msgstr "Prohlížeč profilu"
+
+#: C/mate-color-manager.xml:336(title)
+msgid "MATE Color Manager profiles tab"
+msgstr "Karta s profily Správce barev MATE"
+
+#: C/mate-color-manager.xml:345(para)
+msgid "This allows you to view details about installed profiles."
+msgstr "Umožní vám prohlédnout si detaily o nainstalovaných profilech."
+
+#: C/mate-color-manager.xml:351(title)
+msgid "Calibration and profiling"
+msgstr "Kalibrace a vytvoření profilu"
+
+#: C/mate-color-manager.xml:352(para)
+msgid ""
+"<application>MATE Color Manager</application> can generate ICC profiles "
+"with supported color measuring instruments."
+msgstr ""
+"<application>Správce barev MATE</application> může vytvořit profily ICC "
+"pomocí podporovaných měřících sond."
+
+#: C/mate-color-manager.xml:358(title)
+msgid "The first stage is calibration, which takes a few minutes."
+msgstr "První fáze je kalibrace, která zabere jen několik minut."
+
+#: C/mate-color-manager.xml:370(title)
+msgid ""
+"The final stage is profiling (characterization), which can take over 15 "
+"minutes."
+msgstr ""
+"Poslední fáze je charakterizace zařízení, která může trvat přes 15 minut."
+
+#: C/mate-color-manager.xml:382(para)
+msgid ""
+"When calibrating and profiling a display you may have to change the color "
+"measuring instrument to operate in different modes. You may have to remove "
+"your instrument from the screen to change the modes. Ensure the instrument "
+"is put back on the screen after you have changed any settings."
+msgstr ""
+"Při kalibraci a vytváření profilu pro displej může být nutné změnit "
+"nastavení měřící sondy, aby fungovala v různých režimech. Může být nutné "
+"sundat sondu z obrazovky, aby šla změna režimu provést. Ujistěte se, že po "
+"změně nastavení sondy jste ji vrátili zpět na obrazovku."
+
+#: C/mate-color-manager.xml:391(title)
+msgid "MATE Color Manager Instrument Configure Dialog"
+msgstr "Okno Správce barev MATE pro konfiguraci měřící sondy"
+
+#: C/mate-color-manager.xml:401(para)
+msgid ""
+"When calibrating and profiling a display connected using a VGA or DVI "
+"connection, often the type of device is not known. By answering correctly, "
+"<application>MATE Color Manager</application> can generate better profiles "
+"for the device you are trying to calibrate and profile."
+msgstr ""
+"Při kalibraci a vytváření profilu pro displej připojený pomocí VGA nebo DVI "
+"kabelu často nelze zjistit typ displeje. Pokud odpovíte správně, "
+"<application>Správce barev MATE</application> vytvoří kvalitnější profil "
+"pro dané zařízení."
+
+#: C/mate-color-manager.xml:408(title)
+msgid "MATE Color Manager Screen Type Dialog"
+msgstr "Okno Správce barev MATE pro nastavení typu obrazovky"
+
+#: C/mate-color-manager.xml:418(para)
+msgid ""
+"When profiling a printer you can also generate images to be sent to a print "
+"shop or photograph processing agency. The profiling details will be saved, "
+"and you will need to select the correct profiling results when you receive "
+"the proofs back."
+msgstr ""
+"Při vytváření profilu pro tiskárnu můžete též vytvořit obrázky, které "
+"zašlete do minilabu. Detaily ohledně vytvoření těchto obrázků zůstanou "
+"uloženy ve vašem počítači, při obdržení vytištěných obrázků je pouze znovu "
+"vyberete a následně bude vytvořen profil pro minilab."
+
+#: C/mate-color-manager.xml:425(title)
+msgid "MATE Color Manager Print Mode Dialog"
+msgstr "Okno Správce barev MATE pro nastavení režimu tisku"
+
+#: C/mate-color-manager.xml:439(title)
+msgid "Frequently asked questions"
+msgstr "Často kladené otázky"
+
+#: C/mate-color-manager.xml:440(para)
+msgid "This section list questions frequently asked about color management"
+msgstr "Tento oddíl uvádí často kladené otázky na téma správy barev."
+
+#: C/mate-color-manager.xml:443(title)
+msgid "What's the difference between calibration and characterization?"
+msgstr "Jaký je rozdíl mezi kalibrací a charakterizací zařízení?"
+
+#: C/mate-color-manager.xml:451(para)
+msgid "Changing controls or internal settings that it has."
+msgstr ""
+"Změna nastavení ovládání (tlačítek) nebo interních nastavení, které dané "
+"zařízení má."
+
+#: C/mate-color-manager.xml:456(para)
+msgid "Applying curves to its color channels."
+msgstr "Aplikace křivek na úpravu tonality kanálů barev v zařízení."
+
+#: C/mate-color-manager.xml:444(para)
+msgid ""
+"Many people are initially confused about the difference between calibration "
+"and characterization. Calibration is the process of modifying the color "
+"behavior of a device. This is typically done using two mechanisms: "
+"<placeholder-1/>"
+msgstr ""
+"Mnoho lidí je z počátku zmateno ohledně rozdílu mezi kalibrací a "
+"charakterizací. Kalibrace je proces pozměňování chování zařízení z pohledu "
+"snímání či zobrazování barev. Obvykle se tak činí pomocí dvou mechanizmů: "
+"<placeholder-1/>"
+
+#: C/mate-color-manager.xml:462(para)
+msgid ""
+"The idea of calibration is to put a device is a defined state with regard to "
+"its color response. Often this is used as a day to day means of maintaining "
+"reproducible behavior. Typically calibration will be stored in device or "
+"systems specific file formats that record the device settings or per-channel "
+"calibration curves."
+msgstr ""
+"Podstatou kalibrace je uvedení zařízení do definovaného stavu s ohledem na "
+"jeho odezvu vůči barvám. Často se kalibrace používá jako každodenní "
+"prostředek k dosažení opakovatelného chování. Obvykle se kalibrace ukládá "
+"přímo v zařízení nebo ve specifických souborových formátech, které ukládají "
+"nastavení zařízení nebo kalibračních křivek pro jednotlivé kanály."
+
+#: C/mate-color-manager.xml:469(para)
+msgid ""
+"Characterization (or profiling) is <emphasis>recording</emphasis> the way a "
+"device reproduces or responds to color. Typically the result is stored in a "
+"device ICC profile. Such a profile does not in itself modify color in any "
+"way. It allows a system such as a CMM (Color Management Module) or a color "
+"aware application to modify color when combined with another device profile. "
+"Only by knowing the characteristics of two devices, can a way of "
+"transferring color from one device representation to another be achieved."
+msgstr ""
+"Charakterizace je <emphasis>uložení</emphasis> způsobu, jakým dané zařízení "
+"reprodukuje nebo reaguje na barvu. Výsledek charakterizace je obvykle uložen "
+"v profilu ICC daného zařízení. Profil sám o sobě barvy nijak nemodifikuje, "
+"avšak poskytne informace systémům jako je CMM (Color Management Modul - "
+"modul správy barev) nebo aplikaci podporující správu barev, aby tyto mohly "
+"upravit barvy, dojde-li ke kombinaci s jiným profilem zařízení. Zachovat "
+"shodu barev při převodu mezi různými zařízeními lze pouze v případě, kdy je "
+"známa charakteristika těchto zařízení."
+
+#: C/mate-color-manager.xml:480(para)
+msgid ""
+"Note that a characterization (profile) will only be valid for a device if it "
+"is in the same state of calibration as it was when it was characterized."
+msgstr ""
+"Všimněte si, že charakterizace (profil) je platná pouze pro zařízení, které "
+"je ve stejném stavu (kalibraci) jako když toto zařízení byl profil vytvářen."
+
+#: C/mate-color-manager.xml:486(para)
+msgid ""
+"In the case of display profiles there is some additional confusion because "
+"often the calibration information is stored in the profile for convenience. "
+"By convention it is stored in a tag called the <type>vcgt</type> tag. "
+"Although it is stored in the profile, none of the normal ICC based tools or "
+"applications are aware of it, or do anything with it. Similarly, typical "
+"display calibration tools and applications will not be aware of, or do "
+"anything with the ICC characterization (profile) information."
+msgstr ""
+"V případě profilů displejů je situace ještě zmatenější, neboť z důvodu "
+"\"pohodlí\" se velmi často informace o kalibraci ukládá přímo do profilu "
+"ICC. Zvykem je ukládat kalibraci do tzv. údaje <type>vcgt</type>. Ačkoliv je "
+"tento údaj uložen v profilu, žádný z běžných programů (CMM) pro práci s "
+"převody barev mezi jednotlivými zařízeními tuto informaci nepoužívá. A "
+"obdobně, programy pro kalibraci zařízení naopak nepracují s "
+"charakterizačními daty v profilu a používají pouze vcgt údaj."
+
+#: C/mate-color-manager.xml:498(title)
+msgid "Missing information for whole-screen color correction"
+msgstr "Chybějí informace pro korekci celé obrazovky"
+
+#: C/mate-color-manager.xml:499(para)
+msgid ""
+"Unfortunately, many vendor-supplied ICC profiles do not include the "
+"information required for whole-screen color correction. These profiles can "
+"still be useful for applications that can do color compensation, but you "
+"will not see all the colors of your screen change."
+msgstr ""
+"Bohužel, mnoho profilů ICC dodaných výrobci displejů neobsahuje informaci "
+"nutnou pro korekci barev celé obrazovky. Tyto profily lze přesto použít pro "
+"aplikace, které umějí transformovat barvy pro zobrazení na displeji."
+
+#: C/mate-color-manager.xml:505(para)
+msgid ""
+"In order to create a display profile, which includes both calibration and "
+"characterisation data, you will need to use a special color measuring "
+"instruments callled a colorimeter or a spectrometer."
+msgstr ""
+"Abyste mohli vytvořit profil displeje, který obsahuje jak kalibrační tak i "
+"charakterizační údaje, potřebujete použít speciální měřící sondu zvanou "
+"kolorimetr nebo spektrofotometr."
+
+#: C/mate-color-manager.xml:513(title)
+msgid "Which color measuring instruments are supported?"
+msgstr "Které měřící sondy jsou podporovány?"
+
+#: C/mate-color-manager.xml:514(para)
+msgid ""
+"MATE Color Manager relies on ArgyllCMS to support color instruments. Thus "
+"the following display measuring instruments are supported:"
+msgstr ""
+"Při práci s měřícími sondami spoléhá Správce barev MATE na ArgyllCMS. "
+"Následující měřící sondy pro displeje jsou podporovány:"
+
+#: C/mate-color-manager.xml:520(para)
+msgid "Gretag-Macbeth Eye-One Pro (spectrometer)"
+msgstr "Gretag-Macbeth Eye-One Pro (spectrometer)"
+
+#: C/mate-color-manager.xml:525(para)
+msgid "Gretag-Macbeth Eye-One Monitor (spectrometer)"
+msgstr "Gretag-Macbeth Eye-One Monitor (spectrometer)"
+
+#: C/mate-color-manager.xml:530(para)
+msgid "Gretag-Macbeth Eye-One Display 1, 2 or LT (colorimeter)"
+msgstr "Gretag-Macbeth Eye-One Display 1, 2 nebo LT (colorimeter)"
+
+#: C/mate-color-manager.xml:535(para)
+msgid "X-Rite ColorMunki Design or Photo (spectrometer)"
+msgstr "X-Rite ColorMunki Design nebo Photo (spectrometer)"
+
+#: C/mate-color-manager.xml:540(para)
+msgid "X-Rite ColorMunki Create (colorimeter)"
+msgstr "X-Rite ColorMunki Create (colorimeter)"
+
+#: C/mate-color-manager.xml:545(para)
+msgid "Pantone Huey (colorimeter)"
+msgstr "Pantone Huey (colorimeter)"
+
+#: C/mate-color-manager.xml:550(para)
+msgid "MonacoOPTIX (colorimeter)"
+msgstr "MonacoOPTIX (colorimeter)"
+
+#: C/mate-color-manager.xml:555(para)
+msgid "ColorVision Spyder 2 and 3 (colorimeter)"
+msgstr "ColorVision Spyder 2 a 3 (colorimeter)"
+
+#: C/mate-color-manager.xml:560(para)
+msgid "Colorimètre HCFR (colorimeter)"
+msgstr "Colorimètre HCFR (colorimeter)"
+
+#: C/mate-color-manager.xml:567(title)
+msgid "Which target types are supported?"
+msgstr "Které typy obrazců jsou podporovány?"
+
+#: C/mate-color-manager.xml:568(para)
+msgid "MATE Color Manager supports the following types of targets:"
+msgstr "Správce barev MATE podporuje následující typy obrazců:"
+
+#: C/mate-color-manager.xml:573(para)
+msgid "CMP DigitalTarget"
+msgstr "CMP DigitalTarget"
+
+#: C/mate-color-manager.xml:578(para)
+msgid "ColorChecker 24"
+msgstr "ColorChecker 24"
+
+#: C/mate-color-manager.xml:583(para)
+msgid "ColorChecker DC"
+msgstr "ColorChecker DC"
+
+#: C/mate-color-manager.xml:588(para)
+msgid "ColorChecker SG"
+msgstr "ColorChecker SG"
+
+#: C/mate-color-manager.xml:593(para)
+msgid "i1 RGB Scan 14"
+msgstr "i1 RGB Scan 14"
+
+#: C/mate-color-manager.xml:598(para)
+msgid "LaserSoft DC Pro"
+msgstr "LaserSoft DC Pro"
+
+#: C/mate-color-manager.xml:603(para)
+msgid "QPcard 201"
+msgstr "QPcard 201"
+
+#: C/mate-color-manager.xml:608(para)
+msgid "IT8.7/2"
+msgstr "IT8.7/2"
+
+#: C/mate-color-manager.xml:615(title)
+msgid "Where do I purchase targets from?"
+msgstr "Kde mohu koupit obrazce?"
+
+#: C/mate-color-manager.xml:616(para)
+msgid ""
+"You can purchase targets from well-known vendors like KODAK, X-Rite and "
+"LaserSoft in various online shops. Alternatively you can buy targets from "
+"<ulink url=\"http://www.targets.coloraid.de/\" type=\"http\">Wolf Faust</"
+"ulink> at a very fair price."
+msgstr ""
+"Obrazce můžete koupit od známých výrobců jako jsou KODAK, X-Rite a LaserSoft "
+"v různých internetových obchodech. Můžete je též koupit od <ulink url="
+"\"http://www.targets.coloraid.de/\" type=\"http\">Wolfa Fausta</ulink> za "
+"velmi příznivou cenu."
+
+#: C/mate-color-manager.xml:626(title)
+msgid "About"
+msgstr "O programu"
+
+#: C/mate-color-manager.xml:627(para)
+msgid ""
+"MATE Color Manager was written by Richard Hughes <email>richard@hughsie."
+"com</email>. To find more information about MATE Color Manager, please "
+"visit the <ulink url=\"http://projects.gnome.org/mate-color-manager/\" type="
+"\"http\"><application>MATE Color Manager</application> web page</ulink>."
+msgstr ""
+"Správce barev MATE byl napsán Richardem Hughesem <email>richard@hughsie."
+"com</email>. Další informace o tomto programu najdete na <ulink url=\"http://"
+"projects.gnome.org/mate-color-manager/\" type=\"http\">webové stránce "
+"<application>Správce barev MATE</application></ulink>."
+
+#: C/mate-color-manager.xml:633(para)
+msgid ""
+"To report a bug or make a suggestion regarding this application or this "
+"manual, follow the directions at the <ulink url=\"http://projects.gnome.org/"
+"mate-color-manager/bugs.html\" type=\"http\"><application>MATE Color "
+"Manager</application> Bug Page</ulink>."
+msgstr ""
+"Pokud chcete oznámit chybu nebo navrhnout vylepšení vztahující se k aplikaci "
+"Správce barev MATE nebo této příručce, postupujte dle instrukcí na <ulink "
+"url=\"http://projects.gnome.org/mate-color-manager/bugs.html\" type=\"http"
+"\">stránce chyb <application>Správce barev MATE</application></ulink>."
+
+#: C/mate-color-manager.xml:639(para)
+msgid ""
+"This program is distributed under the terms of the GNU General Public "
+"license as published by the Free Software Foundation; either version 2 of "
+"the License, or (at your option) any later version. A copy of this license "
+"can be found at this <ulink url=\"mate-color-manager:gpl\" type=\"help"
+"\">link</ulink>, or in the file COPYING included with the source code of "
+"this program."
+msgstr ""
+"Tento program je šířen podle ustanovení GNU General Public License, vydávané "
+"Free Software Foundation; a to buď verze 2 této licence anebo (podle "
+"vlastního uvážení) kterékoliv pozdější verze. Kopii této licence naleznete "
+"na <ulink url=\"http://www.gnu.org/licenses/gpl.html\" type=\"http\">stránce "
+"projektu GNU</ulink> nebo v souboru COPYING přiloženém ke zdrojovým kódům "
+"tohoto programu. "
+
+#. Put one translator per line, in the form of NAME <EMAIL>, YEAR1, YEAR2
+#: C/mate-color-manager.xml:0(None)
+msgid "translator-credits"
+msgstr "Milan Knížek <knizek@volny.cz>, 2010"
+

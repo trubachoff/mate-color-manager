@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE policyconfig PUBLIC
+ "-//freedesktop//DTD PolicyKit Policy Configuration 1.0//EN"
+ "http://www.freedesktop.org/standards/PolicyKit/1.0/policyconfig.dtd">
+<policyconfig>
+
+  
+
+  <vendor>MATE Color Manager</vendor>
+  <vendor_url>http://www.gnome.org/projects/mate-color-manager/</vendor_url>
+  <icon_name>application-vnd.iccprofile</icon_name>
+
+  <action id="org.mate.color.install-system-wide">
+    
+    <description>Install system color profiles</description>
+    <description xml:lang="cs">Instalovat systémové profily barev</description>
+    <description xml:lang="da">Installér systemfarveprofiler</description>
+    <description xml:lang="de">Farbprofile systemweit installieren</description>
+    <description xml:lang="el">Εγκατάσταση προφίλ χρώματος συστήματος</description>
+    <description xml:lang="en_GB">Install system colour profiles</description>
+    <description xml:lang="es">Instalar perfiles de color del sistema</description>
+    <description xml:lang="et">Süsteemi värviprofiilide paigaldamine</description>
+    <description xml:lang="fr">Installation de profils de couleurs pour le système</description>
+    <description xml:lang="gl">Instalar perfiles de cor do sistema</description>
+    <description xml:lang="he">התקנת פרופילי צבע של המערכת</description>
+    <description xml:lang="hu">Színprofilok telepítése rendszerszinten</description>
+    <description xml:lang="id">Pasang profil warna sistem</description>
+    <description xml:lang="it">Installa profili colore di sistema</description>
+    <description xml:lang="ja">システムのカラープロファイルをインストール</description>
+    <description xml:lang="ko">시스템 색 프로파일 설치</description>
+    <description xml:lang="lt">Įdiegti sistemos spalvų profilius</description>
+    <description xml:lang="nb">Installer fargeprofiler for systemet</description>
+    <description xml:lang="pa">ਸਿਸਟਮ ਰੰਗ ਪਰੋਫਾਇਲ ਇੰਸਟਾਲ ਕਰੋ</description>
+    <description xml:lang="pl">Instalacja systemowych profilów kolorów</description>
+    <description xml:lang="pt">Instalar perfis de cor de sistema</description>
+    <description xml:lang="pt_BR">Instalar sistema de perfil de cores</description>
+    <description xml:lang="ro">Instalează profiluri de culoare pe sistem</description>
+    <description xml:lang="ru">Общесистемная установка профилей</description>
+    <description xml:lang="sl">Namestitev sistemskih barvnih profilov</description>
+    <description xml:lang="sr">Инсталирај системске профиле боја</description>
+    <description xml:lang="sr@latin">Instaliraj sistemske profile boja</description>
+    <description xml:lang="ta">கணினி நிற வரையுருக்களை நிறுவுக</description>
+    <description xml:lang="zh_CN">安装系统色彩配置文件</description>
+    <description xml:lang="zh_HK">安裝系統顏色設定組合</description>
+    <description xml:lang="zh_TW">安裝系統顏色設定組合</description>
+    <message>Authentication is required to install the color profile for all users</message>
+    <message xml:lang="cs">Abyste mohli nainstalovat profily barev pro všechny uživatele, musíte mít administrátorská oprávnění.</message>
+    <message xml:lang="da">Installation af farveprofil for alle brugere kræver godkendelse</message>
+    <message xml:lang="de">Eine Legitimierung wird benötigt, um das Farbprofil für alle Benutzer zu installieren</message>
+    <message xml:lang="el">Απαιτείται πιστοποίηση για εγκατάσταση προφίλ χρώματος για όλους τους χρήστες</message>
+    <message xml:lang="en_GB">Authentication is required to install the colour profile for all users</message>
+    <message xml:lang="es">Se necesita autenticación para instalar perfiles de color para todos los usuarios</message>
+    <message xml:lang="et">Värviprofiilide paigaldamiseks kõigile kasutajatele on vajalik autentimine</message>
+    <message xml:lang="fr">Authentification nécessaire pour installer le profil de couleur pour tous les utilisateurs</message>
+    <message xml:lang="gl">Necesítase autenticación para instalar perfiles de cor para todos os usuarios</message>
+    <message xml:lang="he">נדרש אימות כדי להתקין את פרופיל הצבע עבור כל המשתמשים</message>
+    <message xml:lang="hu">Hitelesítés szükséges a színprofil minden felhasználó számára történő telepítéséhez</message>
+    <message xml:lang="id">Otentikasi diperlukan untuk memasang profil warna bagi semua pengguna</message>
+    <message xml:lang="it">È richiesta l'autenticazione per installare il profilo colore per tutti gli utenti</message>
+    <message xml:lang="ja">すべてのユーザ用にカラープロファイルをインストールするには認証が必要です。</message>
+    <message xml:lang="ko">모든 사용자에게 적용되도록 색 프로파일을 설치하려면 인증이 필요합니다</message>
+    <message xml:lang="lt">Norint įdiegti spalvų profilį visiems vartotojams, reikia nustatyti tapatybę.</message>
+    <message xml:lang="nb">Autentisering kreves for å installere fargeprofilen for alle brukere</message>
+    <message xml:lang="pl">Wymagane jest uwierzytelnienie, aby zainstalować profil kolorów dla wszystkich użytkowników</message>
+    <message xml:lang="pt">É necessária autenticação para instalar o perfil de cor para todos os utilizadores</message>
+    <message xml:lang="pt_BR">É necessário autenticação para instalar o perfil de cores para todos os usuários</message>
+    <message xml:lang="ro">Autentificarea este necesară pentru a instala profiluri de culoare pentru toți utilizatorii</message>
+    <message xml:lang="ru">Установка профиля для всех пользователей требует аутентификации</message>
+    <message xml:lang="sl">Za namestitev barvnega profila za vse uporabnike je zahtevana overitev</message>
+    <message xml:lang="sr">Неопходна су овлашћења за инсталацију профила свим корисницима</message>
+    <message xml:lang="sr@latin">Neophodna su ovlašćenja za instalaciju profila svim korisnicima</message>
+    <message xml:lang="ta">எல்லாப் பயனர்களுக்கு நிற வரிவுரு அமைக்க அங்கீகாரம் தேவைப்படுகிறது</message>
+    <message xml:lang="zh_CN">为所有用户安装该色彩配置文件需要身份验证</message>
+    <message xml:lang="zh_HK">要將顏色設定檔安裝給所有使用者需要經過驗證</message>
+    <message xml:lang="zh_TW">要將顏色設定檔安裝給所有使用者需要經過驗證</message>
+    <icon_name>application-vnd.iccprofile</icon_name>
+    <defaults>
+      <allow_any>no</allow_any>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>auth_admin_keep</allow_active>
+    </defaults>
+    <annotate key="org.freedesktop.policykit.exec.path">/usr/sbin/mcm-install-system-wide</annotate>
+  </action>
+
+</policyconfig>

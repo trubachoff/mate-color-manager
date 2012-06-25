@@ -1,0 +1,402 @@
+Version 2.32.0
+~~~~~~~~~~~~~~~
+Released: 2010-09-27
+
+* Translations
+ - Added Arabic translation (Khaled Hosny)
+ - Added Hungarian translation (Gabor Kelemen)
+ - Added Romanian translation (Lucian Adrian Grijincu)
+ - Updated Brazilian Portuguese (Flamarion Jorge, Djavan Fagundes)
+ - Updated Czech translation (Milan Knížek)
+ - Updated Greek translation (Bakaoukas Nikolaos)
+ - Updated Indonesian translation (Andika Triwidada)
+ - Updated Japanese translation (Takayuki KUSANO)
+ - Updated Russian help translation (Alexandre Prokoudine)
+
+* Bugfix:
+ - Fix compile on newer GTK2 versions where GDK_DISPLAY() is deprecated (Richard Hughes)
+ - Show the correct copyright notice when a profile has used markup in the description (Richard Hughes)
+
+Version 2.31.92
+~~~~~~~~~~~~~~~
+Released: 2010-09-16
+
+* Translations
+ - Added Korean translation (Homin Lee)
+ - Updated British English translation (Bruce Cowan)
+ - Updated Danish translation (Kenneth Nielsen)
+ - Updated Estonian translation (Mattias Põldaru)
+ - Updated French translation (Claude Paroz)
+ - Updated German translation (Christian Kirbach)
+ - Updated Italian translation (Francesco Groccia)
+ - Updated Lithuanian translation (Aurimas Černius)
+ - Updated Norwegian bokmål translation (Kjartan Maraas)
+ - Updated Polish translation (Piotr Drąg)
+ - Updated Simplified Chinese translation (Aron Xu)
+ - Updated Slovenian translation (Andrej Žnidaršič)
+ - Updated Slovenian translation (Matej Urbančič)
+ - Updated Spanish translation (Jorge González)
+ - Updated Tamil translation (Dr.Tirumurti Vasudevan)
+
+* Bugfix:
+ - Don't prompt the user to calibrate the device again if we are re-using the GcmCalibrate instance (Richard Hughes)
+ - Ensure we disconnect the VTE signals when done with GcmCalibrateArgyll (Richard Hughes)
+ - Lower VTE dep and #ifdef the deprecated methods (Richard Hughes)
+ - Only disable deprecated code for --enable-strict builds (defaulting to true for git) (Richard Hughes)
+ - Put the executable name in argv[0] for argyll commands, otherwise option processing breaks (Richard Hughes)
+
+Version 2.31.91
+~~~~~~~~~~~~~~~
+Released: 2010-08-31
+
+* Translations
+ - Added Punjabi Translation (A S Alam)
+ - Added Serbian translation (Милош Поповић)
+ - Added Traditional Chinese translation (Hong Kong and Taiwan) (Chao-Hsiung Liao)
+ - Added Greek translation for gnome-color-management (Michael Kotsarinis)
+ - Added Greek translation for gnome-color-manager documentation (Michael Kotsarinis)
+ - Updated Danish translation (Ask H. Larsen)
+ - Updated French translation (Claude Paroz)
+ - Updated Galician translations (Fran Diéguez)
+ - Updated Hebrew translation (Yaron Shahrabani)
+ - Updated Portuguese translation (António Lima)
+ - Updated Slovenian translation (Matej Urbančič)
+ - Updated Spanish translation (Jorge González)
+ - Update Simplified Chinese translation (Yinghua Wang)
+
+* Bugfix:
+ - Use a new application icon (Hylke Bons)
+
+Version 2.31.6
+~~~~~~~~~~~~~~
+Released: 2010-08-06
+
+* Important note:
+ - This is 2.31.6, which is forked from the gnome-2-30 branch.
+ - If you have been using 2.31.5 or any earlier 2.31 version, then you will
+   notice the UI and functionality going back in time. This is unfortunate.
+ - GNOME 3 has been pushed back 6 months, and the GSettings and GtkApplication
+   code is not ready for prime-time just yet. I'm not willing to add multiple
+   levels of ifdef'd code for the n-permutations of distros on different GTK
+   and GLib versions, so people are just going to make do with 3.30.x with
+   a few backported bugs and translation fixes. I do apologise to the
+   translators, who have wasted some time on translating git master.
+ - This release does not use the new control center panel, GDBus or GSettings,
+   nor the new XDG directories location.
+ - I don't intend on wasting time backporting features from git master into
+   GNOME 2.32.x. Bugfixes will be, where they make sense.
+ - In my personal opinion, GNOME 2.32.0 is going to blow goats.
+
+* Bugfix:
+ - Use vte_terminal_fork_command_full() as vte_terminal_fork_command() is deprecated (Richard Hughes)
+ - Include the trailing colon in translated strings. Fixes #619967 (Richard Hughes)
+ - Clean up the temporary file created by cupsGetPPD2(). Fixes rh#582202 (Tim Waugh)
+
+Version 2.30.2
+~~~~~~~~~~~~~~
+Released: 2010-06-01
+
+* Translations
+ - Added Japanese translation (Ryo Fujita)
+ - Updated British English translation (Bruce Cowan)
+
+* Bugfix:
+ - Do not connect to sane in gcm-apply, we only need XRandR devices. Fixes rh#585723 (Richard Hughes)
+ - Do not crash when the schema is invalid and GConf reports an error (Richard Hughes)
+ - Only connect to SANE and CUPS when the device lists are needed. Fixes rh#590465 (Richard Hughes)
+ - Get the profile permissions from GIO rather than hardcoding a hack (Richard Hughes)
+ - At login do not attempt to remove previously set X atoms, which speeds up gcm-apply by 750ms (Richard Hughes)
+
+Version 2.30.1
+~~~~~~~~~~~~~~
+Released: 2010-04-26
+
+* Translations
+ - Updated Italian translation (Francesco Groccia)
+ - Updated Polish translation (Piotr Drąg)
+
+* Bugfix:
+ - Do not explode when viewing the details of a CMYK profile (Richard Hughes)
+ - Make gcm-fix-profile open the profile from memory, as then we can catch
+   common access permission errors (Richard Hughes)
+
+Version 2.30.0
+~~~~~~~~~~~~~~
+Released: 2010-03-29
+
+* Translations
+ - Add Simplified Chinese translation (Eleanor Chen)
+ - Update Czech translation (Milan Knížek)
+ - Updated German doc translation (Mario Blättermann)
+ - Updated German translation (Christian Kirbach)
+ - Updated German translation (Mario Blättermann)
+ - Updated Lithuanian translation (Gintautas Miliauskas)
+ - Updated Norwegian bokmål translation (Kjartan Maraas)
+ - Updated Polish translation (Piotr Drąg)
+ - Updated Portuguese translation (António Lima)
+ - Updated Russian translation (Alexandre Prokoudine)
+ - Updated Slovenian translation (Andrej Žnidaršič)
+ - Updated Spanish translation (Jorge González)
+
+* New Features:
+ - Add a 'created' and 'modified' key to each device in the config file (Richard Hughes)
+ - Add a DBus method GetDevices() and relax the checks in GetProfilesForDevice() to also take a device ID (Richard Hughes)
+ - Add an entry to the FAQ to explain the difference between calibration and characterization (Richard Hughes)
+ - Add a notification when devices with profiles need recalibrating (Richard Hughes)
+ - Add CMP DT 003 target image submitted by Guy Kloss (Pascal de Bruijn)
+ - Add images of the Colorimtre HCFR (Richard Hughes)
+ - Add images of the i1 Pro (Richard Hughes)
+ - Add info regarding high precision for display profiling (Milan Knížek)
+ - Allow the user to choose the calibration precision using an interactive dialog (Richard Hughes)
+ - Convert the .tiff files to .jpeg if we are creating a print profile (Richard Hughes)
+ - Do not rely on usb.ids, but instead encode the colorimeter type in the udev rules (Richard Hughes)
+ - Emit ::changed on the public DBus interface when devices are added or removed (Richard Hughes)
+ - For laptops, use the DMI data to contruct the calibration filename (Richard Hughes)
+ - Make sure the profile comboboxes are alphabetically sorted (Richard Hughes)
+ - Show each device setting when we use gcm-inspect --dump (Richard Hughes)
+ - Use libsane to get our scanners, which means remote devices are now supported (Richard Hughes)
+ - When devices are connected and disconnected, do not remove then add them, just change the state (Richard Hughes)
+
+* Bugfix:
+ - Check and correct TIFF image files with alpha channels before using them in argyllcms. Fixes rh#569564 (Richard Hughes)
+ - Correct terminology in help file (Milan Knížek)
+ - Correct use of calibrate/profile and replace device by instrument (Milan Knížek)
+ - Do not crash attempting to add cups printers without PPD file (Martin Szulecki)
+ - Do not crash the DBus service if a device does not have a profile set and it is included in a query (Richard Hughes)
+ - Do not crash when GetProfileForWindow() succeeds in finding a window (Richard Hughes)
+ - Do not use ACL_MANAGE, udev is already doing this for us (Richard Hughes)
+ - Fix "cast increases required alignment of target type" [ia64] (Kamal Mostafa)
+ - Fix up some translatable messages. Fixes #612111 (Richard Hughes)
+ - Fix wrong word in data/gnome-color-manager.schemas.in. Fixes #612105 (Christian Kirbach)
+ - If there are any lcms warnings in gcm-fix-profile, do not attempt to re-save the profile (Richard Hughes)
+ - Make gcm-install-system-wide a little more paranoid from users that might want to be horrible (Richard Hughes)
+ - Parse the EDID more carefully to not overwrite the model with junk for an invalid entry. Fixes #155410 (Richard Hughes)
+ - Prevent a segfault if ppdOpenFile() fails for whatever reason (Richard Hughes)
+ - Update profiling precision wording (Milan Knížek)
+ - Use the model name for the SANE id, the 'name' attribute depends on the USB port used (Richard Hughes)
+ - Warn if GConf is not set correctly when setting up the dialog (Richard Hughes)
+
+Version 2.29.4
+~~~~~~~~~~~~~~
+Released: 2010-03-01
+
+* Translations
+ - Add Czech help translation (Milan Knizek)
+ - Add Czech translation (Milan Knížek)
+ - Update Czech translation (Marek Černocký)
+ - Updated French translation (Claude Paroz)
+ - Updated German doc translation (Mario Blättermann)
+ - Updated German translation (Mario Blättermann)
+ - Updated Lithuanian translation (Aurimas Černius)
+ - Updated Norwegian bokmål translation (Kjartan Maraas)
+ - Updated Russian translation (Alexandre Prokoudine)
+ - Updated Slovenian translation (Andrej Žnidaršič)
+ - Updated Spanish translation (Jorge González)
+ - Updated Swedish translation (Daniel Nylander)
+
+* New Features:
+ - Add a thumbnail image of the ColorCheckerDC (Graeme Gill)
+ - Add ColorCheckerSG thumbnail (Hening Betterman)
+ - Add LaserSoftDCPro thumbnail (Jorg Rosenkranz)
+ - Add printer profiling support using argyllcms and GtkPrint (Richard Hughes)
+ - Add some device type icons (Frédéric Bellaiche, Sebastian Kraft)
+ - Add support for sending calibration images to print shops (Richard Hughes)
+ - Add four more target thumbnails (Pascal de Bruijn)
+ - Allow UDEV and CUPS coldplug to be done multi-threaded (Richard Hughes)
+ - Allow virtual devices to be added to the device list (Richard Hughes)
+ - Automatically use the EXIF data if available from TIFF files when calibrating devices. Fixes #609444 (Richard Hughes)
+ - Conform to ICC Profiles in X Specification 0.3 (Richard Hughes)
+ - Detect printers by connecting to CUPS rather than scraping the HPLIP properties (Richard Hughes)
+ - Enable half-height targets for the ColorMunki, and double the patch counts for this hardware (Richard Hughes)
+ - Make users do the legwork when there is an unrecognised colorimeter (Richard Hughes)
+ - Play sounds using libcanberra when user interaction is required (Richard Hughes)
+ - Properly support projectors in the UI, and in the argyllcms wrapper (Richard Hughes)
+ - Remove GCM_HARDWARE_DETECTION as we're now shipping our own udev rules (Richard Hughes)
+ - Save the device colorspace in the config file so we can set profiles when not connected (Richard Hughes)
+ - Set a tooltip explaining why the calibrate button is insensitive (Richard Hughes)
+ - Set per-user xsane global and device settings when we have assigned a scanner profile (Richard Hughes)
+ - Show a GtkInfoBar warning if the profile has no vcgt table. Fixes #610287 (Richard Hughes)
+ - Support other types of reference file other than IT8 (Richard Hughes)
+ - Three FAQ entries out of five suggested filled in (Alexandre Prokoudine)
+ - Update Help Preferences Text (Paul Finnigan)
+
+* Bugfix:
+ - Add an 'All files' option on the file choosers. Fixes #610288 (Richard Hughes)
+ - Add AC_PROG_RANLIB to configure. Fixes #610771 (Richard Hughes)
+ - Add a list of colorimeters as we'll need this if argyllcms is not installed. Fixes rh#566414 (Richard Hughes)
+ - Ask for the chart type first before we ask for calibration files (Pascal de Bruijn)
+ - Capitalization fix for 'More Information' button (Michael Monreal)
+ - Correct help Intro and Usage (Paul Finnigan)
+ - Do low quality calibration when using targets with a low number of patches (Pascal de Bruijn)
+ - Do not allow devices to be assigned profiles in different colorspaces from native (Richard Hughes)
+ - Do not make the display calibration button sensitive (with tooltip) if we are using < XRandR 1.3 drivers. Fixes #610846 (Richard Hughes)
+ - Do not show the display as 'default' even when using the binary blob (Richard Hughes)
+ - Don't add Cups-PDF devices to the device list (Richard Hughes)
+ - Ensure ~/.color/icc exists at startup. Fixes #566275 (Richard Hughes)
+ - Ensure we set ID_MODEL_FROM_DATABASE and ID_VENDOR_FROM_DATABASE even if we're using old versions of argyllcms (Richard Hughes)
+ - Fix segfault when the profile has no description (Richard Hughes)
+ - Have scanin compensate for perspective distortion (Pascal de Bruijn)
+ - HIG string and capitalization fixes (Michael Monreal)
+ - Only require the device to be present if it is a display type (Richard Hughes)
+ - Read the ti2 file for the calibration model if we are analysing existing targets (Richard Hughes)
+ - Replace ColorCheckerSG with a newly processed one (Pascal de Bruijn)
+ - Replace colprof -aS with -aG (Pascal de Bruijn)
+ - Set the colorspace on unconnected devices to avoid getting no profiles in the list (Richard Hughes)
+ - Show a label in the device section when the user is using a xrandr-fallback driver. Fixes rh#566606 (Richard Hughes)
+ - Support colorimeter devices that need to change mode in the middle of the calibration (Richard Hughes)
+ - Use GFile internally so we can support importing profiles from gvfs mount points. Fixes #610285 (Richard Hughes)
+
+Version 2.29.3
+~~~~~~~~~~~~~~
+Released: 2010-02-01
+
+* Translations
+ - Added Italian translation (Francesco Groccia)
+ - Updated Danish translation (Joe Hansen)
+ - Updated French translation (Claude Paroz)
+ - Updated German translation (Mario Blättermann)
+ - Updated Norwegian bokmål translation (Kjartan Maraas)
+ - Updated Portuguese translation (António Lima)
+ - Updated Russian translation (Alexandre Prokoudine)
+ - Updated Slovenian translation (Andrej Žnidaršič)
+ - Updated Swedish translation (Daniel Nylander)
+
+* New Features:
+ - Enable the rendering intent and default colorspace UI elements (Richard Hughes)
+ - Show whether the ICC profile has a VCGT tag in the UI (Richard Hughes)
+ - Filter out non RGB and CMYK color space profiles from the combo-boxes using a heuristic (Richard Hughes)
+ - Add a new DBus method GetProfileForWindow which can return a profile for a supplied XID (Richard Hughes)
+ - Add some new text and tooltips to the prefs dialog (Richard Hughes)
+ - Add per-user OSX ICC profiles at startup (Richard Hughes)
+ - Add OSX and Windows ICC profiles if they exist from mounted volumes. Fixes #607390 (Richard Hughes)
+ - Add a device profile entry of 'Other profile...' to be able to easily import a profile. Fixes #607389 (Richard Hughes)
+ - Add a precision GConf variable to control the time a calibration takes. Fixes #605558 (Richard Hughes)
+ - Screenscrape the Argyll output to better support other hardware devices. Fixes #605558 (Richard Hughes)
+ - Do not show the 'Fine tuning' expander by default, and have configuration in GConf (Richard Hughes)
+
+* Bugfix:
+ - Zero out GErrors after freeing. Fixes crash (Christian Hergert)
+ - Add gnome-desktop path as fallback for pci.ids (Frederic Crozat)
+ - Do not generate an error if a display profile does not have CLUT data (Richard Hughes)
+ - Add gcm-fix-profile to load and then re-save existing profiles using lcms (Richard Hughes)
+ - Fix compile when using an ld that defaults to --as-needed (Richard Hughes)
+ - Do not allow the colorspace combobox to be zero sized. Fixes #606484 (Richard Hughes)
+ - Make gcm-prefs a normal dialog rather than a modal dialog (Richard Hughes)
+ - Only scan ICC locations with hfs partition types for OSX and msdos/NTFS types for Windows (Richard Hughes)
+ - Make gcm-prefs startup a few hundred ms quicker by not loading the list of screens (Richard Hughes)
+ - Cache gnome_rr_screen_new and take 0.7 seconds off the start time (Richard Hughes)
+ - Don't resize the window on startup. Fixes #607391 (Richard Hughes)
+ - Update the Free Software Foundation address (Richard Hughes)
+
+Version 2.29.2
+~~~~~~~~~~~~~~
+Released: 2010-01-04
+
+* Translations
+ - Added German help translation (Christian Kirbach)
+ - Added Slovenian translation (Matej Urbančič)
+ - Added Spanish translation (Jorge González)
+ - Updated Brazilian Portuguese translation (Flamarion Jorge)
+ - Updated British English translation (Bruce Cowan)
+ - Updated Danish translation (Joe Hansen)
+ - Updated French translation (Claude Paroz)
+ - Updated German translation (Christian Kirbach)
+ - Updated German translation (Mario Blättermann)
+ - Updated Russian translation (Alexandre Prokoudine)
+ - Updated Slovenian translation (Andrej Žnidaršič)
+
+* New Features:
+ - Add two elements in the UI, for RGB and CMYK working spaces (Richard Hughes)
+ - Add a TRC curve to the profile display (Richard Hughes)
+ - Add LCMS as a hard build-time dependency (Richard Hughes)
+ - Add PackageKit integration so we can install shared-color-targets (Richard Hughes)
+ - Offer to install ArgyllCMS if it is not installed, and the user wants to calibrate (Richard Hughes)
+ - Add a simple GcmImage class that makes embedded color profiles 'just work' (Richard Hughes)
+ - Import ICC profiles when dragged and dropped on the prefs capplet (Richard Hughes)
+ - Linkify the copyright and manufacturer strings in the profile dialog (Richard Hughes)
+ - Add a PolicyKit rule for the system-wide profiles install (Richard Hughes)
+ - Load the system-wide default if it has been installed (Richard Hughes)
+
+* Bugfix:
+ - Fix the reference file import filter (Pascal de Bruijn)
+ - Also evaluate /usr/local/bin when searching for Argyll tools. Fixes #605552 (Pascal de Bruijn)
+ - Add an icon for a colorspace conversion profile (Richard Hughes)
+ - Fix the help file installation so that yelp recognizes our help file (Richard Hughes)
+ - Do not install the demo ICC files, and instead depend on the shared-color-profiles package (Richard Hughes)
+ - Fix using profiles with VCGT formulas encoded in them (Richard Hughes)
+ - If getting the illuminants failed, try running it through the profile (Richard Hughes)
+ - Use strftime rather than our own hand-rolled function (Richard Hughes)
+ - Show the TRC curves in the UI, rather than the vcgt curves (Richard Hughes)
+ - Make gcm-dump-edid more useful by showing parsed data if available (Richard Hughes)
+ - Use as much of the EDID as we can when generating device IDs. Fixes #605013 (Richard Hughes)
+ - Add an experimental user-calibrate wizard, which the user can use when there is no calibration hardware available (Richard Hughes)
+ - Use the hardware calibration device in the profile name. Fixes #605259 (Richard Hughes)
+ - Sanitize the basename in GcmCalibrate when set. Fixes #605348 (Richard Hughes)
+ - Use the ORIGINATOR tag in the it8 file to specify a device prefix for the device calibration. Fixes #605259 (Richard Hughes)
+ - Move the device matching from a hard-coded list to a set of udev rules (Richard Hughes)
+ - Properly detect broken dispcal output. Fixes #605838 (Richard Hughes)
+
+Version 2.29.1
+~~~~~~~~~~~~~~
+Released: 2009-12-07
+
+* Translations
+ - Add Russian translation (Alexandre Prokoudine)
+ - Add British English translation (Bruce Cowan)
+ - Add Indonesian translation (Andika Triwidada)
+ - Add French translation (Claude Paroz)
+ - Add Swedish translation (Daniel Nylander)
+ - Add Brazilian Portuguese translation (Flamarion Jorge)
+ - Add Lithuanian translation (Gintautas Miliauskas)
+ - Add German translation (Hendrik Brandt)
+ - Add Danish translation (Joe Hansen)
+ - Add Spanish translation (Jorge González)
+ - Add Norwegian bokmål translation (Kjartan Maraas)
+ - Add Thai translation (Phondanai Khanti)
+ - Add Polish translation (Piotr Drąg)
+ - Add Estonian translation (Priit Laes, Mattias Põldaru)
+ - Add Tamil translation (vasudeven)
+ - Add Russian user guide translation (Alexandre Prokoudine)
+ - Add Indonesian user guide translation (Andika Triwidada)
+
+* New Features:
+ - Add gcm-import, a helper to allow double clicking on ICC profiles to import
+   them (Richard Hughes)
+ - Add gcm-prefs, a utility to assign profiles to devices, examine profiles, and
+   set session-wide defaults (Richard Hughes)
+ - Add gcm-session, a dbus-activated session daemon for applications to get the
+   profiles for a device, or device class and to get session-wide defaults.
+   It exits when no longer used to save resources. (Richard Hughes)
+ - Add gcm-self-test, a self test framework that tests GCM functionality (Richard Hughes)
+ - Add gcm-apply, a simple utility to just set (or reset) display profiles (Richard Hughes)
+ - Add gcm-inspect, a debugging utility to inspect the profiles set in the
+   session (Richard Hughes)
+ - Add gcm-dump-edid, a utility to dump the EDID to disk for debugging (Richard Hughes)
+ - Add gcm-dump-profile, a utility to dump the ICC profile to the screen (Richard Hughes)
+ - Add some simple man pages and help document (Richard Hughes)
+ - Add ArgyllCMS support to generate device profiles (Richard Hughes)
+ - Add color calibration hardware auto-detection (Richard Hughes)
+ - Add code to set the _ICC_PROFILE atom per-output and also per-screen (Richard Hughes)
+ - Add some pre-calibration steps for external displays (Pascal de Bruijn)
+ - Add hardware support for gphoto supported cameras (Richard Hughes)
+ - Add hardware support for SANE suppoerted scanners (Richard Hughes)
+ - Add hardware support for video4linux supported video devices (Richard Hughes)
+ - Add hardware support for XRandR supported displays (Richard Hughes)
+ - Add hardware support for hplip supported printers (Richard Hughes)
+ - Add CIE widget to display visual data about different profiles (Richard Hughes)
+ - Use the system DMI data to better itentify internal LCD panels (Richard Hughes)
+ - Parse the EDID to get a better device description for displays (Richard Hughes)
+ - Make the list orders predictable by setting a sort string (Richard Hughes)
+
+* Bugfix:
+ - Use XDG directory to store data (Baptiste Mille-Mathias)
+ - Remove markup from GTKBuilder translatable strings (Claude Paroz)
+ - Update bluish.icc title (Lars Tore Gustavsen, Pascal de Bruijn)
+ - Enable adding xrandr devices with no EDID (Martin Szulecki)
+ - Avoid reporting a (false) failure on first import (Stephane Delcroix)
+ - Fix the message-received cb signature (Stephane Delcroix)
+ - Fix up numerous small bugs prior to first release (Richard Hughes)
+ - Look for the debian-named argyllcms binaries first (Richard Hughes)
+ - Set the brightness to 100% on internal LCD panels before we generate a
+   output profile (Richard Hughes)
+

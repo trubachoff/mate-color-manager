@@ -1,0 +1,28 @@
+data/mcm-apply.desktop.in
+data/mcm-import.desktop.in
+data/mcm-prefs.desktop.in
+data/mate-color-manager.schemas.in
+policy/org.mate.color.policy.in
+src/egg-debug.c
+src/mcm-apply.c
+src/mcm-calibrate-argyll.c
+src/mcm-calibrate.c
+src/mcm-calibrate-dialog.c
+src/mcm-calibrate-manual.c
+src/mcm-client.c
+src/mcm-colorimeter.c
+src/mcm-device-xrandr.c
+src/mcm-dump-edid.c
+src/mcm-dump-profile.c
+src/mcm-fix-profile.c
+src/mcm-import.c
+src/mcm-inspect.c
+src/mcm-install-system-wide.c
+src/mcm-prefs.c
+src/mcm-profile.c
+src/mcm-session.c
+src/mcm-utils.c
+[type: gettext/glade]data/mcm-calibrate.ui
+[type: gettext/glade]data/mcm-prefs.ui
+[type: gettext/glade]data/mcm-spawn.ui
+

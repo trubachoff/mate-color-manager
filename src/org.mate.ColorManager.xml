@@ -1,0 +1,221 @@
+<!DOCTYPE node PUBLIC
+"-//freedesktop//DTD D-BUS Object Introspection 1.0//EN"
+"http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd" [
+  <!ENTITY ERROR_GENERAL "org.mate.ColorManager.Denied">
+]>
+<node name="/" xmlns:doc="http://www.freedesktop.org/dbus/1.0/doc.dtd">
+
+  <interface name="org.mate.ColorManager">
+    <doc:doc>
+      <doc:description>
+        <doc:para>
+          The interface used for quering color parameters for the session.
+        </doc:para>
+      </doc:description>
+    </doc:doc>
+
+    <!--*****************************************************************************************-->
+    <property name="RenderingIntentDisplay" type="s" access="read">
+      <doc:doc>
+        <doc:description>
+          <doc:para>
+            The rendering intent for the display.
+          </doc:para>
+          <doc:list>
+            <doc:item>
+              <doc:term>perceptual</doc:term><doc:definition>Perceptual</doc:definition>
+            </doc:item>
+            <doc:item>
+              <doc:term>relative-colormetric</doc:term><doc:definition>Relative colormetric</doc:definition>
+            </doc:item>
+            <doc:item>
+              <doc:term>saturation</doc:term><doc:definition>Saturation</doc:definition>
+            </doc:item>
+            <doc:item>
+              <doc:term>absolute-colormetric</doc:term><doc:definition>Absolute colormetric</doc:definition>
+            </doc:item>
+          </doc:list>
+        </doc:description>
+      </doc:doc>
+    </property>
+
+    <!--*****************************************************************************************-->
+    <property name="RenderingIntentSoftproof" type="s" access="read">
+      <doc:doc>
+        <doc:description>
+          <doc:para>
+            The rendering intent for softproofing.
+          </doc:para>
+        </doc:description>
+      </doc:doc>
+    </property>
+
+    <!--*****************************************************************************************-->
+    <property name="ColorspaceRgb" type="s" access="read">
+      <doc:doc>
+        <doc:description>
+          <doc:para>
+            The default colorspace filename for RGB files.
+          </doc:para>
+        </doc:description>
+      </doc:doc>
+    </property>
+
+    <!--*****************************************************************************************-->
+    <property name="ColorspaceCmyk" type="s" access="read">
+      <doc:doc>
+        <doc:description>
+          <doc:para>
+            The default colorspace filename for CMYK files.
+          </doc:para>
+        </doc:description>
+      </doc:doc>
+    </property>
+
+    <!--*****************************************************************************************-->
+    <method name="GetProfilesForDevice">
+      <annotation name="org.freedesktop.DBus.GLib.Async" value=""/>
+      <doc:doc>
+        <doc:description>
+          <doc:para>
+            Gets the profiles for a specific device.
+          </doc:para>
+        </doc:description>
+      </doc:doc>
+      <arg type="s" name="device_id" direction="in">
+        <doc:doc>
+          <doc:summary>
+            <doc:para>
+              A device ID which can be a sysfs path, e.g. <doc:tt>sysfs:/sys/class/usb/hiddev0</doc:tt>
+              or a raw device ID, e.g. <doc:tt>xrandr_ibm_france_ltn154p2_l05</doc:tt>.
+            </doc:para>
+          </doc:summary>
+        </doc:doc>
+      </arg>
+      <arg type="s" name="options" direction="in">
+        <doc:doc>
+          <doc:summary>
+            <doc:para>
+              Options to give hints about what profiles to choose. Currently unused.
+            </doc:para>
+          </doc:summary>
+        </doc:doc>
+      </arg>
+      <arg type="a(ss)" name="profiles" direction="out">
+        <doc:doc>
+          <doc:summary>
+            <doc:para>
+              An array of profile display names and filenames of suitable profiles to use with this device.
+            </doc:para>
+          </doc:summary>
+        </doc:doc>
+      </arg>
+    </method>
+
+    <!--*****************************************************************************************-->
+    <method name="GetProfilesForType">
+      <annotation name="org.freedesktop.DBus.GLib.Async" value=""/>
+      <doc:doc>
+        <doc:description>
+          <doc:para>
+            Gets the profiles for a device type.
+          </doc:para>
+        </doc:description>
+      </doc:doc>
+      <arg type="s" name="type" direction="in">
+        <doc:doc>
+          <doc:summary>
+            <doc:para>
+              A device type, e.g. <doc:tt>scanner</doc:tt>, <doc:tt>display</doc:tt>,
+              <doc:tt>printer</doc:tt> or <doc:tt>camera</doc:tt>.
+            </doc:para>
+          </doc:summary>
+        </doc:doc>
+      </arg>
+      <arg type="s" name="options" direction="in">
+        <doc:doc>
+          <doc:summary>
+            <doc:para>
+              Options to give hints about what profiles to choose. Currently unused.
+            </doc:para>
+          </doc:summary>
+        </doc:doc>
+      </arg>
+      <arg type="a(ss)" name="profiles" direction="out">
+        <doc:doc>
+          <doc:summary>
+            <doc:para>
+              An array of profile display names and filenames of suitable profiles to use with this type of device.
+            </doc:para>
+          </doc:summary>
+        </doc:doc>
+      </arg>
+    </method>
+
+    <!--*****************************************************************************************-->
+    <method name="GetProfileForWindow">
+      <annotation name="org.freedesktop.DBus.GLib.Async" value=""/>
+      <doc:doc>
+        <doc:description>
+          <doc:para>
+            Gets the profile for a window. In the case where the window overlaps
+            two different outputs, then the profile with the greatest percentage
+            area is used.
+          </doc:para>
+        </doc:description>
+      </doc:doc>
+      <arg type="u" name="xid" direction="in">
+        <doc:doc>
+          <doc:summary>
+            <doc:para>
+              A window XID.
+            </doc:para>
+          </doc:summary>
+        </doc:doc>
+      </arg>
+      <arg type="s" name="profile" direction="out">
+        <doc:doc>
+          <doc:summary>
+            <doc:para>
+              A profile filename that is should be used for the display.
+            </doc:para>
+          </doc:summary>
+        </doc:doc>
+      </arg>
+    </method>
+
+    <!--*****************************************************************************************-->
+    <method name="GetDevices">
+      <annotation name="org.freedesktop.DBus.GLib.Async" value=""/>
+      <doc:doc>
+        <doc:description>
+          <doc:para>
+            Gets a list of all the devices which have assigned color profiles.
+          </doc:para>
+        </doc:description>
+      </doc:doc>
+      <arg type="as" name="devices" direction="out">
+        <doc:doc>
+          <doc:summary>
+            <doc:para>
+              An array of device IDs, e.g. <doc:tt>['xrandr_ibm_france_ltn154p2_l05']</doc:tt>.
+            </doc:para>
+          </doc:summary>
+        </doc:doc>
+      </arg>
+    </method>
+
+    <!-- ************************************************************ -->
+    <signal name="Changed">
+      <doc:doc>
+        <doc:description>
+          <doc:para>
+            Some value on the interface or the number of devices has changed.
+          </doc:para>
+        </doc:description>
+      </doc:doc>
+    </signal>
+
+  </interface>
+</node>
+

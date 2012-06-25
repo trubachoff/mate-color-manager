@@ -1,0 +1,467 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN" "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd" [
+<!ENTITY legal SYSTEM "legal.xml">
+<!ENTITY GFDL SYSTEM "fdl-appendix.xml">
+<!ENTITY app "MATE Color Manager">
+<!ENTITY application "<application>&app;</application>">
+<!ENTITY appversion "2.29.1">
+<!ENTITY manrevision "2.29.1">
+]>
+<!--
+      (Do not remove this comment block.)
+  Template Maintained by the MATE Documentation Project:
+    http://developer.gnome.org/projects/gdp
+  Template version: 2.0 beta
+  Template last modified Feb 12, 2002
+-->
+<!-- =============Document Header ============================= -->
+<article id="index" lang="de">
+<!-- please do not change the id; for translations, change lang to -->
+<!-- appropriate code -->
+
+  <articleinfo>
+    <title><application>Farbverwaltung</application>-Handbuch</title>
+    <abstract role="description">
+      <para>Die <application>Farbverwaltung</application> ist ein Sitzungs-Framework, dass die Verwaltung, Installation und Erstellung von Farbprofilen in der <systemitem>MATE-Arbeitsumgebung</systemitem> vereinfacht.</para>
+    </abstract>
+    <copyright>
+      <year>2009</year>
+      <holder>Richard Hughes (richard@hughsie.com)</holder>
+    </copyright><copyright><year>2009, 2010.</year><holder>Christian Kirbach (Christian.Kirbach@googlemail.com)</holder></copyright><copyright><year>2010</year><holder>Mario Blättermann (mariobl@gnome.org)</holder></copyright>
+
+  <!-- translators: uncomment this:
+
+  <copyright>
+   <year>2006</year>
+   <holder>ME-THE-TRANSLATOR (Latin translation)</holder>
+  </copyright>
+
+  -->
+
+<!-- An address can be added to the publisher information.  If a role is
+     not specified, the publisher/author is the same for all versions of the
+     document.  -->
+    <publisher role="maintainer">
+      <publishername>Richard Hughes</publishername>
+    </publisher>
+
+     <legalnotice id="legalnotice">
+	<para>Das vorliegende Dokument kann gemäß den Bedingungen der GNU Free Documentation License (GFDL), Version 1.1 oder jeder späteren, von der Free Software Foundation veröffentlichten Version ohne unveränderbare Abschnitte sowie ohne Texte auf dem vorderen und hinteren Buchdeckel kopiert, verteilt und/oder modifiziert werden. Eine Kopie der GFDL finden Sie unter diesem <ulink type="help" url="ghelp:fdl">Link</ulink> oder in der mit diesem Handbuch gelieferten Datei COPYING-DOCS.</para>
+         <para>Das vorliegende Handbuch ist Teil einer Reihe von MATE-Handbüchern, die unter der GFDL verteilt werden. Wenn Sie dieses Handbuch separat verteilen möchten, können Sie dies tun, indem Sie dem Handbuch eine Kopie der Lizenz, wie in Abschnitt 6 der Lizenz beschrieben, hinzufügen.</para>
+
+	<para>Bei vielen der von Firmen zur Unterscheidung ihrer Produkte und Dienstleistungen verwendeten Namen handelt es sich um Marken. An den Stellen, an denen derartige Namen in einer MATE-Dokumentation vorkommen und wenn die Mitglieder des MATE-Dokumentationsprojekts über diese Marken informiert wurden, sind die Namen in Großbuchstaben oder mit großen Anfangsbuchstaben geschrieben.</para>
+
+	<para>DAS DOKUMENT UND MODIFIZIERTE VERSIONEN DES DOKUMENTS WERDEN GEMÄSS DEN BEDINGUNGEN DER GNU FREE DOCUMENTATION LICENSE MIT DER FOLGENDEN VEREINBARUNG BEREITGESTELLT: <orderedlist>
+		<listitem>
+		  <para>DAS DOKUMENT WIRD »WIE VORLIEGEND« GELIEFERT, OHNE JEGLICHE GEWÄHRLEISTUNG, WEDER AUSDRÜCKLICH NOCH STILLSCHWEIGEND, EINSCHLIESSLICH, ABER NICHT BESCHRÄNKT AUF, GEWÄHRLEISTUNGEN, DASS DAS DOKUMENT ODER EINE MODIFIZIERTE VERSION DES DOKUMENTS FREI VON HANDELSÜBLICHEN FEHLERN UND FÜR EINEN BESTIMMTEN ZWECK GEEIGNET IST UND KEINE RECHTE DRITTER VERLETZT. JEGLICHES RISIKO IN BEZUG AUF DIE QUALITÄT, GENAUIGKEIT UND LEISTUNG DES DOKUMENTS ODER EINER MODIFIZIERTEN VERSION DES DOKUMENTS TRAGEN SIE. SOLLTE SICH EIN DOKUMENT ODER EINE MODIFIZIERTE VERSION DAVON IN IRGENDEINER WEISE ALS FEHLERHAFT ERWEISEN, TRAGEN SIE (NICHT DER URSPRÜNGLICHE VERFASSER, AUTOR ODER EIN MITWIRKENDER) DIE KOSTEN FÜR JEGLICHE ERFORDERLICHE SERVICE-, REPARATUR- UND KORREKTURMASSNAHMEN: DIESE BESCHRÄNKUNG DER GEWÄHRLEISTUNG IST WESENTLICHER BESTANDTEIL DIESER LIZENZ. JEDE VERWENDUNG EINES DOKUMENTS ODER EINER MODIFIZIERTEN VERSION DES DOKUMENTS UNTERLIEGT DIESER BESCHRÄNKUNG; UND</para>
+		</listitem>
+		<listitem>
+		  <para>UNTER KEINEN UMSTÄNDEN UND GEMÄSS KEINER RECHTSLEHRE, WEDER AUFGRUND VON UNERLAUBTEN HANDLUNGEN (EINSCHLIESSLICH FAHRLÄSSIGKEIT), VERTRÄGEN ODER SONSTIGEM, KANN DER AUTOR, DER URSPRÜNGLICHE VERFASSER, EIN MITWIRKENDER ODER EIN VERTEILER DES DOKUMENTS ODER EINER MODIFIZIERTEN VERSION DES DOKUMENTS ODER EIN LIEFERANT EINER DIESER PARTEIEN VON EINER PERSON FÜR DIREKTE, INDIREKTE, BESONDERE, ZUFÄLLIGE ODER ALS FOLGE AUFGETRETENE SCHÄDEN IRGENDEINER ART, EINSCHLIESSLICH, ABER NICHT BESCHRÄNKT AUF, SCHÄDEN DURCH GESCHÄFTSWERTVERLUSTE, ARBEITSAUSFÄLLE, COMPUTERAUSFÄLLE ODER FUNKTIONSSTÖRUNGEN ODER JEGLICHE ANDERE SCHÄDEN ODER VERLUSTE, DIE DURCH ODER IM ZUSAMMENHANG MIT DER VERWENDUNG DES DOKUMENTS ODER EINER MODIFIZIERTEN VERSION DES DOKUMENTS ENTSTANDEN SIND, SELBST WENN DIESE PARTEI ÜBER MÖGLICHE SCHÄDEN INFORMIERT WORDEN SEIN SOLLTE, HAFTBAR GEMACHT WERDEN.</para>
+		</listitem>
+	  </orderedlist></para>
+  </legalnotice>
+
+
+   <!-- This file  contains link to license for the documentation (GNU FDL), and
+        other legal stuff such as "NO WARRANTY" statement. Please do not change
+        any of this. -->
+
+    <authorgroup>
+      <author role="maintainer">
+        <firstname>Richard</firstname>
+        <surname>Hughes</surname>
+        <email>richard@hughsie.com</email>
+      </author>
+<!-- This is appropriate place for other contributors: translators,
+      maintainers,  etc. Commented out by default.
+       <othercredit role="translator">
+        <firstname>Latin</firstname>
+        <surname>Translator 1</surname>
+        <affiliation>
+          <orgname>Latin Translation Team</orgname>
+          <address> <email>translator@gnome.org</email> </address>
+        </affiliation>
+        <contrib>Latin translation</contrib>
+      </othercredit>
+-->
+    </authorgroup>
+
+    <revhistory>
+      <revision>
+        <revnumber>2.0</revnumber>
+        <date>11.01.2009</date>
+        <revdescription>
+          <para role="author">Richard Hughes <email>richard@hughsie.com</email></para>
+          <para role="publisher">Richard Hughes</para>
+        </revdescription>
+      </revision>
+    </revhistory>
+
+    <legalnotice>
+      <title>Rückmeldungen</title>
+      <para>Um einen Fehler zu melden oder einen Vorschlag für die MATE Farbverwaltung oder dieses Handbuch zu unterbreiten, befolgen Sie die Anweisungen auf der <ulink url="http://projects.gnome.org/mate-color-manager/bugs.html" type="http">Kontaktseite der <application>MATE Farbverwaltung</application></ulink>.</para>
+<!-- Translators may also add here feedback address for translations -->
+    </legalnotice>
+  </articleinfo>
+
+  <indexterm zone="index">
+    <primary><application>Farbverwaltung</application></primary>
+  </indexterm>
+  <indexterm zone="index">
+    <primary>mate-color-manager</primary>
+  </indexterm>
+
+<!-- ============= Document Body ============================= -->
+<!-- ============= Introduction ============================== -->
+<section id="intro">
+  <title>Einleitung</title>
+  <!-- manrevision 2.0 compatibility -->
+  <anchor id="aboutex"/>
+  <anchor id="notice"/>
+  <indexterm>
+    <primary><application>Farbverwaltung</application></primary>
+    <secondary>Benutzerhandbuch</secondary>
+    <tertiary>mate-color-manager</tertiary>
+  </indexterm>
+
+  <para>Die MATE Farbverwaltung ist eine Umgebung, die Benutzer beim Erstellen, Installieren und Verwalten der Farben von Geräten in der <systemitem>MATE-Arbeitsumgebung</systemitem> unterstützt. Dem Benutzer wird der Abgleich der Farbdarstellung aller Geräte ermöglicht. Dadurch werden Farben konsistent wiedergegeben, unabhängig davon, ob es sich um ein Bild oder ein Dokument handelt, oder wo die Ausgabe erfolgt.</para>
+  <para>Die MATE Farbverwaltung stellt die gewählten Profile denjenigen Anwendungen bereit, die für eine richtige Farbdarstellung sorgen. Dadurch wird anwendungsübergreifende Verwaltung der Farben möglich.</para>
+  <para>Die MATE Farbverwaltung verwendet die Profile des <ulink url="http://www.color.org" type="http"> International Color Consortium</ulink> (ICC), um Farbcharakeristika von Geräten an den standardisierten Farbraum der <systemitem>MATE-Arbeitsumgebung</systemitem> anzupassen.</para>
+  <warning>
+    <para>Die MATE Farbverwaltung sollte nicht dazu missbraucht werden, das Erscheinungsbild der Arbeitsumgebung zu ändern. Stattdessen ermöglicht Ihnen das Erscheinungsbild-Einstellungswerkzeug die Einrichtung der verschiedenen Aspekte des Aussehens Ihrer Arbeitsumgebung.</para>
+  </warning>
+
+</section>
+
+<section id="using">
+  <title>Aufruf</title>
+  <para>Die <application>MATE Farbverwaltung</application> wird normalerweise beim Start von MATE automatisch geladen, aber Sie können die <application>MATE Farbverwaltung</application> manuell folgendermaßen starten:</para>
+  <screen>
+    <prompt>bash$</prompt><userinput>mcm-apply <parameter>--verbose</parameter></userinput>
+  </screen>
+  <para>Der Einstellungsdialog der <application>MATE Farbverwaltung</application> kann im Einstellungsmenü von MATE aufgerufen werden. Sie können sie auch folgendermaßen starten:</para>
+  <screen>
+    <prompt>bash$</prompt><userinput>mcm-prefs <parameter>--verbose</parameter></userinput>
+  </screen>
+  <para>ICC-Farbprofile sollten Sie in die <application>MATE Farbverwaltung</application> importieren, indem Sie die entsprechende Datei in einem <application>Caja</application>-Fenster auswählen. Sie können die Datei auch auf folgende Weise importieren:</para>
+  <screen>
+    <prompt>bash$</prompt><userinput>mcm-import <filename><![CDATA[<Dateipfad>]]></filename></userinput>
+  </screen>
+</section>
+
+<section id="import">
+  <title>Profile importieren</title>
+  <para>Die <application>Farbverwaltung</application> enthält ein Programm zur einfachen Installation von Profilen durch einen Doppelklick auf die Profil-Datei.</para>
+
+  <section id="import-install">
+    <title>Ein ICC-Profil importieren</title>
+    <figure>
+      <title>Dialog der MATE Farbverwaltung nach einem Doppelklick auf eine ICC- oder ICM-Datei</title>
+      <screenshot>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="figures/mcm-import.png" format="PNG"/>
+          </imageobject>
+        </mediaobject>
+      </screenshot>
+    </figure>
+    <note>
+      <para>Der Knopf »Installieren« wird nicht angezeigt, wenn das Profil bereits installiert worden ist.</para>
+    </note>
+  </section>
+</section>
+
+<section id="preferences">
+  <title>Einstellungen</title>
+
+  <para>Das Fenster »Einstellungen« erlaubt die Steuerung von:</para>
+
+  <itemizedlist>
+    <listitem>
+      <para>Einem Geräteprofil.</para>
+    </listitem>
+    <listitem>
+      <para>Dem Gamma-Wert, der Helligkeit und dem Kontrast.</para>
+    </listitem>
+  </itemizedlist>
+
+  <section id="preferences-basic">
+    <title>Grundlegende Einstellungen</title>
+    <figure id="prefs-basic">
+      <title>Karteireiter »Grundlegend« der MATE Farbverwaltung</title>
+      <screenshot>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="figures/mcm-basic.png" format="PNG"/>
+          </imageobject>
+        </mediaobject>
+      </screenshot>
+    </figure>
+    <para>So ändern Sie ein Profil für ein Gerät. <orderedlist>
+        <listitem>
+          <para>Wählen Sie das Gerät aus.</para>
+        </listitem>
+        <listitem>
+          <para>Wählen Sie das benötigte Profil in der Auswahlliste der Farbprofile aus.</para>
+        </listitem>
+      </orderedlist><tip>
+        <para>Falls das benötigte Profil nicht in der Liste erscheint, dann <orderedlist>
+            <listitem>
+              <para>Wählen Sie <guilabel>Anderes Profil …</guilabel></para>
+            </listitem>
+            <listitem>
+              <para>Suchen Sie mit dem bereitgestellten Dateiwähler nach dem Profil.</para>
+            </listitem>
+            <listitem>
+              <para>Klicken Sie in dem Dialog auf den Knopf <guilabel>Öffnen</guilabel>.</para>
+            </listitem>
+          </orderedlist></para>
+      </tip><tip>
+        <para>Falls das Profil ungültig ist, dann wird das für das Gerät gewählte Profil nicht geändert. Möglicherweise werden Meldungen angezeigt.</para>
+      </tip></para>
+  </section>
+
+  <section id="preferences-advanced">
+    <title>Erweiterte Einstellungen</title>
+    <figure id="prefs-advanced">
+      <title>Karteireiter »Erweitert« der MATE Farbverwaltung</title>
+      <screenshot>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="figures/mcm-adjust.png" format="PNG"/>
+          </imageobject>
+        </mediaobject>
+      </screenshot>
+    </figure>
+    <para>Ermöglicht die Anpassung eines kalibrierten Geräts oder erstellten Profils.</para>
+    <tip>
+      <para>Die Feineinstellungsoption ist nur dann verfügbar, wenn Sie sie in MateConf aktiviert haben (im Konfigurationseditor <menuchoice><guimenu>apps</guimenu><guisubmenu>mate-color-manager</guisubmenu><guimenuitem>show-fine-tuning</guimenuitem></menuchoice>).</para>
+    </tip>
+    <para>Röhrenbildschirme haben native Gamma-Werte zwischen 2,4 und 2,5. LCD-Bildschirme emulieren normalerweise den gleichen Wert.</para>
+    <para>Traditionell verwenden Linux- und Microsoft-Windows-Betriebssysteme eine Bildkodierung von 1/2.2, wobei keine Anpassung des Gamma-Werts an das Bild oder die Ausgabe der Grafikkarte stattfindet. Daher wird der allgemeine Gamma-Wert mit rund 1.1 angenommen. Das ist insbesondere nützlich für abgedunkelte Umgebungen zu Hause.</para>
+    <para>Apple benutzt normalerweise einen Gamma-Wert der Bildenkodierung nahe 1/1.8, um den nativen Gamma-Wert von Druckausgabegeräten zu erreichen. Dafür wird intern eine Anpassung des Gamma-Werts von 1/1.45 angewendet, bevor Bilder auf dem Bildschirm angezeigt werden, um diese korrekt darzustellen.</para>
+    <para>Seit der OSX-Version 10.6 »Snow Leopard« wurde der vorgegebene Gamma-Wert der Bildenkodierung ebenfalls auf 1/2.2 gesetzt, um den Erfordernissen der Industrie gerecht zu werden.</para>
+    <para>Bevor Sie eine Feineinstellung in der MATE Farbverwaltung vornehmen, sollten Sie den nativen Gamma-Wert Ihres Bildschirms kennen und den Gamma-Wert, den Sie erreichen wollen. Dann können Sie die Berechnung selbst vornehmen.</para>
+  </section>
+
+  <section id="preferences-profiles">
+    <title>Profilbetrachter</title>
+    <figure id="prefs-profiles">
+      <title>Karteireiter »Profile« der MATE Farbverwaltung</title>
+      <screenshot>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="figures/mcm-scanner.png" format="PNG"/>
+          </imageobject>
+        </mediaobject>
+      </screenshot>
+    </figure>
+    <para>Ermöglicht die Anzeige von Details über installierte Profile.</para>
+  </section>
+
+  <section id="preferences-calibration">
+    <title>Kalibrierung und Einrichtung</title>
+    <para>Die <application>MATE Farbverwaltung</application> kann ICC-Profile mit Hilfe von unterstützten Farbmessern erstellen.</para>
+
+    <figure>
+      <title>Die erste Phase ist die Kalibrierung, die wenige Minuten dauert.</title>
+      <screenshot>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="figures/mcm-calibrate-default.png" format="PNG"/>
+          </imageobject>
+        </mediaobject>
+      </screenshot>
+    </figure>
+    <figure>
+      <title>Die letzte Phase ist die Einrichtung (Charakterisierung), die mehr als 15 Minuten dauern kann.</title>
+      <screenshot>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="figures/mcm-calibrate-drawing.png" format="PNG"/>
+          </imageobject>
+        </mediaobject>
+      </screenshot>
+    </figure>
+
+    <para>Beim Kalibrieren und Einrichten eines Bildschirms muss das Farbmessinstrument für die Verwendung in verschiedenen Modi eingerichtet werden. Sie müssen Ihr Messinstrument vom Bildschirm abnehmen, um den Modus zu ändern. Stellen Sie sicher, dass sich das Messinstrument wieder am Bildschirm befindet, nachdem Sie die Einstellungen geändert haben.</para>
+    <figure id="prefs-dialogs-device-configure">
+      <title>Dialog der MATE Farbverwaltung zur Einrichtung des Messinstruments</title>
+      <screenshot>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="figures/mcm-device-configure.png" format="PNG"/>
+          </imageobject>
+        </mediaobject>
+      </screenshot>
+    </figure>
+
+    <para>Beim Kalibrieren und Einrichten eines Bildschirms über eine VGA- oder DVI-Verbindung ist oft der Gerätetyp unbekannt. Wenn Sie hier korrekte Angaben machen, kann die  <application>MATE Farbverwaltung</application> bessere Profile für das Gerät erstellen, welches Sie kalibrieren und einrichten wollen.</para>
+    <figure id="prefs-dialogs-screen-type">
+      <title>Bildschirmtyp-Dialog der MATE Farbverwaltung</title>
+      <screenshot>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="figures/mcm-screen-type.png" format="PNG"/>
+          </imageobject>
+        </mediaobject>
+      </screenshot>
+    </figure>
+
+    <para>Wenn Sie einen Drucker einrichten wollen, dann können Sie auch Bilder erstellen, die Sie an einen Druckshop oder einen Anbieter für professionelle Fotoarbeiten senden können. Die Details der Einrichtung werden gespeichert, so dass Sie nur noch die korrekten Ergebnisse auswählen müssen, sobald Sie die Abzüge zurückerhalten haben.</para>
+    <figure id="prefs-dialogs-print-mode">
+      <title>Druckmodus-Dialog der MATE Farbverwaltung</title>
+      <screenshot>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="figures/mcm-print-mode.png" format="PNG"/>
+          </imageobject>
+        </mediaobject>
+      </screenshot>
+    </figure>
+
+  </section>
+</section>
+
+<section id="faq">
+  <title>Häufig gestellte Fragen</title>
+  <para>In diesem Abschnitt finden Sie häufig gestellte Fragen rund um die MATE Farbverwaltung.</para>
+
+  <section id="faq-calibration-and-characterization">
+    <title>What's the difference between calibration and characterization?</title>
+    <para>
+      Many people are initially confused about the difference between calibration
+      and characterization.
+      Calibration is the process of modifying the color behavior of a device.
+      This is typically done using two mechanisms:
+      <orderedlist>
+        <listitem>
+          <para>
+            Changing controls or internal settings that it has.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Applying curves to its color channels.
+          </para>
+        </listitem>
+      </orderedlist>
+    </para>
+    <para>
+      The idea of calibration is to put a device is a defined state with regard
+      to its color response.
+      Often this is used as a day to day means of maintaining reproducible behavior.
+      Typically calibration will be stored in device or systems specific file
+      formats that record the device settings or per-channel calibration curves.
+    </para>
+    <para>
+      Characterization (or profiling) is <emphasis>recording</emphasis> the way
+      a device reproduces or responds to color.
+      Typically the result is stored in a device ICC profile.
+      Such a profile does not in itself modify color in any way.
+      It allows a system such as a CMM (Color Management Module) or a color aware
+      application to modify color when combined with another device profile.
+      Only by knowing the characteristics of two devices, can a way of
+      transferring color from one device representation to another be achieved.
+    </para>
+    <tip>
+      <para>
+        Note that a characterization (profile) will only be valid for a device
+        if it is in the same state of calibration as it was when it was
+        characterized.
+      </para>
+    </tip>
+    <para>
+      In the case of display profiles there is some additional confusion because
+      often the calibration information is stored in the profile for convenience.
+      By convention it is stored in a tag called the <type>vcgt</type> tag.
+      Although it is stored in the profile, none of the normal ICC based tools
+      or applications are aware of it, or do anything with it.
+      Similarly, typical display calibration tools and applications will not be
+      aware of, or do anything with the ICC characterization (profile) information.
+    </para>
+  </section>
+
+  <section id="faq-missing-vcgt">
+    <title>Fehlende Information zur Farbkorrektur des gesamten Bildschirms</title>
+    <para>Leider enthalten viele der von Geräteherstellern angebotenen ICC-Profile keine Informationen für eine bildschirmweite Farbkorrektur. Dennoch sind diese Profile für Anwendungen nutzbar, die eine eigene Farbkompensation vornehmen, aber es werden nicht alle Farben des Bildschirms geändert.</para>
+    <para>Um ein Anzeigeprofil zu erstellen, welches sowohl die Kalibrierungs- als auch die Charakteristikdaten enthält, benötigen Sie keine speziellen Messinstrumente wie Farbmesser oder Spektrometer.</para>
+  </section>
+
+  <section id="faq-supported-colorimeters">
+    <title>Welche Farbmessgeräte werden unterstützt?</title>
+    <para>Die MATE Farbverwaltung benutzt ArgyllCMS zur Unterstützung von Farbmessinstrumenten. Daher werden folgende Messinstrumente unterstützt:</para>
+    <itemizedlist>
+      <listitem>
+        <para>Gretag-Macbeth Eye-One Pro (Spektrometer)</para>
+      </listitem>
+      <listitem>
+        <para>Gretag-Macbeth Eye-One Monitor (Spektrometer)</para>
+      </listitem>
+      <listitem>
+        <para>Gretag-Macbeth Eye-One Display 1, 2 oder LT (Farbmesser)</para>
+      </listitem>
+      <listitem>
+        <para>X-Rite ColorMunki Design oder Photo (Spektrometer)</para>
+      </listitem>
+      <listitem>
+        <para>X-Rite ColorMunki Create (Farbmesser)</para>
+      </listitem>
+      <listitem>
+        <para>Pantone Huey (Farbmesser)</para>
+      </listitem>
+      <listitem>
+        <para>MonacoOPTIX (Farbmesser)</para>
+      </listitem>
+      <listitem>
+        <para>ColorVision Spyder 2 und 3 (Farbmesser)</para>
+      </listitem>
+      <listitem>
+        <para>Colorimètre HCFR (Farbmesser)</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+  <section id="faq-supported-targets">
+    <title>Welche Zieltypen werden unterstützt?</title>
+    <para>Die MATE Farbverwaltung unterstützt folgende Typen von Zielen:</para>
+    <itemizedlist>
+      <listitem>
+        <para>CMP DigitalTarget</para>
+      </listitem>
+      <listitem>
+        <para>ColorChecker 24</para>
+      </listitem>
+      <listitem>
+        <para>ColorChecker DC</para>
+      </listitem>
+      <listitem>
+        <para>ColorChecker SG</para>
+      </listitem>
+      <listitem>
+        <para>i1 RGB Scan 14</para>
+      </listitem>
+      <listitem>
+        <para>LaserSoft DC Pro</para>
+      </listitem>
+      <listitem>
+        <para>QPcard 201</para>
+      </listitem>
+      <listitem>
+        <para>IT8.7/2</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+  <section id="faq-where-to-purchase-targets">
+    <title>Wo sind solche Ziele käuflich zu erwerben?</title>
+    <para>Sie können solche Ziele von bekannten Anbietern wie KODAK, X-Rite und LaserSoft im Internethandel beziehen. Alternativ sind Ziele bei <ulink url="http://www.targets.coloraid.de/" type="http">Wolf Faust</ulink> zu einem günstigen Preis erhältlich.</para>
+  </section>
+</section>
+
+<section id="about">
+  <title>Über die Farbverwaltung</title>
+  <para>Die MATE-Farbverwaltung wurde von Richard Hughes <email>richard@hughsie.com</email> geschrieben. Besuchen Sie die Webseite der <ulink url="http://projects.gnome.org/mate-color-manager/" type="http"><application>MATE-Farbverwaltung</application></ulink>, um mehr über die MATE-Farbverwaltung zu erfahren.</para>
+  <para>Um einen Fehler zu melden oder einen Vorschlag für die MATE Farbverwaltung oder diesem Handbuch zu unterbreiten, befolgen Sie die Anweisungen auf der <ulink url="http://projects.gnome.org/mate-color-manager/bugs.html" type="http">Kontaktseite der <application>MATE Farbverwaltung</application></ulink>.</para>
+  <para>Dieses Programm ist freie Software, Sie können sie weitergeben und/oder verändern, solange Sie sich an die Regeln der GNU General Public License halten, so wie sie von der Free Software Foundation festgelegt wurden; entweder in Version 2 der Lizenz oder (nach Ihrem Ermessen) in jeder folgenden Lizenz. Eine Kopie der Lizenz kann unter folgendem <ulink url="mate-color-manager:gpl" type="help">Verweis</ulink> oder in der Datei »COPYING« erhalten werden, die dem Quellcode dieses Programms beiliegt.</para>
+</section>
+
+</article>

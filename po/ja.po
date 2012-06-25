@@ -1,0 +1,2127 @@
+# Japanese translation of mate-color-manager
+# Copyright (C) 2009-2010 mate-color-manager's COPYRIGHT HOLDER
+# This file is distributed under the mate-color-manager package.
+# Ryo Fujita <rfujita@redhat.com>, 2010.
+# Takayuki KUSANO <AE5AT-KSN@asahi-net.or.jp>, 2010.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: mate-color-manager mate-2-32\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=mate-"
+"color-manager\n"
+"POT-Creation-Date: 2010-09-18 20:28+0000\n"
+"PO-Revision-Date: 2010-09-19 16:38+0900\n"
+"Last-Translator: Ryo Fujita <rfujita@redhat.com>\n"
+"Language-Team: Japanese <rfujita@redhat.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Japanese\n"
+"X-Poedit-Country: JAPAN\n"
+
+#: ../data/mcm-apply.desktop.in.h:1
+msgid "Applies device profile settings at session startup"
+msgstr "セッションスタート時にデバイスプロファイルを適用"
+
+#: ../data/mcm-apply.desktop.in.h:2
+msgid "Load device color profiles"
+msgstr "デバイスのカラープロファイルのロード"
+
+#: ../data/mcm-import.desktop.in.h:1
+msgid "ICC Profile Installer"
+msgstr "ICCプロファイルのインストーラ"
+
+#: ../data/mcm-import.desktop.in.h:2
+msgid "ICC profile installer"
+msgstr "ICCプロファイルのインストーラ"
+
+#: ../data/mcm-import.desktop.in.h:3
+msgid "Install ICC profiles"
+msgstr "ICCプロファイルをインストール"
+
+#: ../data/mcm-prefs.desktop.in.h:1
+msgid "Color Profiles"
+msgstr "カラープロファイル"
+
+#: ../data/mcm-prefs.desktop.in.h:2
+msgid "Manage ICC color profiles"
+msgstr "ICCカラープロファイルの管理"
+
+#: ../data/mate-color-manager.schemas.in.h:1
+msgid ""
+"Gamma is adjusted to affect the color of the attached monitor. Traditionally "
+"Linux has used a gamma value of 1.0, but this makes monitors look washed out "
+"compared Windows XP or OS X. Apple traditionally used a value of 1.8 for a "
+"long time, but now use the same value as Microsoft. Microsoft has always "
+"used a value of 2.2."
+msgstr ""
+"ガンマを調整することで、接続されたモニタの色表示に影響します。従来Linuxではガ"
+"ンマ値として1.0が用いられてきましたが、Windows XPやOS Xと比べるとモニタの表示"
+"が薄くなります。従来、Appleは1.8という値を長い間用いてきましたが、現在では"
+"Microsoftと同じ値を使っています。Microsoftは既に2.2という値を使っています。"
+
+#: ../data/mate-color-manager.schemas.in.h:2
+msgid ""
+"If set to TRUE then external disks are searched for device ICC profiles at "
+"startup, for instance looking in the OSX library folder or Windows XP system "
+"folders. This may increase startup time if disks need to be spun up to be "
+"searched."
+msgstr ""
+"TRUEにセットすると、起動時に外部ディスクからデバイスのICCプロファイルを検索"
+"し、例えば、OSXのライブラリフォルダやWindows XPのシステムフォルダを探すことに"
+"なります。検索のためにディスクのスピンアップをする必要があると、起動時間が長"
+"くなることがあります。"
+
+#: ../data/mate-color-manager.schemas.in.h:3
+msgid ""
+"If set to TRUE then the __ICC_PROFILE hint will be set, which applications "
+"use to convert true color to screen color."
+msgstr ""
+"TRUEに設定すると、__ICC_PROFILEのヒントが設定されます。ヒントとは本来の色を画"
+"面の色に変換するのに使用するアプリケーションのことです。"
+
+#: ../data/mate-color-manager.schemas.in.h:4
+msgid ""
+"If set to TRUE then the fine tuning controls are visible. This allows the "
+"user to change the display profile outside of what the ICC profile suggests "
+"and is only recommended for advanced users."
+msgstr ""
+"TRUEに設定すると、微調整用のコントロールが表示されます。これによって、ICCプロ"
+"ファイルが示す範囲外のディスプレイプロファイルに変更することが出来るようにな"
+"るため、上級ユーザのみに推奨されます。"
+
+#: ../data/mate-color-manager.schemas.in.h:5
+msgid "If set to TRUE then the video LUT is set with the display profile"
+msgstr ""
+"TRUEに設定すると、ビデオLUTはディスプレイプロファイルと一緒に設定されます。"
+
+#: ../data/mate-color-manager.schemas.in.h:6
+msgid "Set the _ICC_PROFILE hint for applications."
+msgstr "アプリケーション用の_ICC_PROFILEのヒントを設定します。"
+
+#: ../data/mate-color-manager.schemas.in.h:7
+msgid "Show the fine tuning controls for display devices."
+msgstr "ディスプレイデバイス用の微調整コントロールを表示します。"
+
+#: ../data/mate-color-manager.schemas.in.h:8
+msgid "The CMYK profile filename to be used by applications by default."
+msgstr "アプリケーションがデフォルトで用いるCMYKプロファイルのファイル名"
+
+#: ../data/mate-color-manager.schemas.in.h:9
+msgid "The RGB profile filename to be used by applications by default."
+msgstr "アプリケーションがデフォルトで用いるRGBプロファイルのファイル名"
+
+#: ../data/mate-color-manager.schemas.in.h:10
+msgid "The default CMYK profile."
+msgstr "デフォルトのCMYKプロファイル。"
+
+#: ../data/mate-color-manager.schemas.in.h:11
+msgid "The default RGB profile."
+msgstr "デフォルトのRGBプロファイル。"
+
+#: ../data/mate-color-manager.schemas.in.h:12
+msgid "The default calibration length."
+msgstr "デフォルトのキャリブレーションの長さ。"
+
+#: ../data/mate-color-manager.schemas.in.h:13
+msgid "The default gamma to use for monitors with no previous value set."
+msgstr "以前に値が設定されていない時に使用されるモニタのデフォルトガンマ値。"
+
+#: ../data/mate-color-manager.schemas.in.h:14
+msgid "The duration between sending notifications to recalibrate a display."
+msgstr "ディスプレイをキャリブレーションし直す通知の送信間隔。"
+
+#: ../data/mate-color-manager.schemas.in.h:15
+msgid "The duration between sending notifications to recalibrate a printer."
+msgstr "プリンタをキャリブレーションし直す通知の送信間隔。"
+
+#: ../data/mate-color-manager.schemas.in.h:16
+msgid ""
+"The length of calibration, as this is proportional to the accuracy. The "
+"option 'short' creates a quick profile, 'normal' a regular one, and 'long' "
+"takes a really long time, but is more precise and creates a better profile. "
+"Use 'ask' if you want the user to choose."
+msgstr ""
+"キャリブレーションの長さは、精度に比例します。'short'オプションでは簡易のプロ"
+"ファイルが作成され、'normal'では通常の、'long'では長時間かかるものの、より正"
+"確で良好なプロファイルが作成されます。'ask'を使うことで、ユーザに選択させるこ"
+"とも出来ます。"
+
+#: ../data/mate-color-manager.schemas.in.h:17
+msgid "The rendering intent to use for softproofs, e.g. 'perceptual'."
+msgstr "ソフトプルーフで用いるレンダリングの変換方法、例:'知覚的'"
+
+#: ../data/mate-color-manager.schemas.in.h:18
+msgid "The rendering intent to use for the display, e.g. 'perceptual'."
+msgstr "ディスプレイで用いるレンダリングの変換方法、例:'知覚的'"
+
+#: ../data/mate-color-manager.schemas.in.h:19
+msgid ""
+"This is the number of seconds in between notifying the user to recalibrate "
+"each display device. Set to 0 to disable the notification."
+msgstr ""
+"秒単位の各ディスプレイデバイスをキャリブレーションし直す通知の間隔。0に設定す"
+"ると通知が無効になります。"
+
+#: ../data/mate-color-manager.schemas.in.h:20
+msgid ""
+"This is the number of seconds in between notifying the user to recalibrate "
+"each printer device. Set to 0 to disable the notification."
+msgstr ""
+"秒単位の各プリンタデバイスをキャリブレーションし直す通知の間隔。0に設定すると"
+"通知が無効になります。"
+
+#: ../data/mate-color-manager.schemas.in.h:21
+msgid "Whether ICC profiles should be loaded from external disks."
+msgstr "外部ディスクからICCプロファイルをロードすべきか否か。"
+
+#: ../data/mate-color-manager.schemas.in.h:22
+msgid ""
+"Whether the display should be globally corrected or left to applications."
+msgstr "ディスプレイが全体的に修正されるか、アプリケーションに任せるか否か。"
+
+#: ../policy/org.mate.color.policy.in.h:1
+msgid "Authentication is required to install the color profile for all users"
+msgstr ""
+"すべてのユーザ用にカラープロファイルをインストールするには認証が必要です。"
+
+#. SECURITY:
+#. - Normal users require admin authentication to install files system
+#. wide to apply color profiles for sessions that have not explicitly
+#. chosen profiles to apply.
+#. - This should not be set to 'yes' as unprivileged users could then
+#. set a profile set to all-white or all-black and thus make the
+#. other sessions unusable.
+#.
+#: ../policy/org.mate.color.policy.in.h:10
+msgid "Install system color profiles"
+msgstr "システムのカラープロファイルをインストール"
+
+#. TRANSLATORS: turn on all debugging
+#: ../src/egg-debug.c:390
+msgid "Show debugging information for all files"
+msgstr "すべてのファイルのデバッグ情報を表示"
+
+#. TRANSLATORS: a list of modules to debug
+#: ../src/egg-debug.c:461
+msgid "Debug these specific modules"
+msgstr "特定のモジュールをデバッグ"
+
+#. TRANSLATORS: a list of functions to debug
+#: ../src/egg-debug.c:464
+msgid "Debug these specific functions"
+msgstr "特定の機能をデバッグ"
+
+#. TRANSLATORS: save to a log
+#: ../src/egg-debug.c:467
+msgid "Log debugging data to a file"
+msgstr "ファイルにデバッグのデータを記録"
+
+#: ../src/egg-debug.c:471
+msgid "Debugging Options"
+msgstr "デバッグオプション"
+
+#: ../src/egg-debug.c:471
+msgid "Show debugging options"
+msgstr "デバッグオプションを表示"
+
+#. TRANSLATORS: we use this mode at login as we're sure there are no previous settings to clear
+#: ../src/mcm-apply.c:54
+msgid "Do not attempt to clear previously applied settings"
+msgstr "前回適用した設定を消去しようとしない"
+
+#. TRANSLATORS: title, default paramters needed to calibrate_argyll
+#: ../src/mcm-calibrate-argyll.c:453
+msgid "Getting default parameters"
+msgstr "デフォルトパラメータを取得中"
+
+#. TRANSLATORS: dialog message
+#: ../src/mcm-calibrate-argyll.c:456
+msgid ""
+"This pre-calibrates the screen by sending colored and gray patches to your "
+"screen and measuring them with the hardware device."
+msgstr ""
+"画面に表示したカラーパッチをハードウェアで計測することで、画面を事前にキャリ"
+"ブレートします。"
+
+#. TRANSLATORS: title, patches are specific colours used in calibration
+#: ../src/mcm-calibrate-argyll.c:545
+msgid "Reading the patches"
+msgstr "パッチを読取中"
+
+#. TRANSLATORS: dialog message
+#: ../src/mcm-calibrate-argyll.c:547
+msgid "Reading the patches using the color measuring instrument."
+msgstr "測色計によりパッチを読取中"
+
+#. TRANSLATORS: title, patches are specific colours used in calibration
+#: ../src/mcm-calibrate-argyll.c:633
+msgid "Generating the patches"
+msgstr "パッチを生成中"
+
+#. TRANSLATORS: dialog message
+#: ../src/mcm-calibrate-argyll.c:635
+msgid "Generating the patches that will be measured with the color instrument."
+msgstr "測色計で読み取るパッチを生成中"
+
+#. TRANSLATORS: title, drawing means painting to the screen
+#: ../src/mcm-calibrate-argyll.c:738
+msgid "Drawing the patches"
+msgstr "パッチを描画中"
+
+#. TRANSLATORS: dialog message
+#: ../src/mcm-calibrate-argyll.c:740
+msgid ""
+"Drawing the generated patches to the screen, which will then be measured by "
+"the hardware device."
+msgstr "ハードウェアで計測する生成したパッチを画面に描画中"
+
+#. TRANSLATORS: this is the copyright string, where it might be "Copyright (c) 2009 Edward Scissorhands" - YOU NEED TO STICK TO ASCII
+#. TRANSLATORS: this is the copyright string, where it might be "Copyright (c) 2009 Edward Scissorhands"
+#: ../src/mcm-calibrate-argyll.c:846 ../src/mcm-calibrate-argyll.c:1181
+msgid "Copyright (c)"
+msgstr "Copyright (c)"
+
+#. TRANSLATORS: title, a profile is a ICC file
+#: ../src/mcm-calibrate-argyll.c:849 ../src/mcm-calibrate-argyll.c:1184
+msgid "Generating the profile"
+msgstr "プロファイルを生成中"
+
+#. TRANSLATORS: dialog message
+#: ../src/mcm-calibrate-argyll.c:851
+msgid "Generating the ICC color profile that can be used with this screen."
+msgstr "この画面で用いることの出来るICCカラープロファイルを生成中"
+
+#. TRANSLATORS: title, a profile is a ICC file
+#: ../src/mcm-calibrate-argyll.c:985
+msgid "Copying files"
+msgstr "ファイルをコピー中"
+
+#. TRANSLATORS: dialog message
+#: ../src/mcm-calibrate-argyll.c:987
+msgid "Copying source image, chart data and CIE reference values."
+msgstr "元のイメージとチャートのデータ、CIEリファレンス値をコピー中"
+
+#. TRANSLATORS: title, drawing means painting to the screen
+#: ../src/mcm-calibrate-argyll.c:1062
+msgid "Measuring the patches"
+msgstr "パッチを計測中"
+
+#. TRANSLATORS: dialog message
+#: ../src/mcm-calibrate-argyll.c:1064
+msgid "Detecting the reference patches and measuring them."
+msgstr "リファレンスパッチを検出・計測中"
+
+#. TRANSLATORS: dialog message
+#: ../src/mcm-calibrate-argyll.c:1186
+msgid "Generating the ICC color profile that can be used with this device."
+msgstr "このデバイスで利用可能なICCカラープロファイルを生成中"
+
+#. TRANSLATORS: title, hardware refers to a calibration device
+#: ../src/mcm-calibrate-argyll.c:1373
+msgid "Set up display"
+msgstr "ディスプレイを設定"
+
+#. TRANSLATORS: dialog message
+#: ../src/mcm-calibrate-argyll.c:1376
+msgid "Setting up display device for use…"
+msgstr "利用するディスプレイデバイスを設定中..."
+
+#. TRANSLATORS: title, patches are specific colors used in calibration
+#: ../src/mcm-calibrate-argyll.c:1475
+msgid "Printing patches"
+msgstr "パッチを印刷中"
+
+#. TRANSLATORS: dialog message
+#: ../src/mcm-calibrate-argyll.c:1478
+msgid "Rendering the patches for the selected paper and ink."
+msgstr "選択した紙とインク用のパッチをレンダリング中’"
+
+#. TRANSLATORS: title, patches are specific colours used in calibration
+#: ../src/mcm-calibrate-argyll.c:1814
+msgid "Wait for the ink to dry"
+msgstr "インクが乾くのを待ちます"
+
+#. TRANSLATORS: dialog message
+#: ../src/mcm-calibrate-argyll.c:1817
+msgid ""
+"Please wait a few minutes for the ink to dry. Profiling damp ink will "
+"produce a poor profile and may damage your color measuring instrument."
+msgstr ""
+"インクが乾くのを数分間待ってください。乾いていないインクをプロファイルする"
+"と、良くないプロファイルが作られ、測色計にダメージを与えることがあります。"
+
+#. TRANSLATORS: the supplied image contains an alpha channel which we have to strip out
+#: ../src/mcm-calibrate-argyll.c:1959
+msgid "Image is not suitable without conversion"
+msgstr "画像は変換しないと使えません。"
+
+#. TRANSLATORS: dialog message
+#: ../src/mcm-calibrate-argyll.c:1962
+msgid ""
+"The supplied image contains an alpha channel which the profiling tools do "
+"not understand."
+msgstr ""
+"指定された画像はプロファイルツールが理解出来ないアルファチャンネルを含んでい"
+"ます。"
+
+#. TRANSLATORS: dialog message
+#: ../src/mcm-calibrate-argyll.c:1966
+msgid ""
+"It is normally safe to convert the image, although you should ensure that "
+"the generated profile is valid."
+msgstr ""
+"生成されたプロファイルが有効だと思っていても、画像を変換する方が通常は安全で"
+"す。"
+
+#. TRANSLATORS: button text to convert the RGBA image into RGB
+#: ../src/mcm-calibrate-argyll.c:1973
+msgid "Convert"
+msgstr "変換"
+
+#. TRANSLATORS: title, instrument refers to a calibration device
+#: ../src/mcm-calibrate-argyll.c:2031
+msgid "Set up instrument"
+msgstr "計測器を設定"
+
+#. TRANSLATORS: dialog message
+#: ../src/mcm-calibrate-argyll.c:2034
+msgid "Setting up the instrument for use…"
+msgstr "利用する計測器を設定中..."
+
+#. TRANSLATORS: title, instrument is a hardware color calibration sensor
+#: ../src/mcm-calibrate-argyll.c:2127
+msgid "Please attach instrument"
+msgstr "計測器を置いてください"
+
+#. TRANSLATORS: dialog message, ask user to attach device, and there's an example image
+#: ../src/mcm-calibrate-argyll.c:2135
+msgid ""
+"Please attach the measuring instrument to the center of the screen on the "
+"gray square like the image below."
+msgstr "下の画像のような画面上の灰色の長方形の中心に測色計を置いてください。"
+
+#. TRANSLATORS: dialog message, ask user to attach device
+#: ../src/mcm-calibrate-argyll.c:2138
+msgid ""
+"Please attach the measuring instrument to the center of the screen on the "
+"gray square."
+msgstr "画面上の灰色の長方形の中心に測色計を置いてください。"
+
+#. TRANSLATORS: button text
+#: ../src/mcm-calibrate-argyll.c:2151 ../src/mcm-calibrate-argyll.c:2205
+#: ../src/mcm-calibrate-argyll.c:2257
+msgid "Continue"
+msgstr "続き"
+
+#. TRANSLATORS: this is the application name for libcanberra
+#: ../src/mcm-calibrate-argyll.c:2161 ../src/mcm-calibrate-argyll.c:2211
+#: ../src/mcm-calibrate-argyll.c:2263 ../src/mcm-calibrate-argyll.c:2342
+#: ../src/mcm-calibrate-argyll.c:2402 ../src/mcm-calibrate-argyll.c:2443
+#: ../src/mcm-prefs.c:819 ../src/mcm-prefs.c:1987
+msgid "MATE Color Manager"
+msgstr "MATE Color Manager"
+
+#. TRANSLATORS: title, instrument is a hardware color calibration sensor
+#: ../src/mcm-calibrate-argyll.c:2182 ../src/mcm-calibrate-argyll.c:2234
+msgid "Please configure instrument"
+msgstr "計測器を設定してください"
+
+#. TRANSLATORS: this is when the user has to change a setting on the sensor, and we're showing a picture
+#: ../src/mcm-calibrate-argyll.c:2192
+msgid ""
+"Please set the measuring instrument to calibration mode like the image below."
+msgstr "下の画像のような画面上の灰色の長方形の中心に測色計を置いてください。"
+
+#. TRANSLATORS: this is when the user has to change a setting on the sensor
+#: ../src/mcm-calibrate-argyll.c:2195
+msgid "Please set the measuring instrument to calibration mode."
+msgstr "計測器をキャリブレーションモードに設定してください。"
+
+#. TRANSLATORS: this is when the user has to change a setting on the sensor, and we're showing a picture
+#: ../src/mcm-calibrate-argyll.c:2244
+msgid ""
+"Please set the measuring instrument to screen mode like the image below, and "
+"ensure it is attached to the screen."
+msgstr ""
+"下の画像のように計測器をキャリブレーションモードに設定し、画面に確実に置いて"
+"ください。"
+
+#. TRANSLATORS: this is when the user has to change a setting on the sensor
+#: ../src/mcm-calibrate-argyll.c:2247
+msgid ""
+"Please set the measuring instrument to screen mode, and ensure it is "
+"attached to the screen."
+msgstr "計測器をキャリブレーションモードに設定し、画面に確実に置いてください。"
+
+#. TRANSLATORS: title, the calibration failed
+#: ../src/mcm-calibrate-argyll.c:2321 ../src/mcm-calibrate-argyll.c:2369
+msgid "Calibration error"
+msgstr "キャリブレーションエラー"
+
+#. TRANSLATORS: message, the sample was not read correctly
+#: ../src/mcm-calibrate-argyll.c:2324
+msgid "The sample could not be read at this time."
+msgstr "今回はサンプルを読み込むことが出来ませんでした。"
+
+#. TRANSLATORS: button text
+#: ../src/mcm-calibrate-argyll.c:2332
+msgid "Try again"
+msgstr "再試行する"
+
+#. TRANSLATORS: message, no firmware is available
+#: ../src/mcm-calibrate-argyll.c:2373
+msgid "No firmware is installed for this instrument."
+msgstr "この計測器にインストールできるファームウェアはありません。"
+
+#. TRANSLATORS: message, the image wasn't good enough
+#: ../src/mcm-calibrate-argyll.c:2376
+msgid ""
+"The pattern match wasn't good enough. Ensure you have the correct type of "
+"target selected."
+msgstr ""
+"充分にパターンが一致しませんでした。正しく色見本の種類を選んだか確認してくだ"
+"さい。"
+
+#. TRANSLATORS: message, the sensor got no readings
+#: ../src/mcm-calibrate-argyll.c:2380
+msgid ""
+"The measuring instrument got no valid readings. Please ensure the aperture "
+"is fully open."
+msgstr ""
+"計測器が有効に読み取り出来ませんでした。開口部が完全に開いていることを確認し"
+"てください。"
+
+#. TRANSLATORS: message, the colorimeter has got confused
+#: ../src/mcm-calibrate-argyll.c:2383
+msgid ""
+"The measuring instrument is busy and is not starting up. Please remove the "
+"USB plug and re-insert before trying to use this device."
+msgstr ""
+"計測器が使用中で起動しませんでした。USBプラグを抜き、このデバイスを使う前に再"
+"度接続してください。"
+
+#. TRANSLATORS: dialog title
+#: ../src/mcm-calibrate-argyll.c:2421
+msgid "Reading target"
+msgstr "色見本を読取中"
+
+#. TRANSLATORS: message, no firmware is available
+#: ../src/mcm-calibrate-argyll.c:2424
+msgid "Failed to read the strip correctly."
+msgstr "ストリップを正しく読み取ることが出来ませんでした。"
+
+#. TRANSLATORS: button text
+#: ../src/mcm-calibrate-argyll.c:2433
+msgid "Retry"
+msgstr "再試行"
+
+#. TRANSLATORS: dialog title, where %s is a letter like 'A'
+#: ../src/mcm-calibrate-argyll.c:2456
+#, c-format
+msgid "Read strip %s rather than %s!"
+msgstr "ストリップ%sをストリップ%sの代わりに読みます!"
+
+#. TRANSLATORS: dialog message, just follow the hardware instructions
+#: ../src/mcm-calibrate-argyll.c:2461
+msgid "It looks like you've measured the wrong strip."
+msgstr "違うストリップを計測したようです。"
+
+#. TRANSLATORS: dialog message, just follow the hardware instructions
+#: ../src/mcm-calibrate-argyll.c:2465
+msgid ""
+"If you've really measured the right one, it's okay, it could just be unusual "
+"paper."
+msgstr ""
+"確実に正しい方を計測したのであれば問題ありません。通常の紙ではないようです。"
+
+#. TRANSLATORS: button
+#: ../src/mcm-calibrate-argyll.c:2475
+msgid "Use anyway"
+msgstr "とにかく使う"
+
+#. TRANSLATORS: dialog title, where %s is a letter like 'A'
+#: ../src/mcm-calibrate-argyll.c:2487
+#, c-format
+msgid "Ready to read strip %s"
+msgstr "ストリップ%sを読み取る準備が出来ました"
+
+#. TRANSLATORS: dialog message, just follow the hardware instructions
+#: ../src/mcm-calibrate-argyll.c:2492
+msgid ""
+"Place the colorimeter on the area of white next to the letter and click and "
+"hold the measure switch."
+msgstr "文字の隣の白い領域に測色計を置き、計測スイッチを押し続けてください。"
+
+#. TRANSLATORS: dialog message, just follow the hardware instructions
+#: ../src/mcm-calibrate-argyll.c:2496
+msgid ""
+"Slowly scan the target line from left to right and release the switch when "
+"you get to the end of the page."
+msgstr ""
+"ゆっくりと色見本のラインを左から右にスキャンし、ページの端まで来たらスイッチ"
+"を離してください。"
+
+#. TRANSLATORS: dialog message, the sensor has to be above the line
+#: ../src/mcm-calibrate-argyll.c:2500
+msgid ""
+"Ensure the center of the device is properly aligned with the row you are "
+"trying to measure."
+msgstr ""
+"計測しようとしている行にデバイスの中心が正しく置かれていることを確認してくだ"
+"さい。"
+
+#. TRANSLATORS: dialog message, just follow the hardware instructions
+#: ../src/mcm-calibrate-argyll.c:2504
+msgid ""
+"If you make a mistake just release the switch and you'll get a chance to try "
+"again."
+msgstr "スイッチを離すのを失敗しただけであれば、再度試すことが出来ます。"
+
+#. TRANSLATORS: title, printing reference files to media
+#: ../src/mcm-calibrate-argyll.c:2642
+msgid "Printing"
+msgstr "印刷中"
+
+#. TRANSLATORS: dialog message
+#: ../src/mcm-calibrate-argyll.c:2649
+msgid "Preparing the data for the printer."
+msgstr "プリンタ用のデータを準備中"
+
+#. TRANSLATORS: dialog message
+#: ../src/mcm-calibrate-argyll.c:2655
+msgid "Sending the targets to the printer."
+msgstr "プリンタに色見本を送信中"
+
+#. TRANSLATORS: dialog message
+#: ../src/mcm-calibrate-argyll.c:2659
+msgid "Printing the targets..."
+msgstr "色見本を印刷中..."
+
+#. TRANSLATORS: dialog message
+#: ../src/mcm-calibrate-argyll.c:2663
+msgid "The printing has finished."
+msgstr "印刷が終了しました。"
+
+#. TRANSLATORS: dialog message
+#: ../src/mcm-calibrate-argyll.c:2667
+msgid "The print was aborted."
+msgstr "印刷は中断されました。"
+
+#. TRANSLATORS: this is saved in the profile
+#: ../src/mcm-calibrate.c:134
+msgid "Unknown model"
+msgstr "不明なモデル"
+
+#. TRANSLATORS: this is saved in the profile
+#: ../src/mcm-calibrate.c:148
+msgid "Unknown description"
+msgstr "不明な説明"
+
+#. TRANSLATORS: this is saved in the profile
+#: ../src/mcm-calibrate.c:162
+msgid "Unknown manufacturer"
+msgstr "不明な製造元"
+
+#. TRANSLATORS: this is saved in the profile
+#: ../src/mcm-calibrate.c:176
+msgid "Unknown device"
+msgstr "不明なデバイス"
+
+#. TRANSLATORS: title, usually we can tell based on the EDID data or output name
+#: ../src/mcm-calibrate.c:391
+msgid "Could not detect screen type"
+msgstr "画面の種類を判別出来ませんでした"
+
+#. TRANSLATORS: dialog message
+#: ../src/mcm-calibrate.c:394
+msgid ""
+"Please indicate if the screen you are trying to profile is an LCD, CRT or a "
+"projector."
+msgstr ""
+"プロファイルしようとしている画面がLCDかCRTかプロジェクトかを指定してくださ"
+"い。"
+
+#. TRANSLATORS: title, the hardware calibration device does not support projectors
+#: ../src/mcm-calibrate.c:419
+msgid "Could not calibrate and profile using this color measuring instrument"
+msgstr "測色計によるキャリブレート及びプロファイルが出来ませんでした。"
+
+#. TRANSLATORS: dialog message
+#: ../src/mcm-calibrate.c:422
+msgid ""
+"This color measuring instrument is not designed to support calibration and "
+"profiling projectors."
+msgstr ""
+"この測色計はプロジェクタのキャリブレーションおよびプロファイリングをサポート"
+"していません。"
+
+#. TRANSLATORS: dialog title
+#: ../src/mcm-calibrate.c:483
+msgid "Profile Precision"
+msgstr "プロファイルの精度"
+
+#. TRANSLATORS: this is the message body for the chart selection
+#: ../src/mcm-calibrate.c:486
+msgid ""
+"A higher precision profile provides higher accuracy in color matching but "
+"requires more time for reading the color patches."
+msgstr ""
+"高精度のプロファイルではより正確なカラーマッチングが可能ですが、色見本を読み"
+"取るためのより長い時間も必要です。"
+
+#. TRANSLATORS: this is the message body for the chart selection
+#: ../src/mcm-calibrate.c:489
+msgid "For a typical workflow, a normal precision profile is sufficient."
+msgstr "典型的な作業手順では、通常の精度で充分です。"
+
+#. TRANSLATORS: dialog message, preface
+#: ../src/mcm-calibrate.c:494
+msgid "The high precision profile also requires more paper and printer ink."
+msgstr "高精度のプロファイルでは、より多くの紙とインクも必要です。"
+
+#. TRANSLATORS: this is the formattted custom profile description. "Custom" refers to the fact that it's user generated
+#: ../src/mcm-calibrate.c:568
+msgid "Custom"
+msgstr "カスタム"
+
+#. TRANSLATORS: dialog message, preface
+#: ../src/mcm-calibrate.c:600
+msgid ""
+"Before calibrating the display, it is recommended to configure your display "
+"with the following settings to get optimal results."
+msgstr ""
+"ディスプレイのキャリブレーションの前に、最適な結果を得るために以下のセッティ"
+"ングでディスプレイを設定することをお勧めします。"
+
+#. TRANSLATORS: dialog message, preface
+#: ../src/mcm-calibrate.c:603
+msgid ""
+"You may want to consult the owner's manual for your display on how to "
+"achieve these settings."
+msgstr ""
+"設定の方法については、ディスプレイの取扱説明書を参照するのが良いでしょう。"
+
+#. TRANSLATORS: dialog message, bullet item
+#: ../src/mcm-calibrate.c:606
+msgid "Reset your display to the factory defaults."
+msgstr "工場出荷時の設定にディスプレイをリセットしてください。"
+
+#. TRANSLATORS: dialog message, bullet item
+#: ../src/mcm-calibrate.c:609
+msgid "Disable dynamic contrast if your display has this feature."
+msgstr ""
+"ディスプレイにダイナミックコントラスト機能がある場合、無効にしてください。"
+
+#. TRANSLATORS: dialog message, bullet item
+#: ../src/mcm-calibrate.c:612
+msgid ""
+"Configure your display with custom color settings and ensure the RGB "
+"channels are set to the same values."
+msgstr ""
+"ディスプレイをカスタムの色設定にして、RGBチャネルが同じ値になっていることを確"
+"認してください。"
+
+#. TRANSLATORS: dialog message, addition to bullet item
+#: ../src/mcm-calibrate.c:615
+msgid "If custom color is not available then use a 6500K color temperature."
+msgstr "カスタムの色設定が出来ない場合は、6500Kの色温度を使ってください。"
+
+#. TRANSLATORS: dialog message, bullet item
+#: ../src/mcm-calibrate.c:618
+msgid ""
+"Adjust the display brightness to a comfortable level for prolonged viewing."
+msgstr "ディスプレイの輝度を長時間の利用時でも快適なレベルに調節します。"
+
+#. TRANSLATORS: dialog message, suffix
+#: ../src/mcm-calibrate.c:621
+msgid ""
+"For best results, the display should have been powered for at least 15 "
+"minutes before starting the calibration."
+msgstr ""
+"キャリブレーションの開始前に少なくとも15分はディスプレイの電源を入れておく"
+"と、最良の結果が得られます。"
+
+#: ../src/mcm-calibrate.c:625
+msgid "Display setup"
+msgstr "ディスプレイ設定"
+
+#. TRANSLATORS: dialog for file->open dialog. A calibration target image is the
+#. * aquired image of the calibration target, e.g. an image file that looks
+#. * a bit like this: http://www.colorreference.de/targets/target.jpg
+#: ../src/mcm-calibrate.c:702
+msgid "Select calibration target image"
+msgstr "キャリブレーション対象の画像を選択してください"
+
+#. TRANSLATORS: filter name on the file->open dialog
+#: ../src/mcm-calibrate.c:715
+msgid "Supported images files"
+msgstr "サポートされている画像ファイル"
+
+#. TRANSLATORS: filter name on the file->open dialog
+#: ../src/mcm-calibrate.c:722 ../src/mcm-calibrate.c:774
+#: ../src/mcm-prefs.c:543
+msgid "All files"
+msgstr "すべてのファイル"
+
+#. TRANSLATORS: dialog for file->open dialog
+#: ../src/mcm-calibrate.c:747
+msgid "Select CIE reference values file"
+msgstr "CIEリファレンス値のファイルを選択"
+
+#. TRANSLATORS: filter name on the file->open dialog
+#: ../src/mcm-calibrate.c:767
+msgid "CIE values"
+msgstr "CIE値"
+
+#. TRANSLATORS: dialog for file->open dialog
+#: ../src/mcm-calibrate.c:840 ../src/mcm-prefs.c:515
+msgid "Select ICC Profile File"
+msgstr "ICCプロファイルのファイルを選択"
+
+#: ../src/mcm-calibrate.c:843
+msgid "Open"
+msgstr "開く"
+
+#. TRANSLATORS: title, you can profile all at once, or in steps
+#: ../src/mcm-calibrate.c:879
+msgid "Please choose a profiling mode"
+msgstr "プロファイルのモードを選んでください"
+
+#. TRANSLATORS: dialog message. Test patches are pages of colored squares
+#. * that are printed with a printer, and then read in with a calibration
+#. * device to create a profile
+#: ../src/mcm-calibrate.c:884
+msgid ""
+"Please indicate if you want to profile a local printer, generate some test "
+"patches, or profile using existing test patches."
+msgstr ""
+"接続されたプリンタをプロファイルするのか、テストパッチを生成するのか、既存の"
+"テストパッチを使ってプロファイルするのかを指定してください。"
+
+#. TRANSLATORS: title, usually we can tell based on the EDID data or output name
+#: ../src/mcm-calibrate.c:996
+msgid "Install missing files?"
+msgstr "見つからないファイルをインストールしますか?"
+
+#. TRANSLATORS: dialog message saying the color targets are not installed
+#: ../src/mcm-calibrate.c:999
+msgid "Common color target files are not installed on this computer."
+msgstr "このコンピュータには汎用の色見本ファイルがインストールされていません。"
+
+#. TRANSLATORS: dialog message saying the color targets are not installed
+#: ../src/mcm-calibrate.c:1001
+msgid "Color target files are needed to convert the image to a color profile."
+msgstr "画像をカラープロファイルに変換するには色見本ファイルが必要です。"
+
+#. TRANSLATORS: dialog message, asking if it's okay to install them
+#: ../src/mcm-calibrate.c:1003
+msgid "Do you want them to be installed?"
+msgstr "これらをインストールしますか?"
+
+#. TRANSLATORS: dialog message, if the user has the target file on a CDROM then there's no need for this package
+#: ../src/mcm-calibrate.c:1005
+msgid "If you already have the correct file, you can skip this step."
+msgstr "適切なファイルが既にあれば、この手順はスキップできます。"
+
+#. TRANSLATORS: button, skip installing a package
+#: ../src/mcm-calibrate.c:1010 ../src/mcm-prefs.c:702
+msgid "Do not install"
+msgstr "インストールしない"
+
+#. TRANSLATORS: button, install a package
+#. TRANSLATORS: button text
+#. TRANSLATORS: button, install a package
+#: ../src/mcm-calibrate.c:1012 ../src/mcm-import.c:188 ../src/mcm-prefs.c:700
+msgid "Install"
+msgstr "インストール"
+
+#. TRANSLATORS: this is the window title for when the user selects the calibration target.
+#. * A calibration target is an accuratly printed grid of colors, for instance:
+#. * the IT 8.7 targets available here: http://www.targets.coloraid.de/
+#: ../src/mcm-calibrate.c:1027
+msgid "Please select a calibration target"
+msgstr "キャリブレーションターゲットを選択してください"
+
+#. TRANSLATORS: dialog message, preface. A calibration target looks like
+#. * this: http://www.colorreference.de/targets/target.jpg
+#: ../src/mcm-calibrate.c:1032
+msgid ""
+"Before profiling the device, you have to manually capture an image of a "
+"calibration target and save it as a TIFF image file."
+msgstr ""
+"デバイスをプロファイルする前に、キャリブレートしたターゲットのイメージを手動"
+"で取り込み、TIFF画像ファイルとして保存しなければなりません。"
+
+#. TRANSLATORS: dialog message, preface
+#: ../src/mcm-calibrate.c:1037
+msgid ""
+"Ensure that the contrast and brightness are not changed and color correction "
+"profiles are not applied."
+msgstr ""
+"コントラストと輝度が変更されていないことと色補正プロファイルが適用されていな"
+"いことを確認してください。"
+
+#. TRANSLATORS: dialog message, suffix
+#: ../src/mcm-calibrate.c:1040
+msgid ""
+"The device sensor should have been cleaned prior to scanning and the output "
+"file resolution should be at least 200dpi."
+msgstr ""
+"スキャンの前にデバイスのセンサーを掃除し、出力ファイルの解像度が少なくとも"
+"200dpi以上であることが推奨されます。"
+
+#. TRANSLATORS: dialog message, preface
+#: ../src/mcm-calibrate.c:1046
+msgid ""
+"Ensure that the white-balance has not been modified by the camera and that "
+"the lens is clean."
+msgstr ""
+"カメラのホワイトバランスが設定されておらず、レンズが掃除されていることを確認"
+"してください。"
+
+#. TRANSLATORS: dialog message, suffix
+#: ../src/mcm-calibrate.c:1050
+msgid ""
+"For best results, the reference target should also be less than two years "
+"old."
+msgstr ""
+"最良の結果には、2年以上経過していないリファレンスの色見本であるべきです。"
+
+#. TRANSLATORS: this is the message body for the chart selection
+#: ../src/mcm-calibrate.c:1053
+msgid ""
+"Please select the calibration target type which corresponds to your "
+"reference file."
+msgstr ""
+"リファレンスファイルに対応する種類のキャリブレーションターゲットを選択してく"
+"ださい。"
+
+#. TRANSLATORS: this is probably a brand name
+#: ../src/mcm-calibrate-dialog.c:567
+msgid "CMP Digital Target 3"
+msgstr "CMP Digital Target 3"
+
+#. TRANSLATORS: this is probably a brand name
+#: ../src/mcm-calibrate-dialog.c:571
+msgid "CMP DT 003"
+msgstr "CMP DT 003"
+
+#. TRANSLATORS: this is probably a brand name
+#: ../src/mcm-calibrate-dialog.c:575
+msgid "Color Checker"
+msgstr "Color Checker"
+
+#. TRANSLATORS: this is probably a brand name
+#: ../src/mcm-calibrate-dialog.c:579
+msgid "Color Checker DC"
+msgstr "Color Checker DC"
+
+#. TRANSLATORS: this is probably a brand name
+#: ../src/mcm-calibrate-dialog.c:583
+msgid "Color Checker SG"
+msgstr "Color Checker SG"
+
+#. TRANSLATORS: this is probably a brand name
+#: ../src/mcm-calibrate-dialog.c:587
+msgid "Hutchcolor"
+msgstr "Hutchcolor"
+
+#. TRANSLATORS: this is probably a brand name
+#: ../src/mcm-calibrate-dialog.c:591
+msgid "i1 RGB Scan 1.4"
+msgstr "i1 RGB Scan 1.4"
+
+#. TRANSLATORS: this is probably a brand name
+#: ../src/mcm-calibrate-dialog.c:595
+msgid "IT8.7/2"
+msgstr "IT8.7/2"
+
+#. TRANSLATORS: this is probably a brand name
+#: ../src/mcm-calibrate-dialog.c:599
+msgid "Laser Soft DC Pro"
+msgstr "Laser Soft DC Pro"
+
+#. TRANSLATORS: this is probably a brand name
+#: ../src/mcm-calibrate-dialog.c:603
+msgid "QPcard 201"
+msgstr "QPcard 201"
+
+#. TRANSLATORS: dialog title
+#: ../src/mcm-calibrate-manual.c:200
+msgid "Introduction to display calibration"
+msgstr "ディスプレイキャリブレーションの紹介"
+
+#. TRANSLATORS: message text, an ICC profile is a file that characterizes the device
+#: ../src/mcm-calibrate-manual.c:222
+msgid ""
+"This dialog will help calibrate your display and create a custom ICC profile."
+msgstr ""
+"ディスプレイのキャリブレーションとカスタムのICCプロファイルの作成に、このダイ"
+"アログが役立つでしょう。"
+
+#. TRANSLATORS: message text, telling the user they are in for the long haul
+#: ../src/mcm-calibrate-manual.c:225
+msgid ""
+"The calibration will involve several steps so that an accurate profile can "
+"be obtained."
+msgstr ""
+"キャリブレーションのいくつかの手順により、適切なプロファイルが得られます。"
+
+#. TRANSLATORS: message text, this is a lie. It will take more than a few minutes, but we don't want to scare the hapless user
+#: ../src/mcm-calibrate-manual.c:228
+msgid "It should only take a few minutes."
+msgstr "数分しかかかりません。"
+
+#. TRANSLATORS: message text, when you're comparing colors, it helps if the image is a bit out of focus otherwise the
+#. * fovea (center bit of the eye) tries to 'pick out' a colour, rather than take the average reading
+#: ../src/mcm-calibrate-manual.c:239
+msgid ""
+"It may help to sit further from the screen or to squint at the calibration "
+"images in order to accurately compare the colors."
+msgstr ""
+"画面から距離をおいて座るか目を細めてキャリブレーションの画像を見ることで、正"
+"確に色を比較するのに役立つでしょう。"
+
+#. TRANSLATORS: message text, tell the use that they can go back and forwards, as the human eye sucks
+#: ../src/mcm-calibrate-manual.c:242
+msgid "You can repeat the calibration steps as many times as you want."
+msgstr "キャリブレーションの手順を何回でも繰り返すことが出来ます。"
+
+#. TRANSLATORS: dialog title
+#: ../src/mcm-calibrate-manual.c:254
+#, c-format
+msgid "Create table item %i/%i"
+msgstr "テーブルの項目 %i/%i を作成"
+
+#. TRANSLATORS: message text
+#: ../src/mcm-calibrate-manual.c:275
+msgid ""
+"Please try to match up the gray square with the surrounding alternating "
+"bars. You should match the brightness first, and then if required change the "
+"color tint so it looks plain gray."
+msgstr ""
+"グレーの長方形が周囲の白黒の縞模様と一致するようにしてください。まず明度を合"
+"わせ、必要であればグレーがニュートラルに見えるように色相を変更します。"
+
+#. TRANSLATORS: dialog title
+#: ../src/mcm-calibrate-manual.c:372
+msgid "Summary"
+msgstr "要約"
+
+#. TRANSLATORS: message text
+#: ../src/mcm-calibrate-manual.c:391
+msgid ""
+"This display is now calibrated. You can change the current profile using the "
+"Color Profiles program."
+msgstr ""
+"ディスプレイがキャリブレートされました。Color Profilesプログラムを使って現在"
+"のプロファイルを変更出来ます。"
+
+#. TRANSLATORS: error message
+#: ../src/mcm-client.c:1103
+msgid "This device already exists"
+msgstr "デバイスは既にあります"
+
+#. TRANSLATORS: this is when the device is not recognized
+#: ../src/mcm-colorimeter.c:391
+msgid "Measuring instrument not recognized"
+msgstr "認識されていない測色計"
+
+#. TRANSLATORS: this is the name of the internal panel
+#: ../src/mcm-device-xrandr.c:128
+msgid "Laptop LCD"
+msgstr "ラップトップLCD"
+
+#. TRANSLATORS: this is when the EDID file cannot be read
+#: ../src/mcm-dump-edid.c:58
+msgid "Cannot load file contents"
+msgstr "ファイルの中身をロード出来ません"
+
+#. TRANSLATORS: this is when the EDID cannot be parsed
+#: ../src/mcm-dump-edid.c:67
+msgid "Cannot parse EDID contents"
+msgstr "EDIDの中身を解析できません"
+
+#. TRANSLATORS: this is debugging output for the supplied EDID file
+#: ../src/mcm-dump-edid.c:75
+msgid "Monitor name"
+msgstr "モニタ名"
+
+#. TRANSLATORS: this is debugging output for the supplied EDID file
+#: ../src/mcm-dump-edid.c:80
+msgid "Vendor name"
+msgstr "ベンダ名"
+
+#. TRANSLATORS: this is debugging output for the supplied EDID file
+#: ../src/mcm-dump-edid.c:85
+msgid "Serial number"
+msgstr "シリアル番号"
+
+#. TRANSLATORS: this is debugging output for the supplied EDID file
+#: ../src/mcm-dump-edid.c:90
+msgid "Text string"
+msgstr "文字列"
+
+#. TRANSLATORS: this is debugging output for the supplied EDID file
+#: ../src/mcm-dump-edid.c:95
+msgid "PNP identifier"
+msgstr "PNP識別子"
+
+#. TRANSLATORS: this is debugging output for the supplied EDID file
+#: ../src/mcm-dump-edid.c:101
+msgid "Size"
+msgstr "サイズ"
+
+#. TRANSLATORS: this is debugging output for the supplied EDID file
+#: ../src/mcm-dump-edid.c:106
+msgid "Gamma"
+msgstr "ガンマ"
+
+#. TRANSLATORS: command line option: a list of files to parse
+#: ../src/mcm-dump-edid.c:136
+msgid "EDID dumps to parse"
+msgstr "解析用のEDIDのダンプ"
+
+#. TRANSLATORS: this is the filename we are displaying
+#: ../src/mcm-dump-edid.c:159
+msgid "EDID dump"
+msgstr "EDIDのダンプ"
+
+#. TRANSLATORS: we saved the EDID to a file - second parameter is a filename
+#: ../src/mcm-dump-edid.c:196
+#, c-format
+msgid "Saved %i bytes to %s"
+msgstr "%iバイトを%sに圧縮"
+
+#. TRANSLATORS: we saved the EDID to a file - parameter is a filename
+#: ../src/mcm-dump-edid.c:201
+#, c-format
+msgid "Failed to save EDID to %s"
+msgstr "EDIDの%sへの保存に失敗"
+
+#. TRANSLATORS: command line option: a list of files to install
+#: ../src/mcm-dump-profile.c:108
+msgid "Profiles to view"
+msgstr "表示するプロファイル"
+
+#. TRANSLATORS: this just dumps the profile to the screen
+#: ../src/mcm-dump-profile.c:121
+msgid "ICC profile dump program"
+msgstr "ICCプロファイルのダンププログラム"
+
+#. TRANSLATORS: command line option
+#: ../src/mcm-fix-profile.c:124
+msgid "The description of the profile"
+msgstr "プロファイルの説明"
+
+#. TRANSLATORS: command line option
+#: ../src/mcm-fix-profile.c:127
+msgid "The copyright of the profile"
+msgstr "プロファイルの著作権"
+
+#. TRANSLATORS: command line option
+#: ../src/mcm-fix-profile.c:130
+msgid "The model of the profile"
+msgstr "プロファイルのモデル"
+
+#. TRANSLATORS: command line option
+#: ../src/mcm-fix-profile.c:133
+msgid "The manufacturer of the profile"
+msgstr "プロファイルの作成者"
+
+#. TRANSLATORS: command line option: a list of icc files to fix
+#: ../src/mcm-fix-profile.c:136
+msgid "Profiles to fix"
+msgstr "修正するプロファイル"
+
+#. TRANSLATORS: this fixes broken profiles
+#: ../src/mcm-fix-profile.c:147
+msgid "ICC profile fix program"
+msgstr "ICCプロファイルを修正するプログラム"
+
+#. TRANSLATORS: command line option: a list of catalogs to install
+#. TRANSLATORS: command line option: a list of files to install
+#: ../src/mcm-import.c:83 ../src/mcm-install-system-wide.c:126
+msgid "ICC profile to install"
+msgstr "インストールするICCプロファイル"
+
+#. TRANSLATORS: nothing was specified on the command line
+#: ../src/mcm-import.c:105
+msgid "No filename specified"
+msgstr "ファイル名が指定されていません"
+
+#. TRANSLATORS: could not read file
+#: ../src/mcm-import.c:118
+msgid "Failed to open ICC profile"
+msgstr "ICCプロファイルを開けません"
+
+#. TRANSLATORS: parsing error
+#: ../src/mcm-import.c:121
+#, c-format
+msgid "Failed to parse file: %s"
+msgstr "ファイル %s の解析に失敗"
+
+#. TRANSLATORS: color profile already been installed
+#: ../src/mcm-import.c:156
+msgid "ICC profile already installed"
+msgstr "インストール済みのICCプロファイル"
+
+#. TRANSLATORS: message text
+#: ../src/mcm-import.c:173
+#, c-format
+msgid "Import ICC color profile %s?"
+msgstr "%s ICCカラープロファイルを読み込みますか?"
+
+#. TRANSLATORS: message text
+#: ../src/mcm-import.c:176
+msgid "Import ICC color profile?"
+msgstr "ICCカラープロファイルを読み込みますか?"
+
+#. ask confirmation
+#: ../src/mcm-import.c:184
+msgid "Import ICC profile"
+msgstr "ICCプロファイルのインポート"
+
+#. TRANSLATORS: could not read file
+#: ../src/mcm-import.c:209 ../src/mcm-prefs.c:572
+msgid "Failed to copy file"
+msgstr "ファイルのコピーに失敗"
+
+#. TRANSLATORS: this is the ICC profile description stored in an atom in the XServer
+#: ../src/mcm-inspect.c:60
+msgid "Description:"
+msgstr "説明:"
+
+#. TRANSLATORS: this is the ICC profile copyright
+#: ../src/mcm-inspect.c:63
+msgid "Copyright:"
+msgstr "著作権:"
+
+#. TRANSLATORS: the root window of all the screens
+#: ../src/mcm-inspect.c:102
+msgid "Root window profile:"
+msgstr "主ウインドウのプロファイル:"
+
+#. TRANSLATORS: the root window of all the screens
+#: ../src/mcm-inspect.c:114
+msgid "Root window protocol version:"
+msgstr "主ウインドウのプロトコルバージョン:"
+
+#: ../src/mcm-inspect.c:130
+#, c-format
+msgid "Output profile '%s':"
+msgstr "出力プロファイル '%s':"
+
+#. TRANSLATORS: this is when the profile has not been set
+#: ../src/mcm-inspect.c:137
+msgid "not set"
+msgstr "未設定"
+
+#. TRANSLATORS: the DBus method failed
+#: ../src/mcm-inspect.c:200 ../src/mcm-inspect.c:269 ../src/mcm-inspect.c:315
+#: ../src/mcm-inspect.c:379 ../src/mcm-inspect.c:472
+msgid "The request failed"
+msgstr "リクエストが失敗"
+
+#. TRANSLATORS: no rofile has been asigned to this device
+#: ../src/mcm-inspect.c:208
+msgid "There are no ICC profiles for this device"
+msgstr "このデバイスのICCプロファイルがありません。"
+
+#. TRANSLATORS: this is a list of profiles suitable for the device
+#: ../src/mcm-inspect.c:213 ../src/mcm-inspect.c:328 ../src/mcm-inspect.c:392
+msgid "Suitable profiles for:"
+msgstr "対応プロファイル:"
+
+#. TRANSLATORS: no profile has been asigned to this window
+#: ../src/mcm-inspect.c:323
+msgid "There are no ICC profiles for this window"
+msgstr "このウインドウのICCプロファイルがありません"
+
+#. TRANSLATORS: no rofile has been asigned to this device type
+#: ../src/mcm-inspect.c:387
+msgid "There are no ICC profiles for this device type"
+msgstr "この種類のデバイスのICCプロファイルがありません"
+
+#. TRANSLATORS: this is the rendering intent of the output
+#: ../src/mcm-inspect.c:427
+msgid "Rendering intent (display):"
+msgstr "変換方式(ディスプレイ):"
+
+#. TRANSLATORS: this is the rendering intent of the printer
+#: ../src/mcm-inspect.c:430
+msgid "Rendering intent (softproof):"
+msgstr "変換方式(ソフトプルーフ):"
+
+#. TRANSLATORS: this is filename of the default colorspace
+#: ../src/mcm-inspect.c:433
+msgid "RGB Colorspace:"
+msgstr "RGB色空間:"
+
+#. TRANSLATORS: this is filename of the default colorspace
+#: ../src/mcm-inspect.c:436
+msgid "CMYK Colorspace:"
+msgstr "CMYK色空間:"
+
+#. TRANSLATORS: command line option
+#: ../src/mcm-inspect.c:506
+msgid "Show X11 properties"
+msgstr "X11の設定を表示"
+
+#. TRANSLATORS: command line option
+#: ../src/mcm-inspect.c:509
+msgid "Get the profiles for a specific device"
+msgstr "特定のデバイスのプロファイルを取得"
+
+#. TRANSLATORS: command line option
+#: ../src/mcm-inspect.c:512
+msgid "Get the profile for a specific window"
+msgstr "特定のウインドウのプロファイルを取得"
+
+#. TRANSLATORS: command line option
+#: ../src/mcm-inspect.c:515
+msgid "Get the profiles for a specific device type"
+msgstr "特定の種類のデバイスのプロファイルを取得"
+
+#. TRANSLATORS: command line option
+#: ../src/mcm-inspect.c:518
+msgid "Dump all details about this system"
+msgstr "システムの全詳細をダンプ"
+
+#. TRANSLATORS: just dumps the EDID to disk
+#: ../src/mcm-inspect.c:531
+msgid "EDID inspect program"
+msgstr "EDIDの検査プログラム"
+
+#. TRANSLATORS: this is when the user does --type=mickeymouse
+#: ../src/mcm-inspect.c:548
+msgid "Device type not recognized"
+msgstr "デバイスの種類が認識されません"
+
+#. command line argument, the ID of the device
+#: ../src/mcm-install-system-wide.c:123
+msgid "Device ID, e.g. 'xrandr_ibm_france_ltn154p2_l05'"
+msgstr "デバイスID、例*'xrandr_ibm_france_ltn154p2_l05'"
+
+#. TRANSLATORS: tool that is used when copying profiles system-wide
+#: ../src/mcm-install-system-wide.c:141
+msgid "MATE Color Manager ICC profile system-wide installer"
+msgstr "MATE Color Manager ICCプロファイルのシステムワイドインストーラ"
+
+#. TRANSLATORS: user did not specify a valid filename
+#: ../src/mcm-install-system-wide.c:149
+msgid "You need to specify exactly one ICC profile filename."
+msgstr "単一のICCプロファイルのファイル名を指定する必要があります。"
+
+#. TRANSLATORS: user did not specify a valid device ID
+#: ../src/mcm-install-system-wide.c:157
+msgid "You need to specify exactly one device ID."
+msgstr "単一のデバイスIDを指定する必要があります。"
+
+#. TRANSLATORS: user did not specify a valid device ID
+#: ../src/mcm-install-system-wide.c:166
+msgid "The device ID has invalid characters."
+msgstr "デバイスIDに利用できない文字があります。"
+
+#. TRANSLATORS: only able to install profiles as root
+#: ../src/mcm-install-system-wide.c:176
+msgid "This program can only be used by the root user."
+msgstr "このプログラムはrootユーザしか使えません。"
+
+#. TRANSLATORS: only able to install profiles with an absolute path
+#: ../src/mcm-install-system-wide.c:185
+msgid "The source filename must be absolute."
+msgstr "元のファイル名は絶対パスでなければなりません"
+
+#. TRANSLATORS: error details
+#: ../src/mcm-install-system-wide.c:196
+msgid "Failed to get content type:"
+msgstr "コンテントタイプを取得出来ませんでした:"
+
+#. TRANSLATORS: the content type is the detected type of file
+#: ../src/mcm-install-system-wide.c:206
+msgid "Content type was incorrect:"
+msgstr "コンテントタイプが正しくありません:"
+
+#. TRANSLATORS: the program must never be directly run
+#: ../src/mcm-install-system-wide.c:215
+msgid "This program must only be run through pkexec."
+msgstr "このプログラムはpkexec経由でのみ実行出来ます。"
+
+#. TRANSLATORS: PolicyKit has gone all insane on us, and we refuse to parse junk
+#: ../src/mcm-install-system-wide.c:224
+msgid "PKEXEC_UID must be set to an integer value."
+msgstr "PKEXEC_UIDは整数値を指定してください。"
+
+#. TRANSLATORS: we are complaining that a file must be really owned by the user who called this program
+#: ../src/mcm-install-system-wide.c:233
+msgid "The ICC profile must be owned by the user."
+msgstr "ICCプロファイルの所有者はあなたでなければなりません。"
+
+#. TRANSLATORS: only able to install profiles with an absolute path
+#: ../src/mcm-install-system-wide.c:246
+msgid "The destination filename must be absolute."
+msgstr "保存先のファイル名は絶対パスでなければなりません。"
+
+#. TRANSLATORS: error details
+#: ../src/mcm-install-system-wide.c:256
+msgid "Failed to copy:"
+msgstr "コピーに失敗:"
+
+#. TRANSLATORS: could not save for all users
+#: ../src/mcm-prefs.c:152
+msgid "Failed to save defaults for all users"
+msgstr "すべてのユーザ用のデフォルト値の保存に失敗"
+
+#. TRANSLATORS: this is where no profile is selected
+#: ../src/mcm-prefs.c:180
+msgid "None"
+msgstr "無し"
+
+#. TRANSLATORS: this is where the user can click and import a profile
+#: ../src/mcm-prefs.c:184
+msgid "Other profile…"
+msgstr "他のプロファイル..."
+
+#. TRANSLATORS: could not calibrate
+#: ../src/mcm-prefs.c:318
+msgid "Failed to calibrate device"
+msgstr "デバイスのキャリブレーションに失敗"
+
+#. TRANSLATORS: could not calibrate
+#: ../src/mcm-prefs.c:353
+msgid "Failed to calibrate printer"
+msgstr "プリンタのキャリブレーションに失敗"
+
+#. TRANSLATORS: title, usually we can tell based on the EDID data or output name
+#: ../src/mcm-prefs.c:467
+msgid "Permanently delete profile?"
+msgstr "永久にプロファイルを削除しますか?"
+
+#. TRANSLATORS: dialog message
+#: ../src/mcm-prefs.c:470
+msgid ""
+"Are you sure you want to remove this profile from your system permanently?"
+msgstr "システムから永久にこのプロファイルを削除しても良いですか?"
+
+#. TRANSLATORS: button, delete a profile
+#: ../src/mcm-prefs.c:473
+msgid "Delete"
+msgstr "削除"
+
+#: ../src/mcm-prefs.c:518
+msgid "Import"
+msgstr "インポート"
+
+#. TRANSLATORS: filter name on the file->open dialog
+#: ../src/mcm-prefs.c:536
+msgid "Supported ICC profiles"
+msgstr "サポートされるICCプロファイル"
+
+#. TRANSLATORS: title, usually we can tell based on the EDID data or output name
+#: ../src/mcm-prefs.c:687
+msgid "Install missing calibration and profiling software?"
+msgstr ""
+"見つからなかったキャリブレーションとプロファイルのソフトウェアをインストール"
+"しますか?"
+
+#. TRANSLATORS: dialog message saying the argyllcms is not installed
+#: ../src/mcm-prefs.c:691
+msgid "Calibration and profiling software is not installed on this computer."
+msgstr ""
+"キャリブレーションとプロファイルのソフトウェアがインストールされていません。"
+
+#. TRANSLATORS: dialog message saying the color targets are not installed
+#: ../src/mcm-prefs.c:693
+msgid "These tools are required to build color profiles for devices."
+msgstr "デバイス用のカラープロファイルを作成するにはこれらのツールが必要です。"
+
+#. TRANSLATORS: dialog message, asking if it's okay to install it
+#: ../src/mcm-prefs.c:695
+msgid "Do you want them to be automatically installed?"
+msgstr "自動的にこれらをインストールしますか?"
+
+#. TRANSLATORS: this is the sound description
+#: ../src/mcm-prefs.c:821
+msgid "Profiling completed"
+msgstr "プロファイルが完了"
+
+#. TRANSLATORS: could not add virtual device
+#: ../src/mcm-prefs.c:877
+msgid "Failed to create virtual device"
+msgstr "仮想デバイスの作成に失敗"
+
+#. TRANSLATORS: could not add virtual device
+#: ../src/mcm-prefs.c:885
+msgid "Failed to save virtual device"
+msgstr "仮想デバイスの保存に失敗"
+
+#. TRANSLATORS: could not add virtual device
+#: ../src/mcm-prefs.c:894
+msgid "Failed to add virtual device"
+msgstr "仮想デバイスの追加に失敗"
+
+#. TRANSLATORS: could not read file
+#: ../src/mcm-prefs.c:938
+msgid "Failed to delete file"
+msgstr "ファイルの削除に失敗"
+
+#. TRANSLATORS: this is when the button is sensitive
+#: ../src/mcm-prefs.c:1069
+msgid "Create a color profile for the selected device"
+msgstr "選択したデバイスのカラープロファイルを作成"
+
+#. TRANSLATORS: this is when the button is insensitive
+#: ../src/mcm-prefs.c:1074
+msgid "Cannot profile: No device is selected"
+msgstr "プロファイル不可能: デバイスが選択されていません"
+
+#. TRANSLATORS: this is when the button is insensitive
+#: ../src/mcm-prefs.c:1086
+msgid "Cannot calibrate: The device is not connected"
+msgstr "キャリブレート不可能: デバイスが接続されていません"
+
+#. TRANSLATORS: this is when the button is insensitive
+#: ../src/mcm-prefs.c:1094
+msgid "Cannot calibrate: The display driver does not support XRandR 1.3"
+msgstr ""
+"キャリブレート不可能: ディスプレイドライバがXRandR 1.3をサポートしていません"
+
+#. TRANSLATORS: this is when the button is insensitive
+#: ../src/mcm-prefs.c:1102
+msgid "Cannot calibrate: The measuring instrument is not plugged in"
+msgstr "キャリブレート不可能: 計測器が接続されていません"
+
+#. TRANSLATORS: this is when the button is insensitive
+#: ../src/mcm-prefs.c:1117
+msgid "Cannot profile: The measuring instrument is not plugged in"
+msgstr "プロファイル不可能: 計測器が接続されていません"
+
+#. TRANSLATORS: this is when the button is insensitive
+#: ../src/mcm-prefs.c:1125
+msgid ""
+"Cannot profile: The measuring instrument does not support printer profiling"
+msgstr ""
+"プロファイル不可能: 計測器がプリンタのプロファイルをサポートしていません"
+
+#. TRANSLATORS: this is when the button is insensitive
+#: ../src/mcm-prefs.c:1132
+msgid "Cannot profile this type of device"
+msgstr "このタイプのデバイスをプロファイルすることが出来ません"
+
+#. TRANSLATORS: Some shitty binary drivers do not support per-head gamma controls.
+#. * Whilst this does not matter if you only have one monitor attached, it means you
+#. * can't color correct additional monitors or projectors.
+#: ../src/mcm-prefs.c:1296
+msgid "Per-device settings not supported. Check your display driver."
+msgstr ""
+"デバイス毎の設定はサポートされていません。ディスプレイドライバをチェックして"
+"ください。"
+
+#. TRANSLATORS: this the ICC profile type
+#: ../src/mcm-prefs.c:1381
+msgid "Input device"
+msgstr "入力デバイス"
+
+#. TRANSLATORS: this the ICC profile type
+#: ../src/mcm-prefs.c:1385
+msgid "Display device"
+msgstr "ディスプレイデバイス"
+
+#. TRANSLATORS: this the ICC profile type
+#: ../src/mcm-prefs.c:1389
+msgid "Output device"
+msgstr "出力デバイス"
+
+#. TRANSLATORS: this the ICC profile type
+#: ../src/mcm-prefs.c:1393
+msgid "Devicelink"
+msgstr "デバイスリンク"
+
+#. TRANSLATORS: this the ICC profile type
+#: ../src/mcm-prefs.c:1397
+msgid "Colorspace conversion"
+msgstr "色空間の変換"
+
+#. TRANSLATORS: this the ICC profile kind
+#: ../src/mcm-prefs.c:1401
+msgid "Abstract"
+msgstr "概要"
+
+#. TRANSLATORS: this the ICC profile type
+#: ../src/mcm-prefs.c:1405
+msgid "Named color"
+msgstr "特色"
+
+#. TRANSLATORS: this the ICC profile type
+#. TRANSLATORS: this the ICC colorspace type
+#: ../src/mcm-prefs.c:1408 ../src/mcm-prefs.c:1458
+msgid "Unknown"
+msgstr "不明"
+
+#. TRANSLATORS: this the ICC colorspace type
+#: ../src/mcm-prefs.c:1419
+msgid "XYZ"
+msgstr "XYZ"
+
+#. TRANSLATORS: this the ICC colorspace type
+#: ../src/mcm-prefs.c:1423
+msgid "LAB"
+msgstr "LAB"
+
+#. TRANSLATORS: this the ICC colorspace type
+#: ../src/mcm-prefs.c:1427
+msgid "LUV"
+msgstr "LUV"
+
+#. TRANSLATORS: this the ICC colorspace type
+#: ../src/mcm-prefs.c:1431
+msgid "YCbCr"
+msgstr "YCbCr"
+
+#. TRANSLATORS: this the ICC colorspace type
+#: ../src/mcm-prefs.c:1435
+msgid "Yxy"
+msgstr "Yxy"
+
+#. TRANSLATORS: this the ICC colorspace type
+#. TRANSLATORS: this is the colorspace, e.g. red, green, blue
+#: ../src/mcm-prefs.c:1439 ../src/mcm-prefs.c:2204 ../data/mcm-prefs.ui.h:59
+msgid "RGB"
+msgstr "RGB"
+
+#. TRANSLATORS: this the ICC colorspace type
+#: ../src/mcm-prefs.c:1443
+msgid "Gray"
+msgstr "グレー"
+
+#. TRANSLATORS: this the ICC colorspace type
+#: ../src/mcm-prefs.c:1447
+msgid "HSV"
+msgstr "HSV"
+
+#. TRANSLATORS: this the ICC colorspace type
+#. TRANSLATORS: this is the colorspace, e.g. cyan, magenta, yellow, black
+#: ../src/mcm-prefs.c:1451 ../src/mcm-prefs.c:2208 ../data/mcm-prefs.ui.h:5
+msgid "CMYK"
+msgstr "CMYK"
+
+#. TRANSLATORS: this the ICC colorspace type
+#: ../src/mcm-prefs.c:1455
+msgid "CMY"
+msgstr "CMY"
+
+#. TRANSLATORS: if the device has a VCGT profile
+#: ../src/mcm-prefs.c:1576
+msgid "Yes"
+msgstr "Yes"
+
+#. TRANSLATORS: if the device has a VCGT profile
+#: ../src/mcm-prefs.c:1579
+msgid "No"
+msgstr "No"
+
+#. TRANSLATORS: this is where an output is not settable, but we are showing it in the UI
+#: ../src/mcm-prefs.c:1723
+msgid "No hardware support"
+msgstr "ハードウェアのサポート無し"
+
+#. TRANSLATORS: this is where the device has been setup but is not connected
+#: ../src/mcm-prefs.c:1727 ../src/mcm-prefs.c:2039
+msgid "disconnected"
+msgstr "未接続"
+
+#. TRANSLATORS: the profile was of the wrong sort for this device
+#: ../src/mcm-prefs.c:1839
+msgid "Could not import profile"
+msgstr "プロファイルをインポートできません"
+
+#: ../src/mcm-prefs.c:1839
+msgid "The profile was of the wrong type for this device"
+msgstr "プロファイルはこのデバイス用のものではありません"
+
+#. TRANSLATORS: this is a sound description
+#: ../src/mcm-prefs.c:1975
+msgid "Device added"
+msgstr "追加されたデバイス"
+
+#. TRANSLATORS: this is a sound description
+#: ../src/mcm-prefs.c:1979
+msgid "Device removed"
+msgstr "削除されたデバイス"
+
+#. TRANSLATORS: this is when there are no profiles that can be used; the search term is either "RGB" or "CMYK"
+#: ../src/mcm-prefs.c:2261
+#, c-format
+msgid "No %s color spaces available"
+msgstr "%s色空間は利用できません"
+
+#. TRANSLATORS: device type
+#: ../src/mcm-prefs.c:2616 ../data/mcm-prefs.ui.h:32
+msgid "Display"
+msgstr "ディスプレイ"
+
+#. TRANSLATORS: device type
+#: ../src/mcm-prefs.c:2620
+msgid "Scanner"
+msgstr "スキャナ"
+
+#. TRANSLATORS: device type
+#: ../src/mcm-prefs.c:2624
+msgid "Printer"
+msgstr "プリンタ"
+
+#. TRANSLATORS: device type
+#: ../src/mcm-prefs.c:2628
+msgid "Camera"
+msgstr "カメラ"
+
+#. TRANSLATORS: we can make this modal (stay on top of) another window
+#: ../src/mcm-prefs.c:2695
+msgid "Set the parent window to make this modal"
+msgstr "親ウインドウをモーダルにします"
+
+#. TRANSLATORS: button for more details about the vcgt failure
+#: ../src/mcm-prefs.c:2991
+msgid "More Information"
+msgstr "詳細情報"
+
+#. TRANSLATORS: this is displayed while the devices are being probed
+#: ../src/mcm-prefs.c:2994
+msgid "Loading list of devices…"
+msgstr "デバイスのリストを読み込み中…."
+
+#. TRANSLATORS: this is displayed when the profile is crap
+#: ../src/mcm-prefs.c:3001
+msgid ""
+"This profile does not have the information required for whole-screen color "
+"correction."
+msgstr "全画面の色補正をするために必要な情報がこのプロファイルには含まれません"
+
+#. TRANSLATORS: this is where the ICC profile_lcms1 has no description
+#: ../src/mcm-profile.c:130
+msgid "Missing description"
+msgstr "不明な説明"
+
+#. TRANSLATORS: button: this is to open MCM
+#: ../src/mcm-session.c:153
+msgid "Recalibrate now"
+msgstr "すぐキャリブレーションし直す"
+
+#. TRANSLATORS: button: this is to ignore the recalibrate notifications
+#: ../src/mcm-session.c:156
+msgid "Ignore"
+msgstr "無視"
+
+#. TRANSLATORS: this is when the device has not been recalibrated in a while
+#: ../src/mcm-session.c:183
+msgid "Recalibration required"
+msgstr "再キャリブレーションが必要"
+
+#. TRANSLATORS: this is when the display has not been recalibrated in a while
+#: ../src/mcm-session.c:193
+#, c-format
+msgid "The display '%s' should be recalibrated soon."
+msgstr "すぐにディスプレイ '%s' をキャリブレーションし直すべきです。"
+
+#. TRANSLATORS: this is when the printer has not been recalibrated in a while
+#: ../src/mcm-session.c:200
+#, c-format
+msgid "The printer '%s' should be recalibrated soon."
+msgstr "すぐにプリンタ '%s' をキャリブレーションし直すべきです。"
+
+#: ../src/mcm-session.c:263
+msgid "Do not exit after the request has been processed"
+msgstr "リクエストの処理後に終了しない"
+
+#. TRANSLATORS: program name, a session wide daemon to watch for updates and changing system state
+#: ../src/mcm-session.c:280 ../data/mcm-prefs.ui.h:9
+msgid "Color Management"
+msgstr "Color Management"
+
+#: ../src/mcm-session.c:282
+msgid "Color Management D-Bus Service"
+msgstr "Color Management D-Bus Service"
+
+#. TRANSLATORS: this is the profile creation date strftime format
+#: ../src/mcm-utils.c:514
+msgid "%B %e %Y, %I:%M:%S %p"
+msgstr "%B %e %Y, %I:%M:%S %p"
+
+#. TRANSLATORS: rendering intent: you probably want to google this
+#: ../src/mcm-utils.c:527
+msgid "Perceptual"
+msgstr "知覚的"
+
+#. TRANSLATORS: rendering intent: you probably want to google this
+#: ../src/mcm-utils.c:531
+msgid "Relative colormetric"
+msgstr "相対的な色域を維持"
+
+#. TRANSLATORS: rendering intent: you probably want to google this
+#: ../src/mcm-utils.c:535
+msgid "Saturation"
+msgstr "彩度"
+
+#. TRANSLATORS: rendering intent: you probably want to google this
+#: ../src/mcm-utils.c:539
+msgid "Absolute colormetric"
+msgstr "絶対的な色域を維持"
+
+#: ../data/mcm-calibrate.ui.h:1
+msgid "Blue:"
+msgstr "ブルー:"
+
+#: ../data/mcm-calibrate.ui.h:2 ../data/mcm-prefs.ui.h:4
+msgid "Brightness:"
+msgstr "輝度:"
+
+#: ../data/mcm-calibrate.ui.h:3
+msgid "CRT"
+msgstr "CRT"
+
+#. The user wants to create images suitable to send to a photo-processing lab
+#: ../data/mcm-calibrate.ui.h:5
+msgid "Create images for printing"
+msgstr "印刷用の画像を作成"
+
+#. Expander label, for use when the user wants to see the VTE widget and what the calibration tool is actually doing
+#: ../data/mcm-calibrate.ui.h:6 ../data/mcm-spawn.ui.h:2
+msgid "Details"
+msgstr "詳細"
+
+#. window title
+#: ../data/mcm-calibrate.ui.h:8
+msgid "Device Calibration"
+msgstr "デバイスのキャリブレーション"
+
+#. The user wants to analyse images that have been printed by a photo-processing lab
+#: ../data/mcm-calibrate.ui.h:10
+msgid "Generate profile from printed images"
+msgstr "印刷した画像からプロファイルを生成"
+
+#: ../data/mcm-calibrate.ui.h:11
+msgid "Green:"
+msgstr "グリーン:"
+
+#. The precision of the calibration
+#: ../data/mcm-calibrate.ui.h:13
+msgid "High"
+msgstr "High"
+
+#: ../data/mcm-calibrate.ui.h:14
+msgid "LCD"
+msgstr "LCD"
+
+#. The precision of the calibration
+#: ../data/mcm-calibrate.ui.h:16
+msgid "Low"
+msgstr "Low"
+
+#. The length of the translation
+#: ../data/mcm-calibrate.ui.h:18
+msgid "Normal"
+msgstr "Normal"
+
+#. The user is trying to create an ICC profile of a printer that is connected to the computer
+#: ../data/mcm-calibrate.ui.h:20
+msgid "Profile locally attached printer"
+msgstr "接続されたプリンタのプロファイル"
+
+#: ../data/mcm-calibrate.ui.h:21
+msgid "Projector"
+msgstr "プロジェクタ"
+
+#: ../data/mcm-calibrate.ui.h:22
+msgid "Red:"
+msgstr "レッド:"
+
+#: ../data/mcm-calibrate.ui.h:23
+msgid "precision"
+msgstr "精度"
+
+#: ../data/mcm-prefs.ui.h:1
+msgid ""
+"A working space is the range of colors that can be encoded into an image."
+msgstr "作業用の色域は画像にエンコード出来る色の範囲です"
+
+#: ../data/mcm-prefs.ui.h:2
+msgid "Add Virtual Device"
+msgstr "仮想デバイスを追加"
+
+#: ../data/mcm-prefs.ui.h:3
+msgid "Adds a virtual device that is not connected."
+msgstr "未接続の仮想デバイスを追加"
+
+#. Technical color word for softproof rendering intent
+#: ../data/mcm-prefs.ui.h:7
+msgid "CMYK:"
+msgstr "CMYK:"
+
+#: ../data/mcm-prefs.ui.h:8
+msgid "Close this dialog"
+msgstr "ダイアログを閉じる"
+
+#. Section heading for device profile settings
+#: ../data/mcm-prefs.ui.h:11
+msgid "Color Profile"
+msgstr "カラープロファイル"
+
+#. The profile colorspace, e.g. RGB
+#: ../data/mcm-prefs.ui.h:13
+msgid "Colorspace:"
+msgstr "色空間:"
+
+#: ../data/mcm-prefs.ui.h:14
+msgid "Contrast:"
+msgstr "コントラスト:"
+
+#. This is a button to calibrate the device by creating an ICC profile file using a hardware device or a reference image
+#: ../data/mcm-prefs.ui.h:16
+msgid "Create _Profile for Device"
+msgstr "デバイスの_Profileを作成"
+
+#. When the profile was created
+#: ../data/mcm-prefs.ui.h:18
+msgid "Created:"
+msgstr "作成日:"
+
+#. Tab title, system wide defaults to use
+#: ../data/mcm-prefs.ui.h:20
+msgid "Defaults"
+msgstr "デフォルト"
+
+#: ../data/mcm-prefs.ui.h:21
+msgid "Delete the currently selected color profile"
+msgstr "選択されているカラープロファイルを削除"
+
+#: ../data/mcm-prefs.ui.h:22
+msgid ""
+"Delete the disconnected device - if you reconnect the device it will "
+"reappear in the list"
+msgstr "未接続のデバイスを削除 - 再度接続するとリストに表示されます"
+
+#. Section heading for device settings
+#: ../data/mcm-prefs.ui.h:24
+msgid "Device"
+msgstr "デバイス"
+
+#. The manufacturer of the profile
+#: ../data/mcm-prefs.ui.h:26
+msgid "Device manufacturer:"
+msgstr "デバイス製造元:"
+
+#. The manufacturer of the profile
+#: ../data/mcm-prefs.ui.h:28
+msgid "Device model:"
+msgstr "デバイスモデル:"
+
+#: ../data/mcm-prefs.ui.h:29
+msgid "Device type:"
+msgstr "デバイスタイプ:"
+
+#. Tab title, currently connected or saved devices
+#: ../data/mcm-prefs.ui.h:31
+msgid "Devices"
+msgstr "デバイス"
+
+#. If the profile contains a display correction table
+#: ../data/mcm-prefs.ui.h:34
+msgid "Display correction:"
+msgstr "ディスプレイの補正:"
+
+#. What mode to use for display rendering intent
+#: ../data/mcm-prefs.ui.h:36
+msgid "Display:"
+msgstr "ディスプレイ:"
+
+#. The file size in bytes of the profile
+#: ../data/mcm-prefs.ui.h:38
+msgid "File size:"
+msgstr "ファイルサイズ:"
+
+#. The basename (the last section of the filename) of the profile
+#: ../data/mcm-prefs.ui.h:40
+msgid "Filename:"
+msgstr "ファイル名:"
+
+#. Settings that users don't normally have to touch
+#: ../data/mcm-prefs.ui.h:42
+msgid "Fine tuning"
+msgstr "微調整"
+
+#: ../data/mcm-prefs.ui.h:43
+msgid "Gamma:"
+msgstr "ガンマ:"
+
+#: ../data/mcm-prefs.ui.h:44
+msgid "Import an ICC file from another location"
+msgstr "他の場所からICCファイルをインポート"
+
+#. The licence of the profile, normally non-free
+#: ../data/mcm-prefs.ui.h:46
+msgid "License:"
+msgstr "ライセンス:"
+
+#. The manufacturer of the device
+#: ../data/mcm-prefs.ui.h:48
+msgid "Manufacturer:"
+msgstr "製造元:"
+
+#. The model of the device
+#: ../data/mcm-prefs.ui.h:50
+msgid "Model:"
+msgstr "モデル:"
+
+#: ../data/mcm-prefs.ui.h:51
+msgid "More details"
+msgstr "詳細"
+
+#: ../data/mcm-prefs.ui.h:52
+msgid "Open the documentation"
+msgstr "ドキュメントを開く"
+
+#: ../data/mcm-prefs.ui.h:53
+msgid "Profile Graphs"
+msgstr "プロファイルのグラフ"
+
+#. The type of profile, e.g. display, scanner, etc.
+#: ../data/mcm-prefs.ui.h:55
+msgid "Profile type:"
+msgstr "プロファイルのタイプ:"
+
+#. Tab title, currently installed profiles
+#: ../data/mcm-prefs.ui.h:57
+msgid "Profiles"
+msgstr "プロファイル"
+
+#: ../data/mcm-prefs.ui.h:58
+msgid ""
+"Program the video card with the adjusted color values so all windows are "
+"color corrected"
+msgstr ""
+"調整済みの色の値をビデオカードにプログラムして全ウインドウの色補正をする"
+
+#. What mode to use for display rendering intent
+#: ../data/mcm-prefs.ui.h:61
+msgid "RGB:"
+msgstr "RGB:"
+
+#: ../data/mcm-prefs.ui.h:62
+msgid "Rendering intent"
+msgstr "変換方式"
+
+#: ../data/mcm-prefs.ui.h:63
+msgid "Save these profiles for all users"
+msgstr "全ユーザ用にプロファイルを保存"
+
+#. The serial number of the device
+#: ../data/mcm-prefs.ui.h:65
+msgid "Serial number:"
+msgstr "シリアル番号:"
+
+#: ../data/mcm-prefs.ui.h:66
+msgid ""
+"Set a property on the system so applications use the default display profile"
+msgstr ""
+"システムに値を設定してアプリケーションがデフォルトのディスプレイプロファイル"
+"を使う"
+
+#. Technical color word for softproof rendering intent
+#: ../data/mcm-prefs.ui.h:68
+msgid "Softproof:"
+msgstr "ソフトプルーフ:"
+
+#: ../data/mcm-prefs.ui.h:69
+msgid "The rendering intent is how one gamut size is mapped to another."
+msgstr ""
+"変換方式とは、あるガマットサイズをどのように別のガマットに当てはめるか、です"
+
+#: ../data/mcm-prefs.ui.h:70
+msgid ""
+"The rendering intent to use when transforming from the image gamut to the "
+"device output gamut"
+msgstr "画像のガマットをデバイスの出力ガマットに変換する時に使われる変換方式"
+
+#: ../data/mcm-prefs.ui.h:71
+msgid ""
+"The rendering intent to use when transforming from the image gamut to the "
+"display gamut"
+msgstr ""
+"画像のガマットをデバイスのディスプレイガマットに変換する時に使われる変換方式"
+
+#: ../data/mcm-prefs.ui.h:72
+msgid "These settings control how color management is applied to your desktop."
+msgstr ""
+"これらの設定でどのようにカラーマネジメントがデスクトップに適用されるかを制御"
+"します"
+
+#: ../data/mcm-prefs.ui.h:73
+msgid "This is the default CMYK working space to use in applications"
+msgstr "アプリケーションで使われるデフォルトの作業用CMYK色空間"
+
+#: ../data/mcm-prefs.ui.h:74
+msgid "This is the default RGB working space to use in applications"
+msgstr "アプリケーションで使われるデフォルトの作業用RGB色空間"
+
+#: ../data/mcm-prefs.ui.h:75
+msgid "Working space"
+msgstr "作業用色空間"
+
+#. This is a button to add a virtual device
+#: ../data/mcm-prefs.ui.h:77
+msgid "_Add Device"
+msgstr "デバイスを追加(_A)"
+
+#: ../data/mcm-prefs.ui.h:78
+msgid "_Apply display correction"
+msgstr "ディスプレイ補正を適用(_A)"
+
+#. This is a button to delete the saved or virtual device
+#: ../data/mcm-prefs.ui.h:80
+msgid "_Delete Device"
+msgstr "デバイスを削除(_D)"
+
+#: ../data/mcm-prefs.ui.h:81
+msgid "_Delete Profile"
+msgstr "プロファイルを削除(_D)"
+
+#: ../data/mcm-prefs.ui.h:82
+msgid "_Import Profile"
+msgstr "プロファイルをインポート(_I)"
+
+#: ../data/mcm-prefs.ui.h:83
+msgid "_Make Default"
+msgstr "デフォルトにする(_M)"
+
+#. This resets the device to it's defaults, and removes any user tweaked settings.
+#: ../data/mcm-prefs.ui.h:85
+msgid "_Reset to defaults"
+msgstr "デフォルトに戻す(_R)"
+
+#: ../data/mcm-prefs.ui.h:86
+msgid "_Set profile for color managed applications"
+msgstr "カラーマネジメント対応のアプリケーション用にプロファイルを設定(_S)"
+
+#~ msgid "Choose the precision of the profile"
+#~ msgstr "プロファイルの精度を選択"
+
+#~ msgid "Please choose the profile precision."
+#~ msgstr "プロファイルの精度を選んでください。"
+
+#~ msgid ""
+#~ "High precision profiles provide higher accuracy in color matching. "
+#~ "Correspondingly, low precision profiles result in lower quality."
+#~ msgstr ""
+#~ "高精度のプロファイルによってより正確なカラーマッチングが可能です。反対に低"
+#~ "い精度のプロファイルでは低品質な結果しか得られません。"
+
+#~ msgid ""
+#~ "The high precision profiles also require more time for reading the color "
+#~ "swatches."
+#~ msgstr ""
+#~ "高精度のプロファイルでは色見本を読むために、より多くの時間が必要です。"
+
+#~ msgid "Select reference image"
+#~ msgstr "リファレンス画像を選択"

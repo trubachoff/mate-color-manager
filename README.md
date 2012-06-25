@@ -19,3 +19,7 @@ unique-devel, intltool, libgudev1-devel, dbus-glib-devel, libXxf86vm-devel, libX
 mate-desktop-devel, lcms-devel, cups-devel, sane-backends-devel, libtiff-devel, libcanberra-devel,
 mate-common, gtk-doc, mate-conf-devel, libmatenotify-devel
 
+If start of mcm-prefs fails after installation use the --sync option
+
+mcm-prefs --sync
+

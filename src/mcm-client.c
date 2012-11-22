@@ -65,7 +65,6 @@ struct _McmClientPrivate
 	gchar				*display_name;
 	GPtrArray			*array;
 	GUdevClient			*gudev_client;
-	GSettings			*settings;
 	McmScreen			*screen;
 	http_t				*http;
 	gboolean			 loading;
@@ -956,68 +955,6 @@ out:
 }
 
 /**
- * mcm_client_possibly_migrate_config_file:
- *
- * Copy the configuration file from ~/.config/mate-color-manager to ~/.config/color
- **/
-static gboolean
-mcm_client_possibly_migrate_config_file (McmClient *client)
-{
-	gchar *dest = NULL;
-	gchar *source = NULL;
-	GFile *gdest = NULL;
-	GFile *gsource = NULL;
-	gboolean ret = FALSE;
-	gboolean done_migration;
-	GError *error = NULL;
-
-	/* have we already attempted this (check first to avoid stating a file */
-	done_migration = g_settings_get_boolean (client->priv->settings, MCM_SETTINGS_DONE_MIGRATION);
-	if (done_migration)
-		goto out;
-
-	/* create default path */
-	source = g_build_filename (g_get_user_config_dir (), "mate-color-manager", "device-profiles.conf", NULL);
-	gsource = g_file_new_for_path (source);
-
-	/* no old profile */
-	ret = g_file_query_exists (gsource, NULL);
-	if (!ret) {
-		g_settings_set_boolean (client->priv->settings, MCM_SETTINGS_DONE_MIGRATION, TRUE);
-		goto out;
-	}
-
-	/* ensure new root exists */
-	dest = mcm_utils_get_default_config_location ();
-	ret = mcm_utils_mkdir_for_filename (dest, &error);
-	if (!ret) {
-		egg_warning ("failed to create new tree: %s", error->message);
-		g_error_free (error);
-		goto out;
-	}
-
-	/* copy to new root */
-	gdest = g_file_new_for_path (dest);
-	ret = g_file_copy (gsource, gdest, G_FILE_COPY_NONE, NULL, NULL, NULL, &error);
-	if (!ret) {
-		egg_warning ("failed to copy: %s", error->message);
-		g_error_free (error);
-		goto out;
-	}
-
-	/* do not attempt to migrate this again */
-	g_settings_set_boolean (client->priv->settings, MCM_SETTINGS_DONE_MIGRATION, TRUE);
-out:
-	g_free (source);
-	g_free (dest);
-	if (gsource != NULL)
-		g_object_unref (gsource);
-	if (gdest != NULL)
-		g_object_unref (gdest);
-	return ret;
-}
-
-/**
  * mcm_client_add_saved:
  **/
 gboolean
@@ -1029,9 +966,6 @@ mcm_client_add_saved (McmClient *client, GError **error)
 	gchar **groups = NULL;
 	guint i;
 	McmDevice *device;
-
-	/* copy from old location */
-	mcm_client_possibly_migrate_config_file (client);
 
 	/* get the config file */
 	filename = mcm_utils_get_default_config_location ();
@@ -1079,9 +1013,6 @@ mcm_client_add_connected (McmClient *client, McmClientColdplug coldplug, GError 
 	GThread *thread;
 
 	g_return_val_if_fail (MCM_IS_CLIENT (client), FALSE);
-
-	/* copy from old location */
-	mcm_client_possibly_migrate_config_file (client);
 
 	/* reset */
 	client->priv->loading_refcount = 0;
@@ -1421,7 +1352,6 @@ mcm_client_init (McmClient *client)
 	client->priv->use_threads = FALSE;
 	client->priv->init_cups = FALSE;
 	client->priv->init_sane = FALSE;
-	client->priv->settings = g_settings_new (MCM_SETTINGS_SCHEMA);
 	client->priv->array = g_ptr_array_new_with_free_func ((GDestroyNotify) g_object_unref);
 	client->priv->screen = mcm_screen_new ();
 	g_signal_connect (client->priv->screen, "outputs-changed",
@@ -1454,7 +1384,6 @@ mcm_client_finalize (GObject *object)
 	g_ptr_array_unref (priv->array);
 	g_object_unref (priv->gudev_client);
 	g_object_unref (priv->screen);
-	g_object_unref (priv->settings);
 	if (client->priv->init_cups)
 		httpClose (priv->http);
 	if (client->priv->init_sane)

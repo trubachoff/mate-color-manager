@@ -94,6 +94,7 @@ AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE(GETTEXT_PACKAGE, "AC_PACKAGE_NAME", [foo])
 
 AM_GLIB_GNU_GETTEXT
+GLIB_GSETTINGS
 
 dnl ---------------------------------------------------------------------------
 dnl - Library dependencies
@@ -101,20 +102,19 @@ dnl ---------------------------------------------------------------------------
 GLIB_REQUIRED=2.14.0
 GTK_REQUIRED=2.14.0
 MATEDESKTOP_REQUIRED=1.2.0
-MATECONF_REQUIRED=1.2.0
 UNIQUE_REQUIRED=1.0.0
 VTE_REQUIRED=0.22.2
 DBUS_GLIB_REQUIRED=0.73
 CANBERRA_REQUIRED=0.10
+GIO_REQUIRED=2.25.0
 
 dnl ---------------------------------------------------------------------------
 dnl - Check library dependencies
 dnl ---------------------------------------------------------------------------
-PKG_CHECK_MODULES(GLIB, glib-2.0 >= $GLIB_REQUIRED gobject-2.0 gthread-2.0 gio-2.0)
+PKG_CHECK_MODULES(GLIB, glib-2.0 >= $GLIB_REQUIRED gobject-2.0 gthread-2.0 gio-2.0 >= $GIO_REQUIRED)
 PKG_CHECK_MODULES(XORG, xxf86vm xrandr)
 PKG_CHECK_MODULES(GTK, gtk+-2.0 >= $GTK_REQUIRED)
 PKG_CHECK_MODULES(MATEDESKTOP, mate-desktop-2.0 >= $MATEDESKTOP_REQUIRED)
-PKG_CHECK_MODULES(MATECONF, mateconf-2.0 >= $MATECONF_REQUIRED)
 PKG_CHECK_MODULES(UNIQUE, unique-1.0 >= $UNIQUE_REQUIRED)
 PKG_CHECK_MODULES(VTE, vte >= $VTE_REQUIRED)
 PKG_CHECK_MODULES(GUDEV, gudev-1.0)
@@ -166,8 +166,9 @@ if test "x$HAVE_CUPS" != "xyes"; then
 	AC_MSG_ERROR([cups-devel is required for mate-color-manager])
 fi
 
-AC_PATH_PROG(MATECONFTOOL, mateconftool-2)
-AM_MATECONF_SOURCE_2
+#AC_SUBST(gsettingsupdateschemacache,
+# `pkg-config --variable gsettingsupdateschemacache gio-2.0`)
+
 
 dnl ---------------------------------------------------------------------------
 dnl - Make paths available for source files
@@ -258,6 +259,5 @@ echo "
         cppflags:                  ${CPPFLAGS}
         PackageKit integration:    ${enable_packagekit}
         building unit tests:       ${enable_tests}
-        mateconf-schema dir:          $MATECONF_SCHEMA_FILE_DIR
 "
 

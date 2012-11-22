@@ -32,7 +32,6 @@
 #include <gtk/gtk.h>
 #include <tiff.h>
 #include <tiffio.h>
-#include <mateconf/mateconf-client.h>
 
 #include "mcm-calibrate.h"
 #include "mcm-dmi.h"
@@ -75,7 +74,7 @@ struct _McmCalibratePrivate
 	gchar				*serial;
 	gchar				*device;
 	gchar				*working_path;
-	MateConfClient			*mateconf_client;
+	GSettings			*settings;
 };
 
 enum {
@@ -247,7 +246,7 @@ mcm_calibrate_set_basename (McmCalibrate *calibrate)
 		g_string_append_printf (basename, " - %s", serial);
 	g_string_append_printf (basename, " (%04i-%02i-%02i)", date->year, date->month, date->day);
 
-	/* maybe configure in MateConf? */
+	/* maybe configure in GSettings? */
 	if (0)
 		g_string_append_printf (basename, " [%s]", timespec);
 
@@ -504,7 +503,7 @@ mcm_calibrate_get_precision (McmCalibrate *calibrate, GError **error)
 		g_set_error_literal (error,
 				     MCM_CALIBRATE_ERROR,
 				     MCM_CALIBRATE_ERROR_USER_ABORT,
-				     "user did not choose precision type and ask is specified in MateConf");
+				     "user did not choose precision type and ask is specified in GSettings");
 		goto out;
 	}
 
@@ -581,7 +580,7 @@ mcm_calibrate_display (McmCalibrate *calibrate, GtkWindow *window, GError **erro
 	}
 
 	/* get default precision */
-	precision = mateconf_client_get_string (priv->mateconf_client, MCM_SETTINGS_CALIBRATION_LENGTH, NULL);
+	precision = g_settings_get_string (priv->settings, MCM_SETTINGS_CALIBRATION_LENGTH);
 	priv->precision = mcm_calibrate_precision_from_string (precision);
 	if (priv->precision == MCM_CALIBRATE_PRECISION_UNKNOWN) {
 		priv->precision = mcm_calibrate_get_precision (calibrate, error);
@@ -899,7 +898,7 @@ mcm_calibrate_printer (McmCalibrate *calibrate, GtkWindow *window, GError **erro
 	}
 
 	/* get default precision */
-	precision = mateconf_client_get_string (priv->mateconf_client, MCM_SETTINGS_CALIBRATION_LENGTH, NULL);
+	precision = g_settings_get_string (priv->settings, MCM_SETTINGS_CALIBRATION_LENGTH);
 	priv->precision = mcm_calibrate_precision_from_string (precision);
 	if (priv->precision == MCM_CALIBRATE_PRECISION_UNKNOWN) {
 		priv->precision = mcm_calibrate_get_precision (calibrate, error);
@@ -1072,7 +1071,7 @@ mcm_calibrate_device (McmCalibrate *calibrate, GtkWindow *window, GError **error
 	g_object_get (priv->calibrate_dialog, "reference-kind", &priv->reference_kind, NULL);
 
 	/* get default precision */
-	precision = mateconf_client_get_string (priv->mateconf_client, MCM_SETTINGS_CALIBRATION_LENGTH, NULL);
+	precision = g_settings_get_string (priv->settings, MCM_SETTINGS_CALIBRATION_LENGTH);
 	priv->precision = mcm_calibrate_precision_from_string (precision);
 	if (priv->precision == MCM_CALIBRATE_PRECISION_UNKNOWN) {
 		priv->precision = mcm_calibrate_get_precision (calibrate, error);
@@ -1487,8 +1486,8 @@ mcm_calibrate_init (McmCalibrate *calibrate)
 	// FIXME: this has to be per-run specific
 	calibrate->priv->working_path = g_strdup ("/tmp");
 
-	/* use MateConf to get defaults */
-	calibrate->priv->mateconf_client = mateconf_client_get_default ();
+	/* use GSettings to get defaults */
+	calibrate->priv->settings = g_settings_new (MCM_SETTINGS_SCHEMA);
 
 	/* coldplug, and watch for changes */
 	calibrate->priv->colorimeter_kind = mcm_colorimeter_get_kind (calibrate->priv->colorimeter);
@@ -1519,7 +1518,7 @@ mcm_calibrate_finalize (GObject *object)
 	g_object_unref (priv->colorimeter);
 	g_object_unref (priv->dmi);
 	g_object_unref (priv->calibrate_dialog);
-	g_object_unref (priv->mateconf_client);
+	g_object_unref (priv->settings);
 
 	G_OBJECT_CLASS (mcm_calibrate_parent_class)->finalize (object);
 }

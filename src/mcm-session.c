@@ -25,7 +25,6 @@
 #include <dbus/dbus-glib.h>
 #include <gtk/gtk.h>
 #include <locale.h>
-#include <mateconf/mateconf-client.h>
 #include <libmatenotify/notify.h>
 
 #include "egg-debug.h"
@@ -36,7 +35,7 @@
 #include "org.mate.ColorManager.h"
 
 static GMainLoop *loop = NULL;
-static MateConfClient *mateconf_client = NULL;
+static GSettings *settings = NULL;
 
 #define MCM_DBUS_SERVICE		"org.mate.ColorManager"
 #define MCM_DBUS_INTERFACE		"org.mate.ColorManager"
@@ -122,9 +121,9 @@ mcm_session_notify_cb (NotifyNotification *notification, gchar *action, gpointer
 	GError *error = NULL;
 
 	if (g_strcmp0 (action, "display") == 0) {
-		mateconf_client_set_int (mateconf_client, MCM_SETTINGS_RECALIBRATE_DISPLAY_THRESHOLD, 0, NULL);
+		g_settings_set_int (settings, MCM_SETTINGS_RECALIBRATE_DISPLAY_THRESHOLD, 0);
 	} else if (g_strcmp0 (action, "printer") == 0) {
-		mateconf_client_set_int (mateconf_client, MCM_SETTINGS_RECALIBRATE_PRINTER_THRESHOLD, 0, NULL);
+		g_settings_set_int (settings, MCM_SETTINGS_RECALIBRATE_PRINTER_THRESHOLD, 0);
 	} else if (g_strcmp0 (action, "recalibrate") == 0) {
 		ret = g_spawn_command_line_async ("mcm-prefs", &error);
 		if (!ret) {
@@ -186,15 +185,15 @@ mcm_session_notify_device (McmDevice *device)
 	kind = mcm_device_get_kind (device);
 	if (kind == MCM_DEVICE_KIND_DISPLAY) {
 
-		/* get from MateConf */
-		threshold = mateconf_client_get_int (mateconf_client, MCM_SETTINGS_RECALIBRATE_DISPLAY_THRESHOLD, NULL);
+		/* get from GSettings */
+		threshold = g_settings_get_int (settings, MCM_SETTINGS_RECALIBRATE_DISPLAY_THRESHOLD);
 
 		/* TRANSLATORS: this is when the display has not been recalibrated in a while */
 		message = g_strdup_printf (_("The display '%s' should be recalibrated soon."), mcm_device_get_title (device));
 	} else {
 
-		/* get from MateConf */
-		threshold = mateconf_client_get_int (mateconf_client, MCM_SETTINGS_RECALIBRATE_DISPLAY_THRESHOLD, NULL);
+		/* get from GSettings */
+		threshold = g_settings_get_int (settings, MCM_SETTINGS_RECALIBRATE_DISPLAY_THRESHOLD);
 
 		/* TRANSLATORS: this is when the printer has not been recalibrated in a while */
 		message = g_strdup_printf (_("The printer '%s' should be recalibrated soon."), mcm_device_get_title (device));
@@ -289,7 +288,7 @@ main (int argc, char *argv[])
 	gtk_init (&argc, &argv);
 
 	/* get the settings */
-	mateconf_client = mateconf_client_get_default ();
+	settings = g_settings_new (MCM_SETTINGS_SCHEMA);
 
 	/* monitor devices as they are added */
 	client = mcm_client_new ();
@@ -323,7 +322,7 @@ main (int argc, char *argv[])
 	/* wait */
 	g_main_loop_run (loop);
 out:
-	g_object_unref (mateconf_client);
+	g_object_unref (settings);
 	g_object_unref (client);
 	g_main_loop_unref (loop);
 	g_object_unref (dbus);

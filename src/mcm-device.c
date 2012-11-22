@@ -29,7 +29,6 @@
 #include "config.h"
 
 #include <glib-object.h>
-#include <mateconf/mateconf-client.h>
 
 #include "mcm-device.h"
 #include "mcm-profile.h"
@@ -61,7 +60,7 @@ struct _McmDevicePrivate
 	gchar			*model;
 	gchar			*profile_filename;
 	gchar			*title;
-	MateConfClient		*mateconf_client;
+	GSettings		*settings;
 	McmColorspace		 colorspace;
 	guint			 changed_id;
 	glong			 modified_time;
@@ -577,7 +576,7 @@ mcm_device_load (McmDevice *device, GError **error)
 		priv->manufacturer = g_key_file_get_string (file, priv->id, "manufacturer", NULL);
 	priv->gamma = g_key_file_get_double (file, priv->id, "gamma", &error_local);
 	if (error_local != NULL) {
-		priv->gamma = mateconf_client_get_float (priv->mateconf_client, "/apps/mate-color-manager/default_gamma", NULL);
+		priv->gamma = g_settings_get_double (priv->settings, MCM_SETTINGS_DEFAULT_GAMMA);
 		if (priv->gamma < 0.1f)
 			priv->gamma = 1.0f;
 		g_clear_error (&error_local);
@@ -1062,7 +1061,6 @@ mcm_device_class_init (McmDeviceClass *klass)
 static void
 mcm_device_init (McmDevice *device)
 {
-	GError *error = NULL;
 	device->priv = MCM_DEVICE_GET_PRIVATE (device);
 	device->priv->changed_id = 0;
 	device->priv->id = NULL;
@@ -1074,12 +1072,8 @@ mcm_device_init (McmDevice *device)
 	device->priv->model = NULL;
 	device->priv->profile_filename = NULL;
 	device->priv->modified_time = 0;
-	device->priv->mateconf_client = mateconf_client_get_default ();
-	device->priv->gamma = mateconf_client_get_float (device->priv->mateconf_client, MCM_SETTINGS_DEFAULT_GAMMA, &error);
-	if (error != NULL) {
-		egg_warning ("failed to get setup parameters: %s", error->message);
-		g_error_free (error);
-	}
+	device->priv->settings = g_settings_new (MCM_SETTINGS_SCHEMA);
+	device->priv->gamma = g_settings_get_double (device->priv->settings, MCM_SETTINGS_DEFAULT_GAMMA);
 	if (device->priv->gamma < 0.01)
 		device->priv->gamma = 1.0f;
 	device->priv->brightness = 0.0f;
@@ -1106,7 +1100,7 @@ mcm_device_finalize (GObject *object)
 	g_free (priv->manufacturer);
 	g_free (priv->model);
 	g_free (priv->profile_filename);
-	g_object_unref (priv->mateconf_client);
+	g_object_unref (priv->settings);
 
 	G_OBJECT_CLASS (mcm_device_parent_class)->finalize (object);
 }

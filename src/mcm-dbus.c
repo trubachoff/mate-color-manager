@@ -23,7 +23,6 @@
 
 #include <glib/gi18n.h>
 #include <dbus/dbus-glib.h>
-#include <mateconf/mateconf-client.h>
 
 #include "egg-debug.h"
 
@@ -40,7 +39,7 @@ static void     mcm_dbus_finalize	(GObject	*object);
 
 struct McmDbusPrivate
 {
-	MateConfClient		*mateconf_client;
+	GSettings		*settings;
 	McmClient		*client;
 	McmProfileStore		*profile_store;
 	GTimer			*timer;
@@ -511,12 +510,12 @@ mcm_dbus_class_init (McmDbusClass *klass)
 }
 
 /**
- * mcm_dbus_mateconf_key_changed_cb:
+ * mcm_dbus_key_changed_cb:
  *
- * We might have to do things when the mateconf keys change; do them here.
+ * We might have to do things when the keys change; do them here.
  **/
 static void
-mcm_dbus_mateconf_key_changed_cb (MateConfClient *client, guint cnxn_id, MateConfEntry *entry, McmDbus *dbus)
+mcm_dbus_key_changed_cb (GSettings *settings, const gchar *key, McmDbus *dbus)
 {
 	/* just emit signal */
 	g_signal_emit (dbus, signals[SIGNAL_CHANGED], 0);
@@ -543,7 +542,8 @@ mcm_dbus_init (McmDbus *dbus)
 	GError *error = NULL;
 
 	dbus->priv = MCM_DBUS_GET_PRIVATE (dbus);
-	dbus->priv->mateconf_client = mateconf_client_get_default ();
+	dbus->priv->settings = g_settings_new (MCM_SETTINGS_SCHEMA);
+	g_signal_connect (dbus->priv->settings, "changed", G_CALLBACK (mcm_dbus_key_changed_cb), dbus);
 	dbus->priv->client = mcm_client_new ();
 	g_signal_connect (dbus->priv->client, "added", G_CALLBACK (mcm_dbus_client_changed_cb), dbus);
 	g_signal_connect (dbus->priv->client, "removed", G_CALLBACK (mcm_dbus_client_changed_cb), dbus);
@@ -553,16 +553,13 @@ mcm_dbus_init (McmDbus *dbus)
 	dbus->priv->profile_store = mcm_profile_store_new ();
 	dbus->priv->timer = g_timer_new ();
 
-	/* notify on changes */
-	mateconf_client_notify_add (dbus->priv->mateconf_client, MCM_SETTINGS_DIR,
-				 (MateConfClientNotifyFunc) mcm_dbus_mateconf_key_changed_cb,
-				 dbus, NULL, NULL);
 
 	/* coldplug */
-	dbus->priv->rendering_intent_display = mateconf_client_get_string (dbus->priv->mateconf_client, MCM_SETTINGS_RENDERING_INTENT_DISPLAY, NULL);
-	dbus->priv->rendering_intent_softproof = mateconf_client_get_string (dbus->priv->mateconf_client, MCM_SETTINGS_RENDERING_INTENT_SOFTPROOF, NULL);
-	dbus->priv->colorspace_rgb = mateconf_client_get_string (dbus->priv->mateconf_client, MCM_SETTINGS_COLORSPACE_RGB, NULL);
-	dbus->priv->colorspace_cmyk = mateconf_client_get_string (dbus->priv->mateconf_client, MCM_SETTINGS_COLORSPACE_CMYK, NULL);
+	dbus->priv->rendering_intent_display = g_settings_get_string (dbus->priv->settings, MCM_SETTINGS_RENDERING_INTENT_DISPLAY);
+	dbus->priv->rendering_intent_softproof = g_settings_get_string (dbus->priv->settings, MCM_SETTINGS_RENDERING_INTENT_SOFTPROOF);
+	dbus->priv->colorspace_rgb = g_settings_get_string (dbus->priv->settings, MCM_SETTINGS_COLORSPACE_RGB);
+	dbus->priv->colorspace_cmyk = g_settings_get_string (dbus->priv->settings, MCM_SETTINGS_COLORSPACE_CMYK);
+
 
 	/* get all devices */
 	ret = mcm_client_add_connected (dbus->priv->client, MCM_CLIENT_COLDPLUG_ALL, &error);
@@ -590,7 +587,7 @@ mcm_dbus_finalize (GObject *object)
 	g_free (dbus->priv->colorspace_cmyk);
 	g_object_unref (dbus->priv->client);
 	g_object_unref (dbus->priv->profile_store);
-	g_object_unref (dbus->priv->mateconf_client);
+	g_object_unref (dbus->priv->settings);
 	g_timer_destroy (dbus->priv->timer);
 
 	G_OBJECT_CLASS (mcm_dbus_parent_class)->finalize (object);

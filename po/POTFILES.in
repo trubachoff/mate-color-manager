@@ -1,7 +1,7 @@
 data/mcm-apply.desktop.in
 data/mcm-import.desktop.in
 data/mcm-prefs.desktop.in
-data/mate-color-manager.schemas.in
+data/org.mate.color-manager.gschema.xml
 policy/org.mate.color.policy.in
 src/egg-debug.c
 src/mcm-apply.c

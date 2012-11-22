@@ -28,7 +28,6 @@
 #include <glib/gstdio.h>
 #include <gudev/gudev.h>
 #include <libmateui/mate-rr.h>
-#include <mateconf/mateconf-client.h>
 #include <locale.h>
 #include <canberra-gtk.h>
 
@@ -58,7 +57,7 @@ static GtkWidget *info_bar_loading = NULL;
 static GtkWidget *info_bar_vcgt = NULL;
 static GtkWidget *cie_widget = NULL;
 static GtkWidget *trc_widget = NULL;
-static MateConfClient *mateconf_client = NULL;
+static GSettings *settings = NULL;
 
 enum {
 	MCM_DEVICES_COLUMN_ID,
@@ -2280,7 +2279,7 @@ mcm_prefs_space_combo_changed_cb (GtkWidget *widget, gpointer data)
 	const gchar *filename;
 	GtkTreeModel *model;
 	McmProfile *profile = NULL;
-	const gchar *mateconf_key = MCM_SETTINGS_COLORSPACE_RGB;
+	const gchar *key = MCM_SETTINGS_COLORSPACE_RGB;
 
 	/* no selection */
 	ret = gtk_combo_box_get_active_iter (GTK_COMBO_BOX(widget), &iter);
@@ -2296,11 +2295,11 @@ mcm_prefs_space_combo_changed_cb (GtkWidget *widget, gpointer data)
 		goto out;
 
 	if (data != NULL)
-		mateconf_key = MCM_SETTINGS_COLORSPACE_CMYK;
+		key = MCM_SETTINGS_COLORSPACE_CMYK;
 
 	filename = mcm_profile_get_filename (profile);
 	egg_debug ("changed working space %s", filename);
-	mateconf_client_set_string (mateconf_client, mateconf_key, filename, NULL);
+	g_settings_set_string (settings, key, filename);
 out:
 	if (profile != NULL)
 		g_object_unref (profile);
@@ -2314,7 +2313,7 @@ static void
 mcm_prefs_renderer_combo_changed_cb (GtkWidget *widget, gpointer data)
 {
 	gint active;
-	const gchar *mateconf_key = MCM_SETTINGS_RENDERING_INTENT_DISPLAY;
+	const gchar *key = MCM_SETTINGS_RENDERING_INTENT_DISPLAY;
 	const gchar *value;
 
 	/* no selection */
@@ -2323,12 +2322,12 @@ mcm_prefs_renderer_combo_changed_cb (GtkWidget *widget, gpointer data)
 		return;
 
 	if (data != NULL)
-		mateconf_key = MCM_SETTINGS_RENDERING_INTENT_SOFTPROOF;
+		key = MCM_SETTINGS_RENDERING_INTENT_SOFTPROOF;
 
-	/* save to MateConf */
+	/* save to GSettings */
 	value = mcm_intent_to_string (active+1);
 	egg_debug ("changed rendering intent to %s", value);
-	mateconf_client_set_string (mateconf_client, mateconf_key, value, NULL);
+	g_settings_set_string (settings, key, value);
 }
 
 /**
@@ -2369,18 +2368,9 @@ mcm_prefs_startup_phase1_idle_cb (gpointer user_data)
 	gchar *intent_display;
 	gchar *intent_softproof;
 
-	/* do we show the fine tuning box */
-	ret = mateconf_client_get_bool (mateconf_client, MCM_SETTINGS_SHOW_FINE_TUNING, NULL);
-	widget = GTK_WIDGET (gtk_builder_get_object (builder, "expander_fine_tuning"));
-	gtk_widget_set_visible (widget, ret);
-
 	/* setup RGB combobox */
 	widget = GTK_WIDGET (gtk_builder_get_object (builder, "combobox_space_rgb"));
-	colorspace_rgb = mateconf_client_get_string (mateconf_client, MCM_SETTINGS_COLORSPACE_RGB, &error);
-	if (colorspace_rgb == NULL && error != NULL) {
-		egg_warning ("failed to get configuration value: %s", error->message);
-		g_clear_error (&error);
-	}
+	colorspace_rgb = g_settings_get_string (settings, MCM_SETTINGS_COLORSPACE_RGB);
 	mcm_prefs_set_combo_simple_text (widget);
 	mcm_prefs_setup_space_combobox (widget, MCM_COLORSPACE_RGB, colorspace_rgb);
 	g_signal_connect (G_OBJECT (widget), "changed",
@@ -2388,11 +2378,7 @@ mcm_prefs_startup_phase1_idle_cb (gpointer user_data)
 
 	/* setup CMYK combobox */
 	widget = GTK_WIDGET (gtk_builder_get_object (builder, "combobox_space_cmyk"));
-	colorspace_cmyk = mateconf_client_get_string (mateconf_client, MCM_SETTINGS_COLORSPACE_CMYK, NULL);
-	if (colorspace_cmyk == NULL && error != NULL) {
-		egg_warning ("failed to get configuration value: %s", error->message);
-		g_clear_error (&error);
-	}
+	colorspace_cmyk = g_settings_get_string (settings, MCM_SETTINGS_COLORSPACE_CMYK);
 	mcm_prefs_set_combo_simple_text (widget);
 	mcm_prefs_setup_space_combobox (widget, MCM_COLORSPACE_CMYK, colorspace_cmyk);
 	g_signal_connect (G_OBJECT (widget), "changed",
@@ -2401,22 +2387,14 @@ mcm_prefs_startup_phase1_idle_cb (gpointer user_data)
 	/* setup rendering lists */
 	widget = GTK_WIDGET (gtk_builder_get_object (builder, "combobox_rendering_display"));
 	mcm_prefs_set_combo_simple_text (widget);
-	intent_display = mateconf_client_get_string (mateconf_client, MCM_SETTINGS_RENDERING_INTENT_DISPLAY, &error);
-	if (intent_display == NULL && error != NULL) {
-		egg_warning ("failed to get configuration value: %s", error->message);
-		g_clear_error (&error);
-	}
+	intent_display = g_settings_get_string (settings, MCM_SETTINGS_RENDERING_INTENT_DISPLAY);
 	mcm_prefs_setup_rendering_combobox (widget, intent_display);
 	g_signal_connect (G_OBJECT (widget), "changed",
 			  G_CALLBACK (mcm_prefs_renderer_combo_changed_cb), NULL);
 
 	widget = GTK_WIDGET (gtk_builder_get_object (builder, "combobox_rendering_softproof"));
 	mcm_prefs_set_combo_simple_text (widget);
-	intent_softproof = mateconf_client_get_string (mateconf_client, MCM_SETTINGS_RENDERING_INTENT_SOFTPROOF, &error);
-	if (intent_softproof == NULL && error != NULL) {
-		egg_warning ("failed to get configuration value: %s", error->message);
-		g_clear_error (&error);
-	}
+	intent_softproof = g_settings_get_string (settings, MCM_SETTINGS_RENDERING_INTENT_SOFTPROOF);
 	mcm_prefs_setup_rendering_combobox (widget, intent_softproof);
 	g_signal_connect (G_OBJECT (widget), "changed",
 			  G_CALLBACK (mcm_prefs_renderer_combo_changed_cb), (gpointer) "softproof");
@@ -2481,37 +2459,11 @@ mcm_prefs_reset_devices_idle_cb (gpointer user_data)
 }
 
 /**
- * mcm_prefs_checkbutton_global_cb:
+ * mcm_prefs_checkbutton_changed_cb:
  **/
 static void
-mcm_prefs_checkbutton_global_cb (GtkWidget *widget, gpointer user_data)
+mcm_prefs_checkbutton_changed_cb (GtkWidget *widget, gpointer user_data)
 {
-	gboolean ret;
-
-	/* get state */
-	ret = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(widget));
-
-	/* save new preference */
-	mateconf_client_set_bool (mateconf_client, MCM_SETTINGS_GLOBAL_DISPLAY_CORRECTION, ret, NULL);
-
-	/* set the new setting */
-	g_idle_add ((GSourceFunc) mcm_prefs_reset_devices_idle_cb, NULL);
-}
-
-/**
- * mcm_prefs_checkbutton_profile_cb:
- **/
-static void
-mcm_prefs_checkbutton_profile_cb (GtkWidget *widget, gpointer user_data)
-{
-	gboolean ret;
-
-	/* get state */
-	ret = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(widget));
-
-	/* save new preference */
-	mateconf_client_set_bool (mateconf_client, MCM_SETTINGS_SET_ICC_PROFILE_ATOM, ret, NULL);
-
 	/* set the new setting */
 	g_idle_add ((GSourceFunc) mcm_prefs_reset_devices_idle_cb, NULL);
 }
@@ -2680,8 +2632,6 @@ main (int argc, char **argv)
 	guint xid = 0;
 	GError *error = NULL;
 	GMainLoop *loop;
-	gboolean use_global;
-	gboolean use_atom;
 	GtkTreeSelection *selection;
 	GtkWidget *info_bar_loading_label;
 	GtkWidget *info_bar_vcgt_label;
@@ -3028,17 +2978,32 @@ main (int argc, char **argv)
 			  G_CALLBACK (mcm_prefs_slider_changed_cb), NULL);
 
 	/* setup defaults */
-	mateconf_client = mateconf_client_get_default ();
-	use_global = mateconf_client_get_bool (mateconf_client, MCM_SETTINGS_GLOBAL_DISPLAY_CORRECTION, NULL);
-	use_atom = mateconf_client_get_bool (mateconf_client, MCM_SETTINGS_SET_ICC_PROFILE_ATOM, NULL);
+	settings = g_settings_new (MCM_SETTINGS_SCHEMA);
+
+	/* connect up global widget */
 	widget = GTK_WIDGET (gtk_builder_get_object (builder, "checkbutton_display"));
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), use_global);
+	g_settings_bind (settings,
+			 MCM_SETTINGS_GLOBAL_DISPLAY_CORRECTION,
+			 widget, "active",
+			 G_SETTINGS_BIND_DEFAULT);
 	g_signal_connect (widget, "clicked",
-			  G_CALLBACK (mcm_prefs_checkbutton_global_cb), NULL);
+			  G_CALLBACK (mcm_prefs_checkbutton_changed_cb), NULL);
+
+	/* connect up atom widget */
 	widget = GTK_WIDGET (gtk_builder_get_object (builder, "checkbutton_profile"));
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), use_atom);
+	g_settings_bind (settings,
+			 MCM_SETTINGS_SET_ICC_PROFILE_ATOM,
+			 widget, "active",
+			 G_SETTINGS_BIND_DEFAULT);
 	g_signal_connect (widget, "clicked",
-			  G_CALLBACK (mcm_prefs_checkbutton_profile_cb), NULL);
+			  G_CALLBACK (mcm_prefs_checkbutton_changed_cb), NULL);
+
+	/* do we show the fine tuning box */
+	widget = GTK_WIDGET (gtk_builder_get_object (builder, "expander_fine_tuning"));
+	g_settings_bind (settings,
+			 MCM_SETTINGS_SHOW_FINE_TUNING,
+			 widget, "visible",
+			 G_SETTINGS_BIND_DEFAULT | G_SETTINGS_BIND_NO_SENSITIVITY);
 
 	/* do all this after the window has been set up */
 	g_idle_add (mcm_prefs_startup_phase1_idle_cb, NULL);
@@ -3057,8 +3022,8 @@ out:
 		g_object_unref (current_device);
 	if (colorimeter != NULL)
 		g_object_unref (colorimeter);
-	if (mateconf_client != NULL)
-		g_object_unref (mateconf_client);
+	if (settings != NULL)
+		g_object_unref (settings);
 	if (builder != NULL)
 		g_object_unref (builder);
 	if (profile_store != NULL)

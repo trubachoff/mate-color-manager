@@ -26,7 +26,6 @@
 #include <libmateui/mate-rr.h>
 #include <X11/extensions/Xrandr.h>
 #include <X11/extensions/xf86vmode.h>
-#include <mateconf/mateconf-client.h>
 #include <gdk/gdkx.h>
 
 #include "mcm-device-xrandr.h"
@@ -54,7 +53,7 @@ struct _McmDeviceXrandrPrivate
 	guint				 gamma_size;
 	McmEdid				*edid;
 	McmDmi				*dmi;
-	MateConfClient			*mateconf_client;
+	GSettings			*settings;
 	McmXserver			*xserver;
 	McmScreen			*screen;
 	gboolean			 xrandr_fallback;
@@ -510,7 +509,7 @@ mcm_device_xrandr_apply (McmDevice *device, GError **error)
 		goto out;
 
 	/* only set the CLUT if we're not seting the atom */
-	use_global = mateconf_client_get_bool (priv->mateconf_client, MCM_SETTINGS_GLOBAL_DISPLAY_CORRECTION, NULL);
+	use_global = g_settings_get_boolean (priv->settings, MCM_SETTINGS_GLOBAL_DISPLAY_CORRECTION);
 	if (use_global && filename != NULL) {
 		/* create CLUT */
 		profile = mcm_profile_default_new ();
@@ -554,7 +553,7 @@ mcm_device_xrandr_apply (McmDevice *device, GError **error)
 	leftmost_screen = (x == 0 && y == 0);
 
 	/* either remove the atoms or set them */
-	use_atom = mateconf_client_get_bool (priv->mateconf_client, MCM_SETTINGS_SET_ICC_PROFILE_ATOM, NULL);
+	use_atom = g_settings_get_boolean (priv->settings, MCM_SETTINGS_SET_ICC_PROFILE_ATOM);
 	if (!use_atom || filename == NULL) {
 
 		/* at login we don't need to remove any previously set options */
@@ -693,7 +692,7 @@ mcm_device_xrandr_init (McmDeviceXrandr *device_xrandr)
 	device_xrandr->priv->gamma_size = 0;
 	device_xrandr->priv->edid = mcm_edid_new ();
 	device_xrandr->priv->dmi = mcm_dmi_new ();
-	device_xrandr->priv->mateconf_client = mateconf_client_get_default ();
+	device_xrandr->priv->settings = g_settings_new (MCM_SETTINGS_SCHEMA);
 	device_xrandr->priv->screen = mcm_screen_new ();
 	device_xrandr->priv->xserver = mcm_xserver_new ();
 }
@@ -710,7 +709,7 @@ mcm_device_xrandr_finalize (GObject *object)
 	g_free (priv->native_device);
 	g_object_unref (priv->edid);
 	g_object_unref (priv->dmi);
-	g_object_unref (priv->mateconf_client);
+	g_object_unref (priv->settings);
 	g_object_unref (priv->screen);
 	g_object_unref (priv->xserver);
 

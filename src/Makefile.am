@@ -4,7 +4,6 @@ INCLUDES =						\
 	$(GTK_CFLAGS)					\
 	$(MATEDESKTOP_CFLAGS)				\
 	$(UNIQUE_CFLAGS)				\
-	$(MATECONF_CFLAGS)					\
 	$(VTE_CFLAGS)					\
 	$(LCMS_CFLAGS)					\
 	$(XORG_CFLAGS)					\
@@ -113,7 +112,6 @@ mcm_dump_edid_LDADD =					\
 	$(GLIB_LIBS)					\
 	$(X11_LIBS)					\
 	$(MATEDESKTOP_LIBS)				\
-	$(MATECONF_LIBS)					\
 	$(GUDEV_LIBS)					\
 	$(LCMS_LIBS)					\
 	$(XORG_LIBS)					\
@@ -134,7 +132,6 @@ mcm_dump_profile_LDADD =				\
 	$(GLIB_LIBS)					\
 	$(X11_LIBS)					\
 	$(MATEDESKTOP_LIBS)				\
-	$(MATECONF_LIBS)					\
 	$(GUDEV_LIBS)					\
 	$(LCMS_LIBS)					\
 	$(XORG_LIBS)					\
@@ -170,7 +167,6 @@ mcm_inspect_LDADD =					\
 	$(GLIB_LIBS)					\
 	$(X11_LIBS)					\
 	$(MATEDESKTOP_LIBS)				\
-	$(MATECONF_LIBS)					\
 	$(GUDEV_LIBS)					\
 	$(LCMS_LIBS)					\
 	$(XORG_LIBS)					\
@@ -191,7 +187,6 @@ mcm_apply_LDADD =					\
 	$(GLIB_LIBS)					\
 	$(X11_LIBS)					\
 	$(MATEDESKTOP_LIBS)				\
-	$(MATECONF_LIBS)					\
 	$(GUDEV_LIBS)					\
 	$(LCMS_LIBS)					\
 	$(XORG_LIBS)					\
@@ -212,7 +207,6 @@ mcm_import_LDADD =					\
 	$(GLIB_LIBS)					\
 	$(X11_LIBS)					\
 	$(MATEDESKTOP_LIBS)				\
-	$(MATECONF_LIBS)					\
 	$(GUDEV_LIBS)					\
 	$(LCMS_LIBS)					\
 	$(XORG_LIBS)					\
@@ -244,7 +238,6 @@ mcm_prefs_LDADD =					\
 	$(X11_LIBS)					\
 	$(MATEDESKTOP_LIBS)				\
 	$(UNIQUE_LIBS)					\
-	$(MATECONF_LIBS)					\
 	$(VTE_LIBS)					\
 	$(GUDEV_LIBS)					\
 	$(LCMS_LIBS)					\
@@ -271,7 +264,6 @@ mcm_session_LDADD =					\
 	$(X11_LIBS)					\
 	$(MATEDESKTOP_LIBS)				\
 	$(UNIQUE_LIBS)					\
-	$(MATECONF_LIBS)					\
 	$(GUDEV_LIBS)					\
 	$(LCMS_LIBS)					\
 	$(DBUS_GLIB_LIBS)				\
@@ -320,7 +312,6 @@ mcm_self_test_LDADD =					\
 	$(X11_LIBS)					\
 	$(MATEDESKTOP_LIBS)				\
 	$(UNIQUE_LIBS)					\
-	$(MATECONF_LIBS)					\
 	$(GUDEV_LIBS)					\
 	$(LCMS_LIBS)					\
 	$(DBUS_GLIB_LIBS)				\

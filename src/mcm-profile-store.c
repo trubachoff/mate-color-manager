@@ -31,7 +31,6 @@
 
 #include <glib-object.h>
 #include <gio/gio.h>
-#include <mateconf/mateconf-client.h>
 
 #include "mcm-profile-store.h"
 #include "mcm-utils.h"
@@ -56,7 +55,7 @@ struct _McmProfileStorePrivate
 	GPtrArray			*monitor_array;
 	GPtrArray			*directory_array;
 	GVolumeMonitor			*volume_monitor;
-	MateConfClient			*mateconf_client;
+	GSettings			*settings;
 };
 
 enum {
@@ -405,7 +404,7 @@ mcm_profile_store_add_profiles (McmProfileStore *profile_store)
 	mcm_profile_store_add_profiles_for_path (profile_store, "/Library/ColorSync/Profiles/Displays");
 
 	/* get OSX and Windows system-wide profiles when using Linux */
-	ret = mateconf_client_get_bool (priv->mateconf_client, MCM_SETTINGS_USE_PROFILES_FROM_VOLUMES, NULL);
+	ret = g_settings_get_boolean (priv->settings, MCM_SETTINGS_USE_PROFILES_FROM_VOLUMES);
 	if (ret)
 		mcm_profile_store_add_profiles_from_mounted_volumes (profile_store);
 
@@ -485,7 +484,7 @@ mcm_profile_store_init (McmProfileStore *profile_store)
 	profile_store->priv->profile_array = g_ptr_array_new_with_free_func ((GDestroyNotify) g_object_unref);
 	profile_store->priv->monitor_array = g_ptr_array_new_with_free_func ((GDestroyNotify) g_object_unref);
 	profile_store->priv->directory_array = g_ptr_array_new_with_free_func ((GDestroyNotify) g_free);
-	profile_store->priv->mateconf_client = mateconf_client_get_default ();
+	profile_store->priv->settings = g_settings_new (MCM_SETTINGS_SCHEMA);
 
 	/* watch for volumes to be connected */
 	profile_store->priv->volume_monitor = g_volume_monitor_get ();
@@ -511,7 +510,7 @@ mcm_profile_store_finalize (GObject *object)
 	g_ptr_array_unref (priv->monitor_array);
 	g_ptr_array_unref (priv->directory_array);
 	g_object_unref (priv->volume_monitor);
-	g_object_unref (priv->mateconf_client);
+	g_object_unref (priv->settings);
 
 	G_OBJECT_CLASS (mcm_profile_store_parent_class)->finalize (object);
 }

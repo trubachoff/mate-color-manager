@@ -477,7 +477,7 @@ mcm_utils_get_default_config_location (void)
 	filename = g_strdup ("/tmp/device-profiles.conf");
 #else
 	/* create default path */
-	filename = g_build_filename (g_get_user_config_dir (), "mate-color-manager", "device-profiles.conf", NULL);
+	filename = g_build_filename (g_get_user_config_dir (), "color", "device-profiles.conf", NULL);
 #endif
 
 	return filename;

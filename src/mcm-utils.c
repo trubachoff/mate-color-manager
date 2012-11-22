@@ -279,7 +279,7 @@ mcm_utils_mkdir_for_filename (const gchar *filename, GError **error)
 	GFile *parent_dir = NULL;
 
 	/* get a file from the URI / path */
-	file = g_file_new_for_uri (filename);
+	file = g_file_new_for_path (filename);
 	if (file == NULL)
 		file = g_file_new_for_path (filename);
 	if (file == NULL) {

@@ -43,6 +43,7 @@
 #define MCM_SETTINGS_USE_PROFILES_FROM_VOLUMES 		"use-profiles-from-volumes"
 #define MCM_SETTINGS_CALIBRATION_LENGTH 		"calibration-length"
 #define MCM_SETTINGS_SHOW_FINE_TUNING 			"show-fine-tuning"
+#define MCM_SETTINGS_DONE_MIGRATION 			"done-migration"
 
 #define MCM_SETTINGS_RECALIBRATE_PRINTER_THRESHOLD 	"recalibrate-printer-threshold"
 #define MCM_SETTINGS_RECALIBRATE_DISPLAY_THRESHOLD 	"recalibrate-display-threshold"

@@ -43,10 +43,12 @@
 #define MCM_SETTINGS_CALIBRATION_LENGTH 		"calibration-length"
 #define MCM_SETTINGS_SHOW_FINE_TUNING 			"show-fine-tuning"
 #define MCM_SETTINGS_SHOW_NOTIFICATIONS 		"show-notifications"
-#define MCM_SETTINGS_DONE_MIGRATION 			"done-migration"
-
+#define MCM_SETTINGS_MIGRATE_CONFIG_VERSION		"migrate-config-version"
 #define MCM_SETTINGS_RECALIBRATE_PRINTER_THRESHOLD 	"recalibrate-printer-threshold"
 #define MCM_SETTINGS_RECALIBRATE_DISPLAY_THRESHOLD 	"recalibrate-display-threshold"
+
+#define MCM_CONFIG_VERSION_ORIGINAL 			0
+#define MCM_CONFIG_VERSION_SHARED_SPEC			1
 
 /* DISTROS: you will have to patch if you have changed the name of these packages */
 #define MCM_PREFS_PACKAGE_NAME_SHARED_COLOR_TARGETS	"shared-color-targets"

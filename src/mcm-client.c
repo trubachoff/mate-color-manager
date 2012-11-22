@@ -968,22 +968,28 @@ mcm_client_possibly_migrate_config_file (McmClient *client)
 	GFile *gdest = NULL;
 	GFile *gsource = NULL;
 	gboolean ret = FALSE;
-	gboolean done_migration;
+	gint config_version;
 	GError *error = NULL;
 
 	/* have we already attempted this (check first to avoid stating a file */
-	done_migration = g_settings_get_boolean (client->priv->settings, MCM_SETTINGS_DONE_MIGRATION);
-	if (done_migration)
+	config_version = g_settings_get_int (client->priv->settings,
+					MCM_SETTINGS_MIGRATE_CONFIG_VERSION);
+	if (config_version >= MCM_CONFIG_VERSION_SHARED_SPEC)
 		goto out;
 
 	/* create default path */
-	source = g_build_filename (g_get_user_config_dir (), "mate-color-manager", "device-profiles.conf", NULL);
+	source = g_build_filename (g_get_user_config_dir (),
+				"mate-color-manager",
+				"device-profiles.conf",
+				NULL);
 	gsource = g_file_new_for_path (source);
 
 	/* no old profile */
 	ret = g_file_query_exists (gsource, NULL);
 	if (!ret) {
-		g_settings_set_boolean (client->priv->settings, MCM_SETTINGS_DONE_MIGRATION, TRUE);
+		g_settings_set_int (client->priv->settings,
+				MCM_SETTINGS_MIGRATE_CONFIG_VERSION,
+				MCM_CONFIG_VERSION_SHARED_SPEC);
 		goto out;
 	}
 
@@ -1006,7 +1012,9 @@ mcm_client_possibly_migrate_config_file (McmClient *client)
 	}
 
 	/* do not attempt to migrate this again */
-	g_settings_set_boolean (client->priv->settings, MCM_SETTINGS_DONE_MIGRATION, TRUE);
+	g_settings_set_int (client->priv->settings,
+			MCM_SETTINGS_MIGRATE_CONFIG_VERSION,
+			MCM_CONFIG_VERSION_SHARED_SPEC);
 out:
 	g_free (source);
 	g_free (dest);

@@ -1,6 +1,6 @@
 AC_PREREQ(2.63)
 
-AC_INIT([mate-color-manager],[1.4.0],[http://bugzilla.gnome.org/enter_bug.cgi?product=mate-color-manager])
+AC_INIT([mate-color-manager],[1.5.0],[http://bugzilla.gnome.org/enter_bug.cgi?product=mate-color-manager])
 AC_CONFIG_SRCDIR(src)
 AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
 AC_CONFIG_HEADERS([config.h])

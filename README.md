@@ -23,10 +23,3 @@ If start of mcm-prefs fails after installation use the --sync option
 
 mcm-prefs --sync
 
-
-News: 22.11.2012
-
-Update to 1.5.0
-
--- Port to GSettings
-

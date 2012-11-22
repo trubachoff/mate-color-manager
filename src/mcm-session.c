@@ -215,6 +215,7 @@ mcm_session_added_cb (McmClient *client, McmDevice *device, gpointer user_data)
 	McmDeviceKind kind;
 	const gchar *profile;
 	gchar *basename = NULL;
+	gboolean allow_notifications;
 
 	/* check we care */
 	kind = mcm_device_get_kind (device);
@@ -235,6 +236,11 @@ mcm_session_added_cb (McmClient *client, McmDevice *device, gpointer user_data)
 		egg_debug ("not a MCM profile for %s: %s", mcm_device_get_id (device), profile);
 		goto out;
 	}
+
+	/* do we allow notifications */
+	allow_notifications = g_settings_get_boolean (settings, MCM_SETTINGS_SHOW_NOTIFICATIONS);
+	if (!allow_notifications)
+		goto out;
 
 	/* handle device */
 	mcm_session_notify_device (device);

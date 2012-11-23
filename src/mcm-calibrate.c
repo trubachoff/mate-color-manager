@@ -34,6 +34,7 @@
 #include <tiffio.h>
 
 #include "mcm-calibrate.h"
+#include "mcm-xyz.h"
 #include "mcm-dmi.h"
 #include "mcm-device-xrandr.h"
 #include "mcm-utils.h"
@@ -63,6 +64,7 @@ struct _McmCalibratePrivate
 	McmColorimeterKind		 colorimeter_kind;
 	McmCalibrateDialog		*calibrate_dialog;
 	McmDeviceKind			 device_kind;
+	McmXyz 				*xyz;
 	gchar				*output_name;
 	gchar				*filename_source;
 	gchar				*filename_reference;
@@ -96,6 +98,7 @@ enum {
 	PROP_FILENAME_RESULT,
 	PROP_WORKING_PATH,
 	PROP_PRECISION,
+	PROP_XYZ,
 	PROP_LAST
 };
 
@@ -1240,6 +1243,9 @@ mcm_calibrate_get_property (GObject *object, guint prop_id, GValue *value, GPara
 	case PROP_PRECISION:
 		g_value_set_uint (value, priv->precision);
 		break;
+	case PROP_XYZ:
+		g_value_set_object (value, priv->xyz);
+		break;
 	default:
 		G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
 		break;
@@ -1484,6 +1490,14 @@ mcm_calibrate_class_init (McmCalibrateClass *klass)
 				   G_PARAM_READABLE);
 	g_object_class_install_property (object_class, PROP_PRECISION, pspec);
 
+	/**
+	 * McmCalibrate:xyz:
+	 */
+	pspec = g_param_spec_object ("xyz", NULL, NULL,
+				     MCM_TYPE_XYZ,
+				     G_PARAM_READWRITE);
+	g_object_class_install_property (object_class, PROP_XYZ, pspec);
+
 	g_type_class_add_private (klass, sizeof (McmCalibratePrivate));
 }
 
@@ -1504,6 +1518,7 @@ mcm_calibrate_init (McmCalibrate *calibrate)
 	calibrate->priv->description = NULL;
 	calibrate->priv->device = NULL;
 	calibrate->priv->serial = NULL;
+	calibrate->priv->xyz = mcm_xyz_new ();
 	calibrate->priv->working_path = NULL;
 	calibrate->priv->calibrate_device_kind = MCM_CALIBRATE_DEVICE_KIND_UNKNOWN;
 	calibrate->priv->print_kind = MCM_CALIBRATE_PRINT_KIND_UNKNOWN;
@@ -1545,6 +1560,8 @@ mcm_calibrate_finalize (GObject *object)
 	g_free (priv->serial);
 	g_free (priv->working_path);
 	g_signal_handlers_disconnect_by_func (calibrate->priv->colorimeter, G_CALLBACK (mcm_prefs_colorimeter_changed_cb), calibrate);
+	if (priv->xyz != NULL)
+		g_object_unref (priv->xyz);
 	g_object_unref (priv->colorimeter);
 	g_object_unref (priv->dmi);
 	g_object_unref (priv->calibrate_dialog);

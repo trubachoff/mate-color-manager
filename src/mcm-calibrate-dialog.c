@@ -88,10 +88,10 @@ static guint signals[SIGNAL_LAST] = { 0 };
 G_DEFINE_TYPE (McmCalibrateDialog, mcm_calibrate_dialog, G_TYPE_OBJECT)
 
 /**
- * mcm_calibrate_dialog_emit_response:
+ * mcm_calibrate_dialog_response:
  **/
-static void
-mcm_calibrate_dialog_emit_response (McmCalibrateDialog *calibrate_dialog, GtkResponseType response)
+void
+mcm_calibrate_dialog_response (McmCalibrateDialog *calibrate_dialog, GtkResponseType response)
 {
 	calibrate_dialog->priv->response = response;
 	g_signal_emit (calibrate_dialog, signals[SIGNAL_RESPONSE], 0, response);
@@ -108,7 +108,7 @@ static void
 mcm_calibrate_dialog_button_clicked_lcd_cb (GtkWidget *widget, McmCalibrateDialog *calibrate_dialog)
 {
 	calibrate_dialog->priv->device_kind = MCM_CALIBRATE_DEVICE_KIND_LCD;
-	mcm_calibrate_dialog_emit_response (calibrate_dialog, GTK_RESPONSE_OK);
+	mcm_calibrate_dialog_response (calibrate_dialog, GTK_RESPONSE_OK);
 }
 
 /**
@@ -118,7 +118,7 @@ static void
 mcm_calibrate_dialog_button_clicked_crt_cb (GtkWidget *widget, McmCalibrateDialog *calibrate_dialog)
 {
 	calibrate_dialog->priv->device_kind = MCM_CALIBRATE_DEVICE_KIND_CRT;
-	mcm_calibrate_dialog_emit_response (calibrate_dialog, GTK_RESPONSE_OK);
+	mcm_calibrate_dialog_response (calibrate_dialog, GTK_RESPONSE_OK);
 }
 
 /**
@@ -128,7 +128,7 @@ static void
 mcm_calibrate_dialog_button_clicked_projector_cb (GtkWidget *widget, McmCalibrateDialog *calibrate_dialog)
 {
 	calibrate_dialog->priv->device_kind = MCM_CALIBRATE_DEVICE_KIND_PROJECTOR;
-	mcm_calibrate_dialog_emit_response (calibrate_dialog, GTK_RESPONSE_OK);
+	mcm_calibrate_dialog_response (calibrate_dialog, GTK_RESPONSE_OK);
 }
 
 /**
@@ -138,7 +138,7 @@ static void
 mcm_calibrate_dialog_button_clicked_print_local_cb (GtkWidget *widget, McmCalibrateDialog *calibrate_dialog)
 {
 	calibrate_dialog->priv->print_kind = MCM_CALIBRATE_PRINT_KIND_LOCAL;
-	mcm_calibrate_dialog_emit_response (calibrate_dialog, GTK_RESPONSE_OK);
+	mcm_calibrate_dialog_response (calibrate_dialog, GTK_RESPONSE_OK);
 }
 
 /**
@@ -148,7 +148,7 @@ static void
 mcm_calibrate_dialog_button_clicked_print_generate_cb (GtkWidget *widget, McmCalibrateDialog *calibrate_dialog)
 {
 	calibrate_dialog->priv->print_kind = MCM_CALIBRATE_PRINT_KIND_GENERATE;
-	mcm_calibrate_dialog_emit_response (calibrate_dialog, GTK_RESPONSE_OK);
+	mcm_calibrate_dialog_response (calibrate_dialog, GTK_RESPONSE_OK);
 }
 
 /**
@@ -158,7 +158,7 @@ static void
 mcm_calibrate_dialog_button_clicked_print_analyze_cb (GtkWidget *widget, McmCalibrateDialog *calibrate_dialog)
 {
 	calibrate_dialog->priv->print_kind = MCM_CALIBRATE_PRINT_KIND_ANALYZE;
-	mcm_calibrate_dialog_emit_response (calibrate_dialog, GTK_RESPONSE_OK);
+	mcm_calibrate_dialog_response (calibrate_dialog, GTK_RESPONSE_OK);
 }
 
 /**
@@ -168,7 +168,7 @@ static void
 mcm_calibrate_dialog_button_clicked_precision_short_cb (GtkWidget *widget, McmCalibrateDialog *calibrate_dialog)
 {
 	calibrate_dialog->priv->precision = MCM_CALIBRATE_PRECISION_SHORT;
-	mcm_calibrate_dialog_emit_response (calibrate_dialog, GTK_RESPONSE_OK);
+	mcm_calibrate_dialog_response (calibrate_dialog, GTK_RESPONSE_OK);
 }
 
 /**
@@ -178,7 +178,7 @@ static void
 mcm_calibrate_dialog_button_clicked_precision_normal_cb (GtkWidget *widget, McmCalibrateDialog *calibrate_dialog)
 {
 	calibrate_dialog->priv->precision = MCM_CALIBRATE_PRECISION_NORMAL;
-	mcm_calibrate_dialog_emit_response (calibrate_dialog, GTK_RESPONSE_OK);
+	mcm_calibrate_dialog_response (calibrate_dialog, GTK_RESPONSE_OK);
 }
 
 /**
@@ -188,7 +188,7 @@ static void
 mcm_calibrate_dialog_button_clicked_precision_long_cb (GtkWidget *widget, McmCalibrateDialog *calibrate_dialog)
 {
 	calibrate_dialog->priv->precision = MCM_CALIBRATE_PRECISION_LONG;
-	mcm_calibrate_dialog_emit_response (calibrate_dialog, GTK_RESPONSE_OK);
+	mcm_calibrate_dialog_response (calibrate_dialog, GTK_RESPONSE_OK);
 }
 
 /**
@@ -197,7 +197,7 @@ mcm_calibrate_dialog_button_clicked_precision_long_cb (GtkWidget *widget, McmCal
 static void
 mcm_calibrate_dialog_button_clicked_ok_cb (GtkWidget *widget, McmCalibrateDialog *calibrate_dialog)
 {
-	mcm_calibrate_dialog_emit_response (calibrate_dialog, GTK_RESPONSE_OK);
+	mcm_calibrate_dialog_response (calibrate_dialog, GTK_RESPONSE_OK);
 }
 
 /**
@@ -206,7 +206,7 @@ mcm_calibrate_dialog_button_clicked_ok_cb (GtkWidget *widget, McmCalibrateDialog
 static void
 mcm_calibrate_dialog_button_clicked_cancel_cb (GtkWidget *widget, McmCalibrateDialog *calibrate_dialog)
 {
-	mcm_calibrate_dialog_emit_response (calibrate_dialog, GTK_RESPONSE_CANCEL);
+	mcm_calibrate_dialog_response (calibrate_dialog, GTK_RESPONSE_CANCEL);
 }
 
 /**
@@ -523,7 +523,7 @@ mcm_calibrate_dialog_set_move_window (McmCalibrateDialog *calibrate_dialog, gboo
 static gboolean
 mcm_calibrate_dialog_delete_event_cb (GtkWidget *widget, GdkEvent *event, McmCalibrateDialog *calibrate_dialog)
 {
-	mcm_calibrate_dialog_emit_response (calibrate_dialog, GTK_RESPONSE_CANCEL);
+	mcm_calibrate_dialog_response (calibrate_dialog, GTK_RESPONSE_CANCEL);
 	return FALSE;
 }
 

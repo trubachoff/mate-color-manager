@@ -80,6 +80,7 @@ McmColorimeterKind	 mcm_colorimeter_get_kind		(McmColorimeter		*colorimeter);
 gboolean		 mcm_colorimeter_supports_display	(McmColorimeter 	*colorimeter);
 gboolean		 mcm_colorimeter_supports_projector	(McmColorimeter 	*colorimeter);
 gboolean		 mcm_colorimeter_supports_printer	(McmColorimeter		*colorimeter);
+gboolean 		 mcm_colorimeter_supports_spot		(McmColorimeter		*colorimeter);
 const gchar		*mcm_colorimeter_kind_to_string		(McmColorimeterKind	 colorimeter_kind);
 McmColorimeterKind	 mcm_colorimeter_kind_from_string	(const gchar		*colorimeter_kind);
 

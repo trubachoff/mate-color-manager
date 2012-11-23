@@ -33,6 +33,7 @@ gsettings_SCHEMAS = org.mate.color-manager.gschema.xml
 pkgdata_DATA =						\
 	mcm-calibrate.ui				\
 	mcm-spawn.ui					\
+	mcm-picker.ui 					\
 	mcm-prefs.ui
 
 EXTRA_DIST =						\

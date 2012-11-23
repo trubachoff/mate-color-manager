@@ -64,8 +64,8 @@ libmcmshared_a_SOURCES =				\
 	mcm-device-cups.h				\
 	mcm-device-sane.c				\
 	mcm-device-sane.h				\
-	mcm-device-virtual.c				\
-	mcm-device-virtual.h				\
+	mcm-device-virtual.c			\
+	mcm-device-virtual.h			\
 	mcm-cie-widget.c				\
 	mcm-cie-widget.h				\
 	mcm-trc-widget.c				\
@@ -77,7 +77,17 @@ libmcmshared_a_SOURCES =				\
 	mcm-profile-lcms1.c				\
 	mcm-profile-lcms1.h				\
 	mcm-profile.c					\
-	mcm-profile.h
+	mcm-profile.h 					\
+	mcm-calibrate.c 				\
+	mcm-calibrate.h 				\
+	mcm-calibrate-argyll.c			\
+	mcm-calibrate-argyll.h			\
+	mcm-calibrate-manual.c			\
+	mcm-calibrate-manual.h 			\
+	mcm-calibrate-dialog.c 			\
+	mcm-calibrate-dialog.h 			\
+	mcm-brightness.c 				\
+	mcm-brightness.h
 
 libmcmshared_a_CFLAGS =					\
 	$(WARNINGFLAGS_C)
@@ -94,6 +104,9 @@ bin_PROGRAMS =						\
 	mcm-prefs					\
 	mcm-session					\
 	mcm-import
+
+noinst_PROGRAMS = \
+		mcm-picker
 
 mcm_install_system_wide_SOURCES =			\
 	mcm-install-system-wide.c
@@ -220,16 +233,6 @@ mcm_import_CFLAGS =					\
 	$(WARNINGFLAGS_C)
 
 mcm_prefs_SOURCES =					\
-	mcm-calibrate.c					\
-	mcm-calibrate.h					\
-	mcm-calibrate-argyll.c				\
-	mcm-calibrate-argyll.h				\
-	mcm-calibrate-manual.c				\
-	mcm-calibrate-manual.h				\
-	mcm-calibrate-dialog.c				\
-	mcm-calibrate-dialog.h				\
-	mcm-brightness.c				\
-	mcm-brightness.h				\
 	mcm-prefs.c
 
 mcm_prefs_LDADD =					\
@@ -251,6 +254,31 @@ mcm_prefs_LDADD =					\
 	-lm
 
 mcm_prefs_CFLAGS =					\
+	$(WARNINGFLAGS_C)
+
+mcm_picker_SOURCES = \
+	mcm-picker.c
+
+mcm_picker_LDADD = \
+	libmcmshared.a \
+	$(GLIB_LIBS) \
+	$(X11_LIBS) \
+	$(MATEDESKTOP_LIBS) \
+	$(UNIQUE_LIBS) \
+	$(MATECONF_LIBS) \
+	$(VTE_LIBS) \
+	$(GUDEV_LIBS) \
+	$(LCMS_LIBS) \
+	$(DBUS_GLIB_LIBS) \
+	$(XORG_LIBS) \
+	$(GTK_LIBS) \
+	$(SANE_LIBS) \
+	$(CUPS_LIBS) \
+	$(TIFF_LIBS) \
+	$(CANBERRA_LIBS) \
+	-lm
+
+mcm_picker_CFLAGS = \
 	$(WARNINGFLAGS_C)
 
 mcm_session_SOURCES =					\

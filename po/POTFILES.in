@@ -18,11 +18,13 @@ src/mcm-fix-profile.c
 src/mcm-import.c
 src/mcm-inspect.c
 src/mcm-install-system-wide.c
+src/mcm-picker.c
 src/mcm-prefs.c
 src/mcm-profile.c
 src/mcm-session.c
 src/mcm-utils.c
 [type: gettext/glade]data/mcm-calibrate.ui
+[type: gettext/glade]data/mcm-picker.ui
 [type: gettext/glade]data/mcm-prefs.ui
 [type: gettext/glade]data/mcm-spawn.ui
 

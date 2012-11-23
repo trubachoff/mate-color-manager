@@ -53,6 +53,8 @@
 /* DISTROS: you will have to patch if you have changed the name of these packages */
 #define MCM_PREFS_PACKAGE_NAME_SHARED_COLOR_TARGETS	"shared-color-targets"
 #define MCM_PREFS_PACKAGE_NAME_ARGYLLCMS		"argyllcms"
+#define MCM_PREFS_PACKAGE_NAME_COLOR_PROFILES		"shared-color-profiles"
+#define MCM_PREFS_PACKAGE_NAME_COLOR_PROFILES_EXTRA	"shared-color-profiles-extra"
 
 gboolean	 mcm_utils_mkdir_for_filename		(const gchar		*filename,
 							 GError			**error);
@@ -73,10 +75,11 @@ McmProfileKind	 mcm_utils_device_kind_to_profile_kind	(McmDeviceKind		 kind);
 gchar		*mcm_utils_format_date_time		(const struct tm	*created);
 gboolean	 mcm_utils_install_package		(const gchar		*package_name,
 							 GtkWindow		*window);
+gboolean 	 mcm_utils_is_package_installed		(const gchar 		*package_name);
 void		 mcm_utils_ensure_printable		(gchar			*text);
 gboolean	 mcm_utils_is_icc_profile		(GFile			*file);
 gchar		*mcm_utils_linkify			(const gchar		*text);
-const gchar	*mcm_intent_to_localized_text	(McmIntent	 intent);
+const gchar	*mcm_intent_to_localized_text		(McmIntent	 	intent);
 
 #endif /* __MCM_UTILS_H */
 

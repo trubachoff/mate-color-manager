@@ -94,6 +94,8 @@ typedef enum {
 
 static void mcm_prefs_devices_treeview_clicked_cb (GtkTreeSelection *selection, gpointer userdata);
 
+#define MCM_PREFS_TREEVIEW_WIDTH 350 /* px */
+
 /**
  * mcm_prefs_error_dialog:
  **/
@@ -1003,12 +1005,14 @@ mcm_prefs_add_devices_columns (GtkTreeView *treeview)
 							   "icon-name", MCM_DEVICES_COLUMN_ICON, NULL);
 	gtk_tree_view_append_column (treeview, column);
 
+	/* set minimum width */
+	gtk_widget_set_size_request (GTK_WIDGET (treeview), MCM_PREFS_TREEVIEW_WIDTH, -1);
+
 	/* column for text */
 	renderer = gtk_cell_renderer_text_new ();
 	g_object_set (renderer,
-		      "ellipsize", PANGO_ELLIPSIZE_END,
-		      "wrap-mode", PANGO_WRAP_WORD_CHAR,
-		      "width-chars", 40,
+		      "wrap-mode", PANGO_WRAP_WORD,
+		      "wrap-width", MCM_PREFS_TREEVIEW_WIDTH - 62,
 		      NULL);
 	column = gtk_tree_view_column_new_with_attributes ("", renderer,
 							   "markup", MCM_DEVICES_COLUMN_TITLE, NULL);
@@ -1034,12 +1038,14 @@ mcm_prefs_add_profiles_columns (GtkTreeView *treeview)
 							   "icon-name", MCM_PROFILES_COLUMN_ICON, NULL);
 	gtk_tree_view_append_column (treeview, column);
 
+	/* set minimum width */
+	gtk_widget_set_size_request (GTK_WIDGET (treeview), MCM_PREFS_TREEVIEW_WIDTH, -1);
+
 	/* column for text */
 	renderer = gtk_cell_renderer_text_new ();
 	g_object_set (renderer,
-		      "ellipsize", PANGO_ELLIPSIZE_END,
-		      "wrap-mode", PANGO_WRAP_WORD_CHAR,
-		      "width-chars", 50,
+		      "wrap-mode", PANGO_WRAP_WORD,
+		      "wrap-width", MCM_PREFS_TREEVIEW_WIDTH - 62,
 		      NULL);
 	column = gtk_tree_view_column_new_with_attributes ("", renderer,
 							   "markup", MCM_PROFILES_COLUMN_TITLE, NULL);

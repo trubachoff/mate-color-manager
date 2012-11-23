@@ -516,6 +516,36 @@ out:
 }
 
 /**
+ * mcm_calibrate_spotread:
+ **/
+gboolean
+mcm_calibrate_spotread (McmCalibrate *calibrate, GtkWindow *window, GError **error)
+{
+	McmCalibrateClass *klass = MCM_CALIBRATE_GET_CLASS (calibrate);
+	gboolean ret;
+
+	/* set the per-profile filename */
+	ret = mcm_calibrate_set_working_path (calibrate, error);
+	if (!ret)
+		goto out;
+
+	/* coldplug source */
+	if (klass->calibrate_spotread == NULL) {
+		ret = FALSE;
+		g_set_error_literal (error,
+				     MCM_CALIBRATE_ERROR,
+				     MCM_CALIBRATE_ERROR_INTERNAL,
+				     "no klass support");
+		goto out;
+	}
+
+	/* proxy */
+	ret = klass->calibrate_spotread (calibrate, window, error);
+out:
+	return ret;
+}
+
+/**
  * mcm_calibrate_display:
  **/
 gboolean

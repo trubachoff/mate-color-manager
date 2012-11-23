@@ -1414,6 +1414,134 @@ out:
 }
 
 /**
+ * mcm_calibrate_argyll_spotread_read_chart:
+ **/
+static gboolean
+mcm_calibrate_argyll_spotread_read_chart (McmCalibrateArgyll *calibrate_argyll, GError **error)
+{
+	gboolean ret = TRUE;
+	McmCalibrateArgyllPrivate *priv = calibrate_argyll->priv;
+	gchar *command = NULL;
+	gchar **argv = NULL;
+	GPtrArray *array = NULL;
+	gchar *basename = NULL;
+	gchar *working_path = NULL;
+	const gchar *title;
+	const gchar *message;
+
+	/* get shared data */
+	g_object_get (calibrate_argyll,
+		      "basename", &basename,
+		      "working-path", &working_path,
+		      NULL);
+
+	/* get correct name of the command */
+	command = mcm_calibrate_argyll_get_tool_filename ("spotread", error);
+	if (command == NULL) {
+		ret = FALSE;
+		goto out;
+	}
+
+	/* TRANSLATORS: title, patches are specific colours used in calibration */
+	title = _("Reading the patches");
+	/* TRANSLATORS: dialog message */
+	message = _("Reading the patches using the color measuring instrument.");
+
+	/* push new messages into the UI */
+	mcm_calibrate_dialog_show (priv->calibrate_dialog, MCM_CALIBRATE_DIALOG_TAB_GENERIC, title, message);
+	mcm_calibrate_dialog_set_show_button_ok (priv->calibrate_dialog, FALSE);
+	mcm_calibrate_dialog_set_show_expander (priv->calibrate_dialog, TRUE);
+
+	/* argument array */
+	array = g_ptr_array_new_with_free_func (g_free);
+
+	/* setup the command */
+	g_ptr_array_add (array, g_strdup ("-v9"));
+	if (priv->done_calibrate)
+		g_ptr_array_add (array, g_strdup ("-N"));
+	g_ptr_array_add (array, g_strdup (basename));
+	argv = mcm_utils_ptr_array_to_strv (array);
+	mcm_calibrate_argyll_debug_argv (command, argv);
+
+	/* start up the command */
+	priv->state = MCM_CALIBRATE_ARGYLL_STATE_RUNNING;
+	vte_terminal_reset (VTE_TERMINAL(priv->terminal), TRUE, FALSE);
+	priv->child_pid = vte_terminal_fork_command (VTE_TERMINAL(priv->terminal), command, argv, NULL, working_path, FALSE, FALSE, FALSE);
+
+	/* wait until finished */
+	g_main_loop_run (priv->loop);
+
+	/* get result */
+	if (priv->response == GTK_RESPONSE_CANCEL) {
+		g_set_error_literal (error,
+				     MCM_CALIBRATE_ERROR,
+				     MCM_CALIBRATE_ERROR_USER_ABORT,
+				     "calibration was cancelled");
+		ret = FALSE;
+		goto out;
+	}
+	if (priv->response == GTK_RESPONSE_REJECT) {
+		gchar *vte_text;
+		vte_text = vte_terminal_get_text (VTE_TERMINAL(priv->terminal), NULL, NULL, NULL);
+		g_set_error (error,
+			     MCM_CALIBRATE_ERROR,
+			     MCM_CALIBRATE_ERROR_INTERNAL,
+			     "command failed to run successfully: %s", vte_text);
+		g_free (vte_text);
+		ret = FALSE;
+		goto out;
+	}
+out:
+	if (array != NULL)
+		g_ptr_array_unref (array);
+	g_free (working_path);
+	g_free (basename);
+	g_free (command);
+	g_strfreev (argv);
+	return ret;
+}
+
+/**
+ * mcm_calibrate_argyll_spotread:
+ **/
+static gboolean
+mcm_calibrate_argyll_spotread (McmCalibrate *calibrate, GtkWindow *window, GError **error)
+{
+	McmCalibrateArgyll *calibrate_argyll = MCM_CALIBRATE_ARGYLL(calibrate);
+	McmCalibrateArgyllPrivate *priv = calibrate_argyll->priv;
+	gboolean ret;
+	const gchar *title;
+	const gchar *message;
+
+	/* set modal windows up correctly */
+	mcm_calibrate_dialog_set_move_window (priv->calibrate_dialog, TRUE);
+	mcm_calibrate_dialog_set_window (priv->calibrate_dialog, window);
+
+	/* TRANSLATORS: title, color spot is the color we are trying to measure */
+	title = _("Sampling the color spot");
+
+	/* TRANSLATORS: dialog message */
+	message = _("Setting up display device for use…");
+
+	/* push new messages into the UI */
+	mcm_calibrate_dialog_show (priv->calibrate_dialog, MCM_CALIBRATE_DIALOG_TAB_GENERIC, title, message);
+	mcm_calibrate_dialog_set_show_button_ok (priv->calibrate_dialog, FALSE);
+	mcm_calibrate_dialog_set_show_expander (priv->calibrate_dialog, FALSE);
+
+	/* step 3 */
+	ret = mcm_calibrate_argyll_spotread_read_chart (calibrate_argyll, error);
+	if (!ret)
+		goto out;
+
+	/* step 5 */
+	ret = mcm_calibrate_argyll_remove_temp_files (calibrate_argyll, error);
+	if (!ret)
+		goto out;
+out:
+	return ret;
+}
+
+/**
  * mcm_calibrate_argyll_get_colorimeter_target:
  **/
 static const gchar *
@@ -2214,6 +2342,9 @@ mcm_calibrate_argyll_interaction_calibrate (McmCalibrateArgyll *calibrate_argyll
 	/* assume it's no longer on the window */
 	priv->already_on_window = FALSE;
 
+	/* assume it was done correctly */
+	priv->done_calibrate = TRUE;
+
 	/* set state */
 	priv->argyllcms_ok = " ";
 	priv->state = MCM_CALIBRATE_ARGYLL_STATE_WAITING_FOR_STDIN;
@@ -2265,9 +2396,6 @@ mcm_calibrate_argyll_interaction_surface (McmCalibrateArgyll *calibrate_argyll)
 
 	/* assume it's no longer on the window */
 	priv->already_on_window = FALSE;
-
-	/* assume it was done correctly */
-	priv->done_calibrate = TRUE;
 
 	/* set state */
 	priv->argyllcms_ok = " ";
@@ -2694,6 +2822,7 @@ mcm_calibrate_argyll_class_init (McmCalibrateArgyllClass *klass)
 	parent_class->calibrate_display = mcm_calibrate_argyll_display;
 	parent_class->calibrate_device = mcm_calibrate_argyll_device;
 	parent_class->calibrate_printer = mcm_calibrate_argyll_printer;
+	parent_class->calibrate_spotread = mcm_calibrate_argyll_spotread;
 
 	g_type_class_add_private (klass, sizeof (McmCalibrateArgyllPrivate));
 }

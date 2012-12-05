@@ -104,10 +104,8 @@ bin_PROGRAMS =						\
 	mcm-apply					\
 	mcm-prefs					\
 	mcm-session					\
+	mcm-picker					\
 	mcm-import
-
-noinst_PROGRAMS = \
-		mcm-picker
 
 mcm_install_system_wide_SOURCES =			\
 	mcm-install-system-wide.c

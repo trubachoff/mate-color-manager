@@ -14,6 +14,7 @@ src/mcm-colorimeter.c
 src/mcm-device-xrandr.c
 src/mcm-dump-edid.c
 src/mcm-dump-profile.c
+src/mcm-enum.c
 src/mcm-fix-profile.c
 src/mcm-import.c
 src/mcm-inspect.c

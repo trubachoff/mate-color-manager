@@ -73,6 +73,7 @@ McmIntent	 mcm_intent_from_string			(const gchar		*intent);
 const gchar	*mcm_intent_to_string			(McmIntent		 intent);
 const gchar	*mcm_profile_kind_to_string		(McmProfileKind		 profile_kind);
 const gchar	*mcm_colorspace_to_string		(McmColorspace		 colorspace);
+const gchar	*mcm_colorspace_to_localised_string	(McmColorspace	 	 colorspace);
 McmColorspace	 mcm_colorspace_from_string		(const gchar		*colorspace);
 McmDeviceKind	 mcm_device_kind_from_string		(const gchar		*kind);
 const gchar	*mcm_device_kind_to_string		(McmDeviceKind		 kind);

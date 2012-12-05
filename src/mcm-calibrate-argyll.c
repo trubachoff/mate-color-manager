@@ -1459,7 +1459,8 @@ mcm_calibrate_argyll_spotread_read_chart (McmCalibrateArgyll *calibrate_argyll, 
 	array = g_ptr_array_new_with_free_func (g_free);
 
 	/* setup the command */
-	g_ptr_array_add (array, g_strdup ("-v9"));
+	g_ptr_array_add (array, g_strdup (command));
+	g_ptr_array_add (array, g_strdup ("-v"));
 	if (priv->done_calibrate)
 		g_ptr_array_add (array, g_strdup ("-N"));
 	argv = mcm_utils_ptr_array_to_strv (array);

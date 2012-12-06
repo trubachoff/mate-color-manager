@@ -930,7 +930,7 @@ mcm_profile_test_parse_file (EggTest *test, const guint8 *datafile, McmProfileTe
 	const gchar *model;
 	const gchar *datetime;
 	const gchar *description;
-	const gchar *ascii_string;
+	const gchar *eisa_id;
 	const gchar *pnp_id;
 	guint width;
 	guint kind;

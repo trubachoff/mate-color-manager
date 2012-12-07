@@ -42,7 +42,6 @@ mcm_dump_edid_filename (const gchar *filename)
 	const gchar *vendor_name;
 	const gchar *serial_number;
 	const gchar *ascii_string;
-	const gchar *eisa_id;
 	const gchar *pnp_id;
 	gchar *data = NULL;
 	guint width;
@@ -85,10 +84,10 @@ mcm_dump_edid_filename (const gchar *filename)
 		/* TRANSLATORS: this is debugging output for the supplied EDID file */
 		g_print ("  %s: %s\n", _("Serial number"), serial_number);
 	}
-	eisa_id = mcm_edid_get_eisa_id (edid);
-	if (eisa_id != NULL) {
+	ascii_string = mcm_edid_get_ascii_string (edid);
+	if (ascii_string != NULL) {
 		/* TRANSLATORS: this is debugging output for the supplied EDID file */
-		g_print ("  %s: %s\n", _("EISA ID"), eisa_id);
+		g_print ("  %s: %s\n", _("Text string"), ascii_string);
 	}
 	pnp_id = mcm_edid_get_pnp_id (edid);
 	if (pnp_id != NULL) {

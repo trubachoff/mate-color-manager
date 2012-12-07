@@ -1086,7 +1086,7 @@ mcm_prefs_set_calibrate_button_sensitivity (void)
 		connected = mcm_device_get_connected (current_device);
 		if (!connected) {
 			/* TRANSLATORS: this is when the button is insensitive */
-			tooltip = _("Cannot calibrate: The display device is not connected");
+			tooltip = _("Cannot calibrate: The device is not connected");
 			goto out;
 		}
 
@@ -1251,7 +1251,6 @@ mcm_prefs_devices_treeview_clicked_cb (GtkTreeSelection *selection, gpointer use
 	const gchar *device_serial = NULL;
 	const gchar *device_model = NULL;
 	const gchar *device_manufacturer = NULL;
-	const gchar *eisa_id = NULL;
 
 	/* This will only work in single or browse selection mode! */
 	if (!gtk_tree_selection_get_selected (selection, &model, &iter)) {
@@ -1336,19 +1335,6 @@ mcm_prefs_devices_treeview_clicked_cb (GtkTreeSelection *selection, gpointer use
 	}
 	widget = GTK_WIDGET (gtk_builder_get_object (builder, "vbox_device_details"));
 	gtk_widget_show (widget);
-
-	/* get display specific properties */
-	if (kind == MCM_DEVICE_KIND_DISPLAY)
-		eisa_id = mcm_device_xrandr_get_eisa_id (MCM_DEVICE_XRANDR (current_device));
-	widget = GTK_WIDGET (gtk_builder_get_object (builder, "hbox_eisa"));
-	if (eisa_id != NULL) {
-		gtk_widget_show (widget);
-		widget = GTK_WIDGET (gtk_builder_get_object (builder, "label_eisa"));
-		gtk_label_set_label (GTK_LABEL (widget), eisa_id);
-	} else {
-		gtk_widget_hide (widget);
-	}
-
 
 	/* set adjustments */
 	setting_up_device = TRUE;
@@ -2217,6 +2203,23 @@ mcm_prefs_startup_phase2_idle_cb (gpointer user_data)
 }
 
 /**
+ * mcm_prefs_colorspace_to_localised_string:
+ **/
+static const gchar *
+mcm_prefs_colorspace_to_localised_string (McmColorspace colorspace)
+{
+	if (colorspace == MCM_COLORSPACE_RGB) {
+		/* TRANSLATORS: this is the colorspace, e.g. red, green, blue */
+		return _("RGB");
+	}
+	if (colorspace == MCM_COLORSPACE_CMYK) {
+		/* TRANSLATORS: this is the colorspace, e.g. cyan, magenta, yellow, black */
+		return _("CMYK");
+	}
+	return NULL;
+}
+
+/**
  * mcm_prefs_setup_space_combobox:
  **/
 static void
@@ -2229,10 +2232,14 @@ mcm_prefs_setup_space_combobox (GtkWidget *widget, McmColorspace colorspace, con
 	McmColorspace colorspace_tmp;
 	gboolean has_profile = FALSE;
 	gboolean has_vcgt;
-	gboolean has_colorspace_description;
 	gchar *text = NULL;
+	const gchar *search = "RGB";
 	GPtrArray *profile_array = NULL;
 	GtkTreeIter iter;
+
+	/* search is a way to reduce to number of profiles */
+	if (colorspace == MCM_COLORSPACE_CMYK)
+		search = "CMYK";
 
 	/* get new list */
 	profile_array = mcm_profile_store_get_array (profile_store);
@@ -2242,13 +2249,13 @@ mcm_prefs_setup_space_combobox (GtkWidget *widget, McmColorspace colorspace, con
 		profile = g_ptr_array_index (profile_array, i);
 
 		/* only for correct kind */
+		description = mcm_profile_get_description (profile);
 		has_vcgt = mcm_profile_get_has_vcgt (profile);
-		has_colorspace_description = mcm_profile_has_colorspace_description (profile);
 		colorspace_tmp = mcm_profile_get_colorspace (profile);
 		if (!has_vcgt &&
 		    colorspace == colorspace_tmp &&
 		    (colorspace == MCM_COLORSPACE_CMYK ||
-		     has_colorspace_description)) {
+		     g_strstr_len (description, -1, search) != NULL)) {
 			mcm_prefs_combobox_add_profile (widget, profile, MCM_PREFS_ENTRY_TYPE_PROFILE, &iter);
 
 			/* set active option */
@@ -2261,7 +2268,7 @@ mcm_prefs_setup_space_combobox (GtkWidget *widget, McmColorspace colorspace, con
 	if (!has_profile) {
 		/* TRANSLATORS: this is when there are no profiles that can be used; the search term is either "RGB" or "CMYK" */
 		text = g_strdup_printf (_("No %s color spaces available"),
-					mcm_colorspace_to_localised_string (colorspace));
+					mcm_prefs_colorspace_to_localised_string (colorspace));
 		gtk_combo_box_append_text (GTK_COMBO_BOX(widget), text);
 		gtk_combo_box_set_active (GTK_COMBO_BOX (widget), 0);
 		gtk_widget_set_sensitive (widget, FALSE);

@@ -56,7 +56,6 @@ gboolean	 mcm_device_xrandr_set_from_output	(McmDevice		*device,
 void		 mcm_device_xrandr_set_remove_atom	(McmDeviceXrandr	*device_xrandr,
 							 gboolean		 remove_atom);
 const gchar	*mcm_device_xrandr_get_native_device	(McmDeviceXrandr	*device_xrandr);
-const gchar	*mcm_device_xrandr_get_eisa_id		(McmDeviceXrandr	*device_xrandr);
 gboolean	 mcm_device_xrandr_get_fallback		(McmDeviceXrandr	*device_xrandr);
 
 G_END_DECLS

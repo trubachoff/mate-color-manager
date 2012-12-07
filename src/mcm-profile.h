@@ -118,7 +118,6 @@ void		 mcm_profile_set_colorspace		(McmProfile	*profile,
 gboolean	 mcm_profile_get_has_vcgt		(McmProfile	*profile);
 void		 mcm_profile_set_has_vcgt		(McmProfile	*profile,
 							 gboolean	 has_vcgt);
-gboolean	 mcm_profile_has_colorspace_description	(McmProfile	*profile);
 
 G_END_DECLS
 

@@ -6,12 +6,12 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mate-color-manager master\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=mate-"
-"color-manager\n"
-"POT-Creation-Date: 2010-08-06 15:57+0000\n"
-"PO-Revision-Date: 2010-06-09 21:43+0530\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug."
+"cgi?product=mate-color-manager\n"
+"POT-Creation-Date: 2010-04-18 23:05+0000\n"
+"PO-Revision-Date: 2010-04-19 07:20+0530\n"
 "Last-Translator: A S Alam <aalam@users.sf.net>\n"
-"Language-Team: Punjabi/Panjabi <punjabi-users@lists.sf.net>\n"
+"Language-Team: Punjabi/Panjabi <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -31,18 +31,131 @@ msgid "ICC Profile Installer"
 msgstr "ICC ਪਰੋਫਾਇਲ ਇੰਸਟਾਲਰ"
 
 #: ../data/mcm-import.desktop.in.h:2
+msgid "ICC profile installer"
+msgstr "ICC ਪਰੋਫਾਇਲ ਇੰਸਟਾਲਰ"
+
+#: ../data/mcm-import.desktop.in.h:3
 msgid "Install ICC profiles"
 msgstr "ICC ਪਰੋਫਾਇਲ ਇੰਸਟਾਲ ਕਰੋ"
 
 #: ../data/mcm-prefs.desktop.in.h:1
-#, fuzzy
-#| msgid "Colorspace:"
-msgid "Color"
-msgstr "ਰੰਗਸਪੇਸ:"
+msgid "Color Profiles"
+msgstr "ਰੰਗ ਪਰੋਫਾਇਲ"
 
 #: ../data/mcm-prefs.desktop.in.h:2
 msgid "Manage ICC color profiles"
 msgstr "ICC ਰੰਗ ਪਰੋਫਾਇਲ"
+
+#: ../data/mate-color-manager.schemas.in.h:1
+msgid ""
+"Gamma is adjusted to affect the color of the attached monitor. Traditionally "
+"Linux has used a gamma value of 1.0, but this makes monitors look washed out "
+"compared Windows XP or OS X. Apple traditionally used a value of 1.8 for a "
+"long time, but now use the same value as Microsoft. Microsoft has always "
+"used a value of 2.2."
+msgstr ""
+
+#: ../data/mate-color-manager.schemas.in.h:2
+msgid ""
+"If set to TRUE then external disks are searched for device ICC profiles at "
+"startup, for instance looking in the OSX library folder or Windows XP system "
+"folders. This may increase startup time if disks need to be spun up to be "
+"searched."
+msgstr ""
+
+#: ../data/mate-color-manager.schemas.in.h:3
+msgid ""
+"If set to TRUE then the __ICC_PROFILE hint will be set, which applications "
+"use to convert true color to screen color."
+msgstr ""
+
+#: ../data/mate-color-manager.schemas.in.h:4
+msgid ""
+"If set to TRUE then the fine tuning controls are visible. This allows the "
+"user to change the display profile outside of what the ICC profile suggests "
+"and is only recommended for advanced users."
+msgstr ""
+
+#: ../data/mate-color-manager.schemas.in.h:5
+msgid "If set to TRUE then the video LUT is set with the display profile"
+msgstr ""
+
+#: ../data/mate-color-manager.schemas.in.h:6
+msgid "Set the _ICC_PROFILE hint for applications."
+msgstr ""
+
+#: ../data/mate-color-manager.schemas.in.h:7
+msgid "Show the fine tuning controls for display devices."
+msgstr ""
+
+#: ../data/mate-color-manager.schemas.in.h:8
+msgid "The CMYK profile filename to be used by applications by default."
+msgstr ""
+
+#: ../data/mate-color-manager.schemas.in.h:9
+msgid "The RGB profile filename to be used by applications by default."
+msgstr ""
+
+#: ../data/mate-color-manager.schemas.in.h:10
+msgid "The default CMYK profile."
+msgstr "ਡਿਫਾਲਟ CMYK ਪਰੋਫਾਇਲ"
+
+#: ../data/mate-color-manager.schemas.in.h:11
+msgid "The default RGB profile."
+msgstr "ਡਿਫਾਲਟ RGB ਪਰੋਫਾਇਲ"
+
+#: ../data/mate-color-manager.schemas.in.h:12
+msgid "The default calibration length."
+msgstr "ਡਿਫਾਲਟ ਕੈਲੀਬਰੇਸ਼ਨ ਲੰਬਾਈ।"
+
+#: ../data/mate-color-manager.schemas.in.h:13
+msgid "The default gamma to use for monitors with no previous value set."
+msgstr ""
+
+#: ../data/mate-color-manager.schemas.in.h:14
+msgid "The duration between sending notifications to recalibrate a display."
+msgstr ""
+
+#: ../data/mate-color-manager.schemas.in.h:15
+msgid "The duration between sending notifications to recalibrate a printer."
+msgstr ""
+
+#: ../data/mate-color-manager.schemas.in.h:16
+msgid ""
+"The length of calibration, as this is proportional to the accuracy. The "
+"option 'short' creates a quick profile, 'normal' a regular one, and 'long' "
+"takes a really long time, but is more precise and creates a better profile. "
+"Use 'ask' if you want the user to choose."
+msgstr ""
+
+#: ../data/mate-color-manager.schemas.in.h:17
+msgid "The rendering intent to use for softproofs, e.g. 'perceptual'."
+msgstr ""
+
+#: ../data/mate-color-manager.schemas.in.h:18
+msgid "The rendering intent to use for the display, e.g. 'perceptual'."
+msgstr ""
+
+#: ../data/mate-color-manager.schemas.in.h:19
+msgid ""
+"This is the number of seconds in between notifying the user to recalibrate "
+"each display device. Set to 0 to disable the notification."
+msgstr ""
+
+#: ../data/mate-color-manager.schemas.in.h:20
+msgid ""
+"This is the number of seconds in between notifying the user to recalibrate "
+"each printer device. Set to 0 to disable the notification."
+msgstr ""
+
+#: ../data/mate-color-manager.schemas.in.h:21
+msgid "Whether ICC profiles should be loaded from external disks."
+msgstr ""
+
+#: ../data/mate-color-manager.schemas.in.h:22
+msgid ""
+"Whether the display should be globally corrected or left to applications."
+msgstr ""
 
 #: ../policy/org.mate.color.policy.in.h:1
 msgid "Authentication is required to install the color profile for all users"
@@ -61,329 +174,72 @@ msgid "Install system color profiles"
 msgstr "ਸਿਸਟਮ ਰੰਗ ਪਰੋਫਾਇਲ ਇੰਸਟਾਲ ਕਰੋ"
 
 #. TRANSLATORS: turn on all debugging
-#: ../src/egg-debug.c:390
+#: ../src/egg-debug.c:388
 msgid "Show debugging information for all files"
 msgstr "ਸਭ ਫਾਇਲਾਂ ਲਈ ਡੀਬੱਗ ਜਾਣਕਾਰੀ ਵੇਖੋ"
 
 #. TRANSLATORS: a list of modules to debug
-#: ../src/egg-debug.c:461
+#: ../src/egg-debug.c:459
 msgid "Debug these specific modules"
-msgstr "ਇਹ ਖਾਸ ਮੋਡੀਊਲ ਡੀਬੱਗ ਕਰੋ"
+msgstr ""
 
 #. TRANSLATORS: a list of functions to debug
-#: ../src/egg-debug.c:464
+#: ../src/egg-debug.c:462
 msgid "Debug these specific functions"
-msgstr "ਇਹ ਖਾਸ ਫੰਕਸ਼ਨ ਡੀਬੱਗ ਕਰੋ"
+msgstr ""
 
 #. TRANSLATORS: save to a log
-#: ../src/egg-debug.c:467
+#: ../src/egg-debug.c:465
 msgid "Log debugging data to a file"
 msgstr "ਡੀਬੱਗ ਡਾਟਾ ਫਾਇਲ 'ਚ ਲਾਗ ਰੱਖੋ"
 
-#: ../src/egg-debug.c:471
+#: ../src/egg-debug.c:469
 msgid "Debugging Options"
 msgstr "ਡੀਬੱਗ ਚੋਣਾਂ"
 
-#: ../src/egg-debug.c:471
+#: ../src/egg-debug.c:469
 msgid "Show debugging options"
 msgstr "ਡੀਬੱਗ ਚੋਣਾਂ ਵੇਖੋ"
 
-#. TRANSLATORS: could not save for all users
-#: ../src/cc-color-panel.c:154
-msgid "Failed to save defaults for all users"
-msgstr "ਸਭ ਯੂਜ਼ਰਾਂ ਲਈ ਡਿਫਾਲਟ ਸੈੱਟ ਕਰਨ ਲਈ ਫੇਲ੍ਹ"
-
-#. TRANSLATORS: this is where the user can click and import a profile
-#: ../src/cc-color-panel.c:182
-msgid "Other profile…"
-msgstr "ਹੋਰ ਪਰੋਫਾਇਲ…"
-
-#. TRANSLATORS: could not calibrate
-#: ../src/cc-color-panel.c:331
-msgid "Failed to calibrate device"
-msgstr "ਜੰਤਰ ਕੈਲੀਬਰੇਟ ਕਰਨ ਲਈ ਫੇਲ੍ਹ"
-
-#. TRANSLATORS: could not calibrate
-#: ../src/cc-color-panel.c:366
-msgid "Failed to calibrate printer"
-msgstr "ਪਰਿੰਟਰ ਕੈਲੀਬਰੇਟ ਕਰਨ ਲਈ ਫੇਲ੍ਹ"
-
-#. TRANSLATORS: dialog for file->open dialog
-#: ../src/cc-color-panel.c:391 ../src/mcm-calibrate.c:872
-#: ../src/mcm-viewer.c:337
-msgid "Select ICC Profile File"
-msgstr "ICC ਪਰੋਫਾਇਲ ਫਾਇਲ ਚੁਣੋ"
-
-#: ../src/cc-color-panel.c:394 ../src/mcm-viewer.c:340
-msgid "Import"
-msgstr "ਇੰਪੋਰਟ"
-
-#. TRANSLATORS: filter name on the file->open dialog
-#: ../src/cc-color-panel.c:412 ../src/mcm-viewer.c:358
-msgid "Supported ICC profiles"
-msgstr "ਸਹਾਇਕ ICC ਪਰੋਫਾਇਲ"
-
-#. TRANSLATORS: filter name on the file->open dialog
-#: ../src/cc-color-panel.c:419 ../src/mcm-calibrate.c:754
-#: ../src/mcm-calibrate.c:806 ../src/mcm-viewer.c:365
-msgid "All files"
-msgstr "ਸਭ ਫਾਇਲਾਂ"
-
-#. TRANSLATORS: could not read file
-#: ../src/cc-color-panel.c:455 ../src/mcm-import.c:221 ../src/mcm-viewer.c:401
-msgid "Failed to copy file"
-msgstr "ਫਾਇਲ ਕਾਪੀ ਕਰਨ ਲਈ ਫੇਲ੍ਹ"
-
-#: ../src/cc-color-panel.c:483
-msgid "Failed to get metadata from image"
-msgstr "ਚਿੱਤਰ ਤੋਂ ਮੇਟਾਡਾਟਾ ਲੈਣ ਲਈ ਫੇਲ੍ਹ"
-
-#. TRANSLATORS: could not add virtual device
-#: ../src/cc-color-panel.c:500 ../src/cc-color-panel.c:1159
-msgid "Failed to create virtual device"
-msgstr "ਵੁਰਚੁਅਲ ਜੰਤਰ ਬਣਾਉਣ ਲਈ ਫੇਲ੍ਹ ਹੈ"
-
-#. TRANSLATORS: could not add virtual device
-#: ../src/cc-color-panel.c:508 ../src/cc-color-panel.c:1167
-msgid "Failed to save virtual device"
-msgstr "ਵੁਰਚੁਅਲ ਜੰਤਰ ਸੰਭਾਲਣ ਲਈ ਫੇਲ੍ਹ"
-
-#. TRANSLATORS: could not add virtual device
-#: ../src/cc-color-panel.c:517 ../src/cc-color-panel.c:1176
-msgid "Failed to add virtual device"
-msgstr "ਵੁਰਚੁਅਲ ਜੰਤਰ ਸ਼ਾਮਲ ਕਰਨ ਲਈ ਫੇਲ੍ਹ"
-
-#. TRANSLATORS: title, usually we can tell based on the EDID data or output name
-#: ../src/cc-color-panel.c:699
-msgid "Install calibration and profiling software?"
-msgstr "ਕੈਲੀਬਰੇਸ਼ਨ ਤੇ ਪਰੋਫਾਇਲਿੰਗ ਸਾਫਟਵੇਅਰ ਇੰਸਟਾਲ ਕਰਨਾ ਹੈ?"
-
-#. TRANSLATORS: dialog message saying the argyllcms is not installed
-#: ../src/cc-color-panel.c:703
-msgid "Calibration and profiling software is not installed."
-msgstr "ਕੈਲੀਬਰੇਸ਼ਨ ਤੇ ਪਰੋਫਾਇਲਿੰਗ ਸਾਫਟਵੇਅਰ ਇੰਸਟਾਲ ਨਹੀਂ ਹੈ।"
-
-#. TRANSLATORS: dialog message saying the color targets are not installed
-#: ../src/cc-color-panel.c:705
-msgid "These tools are required to build color profiles for devices."
-msgstr "ਇਹ ਟੂਲ ਜੰਤਰਾਂ ਲਈ ਰੰਗ ਪਰੋਫਾਇਲ ਬਣਾਉਣ ਲਈ ਚਾਹੀਦੇ ਹਨ।"
-
-#. TRANSLATORS: button, skip installing a package
-#: ../src/cc-color-panel.c:710 ../src/mcm-calibrate.c:1041
-msgid "Do not install"
-msgstr "ਨਾ ਇੰਸਟਾਲ ਕਰੋ"
-
-#. TRANSLATORS: button, install a package
-#. TRANSLATORS: button text
-#: ../src/cc-color-panel.c:712 ../src/mcm-calibrate.c:1043
-#: ../src/mcm-import.c:200
-msgid "Install"
-msgstr "ਇੰਸਟਾਲ"
-
-#. TRANSLATORS: this is the application name for libcanberra
-#: ../src/cc-color-panel.c:829 ../src/cc-color-panel.c:1981
-#: ../src/mcm-calibrate-argyll.c:2312 ../src/mcm-calibrate-argyll.c:2362
-#: ../src/mcm-calibrate-argyll.c:2417 ../src/mcm-calibrate-argyll.c:2493
-#: ../src/mcm-calibrate-argyll.c:2574 ../src/mcm-calibrate-argyll.c:2615
-msgid "MATE Color Manager"
-msgstr "ਗਨੋਮ ਰੰਗ ਮੈਨੇਜਰ"
-
-#. TRANSLATORS: this is the sound description
-#: ../src/cc-color-panel.c:831
-msgid "Profiling completed"
-msgstr "ਪਰੋਫਾਇਲਿੰਗ ਪੂਰੀ ਹੋਈ"
-
-#. TRANSLATORS: could not read file
-#: ../src/cc-color-panel.c:1282
-msgid "Failed to delete file"
-msgstr "ਫਾਇਲ ਹਟਾਉਣ ਲਈ ਫੇਲ੍ਹ"
-
-#. TRANSLATORS: this is when the button is sensitive
-#: ../src/cc-color-panel.c:1378
-msgid "Create a color profile for the selected device"
-msgstr "ਚੁਣੇ ਜੰਤਰਾਂ ਲਈ ਰੰਗ ਪਰੋਫਾਇਲ ਬਣਾਉ।"
-
-#. TRANSLATORS: this is when the button is insensitive
-#: ../src/cc-color-panel.c:1383
-#, fuzzy
-#| msgid "Cannot profile: No device is selected"
-msgid "Cannot create profile: No device is selected"
-msgstr "ਪਰੋਫਾਇਲ ਨਹੀਂ ਹੋ ਸਕਦਾ: ਕੋਈ ਜੰਤਰ ਨਹੀਂ ਚੁਣਿਆ"
-
-#. TRANSLATORS: this is when the button is insensitive because the distro compiled MCM without VTE
-#: ../src/cc-color-panel.c:1394
-msgid "Cannot create profile: Virtual console support is missing"
-msgstr ""
-
-#. TRANSLATORS: this is when the button is insensitive
-#: ../src/cc-color-panel.c:1406
-#, fuzzy
-#| msgid "Cannot calibrate: The display device is not connected"
-msgid "Cannot create profile: The display device is not connected"
-msgstr "ਕੈਲੀਬਰੇਸ਼ਨ ਨਹੀਂ: ਡਿਸਪਲੇਅ ਜੰਤਰ ਕੁਨੈਕਟ ਨਹੀਂ ਹੈ"
-
-#. TRANSLATORS: this is when the button is insensitive
-#: ../src/cc-color-panel.c:1414
-#, fuzzy
-#| msgid "Cannot calibrate: The display driver does not support XRandR 1.3"
-msgid "Cannot create profile: The display driver does not support XRandR 1.3"
-msgstr "ਕੈਲੀਬਰੇਸ਼ਨ ਨਹੀਂ: ਡਿਸਪਲੇਅ ਜੰਤਰ XRandR ੧.੩ ਲਈ ਸਹਾਇਕ ਨਹੀਂ"
-
-#. TRANSLATORS: this is when the button is insensitive
-#: ../src/cc-color-panel.c:1422 ../src/cc-color-panel.c:1437
-#, fuzzy
-#| msgid "Cannot profile: The measuring instrument is not plugged in"
-msgid "Cannot create profile: The measuring instrument is not plugged in"
-msgstr "ਪਰੋਫਾਇਲ ਨਹੀਂ: ਮਾਪ ਜੰਤਰ ਦਾ ਪਲੱਗ ਨਹੀਂ ਲਾਇਆ"
-
-#. TRANSLATORS: this is when the button is insensitive
-#: ../src/cc-color-panel.c:1445
-#, fuzzy
-#| msgid ""
-#| "Cannot profile: The measuring instrument does not support printer "
-#| "profiling"
-msgid ""
-"Cannot create profile: The measuring instrument does not support printer "
-"profiling"
-msgstr "ਪਰੋਫਾਇਲ ਨਹੀਂ: ਮਾਪ ਜੰਤਰ ਪਰਿੰਟਿੰਗ ਪਰੋਫਾਇਲਿੰਗ ਲਈ ਸਹਾਇਕ ਨਹੀਂ"
-
-#. TRANSLATORS: this is when the button is insensitive
-#: ../src/cc-color-panel.c:1452
-#, fuzzy
-#| msgid "Cannot profile this type of device"
-msgid "Cannot create a profile for this type of device"
-msgstr "ਇਸ ਕਿਸਮ ਦੇ ਜੰਤਰ ਲਈ ਪਰੋਫਾਇਲ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਦਾ"
-
-#: ../src/cc-color-panel.c:1534
-msgid "Per-device settings not supported. Check your display driver."
-msgstr ""
-
-#. TRANSLATORS: this is where an output is not settable, but we are showing it in the UI
-#: ../src/cc-color-panel.c:1762
-msgid "No hardware support"
-msgstr "ਕੋਈ ਹਾਰਡਵੇਅਰ ਸਹਿਯੋਗ"
-
-#. TRANSLATORS: this is where the device has been setup but is not connected
-#: ../src/cc-color-panel.c:1766 ../src/cc-color-panel.c:2033
-msgid "disconnected"
-msgstr "ਡਿਸ-ਕੁਨੈਕਟ ਹੈ"
-
-#. TRANSLATORS: the profile was of the wrong sort for this device
-#: ../src/cc-color-panel.c:1885
-msgid "Could not import profile"
-msgstr "ਪਰੋਫਾਇਲ ਇੰਪੋਰਟ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਿਆ"
-
-#: ../src/cc-color-panel.c:1886
-msgid "The profile was of the wrong type for this device"
-msgstr ""
-
-#. TRANSLATORS: this is a sound description
-#: ../src/cc-color-panel.c:1969
-msgid "Device added"
-msgstr "ਜੰਤਰ ਜੋੜਿਆ"
-
-#. TRANSLATORS: this is a sound description
-#: ../src/cc-color-panel.c:1973
-msgid "Device removed"
-msgstr "ਜੰਤਰ ਹਟਾਇਆ"
-
-#. TRANSLATORS: this is when there are no profiles that can be used; the search term is either "RGB" or "CMYK"
-#: ../src/cc-color-panel.c:2216 ../src/mcm-picker.c:518
-#, c-format
-msgid "No %s color spaces available"
-msgstr "%s ਰੰਗ ਸਪੇਸ ਉਪਲੱਬਧ ਨਹੀਂ"
-
-#. TRANSLATORS: device type
-#: ../src/cc-color-panel.c:2537 ../data/mcm-prefs.ui.h:26
-msgid "Display"
-msgstr "ਡਿਸਪਲੇਅ"
-
-#. TRANSLATORS: device type
-#: ../src/cc-color-panel.c:2541
-msgid "Scanner"
-msgstr "ਸਕੈਨਰ"
-
-#. TRANSLATORS: device type
-#: ../src/cc-color-panel.c:2545
-msgid "Printer"
-msgstr "ਪਰਿੰਟਰ"
-
-#. TRANSLATORS: device type
-#: ../src/cc-color-panel.c:2549
-msgid "Camera"
-msgstr "ਕੈਮਰਾ"
-
-#. TRANSLATORS: button for more details about the vcgt failure
-#: ../src/cc-color-panel.c:2829
-msgid "More Information"
-msgstr "ਹੋਰ ਜਾਣਕਾਰੀ"
-
-#. TRANSLATORS: button to install extra profiles
-#: ../src/cc-color-panel.c:2832
-msgid "Install now"
-msgstr "ਹੁਣੇ ਇੰਸਟਾਲ ਕਰੋ"
-
-#. TRANSLATORS: this is displayed while the devices are being probed
-#: ../src/cc-color-panel.c:2835
-msgid "Loading list of devices…"
-msgstr "ਜੰਤਰਾਂ ਦੀ ਲਿਸਟ ਲੋਡ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ…"
-
-#. TRANSLATORS: this is displayed when the profile is crap
-#: ../src/cc-color-panel.c:2842
-msgid ""
-"This profile does not have the information required for whole-screen color "
-"correction."
-msgstr ""
-
-#. TRANSLATORS: this is displayed when the profile is crap
-#: ../src/cc-color-panel.c:2850
-msgid "More color profiles could be automatically installed."
-msgstr "ਹੋਰ ਰੰਗ ਪਰੋਫਾਇਲ ਆਟੋਮੈਟਿਕ ਇੰਸਟਾਲ ਕੀਤੇ ਜਾ ਸਕਦੇ ਹਨ।"
-
-#. TRANSLATORS: we use this mode at login as we're sure there are no previous settings to clear
-#: ../src/mcm-apply.c:54
-msgid "Do not attempt to clear previously applied settings"
-msgstr ""
-
 #. TRANSLATORS: title, default paramters needed to calibrate_argyll
-#: ../src/mcm-calibrate-argyll.c:453
+#: ../src/mcm-calibrate-argyll.c:402
 msgid "Getting default parameters"
 msgstr "ਡਿਫਾਲਟ ਪੈਰਾਮੀਟਰ ਲਏ ਜਾ ਰਹੇ ਹਨ"
 
 #. TRANSLATORS: dialog message
-#: ../src/mcm-calibrate-argyll.c:456
+#: ../src/mcm-calibrate-argyll.c:405
 msgid ""
 "This pre-calibrates the screen by sending colored and gray patches to your "
 "screen and measuring them with the hardware device."
 msgstr ""
 
 #. TRANSLATORS: title, patches are specific colours used in calibration
-#: ../src/mcm-calibrate-argyll.c:549
+#: ../src/mcm-calibrate-argyll.c:496
 msgid "Reading the patches"
 msgstr "ਪੈਚ ਪੜ੍ਹੇ ਜਾ ਰਹੇ ਹਨ"
 
 #. TRANSLATORS: dialog message
-#: ../src/mcm-calibrate-argyll.c:551
+#: ../src/mcm-calibrate-argyll.c:498
 msgid "Reading the patches using the color measuring instrument."
 msgstr ""
 
 #. TRANSLATORS: title, patches are specific colours used in calibration
-#: ../src/mcm-calibrate-argyll.c:641
+#: ../src/mcm-calibrate-argyll.c:584
 msgid "Generating the patches"
 msgstr "ਪੈਚ ਬਣਾਏ ਜਾ ਰਹੇ ਹਨ"
 
 #. TRANSLATORS: dialog message
-#: ../src/mcm-calibrate-argyll.c:643
+#: ../src/mcm-calibrate-argyll.c:586
 msgid "Generating the patches that will be measured with the color instrument."
 msgstr ""
 
 #. TRANSLATORS: title, drawing means painting to the screen
-#: ../src/mcm-calibrate-argyll.c:750
+#: ../src/mcm-calibrate-argyll.c:691
 msgid "Drawing the patches"
 msgstr "ਪੈਚ ਵਾਹੇ ਜਾ ਰਹੇ ਹਨ"
 
 #. TRANSLATORS: dialog message
-#: ../src/mcm-calibrate-argyll.c:752
+#: ../src/mcm-calibrate-argyll.c:693
 msgid ""
 "Drawing the generated patches to the screen, which will then be measured by "
 "the hardware device."
@@ -391,617 +247,618 @@ msgstr ""
 
 #. TRANSLATORS: this is the copyright string, where it might be "Copyright (c) 2009 Edward Scissorhands" - YOU NEED TO STICK TO ASCII
 #. TRANSLATORS: this is the copyright string, where it might be "Copyright (c) 2009 Edward Scissorhands"
-#: ../src/mcm-calibrate-argyll.c:862 ../src/mcm-calibrate-argyll.c:1204
+#: ../src/mcm-calibrate-argyll.c:801 ../src/mcm-calibrate-argyll.c:1141
 msgid "Copyright (c)"
 msgstr "Copyright (c)"
 
 #. TRANSLATORS: title, a profile is a ICC file
-#: ../src/mcm-calibrate-argyll.c:865 ../src/mcm-calibrate-argyll.c:1207
+#: ../src/mcm-calibrate-argyll.c:804 ../src/mcm-calibrate-argyll.c:1144
 msgid "Generating the profile"
 msgstr "ਪਰੋਫਾਇਲ ਤਿਆਰ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ"
 
 #. TRANSLATORS: dialog message
-#: ../src/mcm-calibrate-argyll.c:867
+#: ../src/mcm-calibrate-argyll.c:806
 msgid "Generating the ICC color profile that can be used with this screen."
 msgstr ""
 
 #. TRANSLATORS: title, a profile is a ICC file
-#: ../src/mcm-calibrate-argyll.c:1004
+#: ../src/mcm-calibrate-argyll.c:940
 msgid "Copying files"
 msgstr "ਫਾਇਲਾਂ ਕਾਪੀ ਕੀਤੀਆਂ ਜਾ ਰਹੀਆਂ ਹਨ"
 
 #. TRANSLATORS: dialog message
-#: ../src/mcm-calibrate-argyll.c:1006
+#: ../src/mcm-calibrate-argyll.c:942
 msgid "Copying source image, chart data and CIE reference values."
 msgstr ""
 
 #. TRANSLATORS: title, drawing means painting to the screen
-#: ../src/mcm-calibrate-argyll.c:1081
+#: ../src/mcm-calibrate-argyll.c:1020
 msgid "Measuring the patches"
 msgstr "ਪੈਚ ਮਾਪੇ ਜਾ ਰਹੇ ਹਨ"
 
 #. TRANSLATORS: dialog message
-#: ../src/mcm-calibrate-argyll.c:1083
+#: ../src/mcm-calibrate-argyll.c:1022
 msgid "Detecting the reference patches and measuring them."
 msgstr ""
 
 #. TRANSLATORS: dialog message
-#: ../src/mcm-calibrate-argyll.c:1209
+#: ../src/mcm-calibrate-argyll.c:1146
 msgid "Generating the ICC color profile that can be used with this device."
 msgstr ""
 
 #. TRANSLATORS: title, hardware refers to a calibration device
-#: ../src/mcm-calibrate-argyll.c:1400
+#: ../src/mcm-calibrate-argyll.c:1335
 msgid "Set up display"
 msgstr "ਡਿਸਪਲੇਅ ਸੈਟਅੱਪ ਕਰੋ"
 
 #. TRANSLATORS: dialog message
-#: ../src/mcm-calibrate-argyll.c:1403
+#: ../src/mcm-calibrate-argyll.c:1338
 msgid "Setting up display device for use…"
 msgstr "ਡਿਸਪਲੇਅ ਜੰਤਰ ਵਰਤਣ ਲਈ ਸੈਟਅੱਪ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ..."
 
-#. TRANSLATORS: title, setting up the photospectromiter
-#: ../src/mcm-calibrate-argyll.c:1465
-msgid "Setting up device"
-msgstr "ਜੰਤਰ ਸੈੱਟਅੱਪ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ"
-
-#. TRANSLATORS: dialog message
-#: ../src/mcm-calibrate-argyll.c:1467
-msgid "Setting up the device to read a spot color…"
-msgstr "ਜੰਤਰ ਨੂੰ ਸਪੋਟ ਰੰਗ ਪੜ੍ਹਨ ਲਈ ਸੈਟਅੱਪ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ…"
-
 #. TRANSLATORS: title, patches are specific colors used in calibration
-#: ../src/mcm-calibrate-argyll.c:1614
+#: ../src/mcm-calibrate-argyll.c:1439
 msgid "Printing patches"
 msgstr "ਪੈਚ ਪਰਿੰਟ ਕੀਤੇ ਜਾ ਰਹੇ ਹਨ"
 
 #. TRANSLATORS: dialog message
-#: ../src/mcm-calibrate-argyll.c:1617
+#: ../src/mcm-calibrate-argyll.c:1442
 msgid "Rendering the patches for the selected paper and ink."
 msgstr ""
 
 #. TRANSLATORS: title, patches are specific colours used in calibration
-#: ../src/mcm-calibrate-argyll.c:1959
+#: ../src/mcm-calibrate-argyll.c:1783
 msgid "Wait for the ink to dry"
 msgstr "ਸਿਆਹੀ ਨੂੰ ਸੁੱਕਣ ਤੱਕ ਉਡੀਕੋ"
 
 #. TRANSLATORS: dialog message
-#: ../src/mcm-calibrate-argyll.c:1962
+#: ../src/mcm-calibrate-argyll.c:1786
 msgid ""
 "Please wait a few minutes for the ink to dry. Profiling damp ink will "
 "produce a poor profile and may damage your color measuring instrument."
 msgstr ""
 
 #. TRANSLATORS: the supplied image contains an alpha channel which we have to strip out
-#: ../src/mcm-calibrate-argyll.c:2104
+#: ../src/mcm-calibrate-argyll.c:1929
 msgid "Image is not suitable without conversion"
 msgstr "ਚਿੱਤਰ ਬਦਲੇ ਬਿਨਾਂ ਢੁੱਕਵਾਂ ਨਹੀਂ ਹੈ"
 
 #. TRANSLATORS: dialog message
-#: ../src/mcm-calibrate-argyll.c:2107
+#: ../src/mcm-calibrate-argyll.c:1932
 msgid ""
 "The supplied image contains an alpha channel which the profiling tools do "
 "not understand."
 msgstr ""
 
 #. TRANSLATORS: dialog message
-#: ../src/mcm-calibrate-argyll.c:2111
+#: ../src/mcm-calibrate-argyll.c:1936
 msgid ""
 "It is normally safe to convert the image, although you should ensure that "
 "the generated profile is valid."
 msgstr ""
 
 #. TRANSLATORS: button text to convert the RGBA image into RGB
-#: ../src/mcm-calibrate-argyll.c:2118
+#: ../src/mcm-calibrate-argyll.c:1943
 msgid "Convert"
 msgstr "ਬਦਲੋ"
 
 #. TRANSLATORS: title, instrument refers to a calibration device
-#: ../src/mcm-calibrate-argyll.c:2176
+#: ../src/mcm-calibrate-argyll.c:2002
 msgid "Set up instrument"
-msgstr "ਸੰਦ ਸੈੱਟਅੱਪ"
+msgstr ""
 
 #. TRANSLATORS: dialog message
-#: ../src/mcm-calibrate-argyll.c:2179
+#: ../src/mcm-calibrate-argyll.c:2005
 msgid "Setting up the instrument for use…"
-msgstr "ਜੰਤਰ ਵਰਤਣ ਲਈ ਸੈਟਅੱਪ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ..."
+msgstr ""
 
 #. TRANSLATORS: title, instrument is a hardware color calibration sensor
-#: ../src/mcm-calibrate-argyll.c:2278
+#: ../src/mcm-calibrate-argyll.c:2098
 msgid "Please attach instrument"
-msgstr "ਸੰਦ ਜੋੜੋ ਜੀ"
+msgstr ""
 
 #. TRANSLATORS: dialog message, ask user to attach device, and there's an example image
-#: ../src/mcm-calibrate-argyll.c:2286
+#: ../src/mcm-calibrate-argyll.c:2106
 msgid ""
 "Please attach the measuring instrument to the center of the screen on the "
 "gray square like the image below."
 msgstr ""
 
 #. TRANSLATORS: dialog message, ask user to attach device
-#: ../src/mcm-calibrate-argyll.c:2289
+#: ../src/mcm-calibrate-argyll.c:2109
 msgid ""
 "Please attach the measuring instrument to the center of the screen on the "
 "gray square."
 msgstr ""
 
 #. TRANSLATORS: button text
-#: ../src/mcm-calibrate-argyll.c:2302 ../src/mcm-calibrate-argyll.c:2356
-#: ../src/mcm-calibrate-argyll.c:2411
+#: ../src/mcm-calibrate-argyll.c:2122 ../src/mcm-calibrate-argyll.c:2176
+#: ../src/mcm-calibrate-argyll.c:2228
 msgid "Continue"
 msgstr "ਜਾਰੀ ਰੱਖੋ"
 
+#. TRANSLATORS: this is the application name for libcanberra
+#: ../src/mcm-calibrate-argyll.c:2132 ../src/mcm-calibrate-argyll.c:2182
+#: ../src/mcm-calibrate-argyll.c:2234 ../src/mcm-calibrate-argyll.c:2310
+#: ../src/mcm-calibrate-argyll.c:2370 ../src/mcm-calibrate-argyll.c:2411
+#: ../src/mcm-prefs.c:818 ../src/mcm-prefs.c:1987
+msgid "MATE Color Manager"
+msgstr "ਗਨੋਮ ਰੰਗ ਮੈਨੇਜਰ"
+
 #. TRANSLATORS: title, instrument is a hardware color calibration sensor
-#: ../src/mcm-calibrate-argyll.c:2333 ../src/mcm-calibrate-argyll.c:2388
+#: ../src/mcm-calibrate-argyll.c:2153 ../src/mcm-calibrate-argyll.c:2205
 msgid "Please configure instrument"
 msgstr "ਸੰਦ ਸੰਰਚਨਾ ਕਰੋ ਜੀ"
 
 #. TRANSLATORS: this is when the user has to change a setting on the sensor, and we're showing a picture
-#: ../src/mcm-calibrate-argyll.c:2343
+#: ../src/mcm-calibrate-argyll.c:2163
 msgid ""
 "Please set the measuring instrument to calibration mode like the image below."
 msgstr ""
 
 #. TRANSLATORS: this is when the user has to change a setting on the sensor
-#: ../src/mcm-calibrate-argyll.c:2346
+#: ../src/mcm-calibrate-argyll.c:2166
 msgid "Please set the measuring instrument to calibration mode."
 msgstr ""
 
 #. TRANSLATORS: this is when the user has to change a setting on the sensor, and we're showing a picture
-#: ../src/mcm-calibrate-argyll.c:2398
+#: ../src/mcm-calibrate-argyll.c:2215
 msgid ""
-"Please set the measuring instrument to screen mode like the image below."
+"Please set the measuring instrument to screen mode like the image below, and "
+"ensure it is attached to the screen."
 msgstr ""
 
 #. TRANSLATORS: this is when the user has to change a setting on the sensor
-#: ../src/mcm-calibrate-argyll.c:2401
-msgid "Please set the measuring instrument to screen mode."
+#: ../src/mcm-calibrate-argyll.c:2218
+msgid ""
+"Please set the measuring instrument to screen mode, and ensure it is "
+"attached to the screen."
 msgstr ""
 
 #. TRANSLATORS: title, the calibration failed
-#: ../src/mcm-calibrate-argyll.c:2472 ../src/mcm-calibrate-argyll.c:2541
+#: ../src/mcm-calibrate-argyll.c:2289 ../src/mcm-calibrate-argyll.c:2337
 msgid "Calibration error"
 msgstr "ਕੈਲੀਬਰੇਸ਼ਨ ਗਲਤੀ"
 
 #. TRANSLATORS: message, the sample was not read correctly
-#: ../src/mcm-calibrate-argyll.c:2475
+#: ../src/mcm-calibrate-argyll.c:2292
 msgid "The sample could not be read at this time."
 msgstr "ਇਸ ਸਮੇਂ ਨਮੂਨਾ ਪੜ੍ਹਿਆ ਨਹੀਂ ਜਾ ਸਕਿਆ।"
 
 #. TRANSLATORS: button text
-#: ../src/mcm-calibrate-argyll.c:2483
+#: ../src/mcm-calibrate-argyll.c:2300
 msgid "Try again"
 msgstr "ਫੇਰ ਕੋਸ਼ਿਸ਼"
 
 #. TRANSLATORS: message, no firmware is available
-#: ../src/mcm-calibrate-argyll.c:2545
+#: ../src/mcm-calibrate-argyll.c:2341
 msgid "No firmware is installed for this instrument."
 msgstr "ਇਸ ਸੰਦ ਲਈ ਕੋਈ ਫਿਰਮਵੇਅਰ ਇੰਸਟਾਲ ਨਹੀਂ ਹੈ।"
 
 #. TRANSLATORS: message, the image wasn't good enough
-#: ../src/mcm-calibrate-argyll.c:2548
+#: ../src/mcm-calibrate-argyll.c:2344
 msgid ""
 "The pattern match wasn't good enough. Ensure you have the correct type of "
 "target selected."
 msgstr ""
 
 #. TRANSLATORS: message, the sensor got no readings
-#: ../src/mcm-calibrate-argyll.c:2552
+#: ../src/mcm-calibrate-argyll.c:2348
 msgid ""
 "The measuring instrument got no valid readings. Please ensure the aperture "
 "is fully open."
 msgstr ""
 
 #. TRANSLATORS: message, the colorimeter has got confused
-#: ../src/mcm-calibrate-argyll.c:2555
+#: ../src/mcm-calibrate-argyll.c:2351
 msgid ""
 "The measuring instrument is busy and is not starting up. Please remove the "
 "USB plug and re-insert before trying to use this device."
 msgstr ""
 
 #. TRANSLATORS: dialog title
-#: ../src/mcm-calibrate-argyll.c:2593
+#: ../src/mcm-calibrate-argyll.c:2389
 msgid "Reading target"
 msgstr "ਟਾਰਗੇਟ ਪੜ੍ਹਿਆ ਜਾ ਰਿਹਾ ਹੈ"
 
 #. TRANSLATORS: message, no firmware is available
-#: ../src/mcm-calibrate-argyll.c:2596
+#: ../src/mcm-calibrate-argyll.c:2392
 msgid "Failed to read the strip correctly."
 msgstr ""
 
 #. TRANSLATORS: button text
-#. TRANSLATORS: button
-#: ../src/mcm-calibrate-argyll.c:2605 ../src/mcm-calibrate-argyll.c:2679
+#: ../src/mcm-calibrate-argyll.c:2401
 msgid "Retry"
 msgstr "ਮੁੜ-ਕੋਸ਼ਿਸ਼"
 
 #. TRANSLATORS: dialog title, where %s is a letter like 'A'
-#: ../src/mcm-calibrate-argyll.c:2628
+#: ../src/mcm-calibrate-argyll.c:2424
 #, c-format
 msgid "Read strip %s rather than %s!"
 msgstr ""
 
 #. TRANSLATORS: dialog message, just follow the hardware instructions
-#: ../src/mcm-calibrate-argyll.c:2633
+#: ../src/mcm-calibrate-argyll.c:2429
 msgid "It looks like you've measured the wrong strip."
 msgstr ""
 
 #. TRANSLATORS: dialog message, just follow the hardware instructions
-#: ../src/mcm-calibrate-argyll.c:2637
+#: ../src/mcm-calibrate-argyll.c:2433
 msgid ""
 "If you've really measured the right one, it's okay, it could just be unusual "
 "paper."
 msgstr ""
 
 #. TRANSLATORS: button
-#: ../src/mcm-calibrate-argyll.c:2647
+#: ../src/mcm-calibrate-argyll.c:2443
 msgid "Use anyway"
 msgstr "ਕਿਵੇਂ ਵੀ ਵਰਤੋਂ"
 
-#. TRANSLATORS: title, the calibration failed
-#: ../src/mcm-calibrate-argyll.c:2668
-msgid "Device Error"
-msgstr "ਜੰਤਰ ਗਲਤੀ"
-
-#. TRANSLATORS: message, the sample was not read correctly
-#: ../src/mcm-calibrate-argyll.c:2671
-msgid "The device could not measure the color spot correctly."
-msgstr "ਜੰਤਰ ਰੰਗ ਸਪੋਟ ਠੀਕ ਤਰ੍ਹਾਂ ਮਾਪ ਨਹੀਂ ਸਕਿਆ।"
-
 #. TRANSLATORS: dialog title, where %s is a letter like 'A'
-#: ../src/mcm-calibrate-argyll.c:2691
+#: ../src/mcm-calibrate-argyll.c:2455
 #, c-format
 msgid "Ready to read strip %s"
-msgstr "%s ਸਟਰਿੱਪ ਪੜ੍ਹਨ ਲਈ ਤਿਆਰ"
+msgstr ""
 
 #. TRANSLATORS: dialog message, just follow the hardware instructions
-#: ../src/mcm-calibrate-argyll.c:2696
+#: ../src/mcm-calibrate-argyll.c:2460
 msgid ""
 "Place the colorimeter on the area of white next to the letter and click and "
 "hold the measure switch."
 msgstr ""
 
 #. TRANSLATORS: dialog message, just follow the hardware instructions
-#: ../src/mcm-calibrate-argyll.c:2700
+#: ../src/mcm-calibrate-argyll.c:2464
 msgid ""
 "Slowly scan the target line from left to right and release the switch when "
 "you get to the end of the page."
 msgstr ""
 
 #. TRANSLATORS: dialog message, the sensor has to be above the line
-#: ../src/mcm-calibrate-argyll.c:2704
+#: ../src/mcm-calibrate-argyll.c:2468
 msgid ""
 "Ensure the center of the device is properly aligned with the row you are "
 "trying to measure."
 msgstr ""
 
 #. TRANSLATORS: dialog message, just follow the hardware instructions
-#: ../src/mcm-calibrate-argyll.c:2708
+#: ../src/mcm-calibrate-argyll.c:2472
 msgid ""
 "If you make a mistake just release the switch and you'll get a chance to try "
 "again."
 msgstr ""
 
 #. TRANSLATORS: title, printing reference files to media
-#: ../src/mcm-calibrate-argyll.c:2856
+#: ../src/mcm-calibrate-argyll.c:2610
 msgid "Printing"
 msgstr "ਪਰਿੰਟਿੰਗ"
 
 #. TRANSLATORS: dialog message
-#: ../src/mcm-calibrate-argyll.c:2863
+#: ../src/mcm-calibrate-argyll.c:2617
 msgid "Preparing the data for the printer."
 msgstr "ਪਰਿੰਟਰ ਲਈ ਡਾਟਾ ਤਿਆਰ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ।"
 
 #. TRANSLATORS: dialog message
-#: ../src/mcm-calibrate-argyll.c:2869
+#: ../src/mcm-calibrate-argyll.c:2623
 msgid "Sending the targets to the printer."
 msgstr "ਟਾਰਗੇਟ ਪਰਿੰਟਰ ਉੱਤੇ ਭੇਜੇ ਜਾ ਰਹੇ ਹਨ।"
 
 #. TRANSLATORS: dialog message
-#: ../src/mcm-calibrate-argyll.c:2873
+#: ../src/mcm-calibrate-argyll.c:2627
 msgid "Printing the targets..."
 msgstr "ਟਾਰਗੇਟ ਪਰਿੰਟ ਕੀਤੇ ਜਾ ਰਹੇ ਹਨ..."
 
 #. TRANSLATORS: dialog message
-#: ../src/mcm-calibrate-argyll.c:2877
+#: ../src/mcm-calibrate-argyll.c:2631
 msgid "The printing has finished."
 msgstr "ਪਰਿੰਟਿੰਗ ਮੁਕੰਮਲ ਹੋਈ।"
 
 #. TRANSLATORS: dialog message
-#: ../src/mcm-calibrate-argyll.c:2881
+#: ../src/mcm-calibrate-argyll.c:2635
 msgid "The print was aborted."
 msgstr "ਪਰਿੰਟ ਅਧੂਰਾ ਛੱਡਿਆ।"
 
 #. TRANSLATORS: this is saved in the profile
-#: ../src/mcm-calibrate.c:140
+#: ../src/mcm-calibrate.c:134
 msgid "Unknown model"
 msgstr "ਅਣਜਾਣ ਮਾਡਲ"
 
 #. TRANSLATORS: this is saved in the profile
-#: ../src/mcm-calibrate.c:154
+#: ../src/mcm-calibrate.c:148
 msgid "Unknown description"
 msgstr "ਅਣਜਾਣ ਵੇਰਵਾ"
 
 #. TRANSLATORS: this is saved in the profile
-#: ../src/mcm-calibrate.c:168
+#: ../src/mcm-calibrate.c:162
 msgid "Unknown manufacturer"
 msgstr "ਅਣਜਾਣ ਨਿਰਮਾਤਾ"
 
 #. TRANSLATORS: this is saved in the profile
-#: ../src/mcm-calibrate.c:182
+#: ../src/mcm-calibrate.c:176
 msgid "Unknown device"
 msgstr "ਅਣਜਾਣ ਜੰਤਰ"
 
 #. TRANSLATORS: title, usually we can tell based on the EDID data or output name
-#: ../src/mcm-calibrate.c:394
+#: ../src/mcm-calibrate.c:382
 msgid "Could not detect screen type"
 msgstr "ਸਕਰੀਨ ਕਿਸਮ ਖੋਜੀ ਨਹੀਂ ਜਾ ਸਕੀ"
 
 #. TRANSLATORS: dialog message
-#: ../src/mcm-calibrate.c:397
+#: ../src/mcm-calibrate.c:385
 msgid ""
 "Please indicate if the screen you are trying to profile is an LCD, CRT or a "
 "projector."
 msgstr ""
 
 #. TRANSLATORS: title, the hardware calibration device does not support projectors
-#: ../src/mcm-calibrate.c:422
+#: ../src/mcm-calibrate.c:410
 msgid "Could not calibrate and profile using this color measuring instrument"
 msgstr ""
 
 #. TRANSLATORS: dialog message
-#: ../src/mcm-calibrate.c:425
+#: ../src/mcm-calibrate.c:413
 msgid ""
 "This color measuring instrument is not designed to support calibration and "
 "profiling projectors."
 msgstr ""
 
 #. TRANSLATORS: dialog title
-#: ../src/mcm-calibrate.c:486
+#: ../src/mcm-calibrate.c:474
 msgid "Profile Precision"
 msgstr "ਪਰੋਫਾਇਲ ਸ਼ੁੱਧਤਾ"
 
 #. TRANSLATORS: this is the message body for the chart selection
-#: ../src/mcm-calibrate.c:489
+#: ../src/mcm-calibrate.c:477
 msgid ""
 "A higher precision profile provides higher accuracy in color matching but "
 "requires more time for reading the color patches."
 msgstr ""
 
 #. TRANSLATORS: this is the message body for the chart selection
-#: ../src/mcm-calibrate.c:492
+#: ../src/mcm-calibrate.c:480
 msgid "For a typical workflow, a normal precision profile is sufficient."
 msgstr ""
 
 #. TRANSLATORS: dialog message, preface
-#: ../src/mcm-calibrate.c:497
+#: ../src/mcm-calibrate.c:485
 msgid "The high precision profile also requires more paper and printer ink."
 msgstr ""
 
 #. TRANSLATORS: this is the formattted custom profile description. "Custom" refers to the fact that it's user generated
-#: ../src/mcm-calibrate.c:601
+#: ../src/mcm-calibrate.c:559
 msgid "Custom"
 msgstr "ਕਸਟਮ"
 
 #. TRANSLATORS: dialog message, preface
-#: ../src/mcm-calibrate.c:632
+#: ../src/mcm-calibrate.c:591
 msgid ""
 "Before calibrating the display, it is recommended to configure your display "
 "with the following settings to get optimal results."
 msgstr ""
 
 #. TRANSLATORS: dialog message, preface
-#: ../src/mcm-calibrate.c:635
+#: ../src/mcm-calibrate.c:594
 msgid ""
 "You may want to consult the owner's manual for your display on how to "
 "achieve these settings."
 msgstr ""
 
 #. TRANSLATORS: dialog message, bullet item
-#: ../src/mcm-calibrate.c:638
+#: ../src/mcm-calibrate.c:597
 msgid "Reset your display to the factory defaults."
 msgstr ""
 
 #. TRANSLATORS: dialog message, bullet item
-#: ../src/mcm-calibrate.c:641
+#: ../src/mcm-calibrate.c:600
 msgid "Disable dynamic contrast if your display has this feature."
 msgstr ""
 
 #. TRANSLATORS: dialog message, bullet item
-#: ../src/mcm-calibrate.c:644
+#: ../src/mcm-calibrate.c:603
 msgid ""
 "Configure your display with custom color settings and ensure the RGB "
 "channels are set to the same values."
 msgstr ""
 
 #. TRANSLATORS: dialog message, addition to bullet item
-#: ../src/mcm-calibrate.c:647
+#: ../src/mcm-calibrate.c:606
 msgid "If custom color is not available then use a 6500K color temperature."
 msgstr ""
 
 #. TRANSLATORS: dialog message, bullet item
-#: ../src/mcm-calibrate.c:650
+#: ../src/mcm-calibrate.c:609
 msgid ""
 "Adjust the display brightness to a comfortable level for prolonged viewing."
 msgstr ""
 
 #. TRANSLATORS: dialog message, suffix
-#: ../src/mcm-calibrate.c:653
+#: ../src/mcm-calibrate.c:612
 msgid ""
 "For best results, the display should have been powered for at least 15 "
 "minutes before starting the calibration."
 msgstr ""
 
-#: ../src/mcm-calibrate.c:657
+#: ../src/mcm-calibrate.c:616
 msgid "Display setup"
 msgstr "ਡਿਸਪਲੇਅ ਸੈਟਅੱਪ"
 
-#. TRANSLATORS: dialog for file->open dialog. A calibration target image is the
-#. * aquired image of the calibration target, e.g. an image file that looks
-#. * a bit like this: http://www.colorreference.de/targets/target.jpg
-#: ../src/mcm-calibrate.c:734
-#, fuzzy
-#| msgid "Recalibration required"
-msgid "Select calibration target image"
-msgstr "ਮੁੜ-ਕੈਲੀਬਰੇਟ ਕਰਨ ਦੀ ਲੋੜ"
+#. TRANSLATORS: dialog for file->open dialog
+#: ../src/mcm-calibrate.c:691
+msgid "Select reference image"
+msgstr "ਰੈਫਰੈਂਸ ਚਿੱਤਰ ਚੁਣੋ"
 
 #. TRANSLATORS: filter name on the file->open dialog
-#: ../src/mcm-calibrate.c:747
+#: ../src/mcm-calibrate.c:704
 msgid "Supported images files"
 msgstr "ਸਹਾਇਕ ਚਿੱਤਰ ਫਾਇਲਾਂ"
 
+#. TRANSLATORS: filter name on the file->open dialog
+#: ../src/mcm-calibrate.c:711 ../src/mcm-calibrate.c:763
+#: ../src/mcm-prefs.c:544
+msgid "All files"
+msgstr "ਸਭ ਫਾਇਲਾਂ"
+
 #. TRANSLATORS: dialog for file->open dialog
-#: ../src/mcm-calibrate.c:779
+#: ../src/mcm-calibrate.c:736
 msgid "Select CIE reference values file"
 msgstr ""
 
 #. TRANSLATORS: filter name on the file->open dialog
-#: ../src/mcm-calibrate.c:799
+#: ../src/mcm-calibrate.c:756
 msgid "CIE values"
 msgstr "CIE ਮੁੱਲ"
 
-#: ../src/mcm-calibrate.c:875
+#. TRANSLATORS: dialog for file->open dialog
+#: ../src/mcm-calibrate.c:829 ../src/mcm-prefs.c:516
+msgid "Select ICC Profile File"
+msgstr "ICC ਪਰੋਫਾਇਲ ਫਾਇਲ ਚੁਣੋ"
+
+#: ../src/mcm-calibrate.c:832
 msgid "Open"
 msgstr "ਖੋਲ੍ਹੋ"
 
 #. TRANSLATORS: title, you can profile all at once, or in steps
-#: ../src/mcm-calibrate.c:911
+#: ../src/mcm-calibrate.c:868
 msgid "Please choose a profiling mode"
 msgstr "ਪਰੋਫਾਇਲਿੰਗ ਮੋਡ ਚੁਣੋ ਜੀ"
 
-#. TRANSLATORS: dialog message. Test patches are pages of colored squares
-#. * that are printed with a printer, and then read in with a calibration
-#. * device to create a profile
-#: ../src/mcm-calibrate.c:916
+#. TRANSLATORS: dialog message
+#: ../src/mcm-calibrate.c:871
 msgid ""
-"Please indicate if you want to profile a local printer, generate some test "
-"patches, or profile using existing test patches."
+"Please indicate if you want to profile a local printer, generate some "
+"reference images, or process some reference images."
 msgstr ""
 
 #. TRANSLATORS: title, usually we can tell based on the EDID data or output name
-#: ../src/mcm-calibrate.c:1027
+#: ../src/mcm-calibrate.c:983
 msgid "Install missing files?"
 msgstr "ਗੁੰਮ ਫਾਇਲਾਂ ਇੰਸਟਾਲ ਕਰਨੀਆਂ ਹਨ?"
 
 #. TRANSLATORS: dialog message saying the color targets are not installed
-#: ../src/mcm-calibrate.c:1030
+#: ../src/mcm-calibrate.c:986
 msgid "Common color target files are not installed on this computer."
-msgstr "ਇਸ ਕੰਪਿਊਟਰ ਉੱਤੇ ਆਮ ਰੰਗ ਟਾਰਗੇਟ ਫਾਇਲਾਂ ਇੰਸਟਾਲ ਨਹੀਂ ਹਨ।"
+msgstr ""
 
 #. TRANSLATORS: dialog message saying the color targets are not installed
-#: ../src/mcm-calibrate.c:1032
+#: ../src/mcm-calibrate.c:988
 msgid "Color target files are needed to convert the image to a color profile."
 msgstr ""
 
 #. TRANSLATORS: dialog message, asking if it's okay to install them
-#: ../src/mcm-calibrate.c:1034
+#: ../src/mcm-calibrate.c:990
 msgid "Do you want them to be installed?"
 msgstr "ਕੀ ਤੁਸੀਂ ਉਹਨਾਂ ਨੂੰ ਇੰਸਟਾਲ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ?"
 
 #. TRANSLATORS: dialog message, if the user has the target file on a CDROM then there's no need for this package
-#: ../src/mcm-calibrate.c:1036
+#: ../src/mcm-calibrate.c:992
 msgid "If you already have the correct file, you can skip this step."
-msgstr "ਜੇ ਤੁਹਾਡੇ ਕੋਲ ਪਹਿਲਾਂ ਹੀ ਠੀਕ ਫਾਇਲ ਹੈ, ਤੁਸੀਂ ਇਹ ਸਟੈਪ ਛੱਡ ਸਕਦੇ ਹੋ।"
+msgstr ""
 
-#. TRANSLATORS: this is the window title for when the user selects the calibration target.
-#. * A calibration target is an accuratly printed grid of colors, for instance:
-#. * the IT 8.7 targets available here: http://www.targets.coloraid.de/
-#: ../src/mcm-calibrate.c:1058
-#, fuzzy
-#| msgid "Please select chart type"
-msgid "Please select a calibration target"
+#. TRANSLATORS: button, skip installing a package
+#: ../src/mcm-calibrate.c:997 ../src/mcm-prefs.c:699
+msgid "Do not install"
+msgstr "ਨਾ ਇੰਸਟਾਲ ਕਰੋ"
+
+#. TRANSLATORS: button, install a package
+#. TRANSLATORS: button text
+#. TRANSLATORS: button, install a package
+#: ../src/mcm-calibrate.c:999 ../src/mcm-import.c:188 ../src/mcm-prefs.c:701
+msgid "Install"
+msgstr "ਇੰਸਟਾਲ"
+
+#. TRANSLATORS: this is the window title for when the user selects the chart type.
+#. A chart is a type of reference image the user has purchased.
+#: ../src/mcm-calibrate.c:1013
+msgid "Please select chart type"
 msgstr "ਚਾਰਟ ਕਿਸਮ ਚੁਣੋ ਜੀ"
 
-#. TRANSLATORS: dialog message, preface. A calibration target looks like
-#. * this: http://www.colorreference.de/targets/target.jpg
-#: ../src/mcm-calibrate.c:1063
+#. TRANSLATORS: dialog message, preface
+#: ../src/mcm-calibrate.c:1017
 msgid ""
 "Before profiling the device, you have to manually capture an image of a "
-"calibration target and save it as a TIFF image file."
+"calibrated target and save it as a TIFF image file."
 msgstr ""
 
 #. TRANSLATORS: dialog message, preface
-#: ../src/mcm-calibrate.c:1068
+#: ../src/mcm-calibrate.c:1022
 msgid ""
 "Ensure that the contrast and brightness are not changed and color correction "
 "profiles are not applied."
 msgstr ""
 
 #. TRANSLATORS: dialog message, suffix
-#: ../src/mcm-calibrate.c:1071
+#: ../src/mcm-calibrate.c:1025
 msgid ""
 "The device sensor should have been cleaned prior to scanning and the output "
 "file resolution should be at least 200dpi."
 msgstr ""
 
 #. TRANSLATORS: dialog message, preface
-#: ../src/mcm-calibrate.c:1077
+#: ../src/mcm-calibrate.c:1031
 msgid ""
 "Ensure that the white-balance has not been modified by the camera and that "
 "the lens is clean."
 msgstr ""
 
 #. TRANSLATORS: dialog message, suffix
-#: ../src/mcm-calibrate.c:1081
+#: ../src/mcm-calibrate.c:1035
 msgid ""
 "For best results, the reference target should also be less than two years "
 "old."
 msgstr ""
 
 #. TRANSLATORS: this is the message body for the chart selection
-#: ../src/mcm-calibrate.c:1084
-msgid ""
-"Please select the calibration target type which corresponds to your "
-"reference file."
+#: ../src/mcm-calibrate.c:1038
+msgid "Please select the chart type which corresponds to your reference file."
 msgstr ""
 
 #. TRANSLATORS: this is probably a brand name
-#: ../src/mcm-calibrate-dialog.c:569
+#: ../src/mcm-calibrate-dialog.c:556
 msgid "CMP Digital Target 3"
 msgstr "CMP ਡਿਜ਼ਿਟਲ ਟਾਰਗੇਟ ੩"
 
 #. TRANSLATORS: this is probably a brand name
-#: ../src/mcm-calibrate-dialog.c:573
+#: ../src/mcm-calibrate-dialog.c:560
 msgid "CMP DT 003"
 msgstr "CMP DT 003"
 
 #. TRANSLATORS: this is probably a brand name
-#: ../src/mcm-calibrate-dialog.c:577
+#: ../src/mcm-calibrate-dialog.c:564
 msgid "Color Checker"
 msgstr "ਰੰਗ ਚੈਕਰ"
 
 #. TRANSLATORS: this is probably a brand name
-#: ../src/mcm-calibrate-dialog.c:581
+#: ../src/mcm-calibrate-dialog.c:568
 msgid "Color Checker DC"
 msgstr "ਕਲਰ ਚੈਕਰ DC"
 
 #. TRANSLATORS: this is probably a brand name
-#: ../src/mcm-calibrate-dialog.c:585
+#: ../src/mcm-calibrate-dialog.c:572
 msgid "Color Checker SG"
 msgstr "ਕਲਰ ਚੈਕਰ SG"
 
 #. TRANSLATORS: this is probably a brand name
-#: ../src/mcm-calibrate-dialog.c:589
+#: ../src/mcm-calibrate-dialog.c:576
 msgid "Hutchcolor"
 msgstr "ਹੱਚਕਲਰ"
 
 #. TRANSLATORS: this is probably a brand name
-#: ../src/mcm-calibrate-dialog.c:593
+#: ../src/mcm-calibrate-dialog.c:580
 msgid "i1 RGB Scan 1.4"
-msgstr "i1 RGB Scan 1.4"
+msgstr ""
 
 #. TRANSLATORS: this is probably a brand name
-#: ../src/mcm-calibrate-dialog.c:597
+#: ../src/mcm-calibrate-dialog.c:584
 msgid "IT8.7/2"
 msgstr "IT8.7/2"
 
 #. TRANSLATORS: this is probably a brand name
-#: ../src/mcm-calibrate-dialog.c:601
+#: ../src/mcm-calibrate-dialog.c:588
 msgid "Laser Soft DC Pro"
-msgstr "ਲੇਜ਼ਰ ਸਾਫਟ DC Pro"
+msgstr ""
 
 #. TRANSLATORS: this is probably a brand name
-#: ../src/mcm-calibrate-dialog.c:605
+#: ../src/mcm-calibrate-dialog.c:592
 msgid "QPcard 201"
 msgstr "QPcard 201"
 
@@ -1067,553 +924,775 @@ msgid ""
 "Color Profiles program."
 msgstr ""
 
-#: ../src/mcm-cell-renderer-profile.c:80
-msgid "Default"
-msgstr "ਡਿਫਾਲਟ"
+#. TRANSLATORS: error message
+#: ../src/mcm-client.c:1047
+msgid "This device already exists"
+msgstr "ਇਹ ਜੰਤਰ ਪਹਿਲਾਂ ਹੀ ਮੌਜੂਦ ਹੈ"
+
+#. TRANSLATORS: this is when the device is not recognized
+#: ../src/mcm-colorimeter.c:414
+msgid "Measuring instrument not recognized"
+msgstr ""
 
 #. TRANSLATORS: this is the name of the internal panel
-#: ../src/mcm-device-xrandr.c:138
+#: ../src/mcm-device-xrandr.c:127
 msgid "Laptop LCD"
 msgstr "ਲੈਪਟਾਪ LCD"
 
+#. TRANSLATORS: this is when the EDID file cannot be read
+#: ../src/mcm-dump-edid.c:58
+msgid "Cannot load file contents"
+msgstr "ਫਾਇਲ ਸਮੱਗਰੀ ਲੋਡ ਨਹੀਂ ਕੀਤੀ ਜਾ ਸਕਦੀ"
+
+#. TRANSLATORS: this is when the EDID cannot be parsed
+#: ../src/mcm-dump-edid.c:67
+msgid "Cannot parse EDID contents"
+msgstr ""
+
+#. TRANSLATORS: this is debugging output for the supplied EDID file
+#: ../src/mcm-dump-edid.c:75
+msgid "Monitor name"
+msgstr "ਮਾਨੀਟਰ ਨਾਂ"
+
+#. TRANSLATORS: this is debugging output for the supplied EDID file
+#: ../src/mcm-dump-edid.c:80
+msgid "Vendor name"
+msgstr "ਵੇਂਡਰ ਨਾਂ"
+
+#. TRANSLATORS: this is debugging output for the supplied EDID file
+#: ../src/mcm-dump-edid.c:85
+msgid "Serial number"
+msgstr "ਸੀਰੀਅਲ ਨੰਬਰ"
+
+#. TRANSLATORS: this is debugging output for the supplied EDID file
+#: ../src/mcm-dump-edid.c:90
+msgid "Text string"
+msgstr "ਟੈਕਸਟ ਲਾਈਨ"
+
+#. TRANSLATORS: this is debugging output for the supplied EDID file
+#: ../src/mcm-dump-edid.c:95
+msgid "PNP identifier"
+msgstr "PNP ਪਛਾਣ"
+
+#. TRANSLATORS: this is debugging output for the supplied EDID file
+#: ../src/mcm-dump-edid.c:101
+msgid "Size"
+msgstr "ਸਾਈਜ਼"
+
+#. TRANSLATORS: this is debugging output for the supplied EDID file
+#: ../src/mcm-dump-edid.c:106
+msgid "Gamma"
+msgstr "ਗਾਮਾ"
+
+#. TRANSLATORS: command line option: a list of files to parse
+#: ../src/mcm-dump-edid.c:136
+msgid "EDID dumps to parse"
+msgstr ""
+
+#. TRANSLATORS: this is the filename we are displaying
+#: ../src/mcm-dump-edid.c:159
+msgid "EDID dump"
+msgstr "EDID ਡੰਪ"
+
+#. TRANSLATORS: we saved the EDID to a file - second parameter is a filename
+#: ../src/mcm-dump-edid.c:196
+#, c-format
+msgid "Saved %i bytes to %s"
+msgstr ""
+
+#. TRANSLATORS: we saved the EDID to a file - parameter is a filename
+#: ../src/mcm-dump-edid.c:201
+#, c-format
+msgid "Failed to save EDID to %s"
+msgstr ""
+
+#. TRANSLATORS: command line option: a list of files to install
+#: ../src/mcm-dump-profile.c:108
+msgid "Profiles to view"
+msgstr "ਵੇਖਣ ਲਈ ਪਰੋਫਾਇਲ"
+
+#. TRANSLATORS: this just dumps the profile to the screen
+#: ../src/mcm-dump-profile.c:121
+msgid "ICC profile dump program"
+msgstr "ICC ਪਰੋਫਾਇਲ ਡੰਪ ਪਰੋਗਰਾਮ"
+
+#. TRANSLATORS: command line option
+#: ../src/mcm-fix-profile.c:124
+msgid "The description of the profile"
+msgstr "ਪਰੋਫਾਇਲ ਲਈ ਵੇਰਵਾ"
+
+#. TRANSLATORS: command line option
+#: ../src/mcm-fix-profile.c:127
+msgid "The copyright of the profile"
+msgstr "ਪਰੋਫਾਇਲ ਲਈ ਕਾਪੀਰਾਈਟ"
+
+#. TRANSLATORS: command line option
+#: ../src/mcm-fix-profile.c:130
+msgid "The model of the profile"
+msgstr "ਪਰੋਫਾਇਲ ਲਈ ਮਾਡਲ"
+
+#. TRANSLATORS: command line option
+#: ../src/mcm-fix-profile.c:133
+msgid "The manufacturer of the profile"
+msgstr "ਪਰੋਫਾਇਲ ਲਈ ਨਿਰਮਾਤਾ"
+
+#. TRANSLATORS: command line option: a list of icc files to fix
+#: ../src/mcm-fix-profile.c:136
+msgid "Profiles to fix"
+msgstr "ਠੀਕ ਕਰਨ ਲਈ ਪਰੋਫਾਇਲ"
+
+#. TRANSLATORS: this fixes broken profiles
+#: ../src/mcm-fix-profile.c:147
+msgid "ICC profile fix program"
+msgstr "ICC ਪਰੋਫਾਇਲ ਠੀਕ ਪਰੋਗਰਾਮ"
+
 #. TRANSLATORS: command line option: a list of catalogs to install
 #. TRANSLATORS: command line option: a list of files to install
-#: ../src/mcm-import.c:86 ../src/mcm-install-system-wide.c:126
+#: ../src/mcm-import.c:83 ../src/mcm-install-system-wide.c:126
 msgid "ICC profile to install"
 msgstr "ਇੰਸਟਾਲ ਕਰਨ ਲਈ ICC ਪਰੋਫਾਇਲ"
 
 #. TRANSLATORS: nothing was specified on the command line
-#: ../src/mcm-import.c:108
+#: ../src/mcm-import.c:105
 msgid "No filename specified"
 msgstr "ਕੋਈ ਫਾਇਲ ਨਾਂ ਨਹੀਂ ਦਿੱਤਾ"
 
 #. TRANSLATORS: could not read file
-#: ../src/mcm-import.c:121
+#: ../src/mcm-import.c:118
 msgid "Failed to open ICC profile"
 msgstr "ICC ਪਰੋਫਾਇਥ ਖੋਲ੍ਹਣ ਲਈ ਫੇਲ੍ਹ ਹੈ"
 
 #. TRANSLATORS: parsing error
-#: ../src/mcm-import.c:124
+#: ../src/mcm-import.c:121
 #, c-format
 msgid "Failed to parse file: %s"
 msgstr "ਫਾਇਲ ਪਾਰਸ ਕਰਨ ਲਈ ਫੇਲ੍ਹ: %s"
 
 #. TRANSLATORS: color profile already been installed
-#: ../src/mcm-import.c:159
+#: ../src/mcm-import.c:156
 msgid "ICC profile already installed"
 msgstr "ICC ਪਹਿਲਾਂ ਹੀ ਇੰਸਟਾਲ ਹੈ"
 
-#. TRANSLATORS: color profile already been installed
-#: ../src/mcm-import.c:173
-#, fuzzy
-#| msgid "ICC profile already installed"
-msgid "ICC profile already installed system-wide"
-msgstr "ICC ਪਹਿਲਾਂ ਹੀ ਇੰਸਟਾਲ ਹੈ"
-
 #. TRANSLATORS: message text
-#: ../src/mcm-import.c:185
+#: ../src/mcm-import.c:173
 #, c-format
 msgid "Import ICC color profile %s?"
-msgstr "ICC ਰੰਗ ਪਰੋਫਾਇਲ %s ਇੰਪੋਰਟ ਕਰਨਾ?"
+msgstr ""
 
 #. TRANSLATORS: message text
-#: ../src/mcm-import.c:188
+#: ../src/mcm-import.c:176
 msgid "Import ICC color profile?"
 msgstr "ਕੀ ICC ਪਰੋਫਾਇਲ ਇੰਪੋਰਟ ਕਰਨਾ ਹੈ?"
 
 #. ask confirmation
-#: ../src/mcm-import.c:196
+#: ../src/mcm-import.c:184
 msgid "Import ICC profile"
 msgstr "ICC ਪਰੋਫਾਇਲ ਇੰਪੋਰਟ ਕਰੋ"
 
+#. TRANSLATORS: could not read file
+#: ../src/mcm-import.c:209 ../src/mcm-prefs.c:573
+msgid "Failed to copy file"
+msgstr "ਫਾਇਲ ਕਾਪੀ ਕਰਨ ਲਈ ਫੇਲ੍ਹ"
+
 #. TRANSLATORS: this is the ICC profile description stored in an atom in the XServer
-#: ../src/mcm-inspect.c:58
+#: ../src/mcm-inspect.c:60
 msgid "Description:"
 msgstr "ਵੇਰਵਾ:"
 
 #. TRANSLATORS: this is the ICC profile copyright
-#: ../src/mcm-inspect.c:61
+#: ../src/mcm-inspect.c:63
 msgid "Copyright:"
 msgstr "ਕਾਪੀਰਾਈਟ:"
 
 #. TRANSLATORS: the root window of all the screens
-#: ../src/mcm-inspect.c:106
+#: ../src/mcm-inspect.c:102
 msgid "Root window profile:"
 msgstr "ਰੂਟ ਵਿੰਡੋ ਪਰੋਫਾਇਲ:"
 
 #. TRANSLATORS: the root window of all the screens
-#: ../src/mcm-inspect.c:118
+#: ../src/mcm-inspect.c:114
 msgid "Root window protocol version:"
-msgstr "ਰੂਟ ਵਿੰਡੋ ਪਰੋਟੋਕਾਲ ਵਰਜਨ:"
+msgstr ""
 
-#: ../src/mcm-inspect.c:134
+#: ../src/mcm-inspect.c:130
 #, c-format
 msgid "Output profile '%s':"
 msgstr "ਆਉਟਪੁੱਟ ਪਰੋਫਾਇਲ '%s':"
 
 #. TRANSLATORS: this is when the profile has not been set
-#: ../src/mcm-inspect.c:141
+#: ../src/mcm-inspect.c:137
 msgid "not set"
 msgstr "ਸੈੱਟ ਨਹੀਂ"
 
-#. TRANSLATORS: no DBus session bus
-#: ../src/mcm-inspect.c:179 ../src/mcm-inspect.c:248 ../src/mcm-inspect.c:316
-#: ../src/mcm-inspect.c:377 ../src/mcm-inspect.c:447 ../src/mcm-utils.c:164
-#: ../src/mcm-utils.c:229
-msgid "Failed to connect to session bus:"
-msgstr "ਸ਼ੈਸ਼ਨ ਬੱਸ ਨਾਲ ਕੁਨੈਕਟ ਕਰਨ ਲਈ ਫੇਲ੍ਹ:"
-
 #. TRANSLATORS: the DBus method failed
-#: ../src/mcm-inspect.c:197 ../src/mcm-inspect.c:266 ../src/mcm-inspect.c:333
-#: ../src/mcm-inspect.c:395 ../src/mcm-inspect.c:465 ../src/mcm-utils.c:188
-#: ../src/mcm-utils.c:247
-msgid "The request failed:"
-msgstr "ਮੰਗ ਫੇਲ੍ਹ ਹੋਈ:"
+#: ../src/mcm-inspect.c:200 ../src/mcm-inspect.c:269 ../src/mcm-inspect.c:315
+#: ../src/mcm-inspect.c:379 ../src/mcm-inspect.c:472
+msgid "The request failed"
+msgstr "ਮੰਗ ਫੇਲ੍ਹ ਹੋਈ"
 
-#. TRANSLATORS: no profile has been asigned to this device
-#: ../src/mcm-inspect.c:206
+#. TRANSLATORS: no rofile has been asigned to this device
+#: ../src/mcm-inspect.c:208
 msgid "There are no ICC profiles for this device"
 msgstr "ਇਹ ਜੰਤਰ ਲਈ ਕੋਈ ICC ਪਰੋਫਾਇਲ ਨਹੀਂ"
 
 #. TRANSLATORS: this is a list of profiles suitable for the device
-#: ../src/mcm-inspect.c:211 ../src/mcm-inspect.c:280 ../src/mcm-inspect.c:412
-#: ../src/mcm-inspect.c:479
+#: ../src/mcm-inspect.c:213 ../src/mcm-inspect.c:328 ../src/mcm-inspect.c:392
 msgid "Suitable profiles for:"
 msgstr "ਢੁੱਕਵਾਂ ਪਰੋਫਾਇਲ:"
 
-#. TRANSLATORS: no profile has been asigned to this device
-#: ../src/mcm-inspect.c:275
-msgid "There are no ICC profiles assigned to this file"
-msgstr "ਇਹ ਫਾਇਲ ਲਈ ਕੋਈ ICC ਪਰੋਫਾਇਲ ਨਹੀਂ"
-
 #. TRANSLATORS: no profile has been asigned to this window
-#: ../src/mcm-inspect.c:407
+#: ../src/mcm-inspect.c:323
 msgid "There are no ICC profiles for this window"
 msgstr "ਇਸ ਵਿੰਡੋ ਲਈ ਕੋਈ ICC ਪਰੋਫਾਇਲ ਨਹੀਂ"
 
-#. TRANSLATORS: no profile has been asigned to this device
-#: ../src/mcm-inspect.c:474
+#. TRANSLATORS: no rofile has been asigned to this device type
+#: ../src/mcm-inspect.c:387
 msgid "There are no ICC profiles for this device type"
 msgstr "ਇਹ ਜੰਤਰ ਕਿਸਮ ਲਈ ਕੋਈ ICC ਪਰੋਫਾਇਲ ਨਹੀਂ"
 
-#. TRANSLATORS: the DBus method failed
-#: ../src/mcm-inspect.c:518
-msgid "The request failed"
-msgstr "ਮੰਗ ਫੇਲ੍ਹ ਹੋਈ"
-
 #. TRANSLATORS: this is the rendering intent of the output
-#: ../src/mcm-inspect.c:527
+#: ../src/mcm-inspect.c:427
 msgid "Rendering intent (display):"
-msgstr "ਰੈਂਡਰਿੰਗ ਇੰਟੈਂਟ (ਡਿਸਪਲੇਅ):"
+msgstr ""
 
 #. TRANSLATORS: this is the rendering intent of the printer
-#: ../src/mcm-inspect.c:533
+#: ../src/mcm-inspect.c:430
 msgid "Rendering intent (softproof):"
-msgstr "ਰੈਂਡਰਿੰਗ ਇੰਟੈਂਟ (ਸਾਫਟਪਰੂਫ਼):"
+msgstr ""
 
-#. TRANSLATORS: this is the rendering intent of the output
-#: ../src/mcm-inspect.c:541
+#. TRANSLATORS: this is filename of the default colorspace
+#: ../src/mcm-inspect.c:433
 msgid "RGB Colorspace:"
 msgstr "RGB ਕਲਰਸਪੇਸ:"
 
-#. TRANSLATORS: this is the rendering intent of the printer
-#: ../src/mcm-inspect.c:547
+#. TRANSLATORS: this is filename of the default colorspace
+#: ../src/mcm-inspect.c:436
 msgid "CMYK Colorspace:"
 msgstr "CMYK ਕਲਰਸਪੇਸ:"
 
 #. TRANSLATORS: command line option
-#: ../src/mcm-inspect.c:575
-#, fuzzy
-#| msgid "Show X11 properties"
-msgid "Show xserver properties"
+#: ../src/mcm-inspect.c:506
+msgid "Show X11 properties"
 msgstr "X11 ਵਿਸ਼ੇਸ਼ਤਾ ਵੇਖੋ"
 
 #. TRANSLATORS: command line option
-#: ../src/mcm-inspect.c:578
+#: ../src/mcm-inspect.c:509
 msgid "Get the profiles for a specific device"
-msgstr "ਖਾਸ ਜੰਤਰ ਲਈ ਪਰੋਫਾਇਲ ਲਵੋ"
+msgstr ""
 
 #. TRANSLATORS: command line option
-#: ../src/mcm-inspect.c:581
-msgid "Get the profiles for a specific file"
-msgstr "ਖਾਸ ਫਾਇਲ ਲਈ ਪਰੋਫਾਇਲ ਲਵੋ"
-
-#. TRANSLATORS: command line option
-#: ../src/mcm-inspect.c:584
+#: ../src/mcm-inspect.c:512
 msgid "Get the profile for a specific window"
-msgstr "ਖਾਸ ਵਿੰਡੋ ਲਈ ਪਰੋਫਾਇਲ ਲਵੋ"
+msgstr ""
 
 #. TRANSLATORS: command line option
-#: ../src/mcm-inspect.c:587
+#: ../src/mcm-inspect.c:515
 msgid "Get the profiles for a specific device type"
-msgstr "ਖਾਸ ਜੰਤਰ ਕਿਸਮ ਲਈ ਪਰੋਫਾਇਲ ਲਵੋ"
+msgstr ""
 
 #. TRANSLATORS: command line option
-#: ../src/mcm-inspect.c:590
+#: ../src/mcm-inspect.c:518
 msgid "Dump all details about this system"
-msgstr "ਇਸ ਸਿਸਟਮ ਲਈ ਸਾਰੀ ਜਾਣਕਾਰੀ ਇੱਕਠੀ ਕਰੋ"
+msgstr ""
 
 #. TRANSLATORS: just dumps the EDID to disk
-#: ../src/mcm-inspect.c:603
+#: ../src/mcm-inspect.c:531
 msgid "EDID inspect program"
-msgstr "EDID ਜਾਂਚ ਪਰੋਗਰਾਮ"
+msgstr ""
 
 #. TRANSLATORS: this is when the user does --type=mickeymouse
-#: ../src/mcm-inspect.c:622
-#, fuzzy
-#| msgid "Device type not recognized"
-msgid "Device or profile type not recognized, recognised types are:"
-msgstr "ਜੰਤਰ ਕਿਸਮ ਪਛਾਣੀ ਨਹੀਂ ਹੈ"
+#: ../src/mcm-inspect.c:548
+msgid "Device type not recognized"
+msgstr ""
 
 #. command line argument, the ID of the device
 #: ../src/mcm-install-system-wide.c:123
 msgid "Device ID, e.g. 'xrandr_ibm_france_ltn154p2_l05'"
-msgstr "ਜੰਤਰ ID, ਜਿਵੇਂ 'xrandr_ibm_france_ltn154p2_l05'"
+msgstr ""
 
 #. TRANSLATORS: tool that is used when copying profiles system-wide
 #: ../src/mcm-install-system-wide.c:141
 msgid "MATE Color Manager ICC profile system-wide installer"
-msgstr "MATE ਰੰਗ ਮੈਨੇਜਰ ICC ਪਰੋਫਾਇਲ ਪੂਰੇ ਸਿਸਟਮ ਲਈ ਇੰਸਟਾਲਰ"
+msgstr ""
 
 #. TRANSLATORS: user did not specify a valid filename
 #: ../src/mcm-install-system-wide.c:149
-msgid "You need to specify exactly one ICC profile filename."
-msgstr "ਤੁਹਾਨੂੰ ਠੀਕ ਇੱਕ ICC ਪਰੋਫਾਇਲ ਫਾਇਲ ਨਾਂ ਦੇਣਾ ਪਵੇਗਾ।"
+msgid "You need to specify exactly one ICC profile filename"
+msgstr ""
 
 #. TRANSLATORS: user did not specify a valid device ID
 #: ../src/mcm-install-system-wide.c:157
-msgid "You need to specify exactly one device ID."
-msgstr "ਤੁਹਾਨੂੰ ਠੀਕ ਇੱਕ ਜੰਤਰ ID ਦੇਣਾ ਚਾਹੀਦਾ ਹੈ।"
+msgid "You need to specify exactly one device ID"
+msgstr ""
 
 #. TRANSLATORS: user did not specify a valid device ID
 #: ../src/mcm-install-system-wide.c:166
-msgid "The device ID has invalid characters."
-msgstr "ਜੰਤਰ ID ਲਈ ਗਲਤ ਅੱਖਰ ਹੈ।"
+msgid "The device ID has invalid characters"
+msgstr ""
 
 #. TRANSLATORS: only able to install profiles as root
 #: ../src/mcm-install-system-wide.c:176
-msgid "This program can only be used by the root user."
-msgstr "ਇਹ ਪਰੋਗਰਾਮ ਕੇਵਲ ਰੂਟ ਯੂਜ਼ਰ ਵਲੋਂ ਵਰਤਿਆ ਜਾ ਸਕਦਾ ਹੈ।"
+msgid "This program can only be used by the root user"
+msgstr ""
 
 #. TRANSLATORS: only able to install profiles with an absolute path
 #: ../src/mcm-install-system-wide.c:185
-msgid "The source filename must be absolute."
-msgstr "ਸਰੋਤ ਫਾਇਲ ਨਾਂ ਅਸਲ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ."
+msgid "The source filename must be absolute"
+msgstr ""
 
 #. TRANSLATORS: error details
 #: ../src/mcm-install-system-wide.c:196
-msgid "Failed to get content type:"
-msgstr "ਸਮੱਗਰੀ ਕਿਸਮ ਲੈਣ ਲਈ ਫੇਲ੍ਹ ਹੈ:"
+msgid "Failed to get content type"
+msgstr ""
 
 #. TRANSLATORS: the content type is the detected type of file
 #: ../src/mcm-install-system-wide.c:206
-msgid "Content type was incorrect:"
-msgstr "ਸਮੱਗਰੀ ਕਿਸਮ ਗਲਤ ਹੈ:"
+msgid "Content type was incorrect"
+msgstr ""
 
 #. TRANSLATORS: the program must never be directly run
 #: ../src/mcm-install-system-wide.c:215
-msgid "This program must only be run through pkexec."
-msgstr "ਇਹ ਪਰੋਗਰਾਮ pkexec ਰਾਹੀਂ ਹੀ ਚੱਲਣਾ ਚਾਹੀਦਾ ਹੈ."
+msgid "This program must only be run through pkexec"
+msgstr ""
 
 #. TRANSLATORS: PolicyKit has gone all insane on us, and we refuse to parse junk
 #: ../src/mcm-install-system-wide.c:224
-msgid "PKEXEC_UID must be set to an integer value."
-msgstr "PKEXEC_UID ਇੱਕ ਪੂਰਨ ਅੰਕ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ."
+msgid "PKEXEC_UID must be set to an integer value"
+msgstr ""
 
 #. TRANSLATORS: we are complaining that a file must be really owned by the user who called this program
 #: ../src/mcm-install-system-wide.c:233
-msgid "The ICC profile must be owned by the user."
-msgstr "ICC ਪਰੋਫਾਇਲ ਤੁਹਾਡੀ ਮਲਕੀਅਤ (ਓਵਨ) ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ."
+msgid "The ICC profile must be owned by you"
+msgstr ""
 
 #. TRANSLATORS: only able to install profiles with an absolute path
 #: ../src/mcm-install-system-wide.c:246
-msgid "The destination filename must be absolute."
-msgstr "ਦਿੱਤਾ ਫਾਇਲ ਨਾਂ ਅਸਲ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ।"
+msgid "The destination filename must be absolute"
+msgstr ""
 
 #. TRANSLATORS: error details
 #: ../src/mcm-install-system-wide.c:256
-msgid "Failed to copy:"
-msgstr "ਕਾਪੀ ਕਰਨ ਲਈ ਫੇਲ੍ਹ ਹੈ:"
-
-#. TRANSLATORS: this is when the ambient light level is unknown
-#. TRANSLATORS: this the ICC profile type
-#. TRANSLATORS: this the ICC colorspace type
-#: ../src/mcm-picker.c:174 ../src/mcm-viewer.c:569 ../src/mcm-viewer.c:619
-msgid "Unknown"
-msgstr "ਅਣਜਾਣ"
-
-#. TRANSLATORS: this is displayed the user has not got suitable hardware
-#: ../src/mcm-picker.c:324
-msgid "No colorimeter is attached."
-msgstr "ਕੋਈ ਕਲਰਮੀਟਰ ਅਟੈਚ ਨਹੀਂ ਹੈ।"
-
-#. TRANSLATORS: this is displayed if VTE support is not enabled
-#: ../src/mcm-picker.c:331
-msgid "This application was compiled without VTE support."
+msgid "Failed to copy"
 msgstr ""
 
 #. TRANSLATORS: this is displayed the user has not got suitable hardware
-#: ../src/mcm-picker.c:341
+#: ../src/mcm-picker.c:153
 msgid "The attached colorimeter is not capable of reading a spot color."
-msgstr "ਜੋੜਿਆ ਗਿਆ ਕਲਰਮੀਟਰ ਸਪੋਟ ਰੰਗ ਪੜ੍ਹਨ ਦੇ ਯੋਗ ਨਹੀਂ ਹੈ।"
+msgstr ""
+
+#. TRANSLATORS: this is displayed the user has not got suitable hardware
+#: ../src/mcm-picker.c:156
+msgid "No colorimeter is attached."
+msgstr ""
 
 #. TRANSLATORS: we can make this modal (stay on top of) another window
-#: ../src/mcm-picker.c:547 ../src/mcm-viewer.c:1059
+#: ../src/mcm-picker.c:229 ../src/mcm-prefs.c:2710
 msgid "Set the parent window to make this modal"
-msgstr "ਮੁੱਢਲੀ ਵਿੰਡੋ ਨੂੰ ਇਹ ਮਾਡਲ (modal) ਬਣਾਉਣ ਲਈ ਸੈੱਟ ਕਰੋ"
+msgstr ""
 
 #. TRANSLATORS: tool that is used to pick colors
-#: ../src/mcm-picker.c:565
+#: ../src/mcm-picker.c:244
 msgid "MATE Color Manager Color Picker"
 msgstr "ਗਨੋਮ ਰੰਗ ਮੈਨੇਜਰ ਰੰਗ ਚੋਣੀ"
 
+#. TRANSLATORS: could not save for all users
+#: ../src/mcm-prefs.c:153
+msgid "Failed to save defaults for all users"
+msgstr ""
+
+#. TRANSLATORS: this is where no profile is selected
+#: ../src/mcm-prefs.c:181
+msgid "None"
+msgstr "ਕੋਈ ਨਹੀਂ"
+
+#. TRANSLATORS: this is where the user can click and import a profile
+#: ../src/mcm-prefs.c:185
+msgid "Other profile…"
+msgstr "ਹੋਰ ਪਰੋਫਾਇਲ…"
+
+#. TRANSLATORS: could not calibrate
+#: ../src/mcm-prefs.c:319
+msgid "Failed to calibrate device"
+msgstr "ਜੰਤਰ ਕੈਲੀਬਰੇਟ ਕਰਨ ਲਈ ਫੇਲ੍ਹ"
+
+#. TRANSLATORS: could not calibrate
+#: ../src/mcm-prefs.c:354
+msgid "Failed to calibrate printer"
+msgstr "ਪਰਿੰਟਰ ਕੈਲੀਬਰੇਟ ਕਰਨ ਲਈ ਫੇਲ੍ਹ"
+
 #. TRANSLATORS: title, usually we can tell based on the EDID data or output name
-#: ../src/mcm-viewer.c:289
+#: ../src/mcm-prefs.c:468
 msgid "Permanently delete profile?"
 msgstr "ਪਰੋਫਾਇਲ ਪੱਕੇ ਤੌਰ ਉੱਤੇ ਹਟਾਉਣਾ?"
 
 #. TRANSLATORS: dialog message
-#: ../src/mcm-viewer.c:292
+#: ../src/mcm-prefs.c:471
 msgid ""
 "Are you sure you want to remove this profile from your system permanently?"
-msgstr "ਕੀ ਤੁਸੀਂ ਇਹ ਪਰੋਫਾਇਲ ਆਪਣੇ ਸਿਸਟਮ ਤੋਂ ਪੱਕੇ ਤੌਰ ਉੱਤੇ ਹਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?"
+msgstr ""
 
 #. TRANSLATORS: button, delete a profile
-#: ../src/mcm-viewer.c:295
+#: ../src/mcm-prefs.c:474
 msgid "Delete"
 msgstr "ਹਟਾਓ"
 
+#: ../src/mcm-prefs.c:519
+msgid "Import"
+msgstr "ਇੰਪੋਰਟ"
+
+#. TRANSLATORS: filter name on the file->open dialog
+#: ../src/mcm-prefs.c:537
+msgid "Supported ICC profiles"
+msgstr "ਸਹਾਇਕ ICC ਪਰੋਫਾਇਲ"
+
+#. TRANSLATORS: title, usually we can tell based on the EDID data or output name
+#: ../src/mcm-prefs.c:688
+msgid "Install calibration and profiling software?"
+msgstr ""
+
+#. TRANSLATORS: dialog message saying the argyllcms is not installed
+#: ../src/mcm-prefs.c:692
+msgid "Calibration and profiling software is not installed."
+msgstr ""
+
+#. TRANSLATORS: dialog message saying the color targets are not installed
+#: ../src/mcm-prefs.c:694
+msgid "These tools are required to build color profiles for devices."
+msgstr ""
+
+#. TRANSLATORS: this is the sound description
+#: ../src/mcm-prefs.c:820
+msgid "Profiling completed"
+msgstr ""
+
+#. TRANSLATORS: could not add virtual device
+#: ../src/mcm-prefs.c:876
+msgid "Failed to create virtual device"
+msgstr ""
+
+#. TRANSLATORS: could not add virtual device
+#: ../src/mcm-prefs.c:884
+msgid "Failed to save virtual device"
+msgstr ""
+
+#. TRANSLATORS: could not add virtual device
+#: ../src/mcm-prefs.c:893
+msgid "Failed to add virtual device"
+msgstr ""
+
+#. TRANSLATORS: could not read file
+#: ../src/mcm-prefs.c:937
+msgid "Failed to delete file"
+msgstr "ਫਾਇਲ ਹਟਾਉਣ ਲਈ ਫੇਲ੍ਹ"
+
+#. TRANSLATORS: this is when the button is sensitive
+#: ../src/mcm-prefs.c:1068
+msgid "Create a color profile for the selected device"
+msgstr ""
+
+#. TRANSLATORS: this is when the button is insensitive
+#: ../src/mcm-prefs.c:1073
+msgid "Cannot profile: No device is selected"
+msgstr ""
+
+#. TRANSLATORS: this is when the button is insensitive
+#: ../src/mcm-prefs.c:1085
+msgid "Cannot calibrate: The device is not connected"
+msgstr ""
+
+#. TRANSLATORS: this is when the button is insensitive
+#: ../src/mcm-prefs.c:1093
+msgid "Cannot calibrate: The display driver does not support XRandR 1.3"
+msgstr ""
+
+#. TRANSLATORS: this is when the button is insensitive
+#: ../src/mcm-prefs.c:1101
+msgid "Cannot calibrate: The measuring instrument is not plugged in"
+msgstr ""
+
+#. TRANSLATORS: this is when the button is insensitive
+#: ../src/mcm-prefs.c:1116
+msgid "Cannot profile: The measuring instrument is not plugged in"
+msgstr ""
+
+#. TRANSLATORS: this is when the button is insensitive
+#: ../src/mcm-prefs.c:1124
+msgid ""
+"Cannot profile: The measuring instrument does not support printer profiling"
+msgstr ""
+
+#. TRANSLATORS: this is when the button is insensitive
+#: ../src/mcm-prefs.c:1131
+msgid "Cannot profile this type of device"
+msgstr ""
+
+#. TRANSLATORS: Some shitty binary drivers do not support per-head gamma controls.
+#. * Whilst this does not matter if you only have one monitor attached, it means you
+#. * can't color correct additional monitors or projectors.
+#: ../src/mcm-prefs.c:1295
+msgid "Per-device settings not supported. Check your display driver."
+msgstr ""
+
 #. TRANSLATORS: this the ICC profile type
-#: ../src/mcm-viewer.c:542
+#: ../src/mcm-prefs.c:1380
 msgid "Input device"
 msgstr "ਇੰਪੁੱਟ ਜੰਤਰ"
 
 #. TRANSLATORS: this the ICC profile type
-#: ../src/mcm-viewer.c:546
+#: ../src/mcm-prefs.c:1384
 msgid "Display device"
 msgstr "ਡਿਸਪਲੇਅ ਜੰਤਰ"
 
 #. TRANSLATORS: this the ICC profile type
-#: ../src/mcm-viewer.c:550
+#: ../src/mcm-prefs.c:1388
 msgid "Output device"
 msgstr "ਆਉਟਪੁੱਟ ਜੰਤਰ"
 
 #. TRANSLATORS: this the ICC profile type
-#: ../src/mcm-viewer.c:554
+#: ../src/mcm-prefs.c:1392
 msgid "Devicelink"
 msgstr "ਜੰਤਰਲਿੰਕ"
 
 #. TRANSLATORS: this the ICC profile type
-#: ../src/mcm-viewer.c:558
+#: ../src/mcm-prefs.c:1396
 msgid "Colorspace conversion"
-msgstr "ਰੰਗ-ਸਪੇਸ ਗੱਲਬਾਤ"
+msgstr ""
 
 #. TRANSLATORS: this the ICC profile kind
-#: ../src/mcm-viewer.c:562
+#: ../src/mcm-prefs.c:1400
 msgid "Abstract"
-msgstr "ਘਟਾਓ"
+msgstr ""
 
 #. TRANSLATORS: this the ICC profile type
-#: ../src/mcm-viewer.c:566
+#: ../src/mcm-prefs.c:1404
 msgid "Named color"
-msgstr "ਨਾਮੀ ਰੰਗ"
+msgstr ""
+
+#. TRANSLATORS: this the ICC profile type
+#. TRANSLATORS: this the ICC colorspace type
+#: ../src/mcm-prefs.c:1407 ../src/mcm-prefs.c:1457
+msgid "Unknown"
+msgstr "ਅਣਜਾਣ"
 
 #. TRANSLATORS: this the ICC colorspace type
-#: ../src/mcm-viewer.c:580
+#: ../src/mcm-prefs.c:1418
 msgid "XYZ"
 msgstr "XYZ"
 
 #. TRANSLATORS: this the ICC colorspace type
-#: ../src/mcm-viewer.c:584
+#: ../src/mcm-prefs.c:1422
 msgid "LAB"
 msgstr "LAB"
 
 #. TRANSLATORS: this the ICC colorspace type
-#: ../src/mcm-viewer.c:588
+#: ../src/mcm-prefs.c:1426
 msgid "LUV"
 msgstr "LUV"
 
 #. TRANSLATORS: this the ICC colorspace type
-#: ../src/mcm-viewer.c:592
+#: ../src/mcm-prefs.c:1430
 msgid "YCbCr"
 msgstr "YCbCr"
 
 #. TRANSLATORS: this the ICC colorspace type
-#: ../src/mcm-viewer.c:596
+#: ../src/mcm-prefs.c:1434
 msgid "Yxy"
 msgstr "Yxy"
 
 #. TRANSLATORS: this the ICC colorspace type
 #. TRANSLATORS: this is the colorspace, e.g. red, green, blue
-#: ../src/mcm-viewer.c:600 ../src/mcm-utils.c:596 ../data/mcm-prefs.ui.h:50
+#: ../src/mcm-prefs.c:1438 ../src/mcm-prefs.c:2210 ../data/mcm-prefs.ui.h:57
 msgid "RGB"
 msgstr "RGB"
 
 #. TRANSLATORS: this the ICC colorspace type
-#: ../src/mcm-viewer.c:604
+#: ../src/mcm-prefs.c:1442
 msgid "Gray"
 msgstr "ਗਰੇ"
 
 #. TRANSLATORS: this the ICC colorspace type
-#: ../src/mcm-viewer.c:608
+#: ../src/mcm-prefs.c:1446
 msgid "HSV"
 msgstr "HSV"
 
 #. TRANSLATORS: this the ICC colorspace type
 #. TRANSLATORS: this is the colorspace, e.g. cyan, magenta, yellow, black
-#: ../src/mcm-viewer.c:612 ../src/mcm-utils.c:600 ../data/mcm-prefs.ui.h:10
+#: ../src/mcm-prefs.c:1450 ../src/mcm-prefs.c:2214 ../data/mcm-prefs.ui.h:5
 msgid "CMYK"
 msgstr "CMYK"
 
 #. TRANSLATORS: this the ICC colorspace type
-#: ../src/mcm-viewer.c:616
+#: ../src/mcm-prefs.c:1454
 msgid "CMY"
 msgstr "CMY"
 
 #. TRANSLATORS: if the device has a VCGT profile
-#: ../src/mcm-viewer.c:771
+#: ../src/mcm-prefs.c:1575
 msgid "Yes"
 msgstr "ਹਾਂ"
 
 #. TRANSLATORS: if the device has a VCGT profile
-#: ../src/mcm-viewer.c:774
+#: ../src/mcm-prefs.c:1578
 msgid "No"
 msgstr "ਨਹੀਂ"
 
-#. TRANSLATORS: this is the tooltip when the profile can be deleted
-#: ../src/mcm-viewer.c:851
-msgid "Delete this profile"
-msgstr "ਇਹ ਪਰੋਫਾਇਲ ਹਟਾਓ"
+#. TRANSLATORS: this is where an output is not settable, but we are showing it in the UI
+#: ../src/mcm-prefs.c:1723
+msgid "No hardware support"
+msgstr "ਕੋਈ ਹਾਰਡਵੇਅਰ ਸਹਿਯੋਗ"
 
-#. TRANSLATORS: this is the tooltip when the profile cannot be deleted
-#: ../src/mcm-viewer.c:854
-msgid "This profile cannot be deleted"
-msgstr "ਇਹ ਪਰੋਫਾਇਲ ਹਟਾਇਆ ਨਹੀਂ ਜਾ ਸਕਦਾ"
+#. TRANSLATORS: this is where the device has been setup but is not connected
+#: ../src/mcm-prefs.c:1727 ../src/mcm-prefs.c:2039
+msgid "disconnected"
+msgstr "ਡਿਸ-ਕੁਨੈਕਟ ਹੈ"
 
-#. TRANSLATORS: combo-entry, no graph selected to be shown
-#: ../src/mcm-viewer.c:1020
-msgid "None"
-msgstr "ਕੋਈ ਨਹੀਂ"
+#. TRANSLATORS: the profile was of the wrong sort for this device
+#: ../src/mcm-prefs.c:1839
+msgid "Could not import profile"
+msgstr "ਪਰੋਫਾਇਲ ਇੰਪੋਰਟ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਿਆ"
 
-#. TRANSLATORS: combo-entry, this is a graph plot type (look it up on google...)
-#: ../src/mcm-viewer.c:1023
-msgid "CIE 1931 xy"
+#: ../src/mcm-prefs.c:1839
+msgid "The profile was of the wrong type for this device"
 msgstr ""
 
-#. TRANSLATORS: combo-entry, this is a graph plot type (what goes in, v.s. what goes out)
-#: ../src/mcm-viewer.c:1026
-msgid "Transfer response curve"
+#. TRANSLATORS: this is a sound description
+#: ../src/mcm-prefs.c:1975
+msgid "Device added"
+msgstr "ਜੰਤਰ ਜੋੜਿਆ"
+
+#. TRANSLATORS: this is a sound description
+#: ../src/mcm-prefs.c:1979
+msgid "Device removed"
+msgstr "ਜੰਤਰ ਹਟਾਇਆ"
+
+#. TRANSLATORS: this is when there are no profiles that can be used; the search term is either "RGB" or "CMYK"
+#: ../src/mcm-prefs.c:2267
+#, c-format
+msgid "No %s color spaces available"
 msgstr ""
 
-#. TRANSLATORS: combo-entry, this is a graph plot type (what data we snd the graphics card)
-#: ../src/mcm-viewer.c:1029
-msgid "Video card gamma table"
+#. TRANSLATORS: device type
+#: ../src/mcm-prefs.c:2632 ../data/mcm-prefs.ui.h:31
+msgid "Display"
+msgstr "ਡਿਸਪਲੇਅ"
+
+#. TRANSLATORS: device type
+#: ../src/mcm-prefs.c:2636
+msgid "Scanner"
+msgstr "ਸਕੈਨਰ"
+
+#. TRANSLATORS: device type
+#: ../src/mcm-prefs.c:2640
+msgid "Printer"
+msgstr "ਪਰਿੰਟਰ"
+
+#. TRANSLATORS: device type
+#: ../src/mcm-prefs.c:2644
+msgid "Camera"
+msgstr "ਕੈਮਰਾ"
+
+#. TRANSLATORS: button for more details about the vcgt failure
+#: ../src/mcm-prefs.c:2955
+msgid "More Information"
+msgstr "ਹੋਰ ਜਾਣਕਾਰੀ"
+
+#. TRANSLATORS: button to install extra profiles
+#: ../src/mcm-prefs.c:2958
+msgid "Install now"
+msgstr "ਹੁਣੇ ਇੰਸਟਾਲ ਕਰੋ"
+
+#. TRANSLATORS: this is displayed while the devices are being probed
+#: ../src/mcm-prefs.c:2961
+msgid "Loading list of devices…"
+msgstr "ਜੰਤਰਾਂ ਦੀ ਲਿਸਟ ਲੋਡ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ…"
+
+#. TRANSLATORS: this is displayed when the profile is crap
+#: ../src/mcm-prefs.c:2968
+msgid ""
+"This profile does not have the information required for whole-screen color "
+"correction."
 msgstr ""
 
-#. TRANSLATORS: combo-entry, this is a preview image of what the profile looks like
-#: ../src/mcm-viewer.c:1032
-msgid "Image preview (input)"
+#. TRANSLATORS: this is displayed when the profile is crap
+#: ../src/mcm-prefs.c:2976
+msgid "More color profiles could be automatically installed."
 msgstr ""
 
-#: ../src/mcm-viewer.c:1033
-msgid "Image preview (output)"
-msgstr ""
+#. TRANSLATORS: this is where the ICC profile_lcms1 has no description
+#: ../src/mcm-profile.c:128
+msgid "Missing description"
+msgstr "ਵੇਰਵਾ ਗੁੰਮ ਹੈ"
 
 #. TRANSLATORS: button: this is to open MCM
-#: ../src/mcm-session.c:111
+#: ../src/mcm-session.c:153
 msgid "Recalibrate now"
 msgstr "ਹੁਣੇ ਮੁੜ-ਕੈਲੀਬਰੇਟ"
 
 #. TRANSLATORS: button: this is to ignore the recalibrate notifications
-#: ../src/mcm-session.c:114
+#: ../src/mcm-session.c:156
 msgid "Ignore"
 msgstr "ਅਣਡਿੱਠਾ"
 
 #. TRANSLATORS: this is when the device has not been recalibrated in a while
-#: ../src/mcm-session.c:141
+#: ../src/mcm-session.c:183
 msgid "Recalibration required"
-msgstr "ਮੁੜ-ਕੈਲੀਬਰੇਟ ਕਰਨ ਦੀ ਲੋੜ"
+msgstr ""
 
 #. TRANSLATORS: this is when the display has not been recalibrated in a while
-#: ../src/mcm-session.c:151
+#: ../src/mcm-session.c:193
 #, c-format
 msgid "The display '%s' should be recalibrated soon."
-msgstr "ਡਿਸਪਲੇਅ '%s' ਨੂੰ ਛੇਤੀ ਹੀ ਮੁੜ-ਕੈਲੀਬਰੇਟ ਕਰਨਾ ਚਾਹੀਦਾ ਹੈ।"
+msgstr ""
 
 #. TRANSLATORS: this is when the printer has not been recalibrated in a while
-#: ../src/mcm-session.c:158
+#: ../src/mcm-session.c:200
 #, c-format
 msgid "The printer '%s' should be recalibrated soon."
-msgstr "ਪਰਿੰਟਰ '%s' ਨੂੰ ਛੇਤੀ ਹੀ ਮੁੜ-ਕੈਲੀਬਰੇਟ ਕਰਨਾ ਚਾਹੀਦਾ ਹੈ।"
+msgstr ""
 
-#: ../src/mcm-session.c:707
+#: ../src/mcm-session.c:263
 msgid "Do not exit after the request has been processed"
-msgstr "ਮੰਗ ਉੱਤੇ ਕਾਰਵਾਈ ਪੂਰੀ ਹੋਣ ਦੇ ਬਾਅਦ ਬੰਦ ਨਾ ਕਰੋ"
+msgstr ""
 
 #. TRANSLATORS: program name, a session wide daemon to watch for updates and changing system state
-#: ../src/mcm-session.c:723 ../data/mcm-prefs.ui.h:13
+#: ../src/mcm-session.c:280 ../data/mcm-prefs.ui.h:9
 msgid "Color Management"
 msgstr "ਰੰਗ ਪਰਬੰਧ"
 
-#: ../src/mcm-session.c:725
+#: ../src/mcm-session.c:282
 msgid "Color Management D-Bus Service"
 msgstr "ਰੰਗ ਪਰਬੰਧ ਡੀ-ਬੱਸ ਸਰਵਿਸ"
 
+#. TRANSLATORS: this is the profile creation date strftime format
+#: ../src/mcm-utils.c:562
+msgid "%B %e %Y, %I:%M:%S %p"
+msgstr "%e %B %Y, %I:%M:%S %p"
+
 #. TRANSLATORS: rendering intent: you probably want to google this
-#: ../src/mcm-utils.c:546
+#: ../src/mcm-utils.c:575
 msgid "Perceptual"
 msgstr ""
 
 #. TRANSLATORS: rendering intent: you probably want to google this
-#: ../src/mcm-utils.c:550
-msgid "Relative"
-msgstr "ਅਨੁਸਾਰੀ"
-
-#. TRANSLATORS: rendering intent: you probably want to google this
-#: ../src/mcm-utils.c:554
-msgid "Saturation"
-msgstr "ਸੰਤ੍ਰਿਪਤ"
-
-#. TRANSLATORS: rendering intent: you probably want to google this
-#: ../src/mcm-utils.c:558
-msgid "Absolute"
-msgstr "ਅਸਲ"
-
-#. TRANSLATORS: rendering intent: you probably want to google this
-#: ../src/mcm-utils.c:571
-msgid "High quality photography"
-msgstr "ਉੱਚ ਕੁਆਲਟੀ ਫੋਟੋਗਰਾਫ਼"
-
-#. TRANSLATORS: rendering intent: you probably want to google this
-#: ../src/mcm-utils.c:575
-msgid "Precise color matching"
+#: ../src/mcm-utils.c:579
+msgid "Relative colormetric"
 msgstr ""
 
 #. TRANSLATORS: rendering intent: you probably want to google this
-#: ../src/mcm-utils.c:579
-msgid "Graphs and presentations"
-msgstr "ਗਰਾਫ਼ ਤੇ ਪਰਿਜੈੱਟੇਸ਼ਨ"
+#: ../src/mcm-utils.c:583
+msgid "Saturation"
+msgstr ""
 
 #. TRANSLATORS: rendering intent: you probably want to google this
-#: ../src/mcm-utils.c:583
-msgid "Proofing devices"
-msgstr "ਪਰੂਫਿੰਗ ਜੰਤਰ"
-
-#. TRANSLATORS: this is where the ICC profile has no description
-#: ../libcolor-glib/mcm-profile.c:176
-msgid "Missing description"
-msgstr "ਵੇਰਵਾ ਗੁੰਮ ਹੈ"
-
-#. TRANSLATORS: this is the profile creation date strftime format
-#: ../libcolor-glib/mcm-profile.c:582
-msgid "%B %e %Y, %I:%M:%S %p"
-msgstr "%e %B %Y, %I:%M:%S %p"
+#: ../src/mcm-utils.c:587
+msgid "Absolute colormetric"
+msgstr ""
 
 #: ../data/mcm-calibrate.ui.h:1
 msgid "Blue:"
 msgstr "ਨੀਲਾ:"
 
-#: ../data/mcm-calibrate.ui.h:2 ../data/mcm-prefs.ui.h:9
+#: ../data/mcm-calibrate.ui.h:2 ../data/mcm-prefs.ui.h:4
 msgid "Brightness:"
 msgstr "ਚਮਕ:"
 
@@ -1624,7 +1703,7 @@ msgstr "CRT"
 #. The user wants to create images suitable to send to a photo-processing lab
 #: ../data/mcm-calibrate.ui.h:5
 msgid "Create images for printing"
-msgstr "ਪਰਿਟਿੰਗ ਲਈ ਚਿੱਤਰ ਬਣਾਓ"
+msgstr ""
 
 #. Expander label, for use when the user wants to see the VTE widget and what the calibration tool is actually doing
 #: ../data/mcm-calibrate.ui.h:6 ../data/mcm-spawn.ui.h:2
@@ -1639,7 +1718,7 @@ msgstr "ਜੰਤਰ ਕੈਲੀਬਰੇਸ਼ਨ"
 #. The user wants to analyse images that have been printed by a photo-processing lab
 #: ../data/mcm-calibrate.ui.h:10
 msgid "Generate profile from printed images"
-msgstr "ਪਰਿੰਟ ਕੀਤੇ ਚਿੱਤਰ ਤੋਂ ਪਰੋਫਾਇਲ ਬਣਾਓ"
+msgstr ""
 
 #: ../data/mcm-calibrate.ui.h:11
 msgid "Green:"
@@ -1667,7 +1746,7 @@ msgstr "ਸਧਾਰਨ"
 #. The user is trying to create an ICC profile of a printer that is connected to the computer
 #: ../data/mcm-calibrate.ui.h:20
 msgid "Profile locally attached printer"
-msgstr "ਲੋਕਲ ਅਟੈਚ ਕੀਤੇ ਪਰਿੰਟਰ ਲਈ ਪਰੋਫਾਇਲ"
+msgstr ""
 
 #: ../data/mcm-calibrate.ui.h:21
 msgid "Projector"
@@ -1679,447 +1758,265 @@ msgstr "ਲਾਲ:"
 
 #: ../data/mcm-calibrate.ui.h:23
 msgid "precision"
-msgstr "ਸ਼ੁੱਧਤਾ"
-
-#. This refers to the amount of ambient light on the sensor
-#: ../data/mcm-picker.ui.h:2
-msgid "Ambient:"
 msgstr ""
 
-#. Window title, where the user can pick spot colors using a measuring device
-#: ../data/mcm-picker.ui.h:4
+#: ../data/mcm-picker.ui.h:1
 msgid "Color Picker"
 msgstr "ਰੰਗ ਚੋਣੀ"
 
-#. This is the title to a combobox that switches the RGB conversion between different colorspaces such as Adobe RGB and sRGB
-#: ../data/mcm-picker.ui.h:6
+#. The profile colorspace, e.g. RGB
+#: ../data/mcm-picker.ui.h:2 ../data/mcm-prefs.ui.h:13
 msgid "Colorspace:"
 msgstr "ਰੰਗਸਪੇਸ:"
 
-#. This shows the error in the conversion to RGB.
-#: ../data/mcm-picker.ui.h:8
-msgid "Error:"
-msgstr "ਗਲਤੀ:"
+#: ../data/mcm-picker.ui.h:3
+msgid "LAB:"
+msgstr "LAB:"
 
-#. Lab is the color representation and D50 is the white point
-#: ../data/mcm-picker.ui.h:10
-msgid "Lab (D50):"
-msgstr "ਲੈਬ (D50):"
-
-#. These are the values of the chosen color in Red, Green, Blue encoding
 #. What mode to use for display rendering intent
-#: ../data/mcm-picker.ui.h:12 ../data/mcm-prefs.ui.h:52
+#: ../data/mcm-picker.ui.h:4 ../data/mcm-prefs.ui.h:59
 msgid "RGB:"
 msgstr "RGB:"
 
-#. Expander title, the results from the color picker
-#: ../data/mcm-picker.ui.h:14
+#: ../data/mcm-picker.ui.h:5
 msgid "Results"
 msgstr "ਨਤੀਜੇ"
 
-#. the color representation
-#: ../data/mcm-picker.ui.h:16
+#: ../data/mcm-picker.ui.h:6
 msgid "XYZ:"
 msgstr "XYZ:"
 
-#. Button text, to get a single sample of color
-#: ../data/mcm-picker.ui.h:18
+#: ../data/mcm-picker.ui.h:7
 msgid "_Measure"
 msgstr "ਮਾਪ(_M)"
 
 #: ../data/mcm-prefs.ui.h:1
 msgid ""
-"A working space is a default colorspace that is not associated with a "
-"specific device."
-msgstr ""
-
-#: ../data/mcm-prefs.ui.h:2
-msgid ""
 "A working space is the range of colors that can be encoded into an image."
 msgstr ""
 
+#: ../data/mcm-prefs.ui.h:2
+msgid "Add Virtual Device"
+msgstr "ਵੁਰਚੁਅਲ ਜੰਤਰ ਸ਼ਾਮਲ"
+
 #: ../data/mcm-prefs.ui.h:3
-msgid "Add a color profile to be used for this device"
-msgstr "ਇਸ ਜੰਤਰ ਲਈ ਵਰਤਣ ਵਾਸਤੇ ਰੰਗ ਪਰੋਫਾਇਲ ਸ਼ਾਮਲ"
-
-#. This is a button to add a virtual device
-#: ../data/mcm-prefs.ui.h:5
-#, fuzzy
-#| msgid "Add d_evice&#x2026;"
-msgid "Add d_evice…"
-msgstr "ਜੰਤਰ ਸ਼ਾਮਲ (_e)&#x2026;"
-
-#: ../data/mcm-prefs.ui.h:6
 msgid "Adds a virtual device that is not connected."
-msgstr "ਵੁਰਚੁਅਲ ਜੰਤਰ ਜੋੜੋ, ਜੋ ਕਿ ਕੁਨੈਕਟ ਨਹੀਂ ਹੈ।"
-
-#. Profiles that can be added to the device
-#: ../data/mcm-prefs.ui.h:8
-msgid "Available Profiles"
-msgstr "ਉਪਲੱਬਧ ਪਰੋਫਾਇਲ"
+msgstr ""
 
 #. Technical color word for softproof rendering intent
-#: ../data/mcm-prefs.ui.h:12
+#: ../data/mcm-prefs.ui.h:7
 msgid "CMYK:"
 msgstr "CMYK:"
 
+#: ../data/mcm-prefs.ui.h:8
+msgid "Close this dialog"
+msgstr "ਇਹ ਡਾਈਲਾਗ ਬੰਦ ਕਰੋ"
+
 #. Section heading for device profile settings
-#: ../data/mcm-prefs.ui.h:15
-msgid "Color Profiles"
+#: ../data/mcm-prefs.ui.h:11
+msgid "Color Profile"
 msgstr "ਰੰਗ ਪਰੋਫਾਇਲ"
 
-#: ../data/mcm-prefs.ui.h:16
+#: ../data/mcm-prefs.ui.h:14
 msgid "Contrast:"
-msgstr "ਭਿੰਨਤਾ:"
+msgstr ""
 
 #. This is a button to calibrate the device by creating an ICC profile file using a hardware device or a reference image
-#: ../data/mcm-prefs.ui.h:18
+#: ../data/mcm-prefs.ui.h:16
 msgid "Create _Profile"
 msgstr "ਪਰੋਫਾਇਲ ਬਣਾਓ(_P)"
 
-#: ../data/mcm-prefs.ui.h:19
-msgid "Create a profile for the device"
-msgstr "ਜੰਤਰ ਲਈ ਪਰੋਫਾਇਲ ਬਣਾਓ"
+#. When the profile was created
+#: ../data/mcm-prefs.ui.h:18
+msgid "Created:"
+msgstr "ਬਣਾਇਆ:"
 
 #. Tab title, system wide defaults to use
-#: ../data/mcm-prefs.ui.h:21
+#: ../data/mcm-prefs.ui.h:20
 msgid "Defaults"
 msgstr "ਡਿਫਾਲਟ"
 
-#: ../data/mcm-prefs.ui.h:22
+#: ../data/mcm-prefs.ui.h:21
 msgid ""
 "Delete the disconnected device - if you reconnect the device it will "
 "reappear in the list"
-msgstr "ਡਿਸ-ਕੁਨਕੈਟ ਜੰਤਰ ਹਟਾਉ - ਜੇ ਤੁਸੀਂ ਜੰਤਰ ਫੇਰ ਕੁਨੈਕਟ ਕੀਤਾ ਤਾਂ ਇਹ ਲਿਸਟ ਵਿੱਚ ਆਵੇਗਾ"
+msgstr ""
 
+#. Section heading for device settings
 #: ../data/mcm-prefs.ui.h:23
+msgid "Device"
+msgstr "ਜੰਤਰ"
+
+#. The manufacturer of the profile
+#: ../data/mcm-prefs.ui.h:25
+msgid "Device manufacturer:"
+msgstr "ਜੰਤਰ ਨਿਰਮਾਤਾ:"
+
+#. The manufacturer of the profile
+#: ../data/mcm-prefs.ui.h:27
+msgid "Device model:"
+msgstr "ਜੰਤਰ ਮਾਡਲ:"
+
+#: ../data/mcm-prefs.ui.h:28
 msgid "Device type:"
 msgstr "ਜੰਤਰ ਕਿਸਮ:"
 
 #. Tab title, currently connected or saved devices
-#: ../data/mcm-prefs.ui.h:25
+#: ../data/mcm-prefs.ui.h:30
 msgid "Devices"
 msgstr "ਜੰਤਰ"
 
+#. If the profile contains a display correction table
+#: ../data/mcm-prefs.ui.h:33
+msgid "Display correction:"
+msgstr ""
+
 #. What mode to use for display rendering intent
-#: ../data/mcm-prefs.ui.h:28
+#: ../data/mcm-prefs.ui.h:35
 msgid "Display:"
 msgstr "ਡਿਸਪਲੇਅ:"
 
-#: ../data/mcm-prefs.ui.h:29
-msgid "Do full screen correction"
-msgstr ""
+#. The file size in bytes of the profile
+#: ../data/mcm-prefs.ui.h:37
+msgid "File size:"
+msgstr "ਫਾਇਲ ਸਾਈਜ਼:"
 
-#. The EISA (standards body) identifier of the device
-#: ../data/mcm-prefs.ui.h:31
-msgid "EISA ID:"
-msgstr "EISA ID:"
+#. The basename (the last section of the filename) of the profile
+#: ../data/mcm-prefs.ui.h:39
+msgid "Filename:"
+msgstr "ਫਾਇਲ ਨਾਂ:"
 
 #. Settings that users don't normally have to touch
-#: ../data/mcm-prefs.ui.h:33
+#: ../data/mcm-prefs.ui.h:41
 msgid "Fine tuning"
 msgstr "ਫਾਈਨ ਟਿਊਨਿੰਗ"
 
-#: ../data/mcm-prefs.ui.h:34
+#: ../data/mcm-prefs.ui.h:42
 msgid "Gamma:"
 msgstr "ਗਾਮਾ:"
 
-#: ../data/mcm-prefs.ui.h:35
-msgid ""
-"Image files can be dragged on this window to auto-complete the above fields."
-msgstr ""
-
-#: ../data/mcm-prefs.ui.h:36
-msgid "Make the selected profile the default profile"
-msgstr "ਚੁਣਿਆ ਪਰੋਫਾਇਲ ਡਿਫਾਲਟ ਪਰੋਫਾਇਲ ਬਣਾਓ"
+#. The licence of the profile, normally non-free
+#: ../data/mcm-prefs.ui.h:44
+msgid "License:"
+msgstr "ਲਾਈਸੈਂਸ:"
 
 #. The manufacturer of the device
-#: ../data/mcm-prefs.ui.h:38
+#: ../data/mcm-prefs.ui.h:46
 msgid "Manufacturer:"
 msgstr "ਨਿਰਮਾਤਾ:"
 
 #. The model of the device
-#: ../data/mcm-prefs.ui.h:40
+#: ../data/mcm-prefs.ui.h:48
 msgid "Model:"
 msgstr "ਮਾਡਲ:"
 
-#: ../data/mcm-prefs.ui.h:41
+#: ../data/mcm-prefs.ui.h:49
 msgid "More details"
 msgstr "ਹੋਰ ਵੇਰਵਾ"
 
-#. Some profiles are not compatible with some devices
-#: ../data/mcm-prefs.ui.h:43
-msgid "Only profiles that are compatible with the device will be listed above."
-msgstr ""
-
-#: ../data/mcm-prefs.ui.h:44
+#: ../data/mcm-prefs.ui.h:50
 msgid "Open the documentation"
 msgstr "ਡੌਕੂਮੈਂਟੇਸ਼ਨ ਖੋਲ੍ਹੋ"
 
-#. Button to view installed profiles
-#: ../data/mcm-prefs.ui.h:46
-#, fuzzy
-#| msgid "Profiles to view"
-msgid "Pr_ofile Viewer"
-msgstr "ਵੇਖਣ ਲਈ ਪਰੋਫਾਇਲ"
+#: ../data/mcm-prefs.ui.h:51
+msgid "Profile Graphs"
+msgstr "ਪਰੋਫਾਇਲ ਗਰਾਫ਼"
 
-#. The rendering intent for the print preview
-#: ../data/mcm-prefs.ui.h:48
-#, fuzzy
-#| msgid "Profiles to view"
-msgid "Print Preview:"
-msgstr "ਵੇਖਣ ਲਈ ਪਰੋਫਾਇਲ"
+#. The type of profile, e.g. display, scanner, etc.
+#: ../data/mcm-prefs.ui.h:53
+msgid "Profile type:"
+msgstr "ਪਰੋਫਾਇਲ ਕਿਸਮ:"
 
-#: ../data/mcm-prefs.ui.h:49
+#. Tab title, currently installed profiles
+#: ../data/mcm-prefs.ui.h:55
+msgid "Profiles"
+msgstr "ਪਰੋਫਾਇਲ"
+
+#: ../data/mcm-prefs.ui.h:56
 msgid ""
 "Program the video card with the adjusted color values so all windows are "
 "color corrected"
 msgstr ""
 
-#: ../data/mcm-prefs.ui.h:53
-msgid "Remove a color profile for this device"
-msgstr "ਇਸ ਜੰਤਰ ਲਈ ਰੰਗ ਪਰੋਫਾਇਲ ਹਟਾਓ"
-
 #. This is a button to delete the saved or virtual device
-#: ../data/mcm-prefs.ui.h:55
-msgid "Remove de_vice"
-msgstr "ਜੰਤਰ ਹਟਾਓ(_v)"
+#: ../data/mcm-prefs.ui.h:61
+msgid "Remove"
+msgstr "ਹਟਾਓ"
 
-#: ../data/mcm-prefs.ui.h:56
+#: ../data/mcm-prefs.ui.h:62
 msgid "Rendering intent"
-msgstr "ਰੈਂਡਰਿੰਗ ਇੰਟੈਂਟ"
+msgstr ""
 
-#. This resets the device to it's defaults, and removes any user tweaked settings.
-#: ../data/mcm-prefs.ui.h:58
-msgid "Rese_t"
-msgstr "ਮੁੜ-ਸੈੱਟ(_t)"
-
-#: ../data/mcm-prefs.ui.h:59
-msgid "Reset the sliders to the default values"
-msgstr "ਡਿਫਾਲਟ ਮੁੱਲ ਲਈ ਮੌਜੂਦਾ ਸੰਰਚਨਾ ਮੁੜ-ਸੈੱਟ"
-
-#: ../data/mcm-prefs.ui.h:60
+#: ../data/mcm-prefs.ui.h:63
 msgid "Save these profiles for all users"
-msgstr "ਇਹ ਪਰੋਫਾਇਲ ਸਭ ਯੂਜ਼ਰਾਂ ਲਈ ਸੰਭਾਲੋ"
+msgstr ""
 
 #. The serial number of the device
-#: ../data/mcm-prefs.ui.h:62
+#: ../data/mcm-prefs.ui.h:65
 msgid "Serial number:"
 msgstr "ਸੀਰੀਅਲ ਨੰਬਰ:"
 
-#: ../data/mcm-prefs.ui.h:63
+#: ../data/mcm-prefs.ui.h:66
 msgid ""
 "Set a property on the system so applications use the default display profile"
 msgstr ""
 
-#: ../data/mcm-prefs.ui.h:64
-msgid "Set profile for _color managed applications"
+#. Technical color word for softproof rendering intent
+#: ../data/mcm-prefs.ui.h:68
+msgid "Softproof:"
 msgstr ""
 
-#: ../data/mcm-prefs.ui.h:65
-msgid ""
-"The rendering intent defines how color should be transformed from one "
-"colorspace to another."
-msgstr ""
-
-#: ../data/mcm-prefs.ui.h:66
+#: ../data/mcm-prefs.ui.h:69
 msgid "The rendering intent is how one gamut size is mapped to another."
 msgstr ""
 
-#: ../data/mcm-prefs.ui.h:67
+#: ../data/mcm-prefs.ui.h:70
 msgid ""
 "The rendering intent to use when transforming from the image gamut to the "
 "device output gamut"
 msgstr ""
 
-#: ../data/mcm-prefs.ui.h:68
+#: ../data/mcm-prefs.ui.h:71
 msgid ""
 "The rendering intent to use when transforming from the image gamut to the "
 "display gamut"
 msgstr ""
 
-#: ../data/mcm-prefs.ui.h:69
+#: ../data/mcm-prefs.ui.h:72
 msgid "These settings control how color management is applied to your desktop."
 msgstr ""
 
-#: ../data/mcm-prefs.ui.h:70
-msgid ""
-"This enables full screen color management which requires a modern 3D "
-"graphics card with hardware shader support. This option may increase CPU "
-"load and will increase the amount of power this computer uses."
+#: ../data/mcm-prefs.ui.h:73
+msgid "This is the default CMYK working space to use in applications"
 msgstr ""
 
-#: ../data/mcm-prefs.ui.h:71
-msgid "This is the default CMYK working space to use in applications"
-msgstr "ਐਪਲੀਕੇਸ਼ਨ ਵਿੱਚ ਵਰਤਣ ਲਈ ਇਹ ਡਿਫਾਲਟ CMYK  ਵਰਕਿੰਗ ਸਪੇਸ"
-
-#: ../data/mcm-prefs.ui.h:72
+#: ../data/mcm-prefs.ui.h:74
 msgid "This is the default RGB working space to use in applications"
-msgstr "ਐਪਲੀਕੇਸ਼ਨ ਵਿੱਚ ਵਰਤਣ ਲਈ ਇਹ ਡਿਫਾਲਟ RGB  ਵਰਕਿੰਗ ਸਪੇਸ"
+msgstr ""
 
-#: ../data/mcm-prefs.ui.h:73
+#: ../data/mcm-prefs.ui.h:75
 msgid "Working space"
 msgstr "ਵਰਕਿੰਗ ਥਾਂ"
 
-#: ../data/mcm-prefs.ui.h:74
-#, fuzzy
-#| msgid "_Apply display correction"
-msgid "_Apply basic display correction"
-msgstr "ਡਿਸਪਲੇਅ ਸੋਧ ਲਾਗੂ ਕਰੋ(_A)"
+#. This is a button to add a virtual device
+#: ../data/mcm-prefs.ui.h:77
+msgid "_Add&#x2026;"
+msgstr "ਸ਼ਾਮਲ(_A)&#x2026;"
 
-#. Makes the profile the default for the device
-#: ../data/mcm-prefs.ui.h:76
+#: ../data/mcm-prefs.ui.h:78
+msgid "_Apply display correction"
+msgstr ""
+
+#: ../data/mcm-prefs.ui.h:79
 msgid "_Make Default"
 msgstr "ਡਿਫਾਲਟ ਬਣਾਓ(_M)"
 
-#. This is when the settings are set for all users, unless they have per-user settings themselves
-#: ../data/mcm-prefs.ui.h:78
-msgid "_Set System Default"
-msgstr "ਸਿਸਟਮ ਡਿਫਾਲਟ ਸੈੱਟ ਕਰੋ(_S)"
+#. This resets the device to it's defaults, and removes any user tweaked settings.
+#: ../data/mcm-prefs.ui.h:81
+msgid "_Reset to defaults"
+msgstr "ਡਿਫਾਲਟ ਲਈ ਮੁੜ-ਸੈੱਟ ਕਰੋ(_R)"
 
-#~ msgid "ICC profile installer"
-#~ msgstr "ICC ਪਰੋਫਾਇਲ ਇੰਸਟਾਲਰ"
+#: ../data/mcm-prefs.ui.h:82
+msgid "_Set profile for color managed applications"
+msgstr ""
 
-#~ msgid "Select reference image"
-#~ msgstr "ਰੈਫਰੈਂਸ ਚਿੱਤਰ ਚੁਣੋ"
-
-#~ msgid "Measuring instrument not recognized"
-#~ msgstr "ਮਾਪ ਜੰਤਰ ਪਛਾਣਿਆ ਨਹੀਂ ਗਿਆ"
-
-#~| msgid "Cannot load file contents"
-#~ msgid "Cannot load file contents:"
-#~ msgstr "ਫਾਇਲ ਸਮੱਗਰੀ ਲੋਡ ਨਹੀਂ ਕੀਤੀ ਜਾ ਸਕਦੀ:"
-
-#~| msgid "Cannot load file contents"
-#~ msgid "Cannot parse EDID contents:"
-#~ msgstr "EDID ਸਮੱਗਰੀ ਪਾਰਸ ਨਹੀਂ ਕੀਤੀ ਜਾ ਸਕਦੀ:"
-
-#~| msgid "Monitor name"
-#~ msgid "Monitor name:"
-#~ msgstr "ਮਾਨੀਟਰ ਨਾਂ:"
-
-#~| msgid "Vendor name"
-#~ msgid "Vendor name:"
-#~ msgstr "ਵੇਂਡਰ ਨਾਂ:"
-
-#~| msgid "PNP identifier"
-#~ msgid "PNP identifier:"
-#~ msgstr "PNP ਪਛਾਣ:"
-
-#~| msgid "Size"
-#~ msgid "Size:"
-#~ msgstr "ਸਾਈਜ਼:"
-
-#~ msgid "EDID dumps to parse"
-#~ msgstr "ਪਾਰਸ ਕਰਨ ਲਈ EDID ਡੰਪ"
-
-#~| msgid "EDID dump"
-#~ msgid "EDID dump:"
-#~ msgstr "EDID ਡੰਪ:"
-
-#~ msgid "Failed to save EDID to %s"
-#~ msgstr "EDID ਨੂੰ %s ਉੱਤੇ ਸੰਭਾਲਣ ਲਈ ਫੇਲ੍ਹ"
-
-#~ msgid "ICC profile dump program"
-#~ msgstr "ICC ਪਰੋਫਾਇਲ ਡੰਪ ਪਰੋਗਰਾਮ"
-
-#~ msgid "The description of the profile"
-#~ msgstr "ਪਰੋਫਾਇਲ ਲਈ ਵੇਰਵਾ"
-
-#~ msgid "The copyright of the profile"
-#~ msgstr "ਪਰੋਫਾਇਲ ਲਈ ਕਾਪੀਰਾਈਟ"
-
-#~ msgid "The model of the profile"
-#~ msgstr "ਪਰੋਫਾਇਲ ਲਈ ਮਾਡਲ"
-
-#~ msgid "The manufacturer of the profile"
-#~ msgstr "ਪਰੋਫਾਇਲ ਲਈ ਨਿਰਮਾਤਾ"
-
-#~ msgid "Profiles to fix"
-#~ msgstr "ਠੀਕ ਕਰਨ ਲਈ ਪਰੋਫਾਇਲ"
-
-#~ msgid "ICC profile fix program"
-#~ msgstr "ICC ਪਰੋਫਾਇਲ ਠੀਕ ਪਰੋਗਰਾਮ"
-
-#~ msgid "Cannot calibrate: The measuring instrument is not plugged in"
-#~ msgstr "ਕੈਲੀਬਰੇਸ਼ਨ ਨਹੀਂ: ਮਾਪ ਜੰਤਰ ਜੋੜਿਆ ਨਹੀਂ ਗਿਆ"
-
-#~| msgid "Manage ICC color profiles"
-#~ msgid "Add a new color profile"
-#~ msgstr "ਨਵਾਂ ਰੰਗ ਪਰੋਫਾਇਲ ਸ਼ਾਮਲ"
-
-#~ msgid "Close this dialog"
-#~ msgstr "ਇਹ ਡਾਈਲਾਗ ਬੰਦ ਕਰੋ"
-
-#~ msgid "Created:"
-#~ msgstr "ਬਣਾਇਆ:"
-
-#~ msgid "Device manufacturer:"
-#~ msgstr "ਜੰਤਰ ਨਿਰਮਾਤਾ:"
-
-#~ msgid "Device model:"
-#~ msgstr "ਜੰਤਰ ਮਾਡਲ:"
-
-#~ msgid "Display correction:"
-#~ msgstr "ਡਿਸਪਲੇਅ ਸੋਧ:"
-
-#~ msgid "File size:"
-#~ msgstr "ਫਾਇਲ ਸਾਈਜ਼:"
-
-#~ msgid "Filename:"
-#~ msgstr "ਫਾਇਲ ਨਾਂ:"
-
-#~ msgid "License:"
-#~ msgstr "ਲਾਈਸੈਂਸ:"
-
-#~ msgid "Profile Graphs"
-#~ msgstr "ਪਰੋਫਾਇਲ ਗਰਾਫ਼"
-
-#~ msgid "Profile type:"
-#~ msgstr "ਪਰੋਫਾਇਲ ਕਿਸਮ:"
-
-#~ msgid "Profiles"
-#~ msgstr "ਪਰੋਫਾਇਲ"
-
-#~ msgid "Softproof:"
-#~ msgstr "ਸਾਫਟਪਰੂਫ਼:"
-
-#~ msgid "_Add&#x2026;"
-#~ msgstr "ਸ਼ਾਮਲ(_A)&#x2026;"
-
-#~| msgid "Remove"
-#~ msgid "_Remove"
-#~ msgstr "ਹਟਾਓ(_R)"
-
-#~ msgid "The default CMYK profile."
-#~ msgstr "ਡਿਫਾਲਟ CMYK ਪਰੋਫਾਇਲ"
-
-#~ msgid "The default RGB profile."
-#~ msgstr "ਡਿਫਾਲਟ RGB ਪਰੋਫਾਇਲ"
-
-#~ msgid "The default calibration length."
-#~ msgstr "ਡਿਫਾਲਟ ਕੈਲੀਬਰੇਸ਼ਨ ਲੰਬਾਈ।"
-
-#~ msgid "This device already exists"
-#~ msgstr "ਇਹ ਜੰਤਰ ਪਹਿਲਾਂ ਹੀ ਮੌਜੂਦ ਹੈ"
-
-#~ msgid "Serial number"
-#~ msgstr "ਸੀਰੀਅਲ ਨੰਬਰ"
-
-#~ msgid "Text string"
-#~ msgstr "ਟੈਕਸਟ ਲਾਈਨ"
-
-#~ msgid "Gamma"
-#~ msgstr "ਗਾਮਾ"
-
-#~ msgid "LAB:"
-#~ msgstr "LAB:"
-
-#~ msgid "Add Virtual Device"
-#~ msgstr "ਵੁਰਚੁਅਲ ਜੰਤਰ ਸ਼ਾਮਲ"
-
-#~ msgid "Color Profile"
-#~ msgstr "ਰੰਗ ਪਰੋਫਾਇਲ"
-
-#~ msgid "Device"
-#~ msgstr "ਜੰਤਰ"

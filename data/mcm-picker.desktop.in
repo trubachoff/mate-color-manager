@@ -1,0 +1,13 @@
+[Desktop Entry]
+_Name=Color Picker
+_Comment=Use the color sensor to sample spot colors
+Icon=mate-color-manager
+Exec=mcm-picker
+Terminal=false
+Type=Application
+Categories=GTK;System;
+OnlyShowIn=MATE;
+StartupNotify=true
+X-MATE-Bugzilla-Bugzilla=MATE
+X-MATE-Bugzilla-Product=mate-color-manager
+X-MATE-Bugzilla-Component=mate-color-manager

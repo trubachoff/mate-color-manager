@@ -2228,18 +2228,13 @@ mcm_prefs_setup_space_combobox (GtkWidget *widget, McmColorspace colorspace, con
 	McmProfile *profile;
 	guint i;
 	const gchar *filename;
-	const gchar *description;
 	McmColorspace colorspace_tmp;
 	gboolean has_profile = FALSE;
 	gboolean has_vcgt;
+	gboolean has_colorspace_description;
 	gchar *text = NULL;
-	const gchar *search = "RGB";
 	GPtrArray *profile_array = NULL;
 	GtkTreeIter iter;
-
-	/* search is a way to reduce to number of profiles */
-	if (colorspace == MCM_COLORSPACE_CMYK)
-		search = "CMYK";
 
 	/* get new list */
 	profile_array = mcm_profile_store_get_array (profile_store);
@@ -2249,13 +2244,13 @@ mcm_prefs_setup_space_combobox (GtkWidget *widget, McmColorspace colorspace, con
 		profile = g_ptr_array_index (profile_array, i);
 
 		/* only for correct kind */
-		description = mcm_profile_get_description (profile);
 		has_vcgt = mcm_profile_get_has_vcgt (profile);
+		has_colorspace_description = mcm_profile_has_colorspace_description (profile);
 		colorspace_tmp = mcm_profile_get_colorspace (profile);
 		if (!has_vcgt &&
 		    colorspace == colorspace_tmp &&
 		    (colorspace == MCM_COLORSPACE_CMYK ||
-		     g_strstr_len (description, -1, search) != NULL)) {
+		     has_colorspace_description)) {
 			mcm_prefs_combobox_add_profile (widget, profile, MCM_PREFS_ENTRY_TYPE_PROFILE, &iter);
 
 			/* set active option */

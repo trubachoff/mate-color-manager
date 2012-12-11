@@ -95,24 +95,20 @@ mcm_test_brightness_func (void)
 	brightness = mcm_brightness_new ();
 	g_assert (brightness != NULL);
 
-	g_debug ("get original brightness");
 	ret = mcm_brightness_get_percentage (brightness, &orig_percentage, &error);
 	g_assert_no_error (error);
 	g_assert (ret);
 
-	g_debug ("set the new brightness");
 	ret = mcm_brightness_set_percentage (brightness, 10, &error);
 	g_assert_no_error (error);
 	g_assert (ret);
 
-	g_debug ("get the new brightness");
 	ret = mcm_brightness_get_percentage (brightness, &percentage, &error);
 	g_assert_no_error (error);
 	g_assert (ret);
 	g_assert_cmpint (percentage, >, 5);
 	g_assert_cmpint (percentage, <, 15);
 
-	g_debug ("set back original brightness");
 	ret = mcm_brightness_set_percentage (brightness, orig_percentage, &error);
 	g_assert_no_error (error);
 	g_assert (ret);
@@ -131,7 +127,7 @@ mcm_test_calibrate_func (void)
 	calibrate = mcm_calibrate_new ();
 	g_assert (calibrate != NULL);
 
-	g_debug ("calibrate display manually");
+	/* calibrate display manually */
 	filename = mcm_test_get_data_file ("test.tif");
 	ret = mcm_calibrate_set_from_exif (MCM_CALIBRATE(calibrate), filename, &error);
 	g_assert_no_error (error);
@@ -167,7 +163,7 @@ mcm_test_calibrate_manual_func (void)
 		      "output-name", "lvds1",
 		      NULL);
 
-	g_debug ("calibrate display manually");
+	/* calibrate display manually */
 	ret = mcm_calibrate_display (MCM_CALIBRATE(calibrate), NULL, &error);
 	g_assert_no_error (error);
 	g_assert (ret);
@@ -195,11 +191,9 @@ mcm_test_cie_widget_func (void)
 	widget = mcm_cie_widget_new ();
 	g_assert (widget != NULL);
 
-	g_debug ("get filename of image file");
 	filename_image = mcm_test_get_data_file ("cie-widget.png");
 	g_assert ((filename_image != NULL));
 
-	g_debug ("get filename of data file");
 	filename_profile = mcm_test_get_data_file ("bluish.icc");
 	g_assert ((filename_profile != NULL));
 
@@ -234,7 +228,6 @@ mcm_test_cie_widget_func (void)
 
 	response = gtk_dialog_run (GTK_DIALOG (dialog));
 
-	g_debug ("plotted as expected?");
 	g_assert ((response == GTK_RESPONSE_YES));
 
 	gtk_widget_destroy (dialog);
@@ -265,11 +258,8 @@ mcm_test_clut_func (void)
 		      "brightness", 0.0f,
 		      NULL);
 
-	g_debug ("get array");
 	array = mcm_clut_get_array (clut);
 	g_assert_cmpint (array->len, ==, 3);
-
-	g_debug ("check values for reset array");
 
 	data = g_ptr_array_index (array, 0);
 	g_assert_cmpint (data->red, ==, 0);
@@ -294,11 +284,9 @@ mcm_test_clut_func (void)
 		      "brightness", 0.0f,
 		      NULL);
 
-	g_debug ("get array");
 	array = mcm_clut_get_array (clut);
 	g_assert_cmpint (array->len, ==, 3);
 
-	g_debug ("check values for contrast adjusted array");
 	data = g_ptr_array_index (array, 0);
 	g_assert_cmpint (data->red, ==, 0);
 	g_assert_cmpint (data->green, ==, 0);
@@ -320,11 +308,9 @@ mcm_test_clut_func (void)
 		      "brightness", 1.0f,
 		      NULL);
 
-	g_debug ("get array");
 	array = mcm_clut_get_array (clut);
 	g_assert_cmpint (array->len, ==, 3);
 
-	g_debug ("check values for brightness adjusted array");
 	data = g_ptr_array_index (array, 0);
 	g_assert_cmpint (data->red, ==, 655);
 	g_assert_cmpint (data->green, ==, 655);
@@ -349,9 +335,7 @@ static GMainLoop *_loop = NULL;
 static void
 mcm_device_test_changed_cb (McmDevice *device)
 {
-	g_debug ("emit changed: %s", mcm_device_get_id (device));
 	_changes++;
-
 	g_main_loop_quit (_loop);
 }
 
@@ -365,8 +349,6 @@ mcm_test_device_func (void)
 	const gchar *profile;
 	gchar *data;
 	gchar **split;
-	const gchar *kind;
-	McmDeviceKind kind_enum;
 
 	device = mcm_device_udev_new ();
 	g_assert (device != NULL);
@@ -374,24 +356,13 @@ mcm_test_device_func (void)
 	/* connect to the changed signal */
 	g_signal_connect (device, "changed", G_CALLBACK (mcm_device_test_changed_cb), NULL);
 
-	g_debug ("correct number of changed signals");
 	g_assert_cmpint (_changes, ==, 0);
 
-	g_debug ("convert to recognized enum");
-	kind_enum = mcm_device_kind_from_string ("scanner");
-	g_assert ((kind_enum == MCM_DEVICE_KIND_SCANNER));
+	g_assert (mcm_device_kind_from_string ("scanner") == MCM_DEVICE_KIND_SCANNER);
+	g_assert (mcm_device_kind_from_string ("xxx") == MCM_DEVICE_KIND_UNKNOWN);
 
-	g_debug ("convert to unrecognized enum");
-	kind_enum = mcm_device_kind_from_string ("xxx");
-	g_assert ((kind_enum == MCM_DEVICE_KIND_UNKNOWN));
-
-	g_debug ("convert from recognized enum");
-	kind = mcm_device_kind_to_string (MCM_DEVICE_KIND_SCANNER);
-	g_assert_cmpstr (kind, ==, "scanner");
-
-	g_debug ("convert from unrecognized enum");
-	kind = mcm_device_kind_to_string (MCM_DEVICE_KIND_UNKNOWN);
-	g_assert_cmpstr (kind, ==, "unknown");
+	g_assert_cmpstr (mcm_device_kind_to_string (MCM_DEVICE_KIND_SCANNER), ==, "scanner");
+	g_assert_cmpstr (mcm_device_kind_to_string (MCM_DEVICE_KIND_UNKNOWN), ==, "unknown");
 
 	/* set some properties */
 	g_object_set (device,
@@ -407,39 +378,29 @@ mcm_test_device_func (void)
 	g_main_loop_run (_loop);
 	/* TODO: time out of loop */
 
-	g_debug ("correct number of changed signals");
 	g_assert_cmpint (_changes, ==, 1);
 
 	mcm_device_set_connected (device, TRUE);
 	g_main_loop_run (_loop);
-	/* TODO: time out of loop */
-
-	g_debug ("correct number of changed signals");
 	g_assert_cmpint (_changes, ==, 2);
 
-	g_debug ("get id");
-	kind = mcm_device_get_id (device);
-	g_assert_cmpstr (kind, ==, "sysfs_dummy_device");
+	g_assert_cmpstr (mcm_device_get_id (device), ==, "sysfs_dummy_device");
 
 	/* ensure the file is nuked */
 	filename = mcm_utils_get_default_config_location ();
 	g_unlink (filename);
 
-	g_debug ("load from missing file");
+	/* missing file */
 	ret = mcm_device_load (device, &error);
 	g_assert_no_error (error);
 	g_assert (ret);
 
-	/* get some properties */
-	profile = mcm_device_get_profile_filename (device);
-
-	g_debug ("get profile filename");
-	g_assert_cmpstr (profile, ==, NULL);
+	g_assert_cmpstr (mcm_device_get_profile_filename (device), ==, NULL);
 
 	/* empty file that exists */
 	g_file_set_contents (filename, "", -1, NULL);
 
-	g_debug ("load from empty file");
+	/* load from empty file */
 	ret = mcm_device_load (device, &error);
 	g_assert_no_error (error);
 	g_assert (ret);
@@ -451,7 +412,6 @@ mcm_test_device_func (void)
 			     "type=scanner\n"
 			     "profile=/srv/sysfs_canon_canoscan.icc\n", -1, NULL);
 
-	g_debug ("load from configured file");
 	ret = mcm_device_load (device, &error);
 	g_assert_no_error (error);
 	g_assert (ret);
@@ -462,10 +422,8 @@ mcm_test_device_func (void)
 	g_main_loop_run (_loop);
 	/* TODO: time out of loop */
 
-	g_debug ("correct number of changed signals");
 	g_assert_cmpint (_changes, ==, 3);
 
-	g_debug ("get profile filename");
 	g_assert_cmpstr (profile, ==, "/srv/sysfs_canon_canoscan.icc");
 
 	/* set some properties */
@@ -474,16 +432,14 @@ mcm_test_device_func (void)
 	/* ensure the file is nuked, again */
 	g_unlink (filename);
 
-	g_debug ("save to empty file");
+	/* save to empty file */
 	ret = mcm_device_save (device, &error);
 	g_assert_no_error (error);
 	g_assert (ret);
 
-	g_debug ("get contents of saved file");
 	ret = g_file_get_contents (filename, &data, NULL, NULL);
 	g_assert (ret);
 
-	g_debug ("check data");
 	split = g_strsplit (data, "\n", -1);
 	g_assert_cmpstr (split[1], ==, "[sysfs_dummy_device]");
 	g_assert_cmpstr (split[4], ==, "profile=/srv/sysfs_canon_canoscan.icc");
@@ -533,39 +489,29 @@ mcm_test_edid_test_parse_edid_file (McmEdid *edid, const gchar *datafile, McmEdi
 	gboolean ret;
 	GError *error = NULL;
 
-	g_debug ("get filename of data file");
 	filename = mcm_test_get_data_file (datafile);
 	ret = g_file_get_contents (filename, &data, NULL, &error);
 	g_assert_no_error (error);
 	g_assert (ret);
 
-	g_debug ("parse an example edid block");
 	ret = mcm_edid_parse (edid, (const guint8 *) data, &error);
 	g_assert_no_error (error);
 	g_assert (ret);
 
-	g_debug ("check monitor name for %s", datafile);
 	g_assert_cmpstr (mcm_edid_get_monitor_name (edid), ==, test_data->monitor_name);
 
-	g_debug ("check vendor name for %s", datafile);
 	g_assert_cmpstr (mcm_edid_get_vendor_name (edid), ==, test_data->vendor_name);
 
-	g_debug ("check serial number for %s", datafile);
 	g_assert_cmpstr (mcm_edid_get_serial_number (edid), ==, test_data->serial_number);
 
-	g_debug ("check ascii string for %s", datafile);
 	g_assert_cmpstr (mcm_edid_get_eisa_id (edid), ==, test_data->eisa_id);
 
-	g_debug ("check pnp id for %s", datafile);
 	g_assert_cmpstr (mcm_edid_get_pnp_id (edid), ==, test_data->pnp_id);
 
-	g_debug ("check height for %s", datafile);
 	g_assert_cmpint (mcm_edid_get_height (edid), ==, test_data->height);
 
-	g_debug ("check width for %s", datafile);
 	g_assert_cmpint (mcm_edid_get_width (edid), ==, test_data->width);
 
-	g_debug ("check gamma for %s", datafile);
 	mygamma = mcm_edid_get_gamma (edid);
 	g_assert_cmpfloat (mygamma, >=, test_data->gamma - 0.01);
 	g_assert_cmpfloat (mygamma, <, test_data->gamma + 0.01);
@@ -669,7 +615,6 @@ mcm_test_gamma_widget_func (void)
 		      "color-blue", 0.25f,
 		      NULL);
 
-	g_debug ("get filename of image file");
 	filename_image = mcm_test_get_data_file ("gamma-widget.png");
 	g_assert ((filename_image != NULL));
 
@@ -686,7 +631,6 @@ mcm_test_gamma_widget_func (void)
 
 	response = gtk_dialog_run (GTK_DIALOG (dialog));
 
-	g_debug ("plotted as expected?");
 	g_assert ((response == GTK_RESPONSE_YES));
 
 	gtk_widget_destroy (dialog);
@@ -741,7 +685,6 @@ mcm_test_image_func (void)
 	filename_widget = mcm_test_get_data_file ("image-widget.png");
 	gtk_image_set_from_file (GTK_IMAGE(image), filename_widget);
 
-	g_debug ("get filename of image file");
 	filename_test = mcm_test_get_data_file ("image-widget-good.png");
 	g_assert ((filename_test != NULL));
 
@@ -761,7 +704,6 @@ mcm_test_image_func (void)
 		      "output-icc-profile", NULL,
 		      NULL);
 
-	g_debug ("converted as expected?");
 	response = gtk_dialog_run (GTK_DIALOG (dialog));
 	g_assert ((response == GTK_RESPONSE_YES));
 	g_free (filename_test);
@@ -772,12 +714,10 @@ mcm_test_image_func (void)
 		      "use-embedded-icc-profile", FALSE,
 		      NULL);
 
-	g_debug ("converted as expected?");
 	response = gtk_dialog_run (GTK_DIALOG (dialog));
 	g_assert ((response == GTK_RESPONSE_YES));
 	g_free (filename_test);
 
-	g_debug ("get dummy display profile");
 	profile_base64 = mcm_image_test_get_ibmt61_profile ();
 	g_assert ((profile_base64 != NULL));
 
@@ -788,7 +728,6 @@ mcm_test_image_func (void)
 		      "output-icc-profile", profile_base64,
 		      NULL);
 
-	g_debug ("converted as expected?");
 	response = gtk_dialog_run (GTK_DIALOG (dialog));
 	g_assert ((response == GTK_RESPONSE_YES));
 	g_free (filename_test);
@@ -818,7 +757,6 @@ mcm_test_print_func (void)
 
 	print = mcm_print_new ();
 
-	g_debug ("try to print");
 	ret = mcm_print_with_render_callback (print, NULL, mcm_print_test_render_cb, NULL, &error);
 	g_assert_no_error (error);
 	g_assert (ret);
@@ -841,13 +779,6 @@ static void
 mcm_test_profile_test_parse_file (const gchar *datafile, McmProfileTestData *test_data)
 {
 	gchar *filename = NULL;
-	const gchar *copyright;
-	const gchar *manufacturer;
-	const gchar *model;
-	const gchar *datetime;
-	const gchar *description;
-	guint kind;
-	guint colorspace;
 	gboolean ret;
 	GError *error = NULL;
 	McmProfile *profile_lcms1;
@@ -858,46 +789,23 @@ mcm_test_profile_test_parse_file (const gchar *datafile, McmProfileTestData *tes
 	profile_lcms1 = MCM_PROFILE(mcm_profile_lcms1_new ());
 	g_assert (profile_lcms1 != NULL);
 
-	g_debug ("get filename of data file");
 	filename = mcm_test_get_data_file (datafile);
 	g_assert ((filename != NULL));
 
-	g_debug ("load ICC file");
 	file = g_file_new_for_path (filename);
 	ret = mcm_profile_parse (profile_lcms1, file, &error);
 	g_assert_no_error (error);
 	g_assert (ret);
 	g_object_unref (file);
 
-	g_debug ("check copyright for %s", datafile);
-	copyright = mcm_profile_get_copyright (profile_lcms1);
-	g_assert_cmpstr (copyright, ==, test_data->copyright);
+	g_assert_cmpstr (mcm_profile_get_copyright (profile_lcms1), ==, test_data->copyright);
+	g_assert_cmpstr (mcm_profile_get_manufacturer (profile_lcms1), ==, test_data->manufacturer);
+	g_assert_cmpstr (mcm_profile_get_model (profile_lcms1), ==, test_data->model);
+	g_assert_cmpstr (mcm_profile_get_datetime (profile_lcms1), ==, test_data->datetime);
+	g_assert_cmpstr (mcm_profile_get_description (profile_lcms1), ==, test_data->description);
+	g_assert_cmpint (mcm_profile_get_kind (profile_lcms1), ==, test_data->kind);
+	g_assert_cmpint (mcm_profile_get_colorspace (profile_lcms1), ==, test_data->colorspace);
 
-	g_debug ("check manufacturer for %s", datafile);
-	manufacturer = mcm_profile_get_manufacturer (profile_lcms1);
-	g_assert_cmpstr (manufacturer, ==, test_data->manufacturer);
-
-	g_debug ("check model for %s", datafile);
-	model = mcm_profile_get_model (profile_lcms1);
-	g_assert_cmpstr (model, ==, test_data->model);
-
-	g_debug ("check datetime for %s", datafile);
-	datetime = mcm_profile_get_datetime (profile_lcms1);
-	g_assert_cmpstr (datetime, ==, test_data->datetime);
-
-	g_debug ("check description for %s", datafile);
-	description = mcm_profile_get_description (profile_lcms1);
-	g_assert_cmpstr (description, ==, test_data->description);
-
-	g_debug ("check kind for %s", datafile);
-	kind = mcm_profile_get_kind (profile_lcms1);
-	g_assert_cmpint (kind, ==, test_data->kind);
-
-	g_debug ("check colorspace for %s", datafile);
-	colorspace = mcm_profile_get_colorspace (profile_lcms1);
-	g_assert_cmpint (colorspace, ==, test_data->colorspace);
-
-	g_debug ("check luminance red %s", datafile);
 	g_object_get (profile_lcms1,
 		      "red", &xyz,
 		      NULL);
@@ -947,21 +855,18 @@ mcm_test_tables_func (void)
 	tables = mcm_tables_new ();
 	g_assert (tables != NULL);
 
-	g_debug ("check pnp id 'IBM'");
 	vendor = mcm_tables_get_pnp_id (tables, "IBM", &error);
 	g_assert_no_error (error);
 	g_assert (vendor != NULL);
 	g_assert_cmpstr (vendor, ==, "IBM France");
 	g_free (vendor);
 
-	g_debug ("check pnp id 'MIL'");
 	vendor = mcm_tables_get_pnp_id (tables, "MIL", &error);
 	g_assert_no_error (error);
 	g_assert (vendor != NULL);
 	g_assert_cmpstr (vendor, ==, "Marconi Instruments Ltd");
 	g_free (vendor);
 
-	g_debug ("check pnp id 'XXX'");
 	vendor = mcm_tables_get_pnp_id (tables, "XXX", &error);
 	g_assert_error (error, 1, 0);
 	g_assert_cmpstr (vendor, ==, NULL);
@@ -987,11 +892,9 @@ mcm_test_trc_widget_func (void)
 	widget = mcm_trc_widget_new ();
 	g_assert (widget != NULL);
 
-	g_debug ("get filename of image file");
 	filename_image = mcm_test_get_data_file ("trc-widget.png");
 	g_assert ((filename_image != NULL));
 
-	g_debug ("get filename of data file");
 	filename_profile = mcm_test_get_data_file ("AdobeGammaTest.icm");
 	g_assert ((filename_profile != NULL));
 
@@ -1017,7 +920,6 @@ mcm_test_trc_widget_func (void)
 
 	response = gtk_dialog_run (GTK_DIALOG (dialog));
 
-	g_debug ("plotted as expected?");
 	g_assert ((response == GTK_RESPONSE_YES));
 
 	gtk_widget_destroy (dialog);
@@ -1037,14 +939,12 @@ mcm_test_utils_func (void)
 	GFile *file;
 	GFile *dest;
 
-	g_debug ("Linkify text");
 	text = mcm_utils_linkify ("http://www.dave.org is text http://www.hughsie.com that needs to be linked to http://www.bbc.co.uk really");
 	g_assert_cmpstr (text, ==, "<a href=\"http://www.dave.org\">http://www.dave.org</a> is text "
 			     "<a href=\"http://www.hughsie.com\">http://www.hughsie.com</a> that needs to be linked to "
 			     "<a href=\"http://www.bbc.co.uk\">http://www.bbc.co.uk</a> really");
 	g_free (text);
 
-	g_debug ("get filename of data file");
 	file = g_file_new_for_path ("dave.icc");
 	dest = mcm_utils_get_profile_destination (file);
 	filename = g_file_get_path (dest);
@@ -1053,7 +953,6 @@ mcm_test_utils_func (void)
 	g_object_unref (file);
 	g_object_unref (dest);
 
-	g_debug ("check is icc profile");
 	filename = mcm_test_get_data_file ("bluish.icc");
 	file = g_file_new_for_path (filename);
 	ret = mcm_utils_is_icc_profile (file);
@@ -1061,50 +960,41 @@ mcm_test_utils_func (void)
 	g_object_unref (file);
 	g_free (filename);
 
-	g_debug ("detect LVDS panels");
 	ret = mcm_utils_output_is_lcd_internal ("LVDS1");
 	g_assert (ret);
 
-	g_debug ("detect external panels");
 	ret = mcm_utils_output_is_lcd_internal ("DVI1");
 	g_assert (!ret);
 
-	g_debug ("detect LCD panels");
 	ret = mcm_utils_output_is_lcd ("LVDS1");
 	g_assert (ret);
 
-	g_debug ("detect LCD panels (2)");
 	ret = mcm_utils_output_is_lcd ("DVI1");
 	g_assert (ret);
 
-	g_debug ("Make sensible id");
 	filename = g_strdup ("Hello\n\rWorld!");
 	mcm_utils_alphanum_lcase (filename);
 	g_assert_cmpstr (filename, ==, "hello__world_");
 	g_free (filename);
 
-	g_debug ("Make sensible filename");
 	filename = g_strdup ("Hel lo\n\rWo-(r)ld!");
 	mcm_utils_ensure_sensible_filename (filename);
 	g_assert_cmpstr (filename, ==, "Hel lo__Wo-(r)ld_");
 	g_free (filename);
 
-	g_debug ("check strip printable");
 	text = g_strdup ("1\r34 67_90");
 	mcm_utils_ensure_printable (text);
 	g_assert_cmpstr (text, ==, "134 67 90");
 	g_free (text);
 
-	g_debug ("get default config location (when in make check)");
+	/* get default config location (when in make check) */
 	g_setenv ("MCM_TEST", "1", TRUE);
 	filename = mcm_utils_get_default_config_location ();
 	g_assert_cmpstr (filename, ==, "/tmp/device-profiles.conf");
 	g_free (filename);
 
-	g_debug ("convert valid device kind to profile kind");
 	g_assert (mcm_utils_device_kind_to_profile_kind (MCM_DEVICE_KIND_SCANNER) == MCM_PROFILE_KIND_INPUT_DEVICE);
 
-	g_debug ("convert invalid device kind to profile kind");
 	g_assert (mcm_utils_device_kind_to_profile_kind (MCM_DEVICE_KIND_UNKNOWN) == MCM_PROFILE_KIND_UNKNOWN);
 }
 
@@ -1117,7 +1007,7 @@ mcm_test_xyz_func (void)
 	xyz = mcm_xyz_new ();
 	g_assert (xyz != NULL);
 
-	g_debug ("get x value (when nothing set)");
+	/* nothing set */
 	value = mcm_xyz_get_x (xyz);
 	g_assert_cmpfloat (fabs (value - 0.0f), <, 0.001f);
 
@@ -1128,15 +1018,12 @@ mcm_test_xyz_func (void)
 		      "cie-z", 0.5,
 		      NULL);
 
-	g_debug ("get x value");
 	value = mcm_xyz_get_x (xyz);
 	g_assert_cmpfloat (fabs (value - 0.142857143f), <, 0.001f);
 
-	g_debug ("get y value");
 	value = mcm_xyz_get_y (xyz);
 	g_assert_cmpfloat (fabs (value - 0.285714286f), <, 0.001f);
 
-	g_debug ("get z value");
 	value = mcm_xyz_get_z (xyz);
 	g_assert_cmpfloat (fabs (value - 0.571428571f), <, 0.001f);
 

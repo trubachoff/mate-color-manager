@@ -867,30 +867,3 @@ mcm_calibrate_dialog_new (void)
 	return MCM_CALIBRATE_DIALOG (mcm_calibrate_dialog_object);
 }
 
-/***************************************************************************
- ***                          MAKE CHECK TESTS                           ***
- ***************************************************************************/
-#ifdef EGG_TEST
-#include "egg-test.h"
-
-void
-mcm_calibrate_dialog_test (EggTest *test)
-{
-	McmCalibrateDialog *calibrate_dialog;
-//	gboolean ret;
-//	GError *error = NULL;
-
-	if (!egg_test_start (test, "McmCalibrateDialog"))
-		return;
-
-	/************************************************************/
-	egg_test_title (test, "get a calibrate_dialog object");
-	calibrate_dialog = mcm_calibrate_dialog_new ();
-	egg_test_assert (test, calibrate_dialog != NULL);
-
-	g_object_unref (calibrate_dialog);
-
-	egg_test_end (test);
-}
-#endif
-

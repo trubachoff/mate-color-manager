@@ -20,55 +20,1118 @@
  */
 
 #include <glib-object.h>
-#include "egg-test.h"
-#include <egg-debug.h>
+#include <math.h>
+#include <glib/gstdio.h>
 
-/* prototypes */
-void mcm_print_test (EggTest *test);
-void mcm_edid_test (EggTest *test);
-void mcm_image_test (EggTest *test);
-void mcm_tables_test (EggTest *test);
-void mcm_utils_test (EggTest *test);
-void mcm_device_test (EggTest *test);
-void mcm_profile_test (EggTest *test);
-void mcm_brightness_test (EggTest *test);
-void mcm_clut_test (EggTest *test);
-void mcm_dmi_test (EggTest *test);
-void mcm_xyz_test (EggTest *test);
-void mcm_cie_widget_test (EggTest *test);
-void mcm_trc_widget_test (EggTest *test);
-void mcm_calibrate_test (EggTest *test);
-void mcm_calibrate_manual_test (EggTest *test);
+#include "mcm-brightness.h"
+#include "mcm-calibrate.h"
+#include "mcm-calibrate-dialog.h"
+#include "mcm-calibrate-manual.h"
+#include "mcm-cie-widget.h"
+#include "mcm-clut.h"
+#include "mcm-device.h"
+#include "mcm-device-udev.h"
+#include "mcm-dmi.h"
+#include "mcm-edid.h"
+#include "mcm-gamma-widget.h"
+#include "mcm-image.h"
+#include "mcm-print.h"
+#include "mcm-profile.h"
+#include "mcm-profile-lcms1.h"
+#include "mcm-tables.h"
+#include "mcm-trc-widget.h"
+#include "mcm-utils.h"
+#include "mcm-xyz.h"
+#include "mcm-profile.h"
+#include "mcm-xyz.h"
+
+/**
+ * mcm_test_get_data_file:
+ **/
+static gchar *
+mcm_test_get_data_file (const gchar *filename)
+{
+	gboolean ret;
+	gchar *full;
+
+	/* check to see if we are being run in the build root */
+	full = g_build_filename ("..", "data", "tests", filename, NULL);
+	ret = g_file_test (full, G_FILE_TEST_EXISTS);
+	if (ret)
+		return full;
+	g_free (full);
+
+	/* check to see if we are being run in the build root */
+	full = g_build_filename ("..", "..", "data", "tests", filename, NULL);
+	ret = g_file_test (full, G_FILE_TEST_EXISTS);
+	if (ret)
+		return full;
+	g_free (full);
+
+	/* check to see if we are being run in make check */
+	full = g_build_filename ("..", "..", "data", "tests", filename, NULL);
+	ret = g_file_test (full, G_FILE_TEST_EXISTS);
+	if (ret)
+		return full;
+	g_free (full);
+	full = g_build_filename ("..", "..", "..", "data", "tests", filename, NULL);
+	ret = g_file_test (full, G_FILE_TEST_EXISTS);
+	if (ret)
+		return full;
+	g_free (full);
+	return NULL;
+}
+
+static void
+mcm_test_brightness_func (void)
+{
+	McmBrightness *brightness;
+	gboolean ret;
+	GError *error = NULL;
+	guint orig_percentage;
+	guint percentage;
+
+	brightness = mcm_brightness_new ();
+	g_assert (brightness != NULL);
+
+	g_debug ("get original brightness");
+	ret = mcm_brightness_get_percentage (brightness, &orig_percentage, &error);
+	g_assert_no_error (error);
+	g_assert (ret);
+
+	g_debug ("set the new brightness");
+	ret = mcm_brightness_set_percentage (brightness, 10, &error);
+	g_assert_no_error (error);
+	g_assert (ret);
+
+	g_debug ("get the new brightness");
+	ret = mcm_brightness_get_percentage (brightness, &percentage, &error);
+	g_assert_no_error (error);
+	g_assert (ret);
+	g_assert_cmpint (percentage, >, 5);
+	g_assert_cmpint (percentage, <, 15);
+
+	g_debug ("set back original brightness");
+	ret = mcm_brightness_set_percentage (brightness, orig_percentage, &error);
+	g_assert_no_error (error);
+	g_assert (ret);
+
+	g_object_unref (brightness);
+}
+
+static void
+mcm_test_calibrate_func (void)
+{
+	McmCalibrate *calibrate;
+	gboolean ret;
+	GError *error = NULL;
+	gchar *filename;
+
+	calibrate = mcm_calibrate_new ();
+	g_assert (calibrate != NULL);
+
+	g_debug ("calibrate display manually");
+	filename = mcm_test_get_data_file ("test.tif");
+	ret = mcm_calibrate_set_from_exif (MCM_CALIBRATE(calibrate), filename, &error);
+	g_assert_no_error (error);
+	g_assert (ret);
+	g_assert_cmpstr (mcm_calibrate_get_model_fallback (calibrate), ==, "NIKON D60");
+	g_assert_cmpstr (mcm_calibrate_get_manufacturer_fallback (calibrate), ==, "NIKON CORPORATION");
+
+	g_object_unref (calibrate);
+	g_free (filename);
+}
+
+static void
+mcm_test_calibrate_dialog_func (void)
+{
+	McmCalibrateDialog *calibrate_dialog;
+	calibrate_dialog = mcm_calibrate_dialog_new ();
+	g_assert (calibrate_dialog != NULL);
+	g_object_unref (calibrate_dialog);
+}
+
+static void
+mcm_test_calibrate_manual_func (void)
+{
+	McmCalibrateManual *calibrate;
+	gboolean ret;
+	GError *error = NULL;
+
+	calibrate = mcm_calibrate_manual_new ();
+	g_assert (calibrate != NULL);
+
+	/* set to avoid a critical warning */
+	g_object_set (calibrate,
+		      "output-name", "lvds1",
+		      NULL);
+
+	g_debug ("calibrate display manually");
+	ret = mcm_calibrate_display (MCM_CALIBRATE(calibrate), NULL, &error);
+	g_assert_no_error (error);
+	g_assert (ret);
+
+	g_object_unref (calibrate);
+}
+
+static void
+mcm_test_cie_widget_func (void)
+{
+	GtkWidget *widget;
+	GtkWidget *image;
+	GtkWidget *dialog;
+	GtkWidget *vbox;
+	McmProfile *profile;
+	McmXyz *white;
+	McmXyz *red;
+	McmXyz *green;
+	McmXyz *blue;
+	gint response;
+	gchar *filename_profile;
+	gchar *filename_image;
+	GFile *file = NULL;
+
+	widget = mcm_cie_widget_new ();
+	g_assert (widget != NULL);
+
+	g_debug ("get filename of image file");
+	filename_image = mcm_test_get_data_file ("cie-widget.png");
+	g_assert ((filename_image != NULL));
+
+	g_debug ("get filename of data file");
+	filename_profile = mcm_test_get_data_file ("bluish.icc");
+	g_assert ((filename_profile != NULL));
+
+	profile = mcm_profile_default_new ();
+	file = g_file_new_for_path (filename_profile);
+	mcm_profile_parse (profile, file, NULL);
+	g_object_get (profile,
+		      "white", &white,
+		      "red", &red,
+		      "green", &green,
+		      "blue", &blue,
+		      NULL);
+	g_object_unref (file);
+
+	g_object_set (widget,
+		      "red", red,
+		      "green", green,
+		      "blue", blue,
+		      "white", white,
+		      NULL);
+
+	/* show in a dialog as an example */
+	dialog = gtk_message_dialog_new (NULL, GTK_DIALOG_DESTROY_WITH_PARENT, GTK_MESSAGE_QUESTION, GTK_BUTTONS_YES_NO, "Does CIE widget match\nthe picture below?");
+	image = gtk_image_new_from_file (filename_image);
+	vbox = gtk_dialog_get_content_area (GTK_DIALOG (dialog));
+	gtk_box_pack_end (GTK_BOX(vbox), widget, TRUE, TRUE, 12);
+	gtk_box_pack_end (GTK_BOX(vbox), image, TRUE, TRUE, 12);
+	gtk_widget_set_size_request (widget, 300, 300);
+	gtk_window_set_resizable (GTK_WINDOW (dialog), TRUE);
+	gtk_widget_show (widget);
+	gtk_widget_show (image);
+
+	response = gtk_dialog_run (GTK_DIALOG (dialog));
+
+	g_debug ("plotted as expected?");
+	g_assert ((response == GTK_RESPONSE_YES));
+
+	gtk_widget_destroy (dialog);
+
+	g_object_unref (profile);
+	g_object_unref (white);
+	g_object_unref (red);
+	g_object_unref (green);
+	g_object_unref (blue);
+	g_free (filename_profile);
+	g_free (filename_image);
+}
+
+static void
+mcm_test_clut_func (void)
+{
+	McmClut *clut;
+	GPtrArray *array;
+	const McmClutData *data;
+
+	clut = mcm_clut_new ();
+	g_assert (clut != NULL);
+
+	/* set some initial properties */
+	g_object_set (clut,
+		      "size", 3,
+		      "contrast", 100.0f,
+		      "brightness", 0.0f,
+		      NULL);
+
+	g_debug ("get array");
+	array = mcm_clut_get_array (clut);
+	g_assert_cmpint (array->len, ==, 3);
+
+	g_debug ("check values for reset array");
+
+	data = g_ptr_array_index (array, 0);
+	g_assert_cmpint (data->red, ==, 0);
+	g_assert_cmpint (data->green, ==, 0);
+	g_assert_cmpint (data->blue, ==, 0);
+
+	data = g_ptr_array_index (array, 1);
+	g_assert_cmpint (data->red, ==, 32767);
+	g_assert_cmpint (data->green, ==, 32767);
+	g_assert_cmpint (data->blue, ==, 32767);
+
+	data = g_ptr_array_index (array, 2);
+	g_assert_cmpint (data->red, ==, 65535);
+	g_assert_cmpint (data->green, ==, 65535);
+	g_assert_cmpint (data->blue, ==, 65535);
+
+	g_ptr_array_unref (array);
+
+	/* set some initial properties */
+	g_object_set (clut,
+		      "contrast", 99.0f,
+		      "brightness", 0.0f,
+		      NULL);
+
+	g_debug ("get array");
+	array = mcm_clut_get_array (clut);
+	g_assert_cmpint (array->len, ==, 3);
+
+	g_debug ("check values for contrast adjusted array");
+	data = g_ptr_array_index (array, 0);
+	g_assert_cmpint (data->red, ==, 0);
+	g_assert_cmpint (data->green, ==, 0);
+	g_assert_cmpint (data->blue, ==, 0);
+	data = g_ptr_array_index (array, 1);
+	g_assert_cmpint (data->red, ==, 32439);
+	g_assert_cmpint (data->green, ==, 32439);
+	g_assert_cmpint (data->blue, ==, 32439);
+	data = g_ptr_array_index (array, 2);
+	g_assert_cmpint (data->red, ==, 64879);
+	g_assert_cmpint (data->green, ==, 64879);
+	g_assert_cmpint (data->blue, ==, 64879);
+
+	g_ptr_array_unref (array);
+
+	/* set some initial properties */
+	g_object_set (clut,
+		      "contrast", 100.0f,
+		      "brightness", 1.0f,
+		      NULL);
+
+	g_debug ("get array");
+	array = mcm_clut_get_array (clut);
+	g_assert_cmpint (array->len, ==, 3);
+
+	g_debug ("check values for brightness adjusted array");
+	data = g_ptr_array_index (array, 0);
+	g_assert_cmpint (data->red, ==, 655);
+	g_assert_cmpint (data->green, ==, 655);
+	g_assert_cmpint (data->blue, ==, 655);
+	data = g_ptr_array_index (array, 1);
+	g_assert_cmpint (data->red, ==, 33094);
+	g_assert_cmpint (data->green, ==, 33094);
+	g_assert_cmpint (data->blue, ==, 33094);
+	data = g_ptr_array_index (array, 2);
+	g_assert_cmpint (data->red, ==, 65535);
+	g_assert_cmpint (data->green, ==, 65535);
+	g_assert_cmpint (data->blue, ==, 65535);
+
+	g_ptr_array_unref (array);
+
+	g_object_unref (clut);
+}
+
+static guint _changes = 0;
+static GMainLoop *_loop = NULL;
+
+static void
+mcm_device_test_changed_cb (McmDevice *device)
+{
+	g_debug ("emit changed: %s", mcm_device_get_id (device));
+	_changes++;
+
+	g_main_loop_quit (_loop);
+}
+
+static void
+mcm_test_device_func (void)
+{
+	McmDevice *device;
+	gboolean ret;
+	GError *error = NULL;
+	const gchar *filename;
+	const gchar *profile;
+	gchar *data;
+	gchar **split;
+	const gchar *kind;
+	McmDeviceKind kind_enum;
+
+	device = mcm_device_udev_new ();
+	g_assert (device != NULL);
+
+	/* connect to the changed signal */
+	g_signal_connect (device, "changed", G_CALLBACK (mcm_device_test_changed_cb), NULL);
+
+	g_debug ("correct number of changed signals");
+	g_assert_cmpint (_changes, ==, 0);
+
+	g_debug ("convert to recognized enum");
+	kind_enum = mcm_device_kind_from_string ("scanner");
+	g_assert ((kind_enum == MCM_DEVICE_KIND_SCANNER));
+
+	g_debug ("convert to unrecognized enum");
+	kind_enum = mcm_device_kind_from_string ("xxx");
+	g_assert ((kind_enum == MCM_DEVICE_KIND_UNKNOWN));
+
+	g_debug ("convert from recognized enum");
+	kind = mcm_device_kind_to_string (MCM_DEVICE_KIND_SCANNER);
+	g_assert_cmpstr (kind, ==, "scanner");
+
+	g_debug ("convert from unrecognized enum");
+	kind = mcm_device_kind_to_string (MCM_DEVICE_KIND_UNKNOWN);
+	g_assert_cmpstr (kind, ==, "unknown");
+
+	/* set some properties */
+	g_object_set (device,
+		      "kind", MCM_DEVICE_KIND_SCANNER,
+		      "id", "sysfs_dummy_device",
+		      "connected", FALSE,
+		      "virtual", FALSE,
+		      "serial", "0123456789",
+		      "colorspace", MCM_COLORSPACE_RGB,
+		      NULL);
+
+	_loop = g_main_loop_new (NULL, FALSE);
+	g_main_loop_run (_loop);
+	/* TODO: time out of loop */
+
+	g_debug ("correct number of changed signals");
+	g_assert_cmpint (_changes, ==, 1);
+
+	mcm_device_set_connected (device, TRUE);
+	g_main_loop_run (_loop);
+	/* TODO: time out of loop */
+
+	g_debug ("correct number of changed signals");
+	g_assert_cmpint (_changes, ==, 2);
+
+	g_debug ("get id");
+	kind = mcm_device_get_id (device);
+	g_assert_cmpstr (kind, ==, "sysfs_dummy_device");
+
+	/* ensure the file is nuked */
+	filename = mcm_utils_get_default_config_location ();
+	g_unlink (filename);
+
+	g_debug ("load from missing file");
+	ret = mcm_device_load (device, &error);
+	g_assert_no_error (error);
+	g_assert (ret);
+
+	/* get some properties */
+	profile = mcm_device_get_profile_filename (device);
+
+	g_debug ("get profile filename");
+	g_assert_cmpstr (profile, ==, NULL);
+
+	/* empty file that exists */
+	g_file_set_contents (filename, "", -1, NULL);
+
+	g_debug ("load from empty file");
+	ret = mcm_device_load (device, &error);
+	g_assert_no_error (error);
+	g_assert (ret);
+
+	/* set default file */
+	g_file_set_contents (filename,
+			     "[sysfs_dummy_device]\n"
+			     "title=Canon - CanoScan\n"
+			     "type=scanner\n"
+			     "profile=/srv/sysfs_canon_canoscan.icc\n", -1, NULL);
+
+	g_debug ("load from configured file");
+	ret = mcm_device_load (device, &error);
+	g_assert_no_error (error);
+	g_assert (ret);
+
+	/* get some properties */
+	profile = mcm_device_get_profile_filename (device);
+
+	g_main_loop_run (_loop);
+	/* TODO: time out of loop */
+
+	g_debug ("correct number of changed signals");
+	g_assert_cmpint (_changes, ==, 3);
+
+	g_debug ("get profile filename");
+	g_assert_cmpstr (profile, ==, "/srv/sysfs_canon_canoscan.icc");
+
+	/* set some properties */
+	mcm_device_set_profile_filename (device, "/srv/sysfs_canon_canoscan.icc");
+
+	/* ensure the file is nuked, again */
+	g_unlink (filename);
+
+	g_debug ("save to empty file");
+	ret = mcm_device_save (device, &error);
+	g_assert_no_error (error);
+	g_assert (ret);
+
+	g_debug ("get contents of saved file");
+	ret = g_file_get_contents (filename, &data, NULL, NULL);
+	g_assert (ret);
+
+	g_debug ("check data");
+	split = g_strsplit (data, "\n", -1);
+	g_assert_cmpstr (split[1], ==, "[sysfs_dummy_device]");
+	g_assert_cmpstr (split[4], ==, "profile=/srv/sysfs_canon_canoscan.icc");
+	g_assert_cmpstr (split[5], ==, "serial=0123456789");
+	g_assert_cmpstr (split[6], ==, "type=scanner");
+	g_assert_cmpstr (split[7], ==, "colorspace=rgb");
+	g_free (data);
+	g_strfreev (split);
+
+	/* ensure the file is nuked, in case we are running in distcheck */
+	g_unlink (filename);
+	g_main_loop_unref (_loop);
+
+	g_object_unref (device);
+}
+
+static void
+mcm_test_dmi_func (void)
+{
+	McmDmi *dmi;
+
+	dmi = mcm_dmi_new ();
+	g_assert (dmi != NULL);
+	g_assert (mcm_dmi_get_name (dmi) != NULL);
+	g_assert (mcm_dmi_get_version (dmi) != NULL);
+	g_assert (mcm_dmi_get_vendor (dmi) != NULL);
+	g_object_unref (dmi);
+}
+
+typedef struct {
+	const gchar *monitor_name;
+	const gchar *vendor_name;
+	const gchar *serial_number;
+	const gchar *eisa_id;
+	const gchar *pnp_id;
+	guint width;
+	guint height;
+	gfloat gamma;
+} McmEdidTestData;
+
+static void
+mcm_test_edid_test_parse_edid_file (McmEdid *edid, const gchar *datafile, McmEdidTestData *test_data)
+{
+	gchar *filename;
+	gchar *data;
+	gfloat mygamma;
+	gboolean ret;
+	GError *error = NULL;
+
+	g_debug ("get filename of data file");
+	filename = mcm_test_get_data_file (datafile);
+	ret = g_file_get_contents (filename, &data, NULL, &error);
+	g_assert_no_error (error);
+	g_assert (ret);
+
+	g_debug ("parse an example edid block");
+	ret = mcm_edid_parse (edid, (const guint8 *) data, &error);
+	g_assert_no_error (error);
+	g_assert (ret);
+
+	g_debug ("check monitor name for %s", datafile);
+	g_assert_cmpstr (mcm_edid_get_monitor_name (edid), ==, test_data->monitor_name);
+
+	g_debug ("check vendor name for %s", datafile);
+	g_assert_cmpstr (mcm_edid_get_vendor_name (edid), ==, test_data->vendor_name);
+
+	g_debug ("check serial number for %s", datafile);
+	g_assert_cmpstr (mcm_edid_get_serial_number (edid), ==, test_data->serial_number);
+
+	g_debug ("check ascii string for %s", datafile);
+	g_assert_cmpstr (mcm_edid_get_eisa_id (edid), ==, test_data->eisa_id);
+
+	g_debug ("check pnp id for %s", datafile);
+	g_assert_cmpstr (mcm_edid_get_pnp_id (edid), ==, test_data->pnp_id);
+
+	g_debug ("check height for %s", datafile);
+	g_assert_cmpint (mcm_edid_get_height (edid), ==, test_data->height);
+
+	g_debug ("check width for %s", datafile);
+	g_assert_cmpint (mcm_edid_get_width (edid), ==, test_data->width);
+
+	g_debug ("check gamma for %s", datafile);
+	mygamma = mcm_edid_get_gamma (edid);
+	g_assert_cmpfloat (mygamma, >=, test_data->gamma - 0.01);
+	g_assert_cmpfloat (mygamma, <, test_data->gamma + 0.01);
+
+	g_free (filename);
+}
+
+static void
+mcm_test_edid_func (void)
+{
+	McmEdid *edid;
+	McmEdidTestData test_data;
+
+	edid = mcm_edid_new ();
+	g_assert (edid != NULL);
+
+	/* LG 21" LCD panel */
+	test_data.monitor_name = "L225W";
+	test_data.vendor_name = "Goldstar Company Ltd";
+	test_data.serial_number = "34398";
+	test_data.eisa_id = NULL;
+	test_data.pnp_id = "GSM";
+	test_data.height = 30;
+	test_data.width = 47;
+	test_data.gamma = 2.2f;
+	mcm_test_edid_test_parse_edid_file (edid, "LG-L225W-External.bin", &test_data);
+
+	/* Lenovo T61 Intel Panel */
+	test_data.monitor_name = NULL;
+	test_data.vendor_name = "IBM France";
+	test_data.serial_number = NULL;
+	test_data.eisa_id = "LTN154P2-L05";
+	test_data.pnp_id = "IBM";
+	test_data.height = 21;
+	test_data.width = 33;
+	test_data.gamma = 2.2f;
+	mcm_test_edid_test_parse_edid_file (edid, "Lenovo-T61-Internal.bin", &test_data);
+
+	g_object_unref (edid);
+}
+
+static void
+mcm_test_gamma_widget_func (void)
+{
+	GtkWidget *widget;
+	GtkWidget *image;
+	GtkWidget *dialog;
+	GtkWidget *vbox;
+	gint response;
+	gchar *filename_image;
+
+	widget = mcm_gamma_widget_new ();
+	g_assert (widget != NULL);
+
+	g_object_set (widget,
+		      "color-light", 0.5f,
+		      "color-dark", 0.0f,
+		      "color-red", 0.25f,
+		      "color-green", 0.25f,
+		      "color-blue", 0.25f,
+		      NULL);
+
+	g_debug ("get filename of image file");
+	filename_image = mcm_test_get_data_file ("gamma-widget.png");
+	g_assert ((filename_image != NULL));
+
+	/* show in a dialog as an example */
+	dialog = gtk_message_dialog_new (NULL, GTK_DIALOG_DESTROY_WITH_PARENT, GTK_MESSAGE_QUESTION, GTK_BUTTONS_YES_NO, "Does GAMMA widget match\nthe picture below?");
+	image = gtk_image_new_from_file (filename_image);
+	vbox = gtk_dialog_get_content_area (GTK_DIALOG (dialog));
+	gtk_box_pack_end (GTK_BOX(vbox), widget, TRUE, TRUE, 12);
+	gtk_box_pack_end (GTK_BOX(vbox), image, TRUE, TRUE, 12);
+	gtk_widget_set_size_request (widget, 300, 300);
+	gtk_window_set_resizable (GTK_WINDOW (dialog), TRUE);
+	gtk_widget_show (widget);
+	gtk_widget_show (image);
+
+	response = gtk_dialog_run (GTK_DIALOG (dialog));
+
+	g_debug ("plotted as expected?");
+	g_assert ((response == GTK_RESPONSE_YES));
+
+	gtk_widget_destroy (dialog);
+
+	g_free (filename_image);
+}
+
+static gchar *
+mcm_image_test_get_ibmt61_profile ()
+{
+	gchar *filename;
+	gchar *profile_base64 = NULL;
+	gchar *contents = NULL;
+	gboolean ret;
+	gsize length;
+	GError *error = NULL;
+
+	/* get test file */
+	filename = mcm_test_get_data_file ("ibm-t61.icc");
+
+	/* get contents */
+	ret = g_file_get_contents (filename, &contents, &length, &error);
+	if (!ret) {
+		g_warning ("failed to get contents: %s", error->message);
+		g_error_free (error);
+		goto out;
+	}
+
+	/* encode */
+	profile_base64 = g_base64_encode ((const guchar *)contents, length);
+out:
+	g_free (contents);
+	g_free (filename);
+	return profile_base64;
+}
+
+static void
+mcm_test_image_func (void)
+{
+	McmImage *image;
+	GtkWidget *image_test;
+	GtkWidget *dialog;
+	GtkWidget *vbox;
+	gint response;
+	gchar *filename_widget;
+	gchar *filename_test;
+	gchar *profile_base64;
+
+	image = mcm_image_new ();
+	g_assert (image != NULL);
+
+	filename_widget = mcm_test_get_data_file ("image-widget.png");
+	gtk_image_set_from_file (GTK_IMAGE(image), filename_widget);
+
+	g_debug ("get filename of image file");
+	filename_test = mcm_test_get_data_file ("image-widget-good.png");
+	g_assert ((filename_test != NULL));
+
+	/* show in a dialog as an example */
+	dialog = gtk_message_dialog_new (NULL, GTK_DIALOG_DESTROY_WITH_PARENT, GTK_MESSAGE_QUESTION, GTK_BUTTONS_YES_NO, "Does color-corrected image match\nthe picture below?");
+	image_test = gtk_image_new_from_file (filename_test);
+	vbox = gtk_dialog_get_content_area (GTK_DIALOG (dialog));
+	gtk_box_pack_end (GTK_BOX(vbox), GTK_WIDGET(image), TRUE, TRUE, 12);
+	gtk_box_pack_end (GTK_BOX(vbox), image_test, TRUE, TRUE, 12);
+	gtk_widget_set_size_request (GTK_WIDGET(image), 300, 300);
+	gtk_window_set_resizable (GTK_WINDOW (dialog), TRUE);
+	gtk_widget_show (GTK_WIDGET(image));
+	gtk_widget_show (image_test);
+
+	g_object_set (image,
+		      "use-embedded-icc-profile", TRUE,
+		      "output-icc-profile", NULL,
+		      NULL);
+
+	g_debug ("converted as expected?");
+	response = gtk_dialog_run (GTK_DIALOG (dialog));
+	g_assert ((response == GTK_RESPONSE_YES));
+	g_free (filename_test);
+
+	filename_test = mcm_test_get_data_file ("image-widget-nonembed.png");
+	gtk_image_set_from_file (GTK_IMAGE(image_test), filename_test);
+	g_object_set (image,
+		      "use-embedded-icc-profile", FALSE,
+		      NULL);
+
+	g_debug ("converted as expected?");
+	response = gtk_dialog_run (GTK_DIALOG (dialog));
+	g_assert ((response == GTK_RESPONSE_YES));
+	g_free (filename_test);
+
+	g_debug ("get dummy display profile");
+	profile_base64 = mcm_image_test_get_ibmt61_profile ();
+	g_assert ((profile_base64 != NULL));
+
+	filename_test = mcm_test_get_data_file ("image-widget-output.png");
+	gtk_image_set_from_file (GTK_IMAGE(image_test), filename_test);
+	g_object_set (image,
+		      "use-embedded-icc-profile", TRUE,
+		      "output-icc-profile", profile_base64,
+		      NULL);
+
+	g_debug ("converted as expected?");
+	response = gtk_dialog_run (GTK_DIALOG (dialog));
+	g_assert ((response == GTK_RESPONSE_YES));
+	g_free (filename_test);
+
+	gtk_widget_destroy (dialog);
+
+	g_free (profile_base64);
+	g_free (filename_widget);
+}
+
+static GPtrArray *
+mcm_print_test_render_cb (McmPrint *print,  GtkPageSetup *page_setup, gpointer user_data, GError **error)
+{
+	GPtrArray *filenames;
+	filenames = g_ptr_array_new_with_free_func (g_free);
+	g_ptr_array_add (filenames, mcm_test_get_data_file ("image-widget-nonembed.png"));
+	g_ptr_array_add (filenames, mcm_test_get_data_file ("image-widget-good.png"));
+	return filenames;
+}
+
+static void
+mcm_test_print_func (void)
+{
+	gboolean ret;
+	GError *error = NULL;
+	McmPrint *print;
+
+	print = mcm_print_new ();
+
+	g_debug ("try to print");
+	ret = mcm_print_with_render_callback (print, NULL, mcm_print_test_render_cb, NULL, &error);
+	g_assert_no_error (error);
+	g_assert (ret);
+
+	g_object_unref (print);
+}
+
+typedef struct {
+	const gchar *copyright;
+	const gchar *manufacturer;
+	const gchar *model;
+	const gchar *datetime;
+	const gchar *description;
+	McmProfileKind kind;
+	McmColorspace colorspace;
+	gfloat luminance;
+} McmProfileTestData;
+
+static void
+mcm_test_profile_test_parse_file (const gchar *datafile, McmProfileTestData *test_data)
+{
+	gchar *filename = NULL;
+	const gchar *copyright;
+	const gchar *manufacturer;
+	const gchar *model;
+	const gchar *datetime;
+	const gchar *description;
+	guint kind;
+	guint colorspace;
+	gboolean ret;
+	GError *error = NULL;
+	McmProfile *profile_lcms1;
+	McmXyz *xyz;
+	gfloat luminance;
+	GFile *file;
+
+	profile_lcms1 = MCM_PROFILE(mcm_profile_lcms1_new ());
+	g_assert (profile_lcms1 != NULL);
+
+	g_debug ("get filename of data file");
+	filename = mcm_test_get_data_file (datafile);
+	g_assert ((filename != NULL));
+
+	g_debug ("load ICC file");
+	file = g_file_new_for_path (filename);
+	ret = mcm_profile_parse (profile_lcms1, file, &error);
+	g_assert_no_error (error);
+	g_assert (ret);
+	g_object_unref (file);
+
+	g_debug ("check copyright for %s", datafile);
+	copyright = mcm_profile_get_copyright (profile_lcms1);
+	g_assert_cmpstr (copyright, ==, test_data->copyright);
+
+	g_debug ("check manufacturer for %s", datafile);
+	manufacturer = mcm_profile_get_manufacturer (profile_lcms1);
+	g_assert_cmpstr (manufacturer, ==, test_data->manufacturer);
+
+	g_debug ("check model for %s", datafile);
+	model = mcm_profile_get_model (profile_lcms1);
+	g_assert_cmpstr (model, ==, test_data->model);
+
+	g_debug ("check datetime for %s", datafile);
+	datetime = mcm_profile_get_datetime (profile_lcms1);
+	g_assert_cmpstr (datetime, ==, test_data->datetime);
+
+	g_debug ("check description for %s", datafile);
+	description = mcm_profile_get_description (profile_lcms1);
+	g_assert_cmpstr (description, ==, test_data->description);
+
+	g_debug ("check kind for %s", datafile);
+	kind = mcm_profile_get_kind (profile_lcms1);
+	g_assert_cmpint (kind, ==, test_data->kind);
+
+	g_debug ("check colorspace for %s", datafile);
+	colorspace = mcm_profile_get_colorspace (profile_lcms1);
+	g_assert_cmpint (colorspace, ==, test_data->colorspace);
+
+	g_debug ("check luminance red %s", datafile);
+	g_object_get (profile_lcms1,
+		      "red", &xyz,
+		      NULL);
+	luminance = mcm_xyz_get_x (xyz);
+	g_assert_cmpfloat (fabs (luminance - test_data->luminance), <, 0.001);
+
+	g_object_unref (xyz);
+	g_object_unref (profile_lcms1);
+	g_free (filename);
+}
+
+static void
+mcm_test_profile_func (void)
+{
+	McmProfileTestData test_data;
+
+	/* bluish test */
+	test_data.copyright = "Copyright (c) 1998 Hewlett-Packard Company";
+	test_data.manufacturer = "IEC http://www.iec.ch";
+	test_data.model = "IEC 61966-2.1 Default RGB colour space - sRGB";
+	test_data.description = "Blueish Test";
+	test_data.kind = MCM_PROFILE_KIND_DISPLAY_DEVICE;
+	test_data.colorspace = MCM_COLORSPACE_RGB;
+	test_data.luminance = 0.648454;
+	test_data.datetime = "February  9 1998, 06:49:00 AM";
+	mcm_test_profile_test_parse_file ("bluish.icc", &test_data);
+
+	/* Adobe test */
+	test_data.copyright = "Copyright (c) 1998 Hewlett-Packard Company Modified using Adobe Gamma";
+	test_data.manufacturer = "IEC http://www.iec.ch";
+	test_data.model = "IEC 61966-2.1 Default RGB colour space - sRGB";
+	test_data.description = "ADOBEGAMMA-Test";
+	test_data.kind = MCM_PROFILE_KIND_DISPLAY_DEVICE;
+	test_data.colorspace = MCM_COLORSPACE_RGB;
+	test_data.luminance = 0.648446;
+	test_data.datetime = "August 16 2005, 09:49:54 PM";
+	mcm_test_profile_test_parse_file ("AdobeGammaTest.icm", &test_data);
+}
+
+static void
+mcm_test_tables_func (void)
+{
+	McmTables *tables;
+	GError *error = NULL;
+	gchar *vendor;
+
+	tables = mcm_tables_new ();
+	g_assert (tables != NULL);
+
+	g_debug ("check pnp id 'IBM'");
+	vendor = mcm_tables_get_pnp_id (tables, "IBM", &error);
+	g_assert_no_error (error);
+	g_assert (vendor != NULL);
+	g_assert_cmpstr (vendor, ==, "IBM France");
+	g_free (vendor);
+
+	g_debug ("check pnp id 'MIL'");
+	vendor = mcm_tables_get_pnp_id (tables, "MIL", &error);
+	g_assert_no_error (error);
+	g_assert (vendor != NULL);
+	g_assert_cmpstr (vendor, ==, "Marconi Instruments Ltd");
+	g_free (vendor);
+
+	g_debug ("check pnp id 'XXX'");
+	vendor = mcm_tables_get_pnp_id (tables, "XXX", &error);
+	g_assert_error (error, 1, 0);
+	g_assert_cmpstr (vendor, ==, NULL);
+	g_free (vendor);
+
+	g_object_unref (tables);
+}
+
+static void
+mcm_test_trc_widget_func (void)
+{
+	GtkWidget *widget;
+	GtkWidget *image;
+	GtkWidget *dialog;
+	GtkWidget *vbox;
+	McmClut *clut;
+	McmProfile *profile;
+	gint response;
+	gchar *filename_profile;
+	gchar *filename_image;
+	GFile *file;
+
+	widget = mcm_trc_widget_new ();
+	g_assert (widget != NULL);
+
+	g_debug ("get filename of image file");
+	filename_image = mcm_test_get_data_file ("trc-widget.png");
+	g_assert ((filename_image != NULL));
+
+	g_debug ("get filename of data file");
+	filename_profile = mcm_test_get_data_file ("AdobeGammaTest.icm");
+	g_assert ((filename_profile != NULL));
+
+	profile = mcm_profile_default_new ();
+	file = g_file_new_for_path (filename_profile);
+	mcm_profile_parse (profile, file, NULL);
+	clut = mcm_profile_generate_vcgt (profile, 256);
+	g_object_set (widget,
+		      "clut", clut,
+		      NULL);
+	g_object_unref (file);
+
+	/* show in a dialog as an example */
+	dialog = gtk_message_dialog_new (NULL, GTK_DIALOG_DESTROY_WITH_PARENT, GTK_MESSAGE_QUESTION, GTK_BUTTONS_YES_NO, "Does TRC widget match\nthe picture below?");
+	image = gtk_image_new_from_file (filename_image);
+	vbox = gtk_dialog_get_content_area (GTK_DIALOG (dialog));
+	gtk_box_pack_end (GTK_BOX(vbox), widget, TRUE, TRUE, 12);
+	gtk_box_pack_end (GTK_BOX(vbox), image, TRUE, TRUE, 12);
+	gtk_widget_set_size_request (widget, 300, 300);
+	gtk_window_set_resizable (GTK_WINDOW (dialog), TRUE);
+	gtk_widget_show (widget);
+	gtk_widget_show (image);
+
+	response = gtk_dialog_run (GTK_DIALOG (dialog));
+
+	g_debug ("plotted as expected?");
+	g_assert ((response == GTK_RESPONSE_YES));
+
+	gtk_widget_destroy (dialog);
+
+	g_object_unref (clut);
+	g_object_unref (profile);
+	g_free (filename_profile);
+	g_free (filename_image);
+}
+
+static void
+mcm_test_utils_func (void)
+{
+	gboolean ret;
+	gchar *text;
+	gchar *filename;
+	GFile *file;
+	GFile *dest;
+
+	g_debug ("Linkify text");
+	text = mcm_utils_linkify ("http://www.dave.org is text http://www.hughsie.com that needs to be linked to http://www.bbc.co.uk really");
+	g_assert_cmpstr (text, ==, "<a href=\"http://www.dave.org\">http://www.dave.org</a> is text "
+			     "<a href=\"http://www.hughsie.com\">http://www.hughsie.com</a> that needs to be linked to "
+			     "<a href=\"http://www.bbc.co.uk\">http://www.bbc.co.uk</a> really");
+	g_free (text);
+
+	g_debug ("get filename of data file");
+	file = g_file_new_for_path ("dave.icc");
+	dest = mcm_utils_get_profile_destination (file);
+	filename = g_file_get_path (dest);
+	g_assert (g_str_has_suffix (filename, "/.color/icc/dave.icc"));
+	g_free (filename);
+	g_object_unref (file);
+	g_object_unref (dest);
+
+	g_debug ("check is icc profile");
+	filename = mcm_test_get_data_file ("bluish.icc");
+	file = g_file_new_for_path (filename);
+	ret = mcm_utils_is_icc_profile (file);
+	g_assert (ret);
+	g_object_unref (file);
+	g_free (filename);
+
+	g_debug ("detect LVDS panels");
+	ret = mcm_utils_output_is_lcd_internal ("LVDS1");
+	g_assert (ret);
+
+	g_debug ("detect external panels");
+	ret = mcm_utils_output_is_lcd_internal ("DVI1");
+	g_assert (!ret);
+
+	g_debug ("detect LCD panels");
+	ret = mcm_utils_output_is_lcd ("LVDS1");
+	g_assert (ret);
+
+	g_debug ("detect LCD panels (2)");
+	ret = mcm_utils_output_is_lcd ("DVI1");
+	g_assert (ret);
+
+	g_debug ("Make sensible id");
+	filename = g_strdup ("Hello\n\rWorld!");
+	mcm_utils_alphanum_lcase (filename);
+	g_assert_cmpstr (filename, ==, "hello__world_");
+	g_free (filename);
+
+	g_debug ("Make sensible filename");
+	filename = g_strdup ("Hel lo\n\rWo-(r)ld!");
+	mcm_utils_ensure_sensible_filename (filename);
+	g_assert_cmpstr (filename, ==, "Hel lo__Wo-(r)ld_");
+	g_free (filename);
+
+	g_debug ("check strip printable");
+	text = g_strdup ("1\r34 67_90");
+	mcm_utils_ensure_printable (text);
+	g_assert_cmpstr (text, ==, "134 67 90");
+	g_free (text);
+
+	g_debug ("get default config location (when in make check)");
+	g_setenv ("MCM_TEST", "1", TRUE);
+	filename = mcm_utils_get_default_config_location ();
+	g_assert_cmpstr (filename, ==, "/tmp/device-profiles.conf");
+	g_free (filename);
+
+	g_debug ("convert valid device kind to profile kind");
+	g_assert (mcm_utils_device_kind_to_profile_kind (MCM_DEVICE_KIND_SCANNER) == MCM_PROFILE_KIND_INPUT_DEVICE);
+
+	g_debug ("convert invalid device kind to profile kind");
+	g_assert (mcm_utils_device_kind_to_profile_kind (MCM_DEVICE_KIND_UNKNOWN) == MCM_PROFILE_KIND_UNKNOWN);
+}
+
+static void
+mcm_test_xyz_func (void)
+{
+	McmXyz *xyz;
+	gdouble value;
+
+	xyz = mcm_xyz_new ();
+	g_assert (xyz != NULL);
+
+	g_debug ("get x value (when nothing set)");
+	value = mcm_xyz_get_x (xyz);
+	g_assert_cmpfloat (fabs (value - 0.0f), <, 0.001f);
+
+	/* set dummy values */
+	g_object_set (xyz,
+		      "cie-x", 0.125,
+		      "cie-y", 0.25,
+		      "cie-z", 0.5,
+		      NULL);
+
+	g_debug ("get x value");
+	value = mcm_xyz_get_x (xyz);
+	g_assert_cmpfloat (fabs (value - 0.142857143f), <, 0.001f);
+
+	g_debug ("get y value");
+	value = mcm_xyz_get_y (xyz);
+	g_assert_cmpfloat (fabs (value - 0.285714286f), <, 0.001f);
+
+	g_debug ("get z value");
+	value = mcm_xyz_get_z (xyz);
+	g_assert_cmpfloat (fabs (value - 0.571428571f), <, 0.001f);
+
+	g_object_unref (xyz);
+}
 
 int
 main (int argc, char **argv)
 {
-	EggTest *test;
 
 	if (! g_thread_supported ())
 		g_thread_init (NULL);
 	gtk_init (&argc, &argv);
-	test = egg_test_init ();
-	egg_debug_init (&argc, &argv);
+	g_test_init (&argc, &argv, NULL);
 
-	/* components */
-	mcm_calibrate_test (test);
-	mcm_edid_test (test);
-	mcm_tables_test (test);
-	mcm_utils_test (test);
-	mcm_device_test (test);
-	mcm_profile_test (test);
-	mcm_brightness_test (test);
-	mcm_clut_test (test);
-	mcm_dmi_test (test);
-	mcm_xyz_test (test);
-	mcm_trc_widget_test (test);
-	mcm_cie_widget_test (test);
-	mcm_gamma_widget_test (test);
-	mcm_image_test (test);
-	mcm_print_test (test);
-//	mcm_calibrate_manual_test (test);
+	g_test_add_func ("/color/dmi", mcm_test_dmi_func);
+	g_test_add_func ("/color/calibrate", mcm_test_calibrate_func);
+	g_test_add_func ("/color/edid", mcm_test_edid_func);
+	g_test_add_func ("/color/tables", mcm_test_tables_func);
+	g_test_add_func ("/color/utils", mcm_test_utils_func);
+	g_test_add_func ("/color/device", mcm_test_device_func);
+	g_test_add_func ("/color/profile", mcm_test_profile_func);
+	g_test_add_func ("/color/clut", mcm_test_clut_func);
+	g_test_add_func ("/color/xyz", mcm_test_xyz_func);
+	g_test_add_func ("/color/calibrate_dialog", mcm_test_calibrate_dialog_func);
+	if (g_test_thorough ()) {
+		g_test_add_func ("/color/brightness", mcm_test_brightness_func);
+		g_test_add_func ("/color/trc", mcm_test_trc_widget_func);
+		g_test_add_func ("/color/cie", mcm_test_cie_widget_func);
+		g_test_add_func ("/color/gamma_widget", mcm_test_gamma_widget_func);
+		g_test_add_func ("/color/image", mcm_test_image_func);
+	}
+	if (g_test_slow ()) {
+		g_test_add_func ("/color/print", mcm_test_print_func);
+		g_test_add_func ("/color/calibrate_manual", mcm_test_calibrate_manual_func);
+	}
 
-	return (egg_test_finish (test));
+	return g_test_run ();
 }
 

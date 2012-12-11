@@ -313,26 +313,6 @@ check_PROGRAMS =					\
 
 mcm_self_test_SOURCES =					\
 	mcm-self-test.c					\
-	mcm-edid.c					\
-	mcm-tables.c					\
-	mcm-utils.c					\
-	mcm-device.c					\
-	mcm-profile.c					\
-	mcm-profile-lcms1.c				\
-	mcm-brightness.c				\
-	mcm-clut.c					\
-	mcm-dmi.c					\
-	mcm-xyz.c					\
-	mcm-image.c					\
-	mcm-cie-widget.c				\
-	mcm-trc-widget.c				\
-	mcm-gamma-widget.c				\
-	mcm-calibrate.c					\
-	mcm-calibrate-manual.c				\
-	mcm-print.c					\
-	mcm-calibrate-dialog.c				\
-	egg-test.h					\
-	egg-test.c					\
 	$(NULL)
 
 mcm_self_test_LDADD =					\
@@ -351,7 +331,7 @@ mcm_self_test_LDADD =					\
 	$(TIFF_LIBS)					\
 	-lm
 
-mcm_self_test_CFLAGS = -DEGG_TEST $(AM_CFLAGS)
+mcm_self_test_CFLAGS = $(AM_CFLAGS) $(WARNINGFLAGS_C)
 
 TESTS = mcm-self-test
 

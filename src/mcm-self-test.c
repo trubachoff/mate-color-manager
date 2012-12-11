@@ -562,14 +562,17 @@ mcm_test_exif_func (void)
 	gboolean ret;
 	GError *error = NULL;
 	gchar *filename;
+	GFile *file;
 
 	exif = mcm_exif_new ();
 	g_assert (exif != NULL);
 
 	/* TIFF */
 	filename = mcm_test_get_data_file ("test.tif");
-	ret = mcm_exif_parse (exif, filename, &error);
+	file = g_file_new_for_path (filename);
+	ret = mcm_exif_parse (exif, file, &error);
 	g_free (filename);
+	g_object_unref (file);
 	g_assert_no_error (error);
 	g_assert (ret);
 	g_assert_cmpstr (mcm_exif_get_model (exif), ==, "NIKON D60");
@@ -578,8 +581,10 @@ mcm_test_exif_func (void)
 
 	/* JPG */
 	filename = mcm_test_get_data_file ("test.jpg");
-	ret = mcm_exif_parse (exif, filename, &error);
+	file = g_file_new_for_path (filename);
+	ret = mcm_exif_parse (exif, file, &error);
 	g_free (filename);
+	g_object_unref (file);
 	g_assert_no_error (error);
 	g_assert (ret);
 	g_assert_cmpstr (mcm_exif_get_model (exif), ==, "NIKON D60");
@@ -588,8 +593,10 @@ mcm_test_exif_func (void)
 
 	/* PNG */
 	filename = mcm_test_get_data_file ("test.png");
-	ret = mcm_exif_parse (exif, filename, &error);
+	file = g_file_new_for_path (filename);
+	ret = mcm_exif_parse (exif, file, &error);
 	g_free (filename);
+	g_object_unref (file);
 	g_assert_error (error, MCM_EXIF_ERROR, MCM_EXIF_ERROR_NO_SUPPORT);
 	g_assert (!ret);
 

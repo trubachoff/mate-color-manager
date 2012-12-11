@@ -174,10 +174,10 @@ out:
  * mcm_exif_parse:
  **/
 gboolean
-mcm_exif_parse (McmExif *exif, const gchar *filename, GError **error)
+mcm_exif_parse (McmExif *exif, GFile *file, GError **error)
 {
 	gboolean ret = FALSE;
-	GFile *file = NULL;
+	gchar *filename = NULL;
 	GFileInfo *info = NULL;
 	const gchar *content_type;
 
@@ -185,7 +185,6 @@ mcm_exif_parse (McmExif *exif, const gchar *filename, GError **error)
 	g_return_val_if_fail (error == NULL || *error == NULL, FALSE);
 
 	/* check exists */
-	file = g_file_new_for_path (filename);
 	info = g_file_query_info (file, G_FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE,
 				  G_FILE_QUERY_INFO_NONE, NULL, error);
 	if (info == NULL)
@@ -194,10 +193,12 @@ mcm_exif_parse (McmExif *exif, const gchar *filename, GError **error)
 	/* get EXIF data in different ways depending on content type */
 	content_type = g_file_info_get_attribute_string (info, G_FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE);
 	if (g_strcmp0 (content_type, "image/tiff") == 0) {
+		filename = g_file_get_path (file);
 		ret = mcm_exif_parse_tiff (exif, filename, error);
 		goto out;
 	}
 	if (g_strcmp0 (content_type, "image/jpeg") == 0) {
+		filename = g_file_get_path (file);
 		ret = mcm_exif_parse_jpeg (exif, filename, error);
 		goto out;
 	}
@@ -208,7 +209,7 @@ mcm_exif_parse (McmExif *exif, const gchar *filename, GError **error)
 		     MCM_EXIF_ERROR_NO_SUPPORT,
 		     "no support for %s content type", content_type);
 out:
-	g_object_unref (file);
+	g_free (filename);
 	if (info != NULL)
 		g_object_unref (info);
 	return ret;

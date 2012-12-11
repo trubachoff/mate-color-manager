@@ -51,6 +51,7 @@ struct _McmExifClass
 typedef enum
 {
 	MCM_EXIF_ERROR_NO_DATA,
+	MCM_EXIF_ERROR_NO_SUPPORT,
 	MCM_EXIF_ERROR_INTERNAL
 } McmExifError;
 

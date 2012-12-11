@@ -29,9 +29,9 @@
 #include "config.h"
 
 #include <glib-object.h>
-//#include <math.h>
 #include <tiff.h>
 #include <tiffio.h>
+#include <libexif/exif-data.h>
 
 #include "mcm-exif.h"
 
@@ -64,10 +64,10 @@ enum {
 G_DEFINE_TYPE (McmExif, mcm_exif, G_TYPE_OBJECT)
 
 /**
- * mcm_exif_parse:
+ * mcm_exif_parse_tiff:
  **/
-gboolean
-mcm_exif_parse (McmExif *exif, const gchar *filename, GError **error)
+static gboolean
+mcm_exif_parse_tiff (McmExif *exif, const gchar *filename, GError **error)
 {
 	gboolean ret = TRUE;
 	const gchar *manufacturer = NULL;
@@ -75,9 +75,6 @@ mcm_exif_parse (McmExif *exif, const gchar *filename, GError **error)
 	const gchar *serial = NULL;
 	TIFF *tiff;
 	McmExifPrivate *priv = exif->priv;
-
-	g_return_val_if_fail (MCM_IS_EXIF (exif), FALSE);
-	g_return_val_if_fail (error == NULL || *error == NULL, FALSE);
 
 	/* open file */
 	tiff = TIFFOpen (filename, "r");
@@ -101,6 +98,94 @@ mcm_exif_parse (McmExif *exif, const gchar *filename, GError **error)
 	priv->serial = g_strdup (serial);
 out:
 	TIFFClose (tiff);
+	return ret;
+}
+
+/**
+ * mcm_exif_parse_jpeg:
+ **/
+static gboolean
+mcm_exif_parse_jpeg (McmExif *exif, const gchar *filename, GError **error)
+{
+	gboolean ret = TRUE;
+	McmExifPrivate *priv = exif->priv;
+	ExifData *ed = NULL;
+	ExifEntry *entry;
+	gchar make[1024] = { '\0' };
+	gchar model[1024] = { '\0' };
+
+	/* load EXIF file */
+	ed = exif_data_new_from_file (filename);
+	if (ed == NULL) {
+		g_set_error (error,
+			     MCM_EXIF_ERROR,
+			     MCM_EXIF_ERROR_NO_DATA,
+			     "File not readable or no EXIF data in file");
+		ret = FALSE;
+		goto out;
+	}
+
+	/* get make */
+	entry = exif_content_get_entry (ed->ifd[EXIF_IFD_0], EXIF_TAG_MAKE);
+	if (entry != NULL) {
+		exif_entry_get_value (entry, make, sizeof (make));
+		g_strchomp (make);
+	}
+
+	/* get model */
+	entry = exif_content_get_entry (ed->ifd[EXIF_IFD_0], EXIF_TAG_MODEL);
+	if (entry != NULL) {
+		exif_entry_get_value (entry, model, sizeof (model));
+		g_strchomp (model);
+	}
+
+	/* we failed to get data */
+	if (make == NULL || model == NULL) {
+		g_set_error (error,
+			     MCM_EXIF_ERROR,
+			     MCM_EXIF_ERROR_NO_DATA,
+			     "failed to get EXIF data from TIFF");
+		ret = FALSE;
+		goto out;
+	}
+
+	/* create copies for ourselves */
+	priv->manufacturer = g_strdup (make);
+	priv->model = g_strdup (model);
+	priv->serial = NULL;
+out:
+	if (ed != NULL)
+		exif_data_unref (ed);
+	return ret;
+}
+
+/**
+ * mcm_exif_parse:
+ **/
+gboolean
+mcm_exif_parse (McmExif *exif, const gchar *filename, GError **error)
+{
+	gboolean ret = FALSE;
+
+	g_return_val_if_fail (MCM_IS_EXIF (exif), FALSE);
+	g_return_val_if_fail (error == NULL || *error == NULL, FALSE);
+
+	//FIXME: get type, not extension
+	if (g_str_has_suffix (filename, "tif")) {
+		ret = mcm_exif_parse_tiff (exif, filename, error);
+		goto out;
+	}
+	if (g_str_has_suffix (filename, "jpg")) {
+		ret = mcm_exif_parse_jpeg (exif, filename, error);
+		goto out;
+	}
+
+	/* no support */
+	g_set_error (error,
+		     MCM_EXIF_ERROR,
+		     MCM_EXIF_ERROR_NO_SUPPORT,
+		     "no support for %s filetype", filename);
+out:
 	return ret;
 }
 

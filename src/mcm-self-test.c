@@ -345,7 +345,7 @@ mcm_test_device_func (void)
 	McmDevice *device;
 	gboolean ret;
 	GError *error = NULL;
-	const gchar *filename;
+	gchar *filename;
 	const gchar *profile;
 	gchar *data;
 	gchar **split;
@@ -452,6 +452,7 @@ mcm_test_device_func (void)
 	/* ensure the file is nuked, in case we are running in distcheck */
 	g_unlink (filename);
 	g_main_loop_unref (_loop);
+	g_free (filename);
 
 	g_object_unref (device);
 }
@@ -517,6 +518,7 @@ mcm_test_edid_test_parse_edid_file (McmEdid *edid, const gchar *datafile, McmEdi
 	g_assert_cmpfloat (mygamma, <, test_data->gamma + 0.01);
 
 	g_free (filename);
+	g_free (data);
 }
 
 static void

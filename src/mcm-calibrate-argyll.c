@@ -48,7 +48,7 @@
 
 #include "egg-debug.h"
 
-//#define FIXED_ARGYLL
+#define FIXED_ARGYLL
 
 static void     mcm_calibrate_argyll_finalize	(GObject     *object);
 
@@ -361,10 +361,7 @@ out:
 static gboolean
 mcm_calibrate_argyll_fork_command (McmCalibrateArgyll *calibrate_argyll, gchar **argv, GError **error)
 {
-	gboolean ret = FALSE;
-#if VTE_CHECK_VERSION(0,25,0)
-	const gchar *envp[] = { "ARGYLL_NOT_INTERACTIVE", NULL };
-#endif
+	gboolean ret;
 	const gchar *working_directory;
 	McmCalibrateArgyllPrivate *priv = calibrate_argyll->priv;
 
@@ -374,28 +371,17 @@ mcm_calibrate_argyll_fork_command (McmCalibrateArgyll *calibrate_argyll, gchar *
 
 	/* try to run */
 	working_directory = mcm_calibrate_get_working_path (MCM_CALIBRATE (calibrate_argyll));
-
-#if VTE_CHECK_VERSION(0,25,0)
 	ret = vte_terminal_fork_command_full (VTE_TERMINAL(priv->terminal),
 					      VTE_PTY_DEFAULT,
 					      working_directory,
-					      argv, (gchar**)envp,
+					      argv, NULL,
+#ifdef FIXED_ARGYLL
+					      0,
+#else
 					      G_SPAWN_FILE_AND_ARGV_ZERO,
+#endif
 					      NULL, NULL,
 					      &priv->child_pid, error);
-#else
-	priv->child_pid = vte_terminal_fork_command (VTE_TERMINAL(priv->terminal),
-						     argv[0], &argv[1], NULL,
-						     working_directory,
-						     FALSE, FALSE, FALSE);
-	ret = (priv->child_pid > 0);
-	if (!ret) {
-		g_set_error (error,
-			     MCM_CALIBRATE_ERROR,
-			     MCM_CALIBRATE_ERROR_USER_ABORT,
-			     "failed to spawn %s", argv[0]);
-	}
-#endif
 	if (!ret)
 		goto out;
 
@@ -1442,14 +1428,8 @@ mcm_calibrate_argyll_spotread_read_chart (McmCalibrateArgyll *calibrate_argyll, 
 	gchar *command = NULL;
 	gchar **argv = NULL;
 	GPtrArray *array = NULL;
-	gchar *working_path = NULL;
 	const gchar *title;
 	const gchar *message;
-
-	/* get shared data */
-	g_object_get (calibrate_argyll,
-		      "working-path", &working_path,
-		      NULL);
 
 	/* get correct name of the command */
 	command = mcm_calibrate_argyll_get_tool_filename ("spotread", error);
@@ -1485,9 +1465,9 @@ mcm_calibrate_argyll_spotread_read_chart (McmCalibrateArgyll *calibrate_argyll, 
 	mcm_calibrate_argyll_debug_argv (command, argv);
 
 	/* start up the command */
-	priv->state = MCM_CALIBRATE_ARGYLL_STATE_RUNNING;
-	vte_terminal_reset (VTE_TERMINAL(priv->terminal), TRUE, FALSE);
-	priv->child_pid = vte_terminal_fork_command (VTE_TERMINAL(priv->terminal), command, argv, NULL, working_path, FALSE, FALSE, FALSE);
+	ret = mcm_calibrate_argyll_fork_command (calibrate_argyll, argv, error);
+	if (!ret)
+		goto out;
 
 	/* wait until finished */
 	g_main_loop_run (priv->loop);
@@ -1515,7 +1495,6 @@ mcm_calibrate_argyll_spotread_read_chart (McmCalibrateArgyll *calibrate_argyll, 
 out:
 	if (array != NULL)
 		g_ptr_array_unref (array);
-	g_free (working_path);
 	g_free (command);
 	g_strfreev (argv);
 	return ret;

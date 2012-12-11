@@ -33,6 +33,7 @@
 #include "mcm-device-udev.h"
 #include "mcm-dmi.h"
 #include "mcm-edid.h"
+#include "mcm-exif.h"
 #include "mcm-gamma-widget.h"
 #include "mcm-image.h"
 #include "mcm-print.h"
@@ -607,6 +608,50 @@ mcm_test_edid_func (void)
 }
 
 static void
+mcm_test_exif_func (void)
+{
+	McmExif *exif;
+	gboolean ret;
+	GError *error = NULL;
+	gchar *filename;
+
+	exif = mcm_exif_new ();
+	g_assert (exif != NULL);
+
+	/* TIFF */
+	filename = mcm_test_get_data_file ("test.tif");
+	ret = mcm_exif_parse (exif, filename, &error);
+	g_free (filename);
+	g_assert_no_error (error);
+	g_assert (ret);
+	g_assert_cmpstr (mcm_exif_get_model (exif), ==, "NIKON D60");
+	g_assert_cmpstr (mcm_exif_get_manufacturer (exif), ==, "NIKON CORPORATION");
+	g_assert_cmpstr (mcm_exif_get_serial (exif), ==, NULL);
+
+	/* PNG */
+	filename = mcm_test_get_data_file ("test.png");
+	ret = mcm_exif_parse (exif, filename, &error);
+	g_free (filename);
+	g_assert_no_error (error);
+	g_assert (ret);
+	g_assert_cmpstr (mcm_exif_get_model (exif), ==, "NIKON D60");
+	g_assert_cmpstr (mcm_exif_get_manufacturer (exif), ==, "NIKON CORPORATION");
+	g_assert_cmpstr (mcm_exif_get_serial (exif), ==, NULL);
+
+	/* JPG */
+	filename = mcm_test_get_data_file ("test.jpg");
+	ret = mcm_exif_parse (exif, filename, &error);
+	g_free (filename);
+	g_assert_no_error (error);
+	g_assert (ret);
+	g_assert_cmpstr (mcm_exif_get_model (exif), ==, "NIKON D60");
+	g_assert_cmpstr (mcm_exif_get_manufacturer (exif), ==, "NIKON CORPORATION");
+	g_assert_cmpstr (mcm_exif_get_serial (exif), ==, NULL);
+
+	g_object_unref (exif);
+}
+
+static void
 mcm_test_gamma_widget_func (void)
 {
 	GtkWidget *widget;
@@ -1113,6 +1158,7 @@ main (int argc, char **argv)
 	g_test_add_func ("/color/dmi", mcm_test_dmi_func);
 	g_test_add_func ("/color/calibrate", mcm_test_calibrate_func);
 	g_test_add_func ("/color/edid", mcm_test_edid_func);
+	g_test_add_func ("/color/exif", mcm_test_exif_func);
 	g_test_add_func ("/color/tables", mcm_test_tables_func);
 	g_test_add_func ("/color/utils", mcm_test_utils_func);
 	g_test_add_func ("/color/device", mcm_test_device_func);

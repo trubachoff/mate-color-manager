@@ -35,6 +35,8 @@ libmcmshared_a_SOURCES =				\
 	mcm-screen.h					\
 	mcm-xyz.c					\
 	mcm-xyz.h					\
+	mcm-exif.c					\
+	mcm-exif.h					\
 	mcm-print.c					\
 	mcm-print.h					\
 	mcm-utils.c					\

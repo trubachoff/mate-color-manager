@@ -30,8 +30,6 @@
 
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
-#include <tiff.h>
-#include <tiffio.h>
 
 #include "mcm-calibrate.h"
 #include "mcm-xyz.h"
@@ -41,6 +39,7 @@
 #include "mcm-brightness.h"
 #include "mcm-colorimeter.h"
 #include "mcm-calibrate-dialog.h"
+#include "mcm-exif.h"
 
 #include "egg-debug.h"
 
@@ -335,28 +334,23 @@ out:
 gboolean
 mcm_calibrate_set_from_exif (McmCalibrate *calibrate, const gchar *filename, GError **error)
 {
-	const gchar *manufacturer = NULL;
-	const gchar *model = NULL;
+	const gchar *manufacturer;
+	const gchar *model;
+	const gchar *serial;
 	gchar *description = NULL;
-	const gchar *serial = NULL;
-	TIFF *tiff;
-	gboolean ret = TRUE;
+	gboolean ret;
+	McmExif *exif;
 
-	/* open file */
-	tiff = TIFFOpen (filename, "r");
-	TIFFGetField (tiff,TIFFTAG_MAKE, &manufacturer);
-	TIFFGetField (tiff,TIFFTAG_MODEL, &model);
-	TIFFGetField (tiff,TIFFTAG_CAMERASERIALNUMBER, &serial);
-
-	/* we failed to get data */
-	if (manufacturer == NULL || model == NULL) {
-		g_set_error (error,
-			     MCM_CALIBRATE_ERROR,
-			     MCM_CALIBRATE_ERROR_NO_DATA,
-			     "failed to get EXIF data from TIFF");
-		ret = FALSE;
+	/* parse file */
+	exif = mcm_exif_new ();
+	ret = mcm_exif_parse (exif, filename, error);
+	if (!ret)
 		goto out;
-	}
+
+	/* get data */
+	manufacturer = mcm_exif_get_manufacturer (exif);
+	model = mcm_exif_get_model (exif);
+	serial = mcm_exif_get_serial (exif);
 
 	/* do the best we can */
 	description = g_strdup_printf ("%s - %s", manufacturer, model);
@@ -372,8 +366,8 @@ mcm_calibrate_set_from_exif (McmCalibrate *calibrate, const gchar *filename, GEr
 		g_object_set (calibrate, "serial", serial, NULL);
 
 out:
+	g_object_unref (exif);
 	g_free (description);
-	TIFFClose (tiff);
 	return ret;
 }
 

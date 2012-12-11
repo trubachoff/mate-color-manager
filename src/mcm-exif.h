@@ -25,6 +25,8 @@
 #include <glib-object.h>
 #include <gio/gio.h>
 
+#include "mcm-enum.h"
+
 G_BEGIN_DECLS
 
 #define MCM_TYPE_EXIF		(mcm_exif_get_type ())
@@ -65,6 +67,7 @@ McmExif		*mcm_exif_new				(void);
 const gchar	*mcm_exif_get_manufacturer		(McmExif	*exif);
 const gchar	*mcm_exif_get_model			(McmExif	*exif);
 const gchar	*mcm_exif_get_serial			(McmExif	*exif);
+McmDeviceKind	 mcm_exif_get_device_kind		(McmExif	*exif);
 gboolean	 mcm_exif_parse				(McmExif	*exif,
 							 GFile		*file,
 							 GError		**error);

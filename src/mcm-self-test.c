@@ -578,6 +578,7 @@ mcm_test_exif_func (void)
 	g_assert_cmpstr (mcm_exif_get_model (exif), ==, "NIKON D60");
 	g_assert_cmpstr (mcm_exif_get_manufacturer (exif), ==, "NIKON CORPORATION");
 	g_assert_cmpstr (mcm_exif_get_serial (exif), ==, NULL);
+	g_assert_cmpint (mcm_exif_get_device_kind (exif), ==, MCM_DEVICE_KIND_CAMERA);
 
 	/* JPG */
 	filename = mcm_test_get_data_file ("test.jpg");
@@ -590,6 +591,7 @@ mcm_test_exif_func (void)
 	g_assert_cmpstr (mcm_exif_get_model (exif), ==, "NIKON D60");
 	g_assert_cmpstr (mcm_exif_get_manufacturer (exif), ==, "NIKON CORPORATION");
 	g_assert_cmpstr (mcm_exif_get_serial (exif), ==, NULL);
+	g_assert_cmpint (mcm_exif_get_device_kind (exif), ==, MCM_DEVICE_KIND_CAMERA);
 
 	/* PNG */
 	filename = mcm_test_get_data_file ("test.png");

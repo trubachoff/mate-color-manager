@@ -63,8 +63,6 @@ libmcmshared_a_SOURCES =				\
 	mcm-device-udev.h				\
 	mcm-device-cups.c				\
 	mcm-device-cups.h				\
-	mcm-device-sane.c				\
-	mcm-device-sane.h				\
 	mcm-device-virtual.c			\
 	mcm-device-virtual.h			\
 	mcm-cie-widget.c				\
@@ -89,6 +87,10 @@ libmcmshared_a_SOURCES =				\
 	mcm-calibrate-dialog.h 			\
 	mcm-brightness.c 				\
 	mcm-brightness.h
+
+libmcmshared_a_SOURCES +=			\
+	mcm-device-sane.c				\
+	mcm-device-sane.h
 
 libmcmshared_a_CFLAGS =					\
 	$(WARNINGFLAGS_C)

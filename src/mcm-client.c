@@ -34,13 +34,18 @@
 #include <gudev/gudev.h>
 #include <libmateui/mate-rr.h>
 #include <cups/cups.h>
-#include <sane/sane.h>
+
+#ifdef MCM_USE_SANE
+ #include <sane/sane.h>
+#endif
 
 #include "mcm-client.h"
 #include "mcm-device-xrandr.h"
 #include "mcm-device-udev.h"
 #include "mcm-device-cups.h"
-#include "mcm-device-sane.h"
+#ifdef MCM_USE_SANE
+ #include "mcm-device-sane.h"
+#endif
 #include "mcm-device-virtual.h"
 #include "mcm-screen.h"
 #include "mcm-utils.h"
@@ -52,9 +57,10 @@ static void     mcm_client_finalize	(GObject     *object);
 #define MCM_CLIENT_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), MCM_TYPE_CLIENT, McmClientPrivate))
 
 static void mcm_client_xrandr_add (McmClient *client, MateRROutput *output);
+#ifdef MCM_USE_SANE
 static gboolean mcm_client_add_connected_devices_sane (McmClient *client, GError **error);
 static gpointer mcm_client_add_connected_devices_sane_thrd (McmClient *client);
-
+#endif
 /**
  * McmClientPrivate:
  *
@@ -339,6 +345,7 @@ out:
 	return ret;
 }
 
+#ifdef MCM_USE_SANE
 /**
  * mcm_client_sane_refresh_cb:
  **/
@@ -373,6 +380,7 @@ mcm_client_sane_refresh_cb (McmClient *client)
 out:
 	return FALSE;
 }
+#endif
 
 /**
  * mcm_client_uevent_cb:
@@ -381,16 +389,19 @@ static void
 mcm_client_uevent_cb (GUdevClient *gudev_client, const gchar *action, GUdevDevice *udev_device, McmClient *client)
 {
 	gboolean ret;
+#ifdef MCM_USE_SANE
 	const gchar *value;
 	McmDevice *device_tmp;
 	guint i;
 	McmClientPrivate *priv = client->priv;
+#endif
 
 	if (g_strcmp0 (action, "remove") == 0) {
 		ret = mcm_client_gudev_remove (client, udev_device);
 		if (ret)
 			egg_debug ("removed %s", g_udev_device_get_sysfs_path (udev_device));
 
+#ifdef MCM_USE_SANE
 		/* we need to remove scanner devices */
 		value = g_udev_device_get_property (udev_device, "MCM_RESCAN");
 		if (g_strcmp0 (value, "scanner") == 0) {
@@ -405,16 +416,19 @@ mcm_client_uevent_cb (GUdevClient *gudev_client, const gchar *action, GUdevDevic
 			/* find any others that might still be connected */
 			g_timeout_add (MCM_CLIENT_SANE_REMOVED_TIMEOUT, (GSourceFunc) mcm_client_sane_refresh_cb, client);
 		}
+#endif
 
 	} else if (g_strcmp0 (action, "add") == 0) {
 		ret = mcm_client_gudev_add (client, udev_device);
 		if (ret)
 			egg_debug ("added %s", g_udev_device_get_sysfs_path (udev_device));
 
+#ifdef MCM_USE_SANE
 		/* we need to rescan scanner devices */
 		value = g_udev_device_get_property (udev_device, "MCM_RESCAN");
 		if (g_strcmp0 (value, "scanner") == 0)
 			g_timeout_add (MCM_CLIENT_SANE_REMOVED_TIMEOUT, (GSourceFunc) mcm_client_sane_refresh_cb, client);
+#endif
 	}
 }
 
@@ -756,6 +770,7 @@ mcm_client_add_connected_devices_cups_thrd (McmClient *client)
 	return NULL;
 }
 
+#ifdef MCM_USE_SANE
 /**
  * mcm_client_sane_add:
  **/
@@ -865,6 +880,7 @@ mcm_client_add_connected_devices_sane_thrd (McmClient *client)
 	mcm_client_add_connected_devices_sane (client, NULL);
 	return NULL;
 }
+#endif
 
 /**
  * mcm_client_add_unconnected_device:
@@ -912,8 +928,10 @@ mcm_client_add_unconnected_device (McmClient *client, GKeyFile *keyfile, const g
 	} else if (kind == MCM_DEVICE_KIND_CAMERA) {
 		/* FIXME: use GPhoto? */
 		device = mcm_device_udev_new ();
+#ifdef MCM_USE_SANE
 	} else if (kind == MCM_DEVICE_KIND_SCANNER) {
 		device = mcm_device_sane_new ();
+#endif
 	} else {
 		egg_warning ("device kind internal error");
 		goto out;
@@ -1138,6 +1156,7 @@ mcm_client_add_connected (McmClient *client, McmClientColdplug coldplug, GError 
 		}
 	}
 
+#ifdef MCM_USE_SANE
 	/* SANE */
 	if (!coldplug || coldplug & MCM_CLIENT_COLDPLUG_SANE) {
 		mcm_client_add_loading (client);
@@ -1152,6 +1171,7 @@ mcm_client_add_connected (McmClient *client, McmClientColdplug coldplug, GError 
 				goto out;
 		}
 	}
+#endif
 out:
 	return ret;
 }
@@ -1470,8 +1490,10 @@ mcm_client_finalize (GObject *object)
 	g_object_unref (priv->settings);
 	if (client->priv->init_cups)
 		httpClose (priv->http);
+#ifdef MCM_USE_SANE
 	if (client->priv->init_sane)
 		sane_exit ();
+#endif
 
 	G_OBJECT_CLASS (mcm_client_parent_class)->finalize (object);
 }

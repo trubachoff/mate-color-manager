@@ -561,7 +561,14 @@ mcm_dbus_init (McmDbus *dbus)
 	dbus->priv->colorspace_cmyk = g_settings_get_string (dbus->priv->settings, MCM_SETTINGS_COLORSPACE_CMYK);
 
 
-	/* get all devices */
+	/* get all saved devices */
+	ret = mcm_client_add_saved (dbus->priv->client, &error);
+	if (!ret) {
+		egg_warning ("failed to coldplug: %s", error->message);
+		g_error_free (error);
+	}
+
+	/* get all connected devices */
 	ret = mcm_client_add_connected (dbus->priv->client, MCM_CLIENT_COLDPLUG_ALL, &error);
 	if (!ret) {
 		egg_warning ("failed to coldplug: %s", error->message);

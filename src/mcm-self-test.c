@@ -959,7 +959,7 @@ mcm_test_utils_func (void)
 	file = g_file_new_for_path ("dave.icc");
 	dest = mcm_utils_get_profile_destination (file);
 	filename = g_file_get_path (dest);
-	g_assert (g_str_has_suffix (filename, "/.color/icc/dave.icc"));
+	g_assert (g_str_has_suffix (filename, "/.local/share/icc/dave.icc"));
 	g_free (filename);
 	g_object_unref (file);
 	g_object_unref (dest);

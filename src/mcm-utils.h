@@ -30,6 +30,10 @@
 #include "mcm-enum.h"
 
 #define MCM_STOCK_ICON					"mate-color-manager"
+#define MCM_PROFILE_PATH				"/.color/icc"
+#define MCM_DBUS_SERVICE				"org.mate.ColorManager"
+#define MCM_DBUS_INTERFACE				"org.mate.ColorManager"
+#define MCM_DBUS_PATH					"/org/mate/ColorManager"
 
 #define MCM_SETTINGS_SCHEMA				"org.mate.color-manager"
 #define MCM_SETTINGS_DEFAULT_GAMMA 			"default-gamma"

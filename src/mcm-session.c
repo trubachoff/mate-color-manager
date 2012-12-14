@@ -37,9 +37,6 @@
 static GMainLoop *loop = NULL;
 static GSettings *settings = NULL;
 
-#define MCM_DBUS_SERVICE		"org.mate.ColorManager"
-#define MCM_DBUS_INTERFACE		"org.mate.ColorManager"
-#define MCM_DBUS_PATH			"/org/mate/ColorManager"
 #define MCM_SESSION_IDLE_EXIT		60 /* seconds */
 #define MCM_SESSION_NOTIFY_TIMEOUT	30000 /* ms */
 

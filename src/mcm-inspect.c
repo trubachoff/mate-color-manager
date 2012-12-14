@@ -165,7 +165,7 @@ mcm_inspect_show_profiles_for_device (const gchar *device_id)
 	guint i = 0;
 	GDBusConnection *connection;
 	GError *error = NULL;
-	GVariant *args;
+	GVariant *args = NULL;
 	GVariant *response = NULL;
 	GVariantIter *iter = NULL;
 
@@ -186,6 +186,7 @@ mcm_inspect_show_profiles_for_device (const gchar *device_id)
 						MCM_DBUS_INTERFACE,
 						"GetProfilesForDevice",
 						args,
+						G_VARIANT_TYPE ("(a(ss))"),
 						G_DBUS_CALL_FLAGS_NONE,
 						-1, NULL, &error);
 	if (response == NULL) {
@@ -213,11 +214,13 @@ mcm_inspect_show_profiles_for_device (const gchar *device_id)
 	/* success */
 	ret = TRUE;
 out:
-	if (iter != NULL)
-		g_variant_iter_free (iter);
-	if (response != NULL)
-		g_variant_unref (response);
-	return ret;
+ 	if (iter != NULL)
+ 		g_variant_iter_free (iter);
+	if (args != NULL)
+		g_variant_unref (args);
+ 	if (response != NULL)
+ 		g_variant_unref (response);
+ 	return ret;
 }
 
 /**
@@ -231,7 +234,7 @@ mcm_inspect_show_profiles_for_file (const gchar *filename)
 	guint i = 0;
 	GDBusConnection *connection;
 	GError *error = NULL;
-	GVariant *args;
+	GVariant *args = NULL;
 	GVariant *response = NULL;
 	GVariantIter *iter = NULL;
 
@@ -252,6 +255,7 @@ mcm_inspect_show_profiles_for_file (const gchar *filename)
 						MCM_DBUS_INTERFACE,
 						"GetProfilesForFile",
 						args,
+						G_VARIANT_TYPE ("(a(ss))"),
 						G_DBUS_CALL_FLAGS_NONE,
 						-1, NULL, &error);
 	if (response == NULL) {
@@ -279,11 +283,13 @@ mcm_inspect_show_profiles_for_file (const gchar *filename)
 	/* success */
 	ret = TRUE;
 out:
-	if (iter != NULL)
-		g_variant_iter_free (iter);
-	if (response != NULL)
-		g_variant_unref (response);
-	return ret;
+ 	if (iter != NULL)
+ 		g_variant_iter_free (iter);
+	if (args != NULL)
+		g_variant_unref (args);
+ 	if (response != NULL)
+ 		g_variant_unref (response);
+ 	return ret;
 }
 
 /**
@@ -316,6 +322,7 @@ mcm_inspect_show_profiles_for_devices (void)
 						MCM_DBUS_INTERFACE,
 						"GetDevices",
 						NULL,
+						G_VARIANT_TYPE ("(as)"),
 						G_DBUS_CALL_FLAGS_NONE,
 						-1, NULL, &error);
 	if (response == NULL) {
@@ -355,7 +362,7 @@ mcm_inspect_show_profile_for_window (guint xid)
 	GDBusConnection *connection;
 	GError *error = NULL;
 	const gchar *profile;
-	GVariant *args;
+	GVariant *args = NULL;
 	GVariant *response = NULL;
 	GVariant *response_child = NULL;
 	GVariantIter *iter = NULL;
@@ -377,6 +384,7 @@ mcm_inspect_show_profile_for_window (guint xid)
 						MCM_DBUS_INTERFACE,
 						"GetProfileForWindow",
 						args,
+						G_VARIANT_TYPE ("(s)"),
 						G_DBUS_CALL_FLAGS_NONE,
 						-1, NULL, &error);
 	if (response == NULL) {
@@ -405,9 +413,11 @@ mcm_inspect_show_profile_for_window (guint xid)
 	ret = TRUE;
 out:
 	if (iter != NULL)
-		g_variant_iter_free (iter);
-	if (response != NULL)
-		g_variant_unref (response);
+ 		g_variant_iter_free (iter);
+	if (args != NULL)
+		g_variant_unref (args);
+ 	if (response != NULL)
+ 		g_variant_unref (response);
 	return ret;
 }
 
@@ -423,7 +433,7 @@ mcm_inspect_show_profiles_for_type (const gchar *type)
 	const gchar *filename;
 	const gchar *description;
 	guint i;
-	GVariant *args;
+	GVariant *args = NULL;
 	GVariant *response = NULL;
 	GVariantIter *iter = NULL;
 
@@ -444,6 +454,7 @@ mcm_inspect_show_profiles_for_type (const gchar *type)
 						MCM_DBUS_INTERFACE,
 						"GetProfilesForType",
 						args,
+						G_VARIANT_TYPE ("(a(ss))"),
 						G_DBUS_CALL_FLAGS_NONE,
 						-1, NULL, &error);
 	if (response == NULL) {
@@ -473,22 +484,38 @@ mcm_inspect_show_profiles_for_type (const gchar *type)
 out:
 	if (iter != NULL)
 		g_variant_iter_free (iter);
+	if (args != NULL)
+		g_variant_unref (args);
 	if (response != NULL)
 		g_variant_unref (response);
 	return ret;
 }
 
 /**
- * mcm_inspect_proxy_appeared_cb:
+ * mcm_inspect_get_properties:
  **/
-static void
-mcm_inspect_proxy_appeared_cb (GDBusConnection *connection,
-                               const gchar *name,
-                               const gchar *name_owner,
-                               GDBusProxy *proxy,
-                               GMainLoop *loop)
+static gboolean
+mcm_inspect_get_properties (void)
 {
+	GDBusProxy *proxy;
+	GError *error = NULL;
 	GVariant *result;
+
+	/* connect to the named instance */
+	proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SESSION,
+					       G_DBUS_PROXY_FLAGS_DO_NOT_CONNECT_SIGNALS,
+					       NULL,
+					       MCM_DBUS_SERVICE,
+					       MCM_DBUS_PATH,
+					       MCM_DBUS_INTERFACE,
+					       NULL,
+					       &error);
+	if (proxy == NULL) {
+		/* TRANSLATORS: the DBus method failed */
+		g_print ("%s: %s\n", _("The request failed"), error->message);
+		g_error_free (error);
+		goto out;
+	}
 
 	/* get rendering intents */
 	result = g_dbus_proxy_get_cached_property (proxy, "RenderingIntentDisplay");
@@ -505,58 +532,21 @@ mcm_inspect_proxy_appeared_cb (GDBusConnection *connection,
 	}
 
 	/* get colorspaces */
-	result = g_dbus_proxy_get_cached_property (proxy, "RenderingIntentDisplay");
+	result = g_dbus_proxy_get_cached_property (proxy, "ColorspaceRgb");
 	if (result != NULL) {
 		/* TRANSLATORS: this is the rendering intent of the output */
 		g_print ("%s:\t%s\n", _("RGB Colorspace"), g_variant_get_string (result, NULL));
 		g_variant_unref (result);
 	}
-	result = g_dbus_proxy_get_cached_property (proxy, "RenderingIntentSoftproof");
+	result = g_dbus_proxy_get_cached_property (proxy, "ColorspaceCmyk");
 	if (result != NULL) {
 		/* TRANSLATORS: this is the rendering intent of the printer */
 		g_print ("%s:\t%s\n", _("CMYK Colorspace"), g_variant_get_string (result, NULL));
 		g_variant_unref (result);
 	}
-
-	g_main_loop_quit (loop);
-}
-
-/**
- * mcm_inspect_proxy_vanished_cb:
- **/
-static void
-mcm_inspect_proxy_vanished_cb (GDBusConnection *connection,
-                               const gchar *name,
-                               GMainLoop *loop)
-{
-	/* TRANSLATORS: the DBus method failed */
-	g_print ("%s\n", _("The request failed"));
-	g_main_loop_quit (loop);
-}
-
-/**
- * mcm_inspect_get_properties:
- **/
-static gboolean
-mcm_inspect_get_properties (void)
-{
-	guint proxy_id;
-	GMainLoop *loop = NULL;
-
-	loop = g_main_loop_new (NULL, FALSE);
-	proxy_id = g_bus_watch_proxy (G_BUS_TYPE_SESSION,
-				      MCM_DBUS_SERVICE,
-				      G_BUS_NAME_WATCHER_FLAGS_AUTO_START,
-				      MCM_DBUS_PATH,
-				      MCM_DBUS_INTERFACE,
-				      G_TYPE_DBUS_PROXY,
-				      G_DBUS_PROXY_FLAGS_DO_NOT_CONNECT_SIGNALS,
-				      (GBusProxyAppearedCallback) mcm_inspect_proxy_appeared_cb,
-				      (GBusProxyVanishedCallback) mcm_inspect_proxy_vanished_cb,
-				      loop, /* user_data */
-				      NULL); /* user_data_free_func */
-	g_main_loop_run (loop);
-	g_bus_unwatch_proxy (proxy_id);
+out:
+	if (proxy != NULL)
+		g_object_unref (proxy);
 	return TRUE;
 }
 

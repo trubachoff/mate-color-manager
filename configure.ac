@@ -107,7 +107,7 @@ UNIQUE_REQUIRED=1.0.0
 VTE_REQUIRED=0.25.1
 DBUS_GLIB_REQUIRED=0.73
 CANBERRA_REQUIRED=0.10
-GIO_REQUIRED=2.25.0
+GIO_REQUIRED=2.25.9
 
 dnl ---------------------------------------------------------------------------
 dnl - Check library dependencies

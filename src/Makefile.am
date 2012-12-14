@@ -120,88 +120,88 @@ mcm_helper_exiv_SOURCES = mcm-helper-exiv.cpp
 mcm_helper_exiv_LDADD = $(EXIV_LIBS)
 endif
 
-mcm_install_system_wide_SOURCES =			\
+mcm_install_system_wide_SOURCES =	\
 	mcm-install-system-wide.c
 
-mcm_install_system_wide_LDADD =				\
+mcm_install_system_wide_LDADD =		\
 	$(GLIB_LIBS)
 
-mcm_install_system_wide_CFLAGS =			\
+mcm_install_system_wide_CFLAGS =	\
 	$(WARNINGFLAGS_C)
 
-mcm_dump_edid_SOURCES =					\
+mcm_dump_edid_SOURCES =				\
 	mcm-dump-edid.c
 
-mcm_dump_edid_LDADD =					\
+mcm_dump_edid_LDADD =				\
 	libmcmshared.a					\
 	$(GLIB_LIBS)					\
-	$(X11_LIBS)					\
+	$(X11_LIBS)						\
 	$(MATEDESKTOP_LIBS)				\
 	$(GUDEV_LIBS)					\
 	$(LCMS_LIBS)					\
 	$(XORG_LIBS)					\
 	$(DBUS_GLIB_LIBS)				\
-	$(GTK_LIBS)					\
+	$(GTK_LIBS)						\
 	$(SANE_LIBS)					\
 	$(CUPS_LIBS)					\
 	-lm
 
-mcm_dump_edid_CFLAGS =					\
+mcm_dump_edid_CFLAGS =				\
 	$(WARNINGFLAGS_C)
 
-mcm_dump_profile_SOURCES =				\
+mcm_dump_profile_SOURCES =			\
 	mcm-dump-profile.c
 
-mcm_dump_profile_LDADD =				\
+mcm_dump_profile_LDADD =			\
 	libmcmshared.a					\
 	$(GLIB_LIBS)					\
-	$(X11_LIBS)					\
+	$(X11_LIBS)						\
 	$(MATEDESKTOP_LIBS)				\
 	$(GUDEV_LIBS)					\
 	$(LCMS_LIBS)					\
 	$(XORG_LIBS)					\
 	$(DBUS_GLIB_LIBS)				\
-	$(GTK_LIBS)					\
+	$(GTK_LIBS)						\
 	$(SANE_LIBS)					\
 	$(CUPS_LIBS)					\
 	-lm
 
-mcm_dump_profile_CFLAGS =				\
+mcm_dump_profile_CFLAGS =			\
 	$(WARNINGFLAGS_C)
 
-mcm_fix_profile_SOURCES =				\
+mcm_fix_profile_SOURCES =			\
 	mcm-fix-profile.c
 
-mcm_fix_profile_LDADD =					\
+mcm_fix_profile_LDADD =				\
 	$(GLIB_LIBS)					\
-	$(X11_LIBS)					\
+	$(X11_LIBS)						\
 	$(LCMS_LIBS)					\
-	$(GTK_LIBS)					\
+	$(GTK_LIBS)						\
 	$(SANE_LIBS)					\
 	$(CUPS_LIBS)					\
 	-lm
 
-mcm_fix_profile_CFLAGS =				\
+mcm_fix_profile_CFLAGS =			\
 	$(WARNINGFLAGS_C)
 
-mcm_inspect_SOURCES =					\
+mcm_inspect_SOURCES =				\
 	mcm-inspect.c
 
 mcm_inspect_LDADD =					\
 	libmcmshared.a					\
 	$(GLIB_LIBS)					\
-	$(X11_LIBS)					\
+	$(X11_LIBS)						\
 	$(MATEDESKTOP_LIBS)				\
 	$(GUDEV_LIBS)					\
 	$(LCMS_LIBS)					\
 	$(XORG_LIBS)					\
 	$(DBUS_GLIB_LIBS)				\
-	$(GTK_LIBS)					\
+	$(GTK_LIBS)						\
 	$(SANE_LIBS)					\
 	$(CUPS_LIBS)					\
 	-lm
 
-mcm_inspect_CFLAGS =					\
+mcm_inspect_CFLAGS =				\
 	$(WARNINGFLAGS_C)
 
 mcm_apply_SOURCES =					\
@@ -210,13 +210,13 @@ mcm_apply_SOURCES =					\
 mcm_apply_LDADD =					\
 	libmcmshared.a					\
 	$(GLIB_LIBS)					\
-	$(X11_LIBS)					\
+	$(X11_LIBS)						\
 	$(MATEDESKTOP_LIBS)				\
 	$(GUDEV_LIBS)					\
 	$(LCMS_LIBS)					\
 	$(XORG_LIBS)					\
 	$(DBUS_GLIB_LIBS)				\
-	$(GTK_LIBS)					\
+	$(GTK_LIBS)						\
 	$(SANE_LIBS)					\
 	$(CUPS_LIBS)					\
 	-lm
@@ -224,19 +224,19 @@ mcm_apply_LDADD =					\
 mcm_apply_CFLAGS =					\
 	$(WARNINGFLAGS_C)
 
-mcm_import_SOURCES =					\
+mcm_import_SOURCES =				\
 	mcm-import.c
 
 mcm_import_LDADD =					\
 	libmcmshared.a					\
 	$(GLIB_LIBS)					\
-	$(X11_LIBS)					\
+	$(X11_LIBS)						\
 	$(MATEDESKTOP_LIBS)				\
 	$(GUDEV_LIBS)					\
 	$(LCMS_LIBS)					\
 	$(XORG_LIBS)					\
 	$(DBUS_GLIB_LIBS)				\
-	$(GTK_LIBS)					\
+	$(GTK_LIBS)						\
 	$(SANE_LIBS)					\
 	$(CUPS_LIBS)					\
 	-lm
@@ -250,15 +250,15 @@ mcm_prefs_SOURCES =					\
 mcm_prefs_LDADD =					\
 	libmcmshared.a					\
 	$(GLIB_LIBS)					\
-	$(X11_LIBS)					\
+	$(X11_LIBS)						\
 	$(MATEDESKTOP_LIBS)				\
 	$(UNIQUE_LIBS)					\
-	$(VTE_LIBS)					\
+	$(VTE_LIBS)						\
 	$(GUDEV_LIBS)					\
 	$(LCMS_LIBS)					\
 	$(DBUS_GLIB_LIBS)				\
 	$(XORG_LIBS)					\
-	$(GTK_LIBS)					\
+	$(GTK_LIBS)						\
 	$(SANE_LIBS)					\
 	$(CUPS_LIBS)					\
 	$(TIFF_LIBS)					\
@@ -295,28 +295,30 @@ mcm_picker_LDADD = \
 mcm_picker_CFLAGS = \
 	$(WARNINGFLAGS_C)
 
-mcm_session_SOURCES =					\
-	mcm-dbus.c					\
-	mcm-dbus.h					\
+mcm_session_SOURCES =				\
+	mcm-dbus.c						\
+	mcm-dbus.h						\
 	mcm-session.c
 
 mcm_session_LDADD =					\
 	libmcmshared.a					\
 	$(GLIB_LIBS)					\
-	$(X11_LIBS)					\
+	$(X11_LIBS)						\
 	$(MATEDESKTOP_LIBS)				\
 	$(UNIQUE_LIBS)					\
 	$(GUDEV_LIBS)					\
 	$(LCMS_LIBS)					\
 	$(DBUS_GLIB_LIBS)				\
 	$(XORG_LIBS)					\
-	$(GTK_LIBS)					\
+	$(GTK_LIBS)						\
 	$(SANE_LIBS)					\
 	$(NOTIFY_LIBS)					\
 	$(CUPS_LIBS)					\
-	-lm
+	-lm								\
+	-lexif							\
+	-ltiff
 
-mcm_session_CFLAGS =					\
+mcm_session_CFLAGS =				\
 	$(WARNINGFLAGS_C)
 
 if EGG_BUILD_TESTS
@@ -324,11 +326,11 @@ if EGG_BUILD_TESTS
 check_PROGRAMS =					\
 	mcm-self-test
 
-mcm_self_test_SOURCES =					\
+mcm_self_test_SOURCES =				\
 	mcm-self-test.c					\
 	$(NULL)
 
-mcm_self_test_LDADD =					\
+mcm_self_test_LDADD =				\
 	libmcmshared.a					\
 	$(GLIB_LIBS)					\
 	$(X11_LIBS)						\
@@ -370,8 +372,8 @@ clean-local:
 
 CLEANFILES = $(BUILT_SOURCES)
 
-MAINTAINERCLEANFILES =					\
-	*~						\
+MAINTAINERCLEANFILES =				\
+	*~								\
 	Makefile.in
 
 EXTRA_DIST =						\

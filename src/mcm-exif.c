@@ -200,6 +200,70 @@ out:
 	return ret;
 }
 
+#ifdef MCM_USE_EXIV
+/**
+ * mcm_exif_parse_exiv:
+ **/
+static gboolean
+mcm_exif_parse_exiv (McmExif *exif, const gchar *filename, GError **error)
+{
+	gboolean ret;
+	gchar *command_line;
+	gint exit_status = 0;
+	gchar *standard_output = NULL;
+	gchar **split = NULL;
+	McmExifPrivate *priv = exif->priv;
+
+	command_line = g_strdup_printf (LIBEXECDIR "/mcm-helper-exiv %s", filename);
+	ret = g_spawn_command_line_sync (command_line, &standard_output, NULL, &exit_status, error);
+	if (!ret)
+		goto out;
+
+	/* failed to sniff */
+	if (exit_status != 0) {
+		ret = FALSE;
+		g_set_error (error, MCM_EXIF_ERROR, MCM_EXIF_ERROR_NO_SUPPORT,
+			     "Failed to run: %s", standard_output);
+		goto out;
+	}
+
+	/* get data */
+	split = g_strsplit (standard_output, "\n", -1);
+	if (g_strv_length (split) != 4) {
+		ret = FALSE;
+		g_set_error (error, MCM_EXIF_ERROR, MCM_EXIF_ERROR_NO_SUPPORT,
+			     "Unexpected output: %s", standard_output);
+		goto out;
+	}
+
+	/* free old versions */
+	g_free (priv->manufacturer);
+	g_free (priv->model);
+	g_free (priv->serial);
+
+	/* create copies for ourselves */
+	if (split[0][0] != '\0')
+		priv->manufacturer = g_strdup (split[0]);
+	else
+		priv->manufacturer = NULL;
+	if (split[1][0] != '\0')
+		priv->model = g_strdup (split[1]);
+	else
+		priv->model = NULL;
+	if (split[2][0] != '\0')
+		priv->serial = g_strdup (split[2]);
+	else
+		priv->serial = NULL;
+	priv->device_kind = MCM_DEVICE_KIND_CAMERA;
+
+out:
+	g_free (standard_output);
+	g_free (command_line);
+	g_strfreev (split);
+	return ret;
+}
+#endif
+
 /**
  * mcm_exif_parse:
  **/
@@ -232,6 +296,25 @@ mcm_exif_parse (McmExif *exif, GFile *file, GError **error)
 		ret = mcm_exif_parse_jpeg (exif, filename, error);
 		goto out;
 	}
+
+#ifdef MCM_USE_EXIV
+	if (g_strcmp0 (content_type, "image/x-adobe-dng") == 0 ||
+	    g_strcmp0 (content_type, "image/x-canon-crw") == 0 ||
+	    g_strcmp0 (content_type, "image/x-fuji-raf") == 0 ||
+	    g_strcmp0 (content_type, "image/x-kde-raw") == 0 ||
+	    g_strcmp0 (content_type, "image/x-kodak-kdc") == 0 ||
+	    g_strcmp0 (content_type, "image/x-minolta-mrw") == 0 ||
+	    g_strcmp0 (content_type, "image/x-nikon-nef") == 0 ||
+	    g_strcmp0 (content_type, "image/x-olympus-orf") == 0 ||
+	    g_strcmp0 (content_type, "image/x-panasonic-raw") == 0 ||
+	    g_strcmp0 (content_type, "image/x-pentax-pef") == 0 ||
+	    g_strcmp0 (content_type, "image/x-sigma-x3f") == 0 ||
+	    g_strcmp0 (content_type, "image/x-sony-arw") == 0) {
+		filename = g_file_get_path (file);
+		ret = mcm_exif_parse_exiv (exif, filename, error);
+		goto out;
+	}
+#endif
 
 	/* no support */
 	g_set_error (error,

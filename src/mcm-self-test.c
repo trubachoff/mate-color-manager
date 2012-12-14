@@ -593,6 +593,19 @@ mcm_test_exif_func (void)
 	g_assert_cmpstr (mcm_exif_get_serial (exif), ==, NULL);
 	g_assert_cmpint (mcm_exif_get_device_kind (exif), ==, MCM_DEVICE_KIND_CAMERA);
 
+	/* RAW */
+	filename = mcm_test_get_data_file ("test.kdc");
+	file = g_file_new_for_path (filename);
+	ret = mcm_exif_parse (exif, file, &error);
+	g_free (filename);
+	g_object_unref (file);
+	g_assert_no_error (error);
+	g_assert (ret);
+	g_assert_cmpstr (mcm_exif_get_model (exif), ==, "Eastman Kodak Company");
+	g_assert_cmpstr (mcm_exif_get_manufacturer (exif), ==, "Kodak Digital Science DC50 Zoom Camera");
+	g_assert_cmpstr (mcm_exif_get_serial (exif), ==, NULL);
+	g_assert_cmpint (mcm_exif_get_device_kind (exif), ==, MCM_DEVICE_KIND_CAMERA);
+
 	/* PNG */
 	filename = mcm_test_get_data_file ("test.png");
 	file = g_file_new_for_path (filename);

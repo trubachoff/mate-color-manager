@@ -1,8 +1,8 @@
-INCLUDES =						\
+INCLUDES =							\
 	$(GLIB_CFLAGS)					\
 	$(X11_CFLAGS)					\
 	$(GTK_CFLAGS)					\
-	$(MATEDESKTOP_CFLAGS)				\
+	$(MATEDESKTOP_CFLAGS)			\
 	$(UNIQUE_CFLAGS)				\
 	$(VTE_CFLAGS)					\
 	$(LCMS_CFLAGS)					\
@@ -11,29 +11,31 @@ INCLUDES =						\
 	$(SANE_CFLAGS)					\
 	$(TIFF_CFLAGS)					\
 	$(EXIF_CFLAGS)					\
+	$(EXIV_CFLAGS)					\
 	$(NOTIFY_CFLAGS)				\
 	$(CANBERRA_CFLAGS)				\
 	$(DBUS_GLIB_CFLAGS)				\
 	-DG_UDEV_API_IS_SUBJECT_TO_CHANGE		\
-	-DMATE_DESKTOP_USE_UNSTABLE_API		\
+	-DMATE_DESKTOP_USE_UNSTABLE_API	\
 	$(GUDEV_CFLAGS)					\
-	-DBINDIR=\"$(bindir)\"				\
-	-DSBINDIR=\"$(sbindir)\"			\
-	-DDATADIR=\"$(datadir)\"			\
+	-DBINDIR=\"$(bindir)\"			\
+	-DLIBEXECDIR=\"$(libexecdir)\"	\
+	-DSBINDIR=\"$(sbindir)\"		\
+	-DDATADIR=\"$(datadir)\"		\
 	-DSYSCONFDIR=\""$(sysconfdir)"\"		\
-	-DVERSION="\"$(VERSION)\""			\
-	-DLOCALEDIR=\""$(localedir)"\"			\
+	-DVERSION="\"$(VERSION)\""		\
+	-DLOCALEDIR=\""$(localedir)"\"	\
 	-DMCM_SYSTEM_PROFILES_DIR="\"$(MCM_SYSTEM_PROFILES_DIR)"\" \
 	-DMCM_DATA=\"$(pkgdatadir)\"
 
 noinst_LIBRARIES = libmcmshared.a
-libmcmshared_a_SOURCES =				\
+libmcmshared_a_SOURCES =		\
 	egg-debug.c					\
 	egg-debug.h					\
 	mcm-image.c					\
 	mcm-image.h					\
-	mcm-screen.c					\
-	mcm-screen.h					\
+	mcm-screen.c				\
+	mcm-screen.h				\
 	mcm-xyz.c					\
 	mcm-xyz.h					\
 	mcm-exif.c					\
@@ -50,67 +52,73 @@ libmcmshared_a_SOURCES =				\
 	mcm-edid.h					\
 	mcm-dmi.c					\
 	mcm-dmi.h					\
-	mcm-tables.c					\
-	mcm-tables.h					\
-	mcm-xserver.c					\
-	mcm-xserver.h					\
-	mcm-client.c					\
-	mcm-client.h					\
-	mcm-colorimeter.c				\
-	mcm-colorimeter.h				\
-	mcm-device.c					\
-	mcm-device.h					\
-	mcm-device-xrandr.c				\
-	mcm-device-xrandr.h				\
-	mcm-device-udev.c				\
-	mcm-device-udev.h				\
-	mcm-device-cups.c				\
-	mcm-device-cups.h				\
-	mcm-device-virtual.c			\
-	mcm-device-virtual.h			\
-	mcm-cie-widget.c				\
-	mcm-cie-widget.h				\
-	mcm-trc-widget.c				\
-	mcm-trc-widget.h				\
-	mcm-gamma-widget.c				\
-	mcm-gamma-widget.h				\
-	mcm-profile-store.c				\
-	mcm-profile-store.h				\
-	mcm-profile-lcms1.c				\
-	mcm-profile-lcms1.h				\
-	mcm-profile.c					\
-	mcm-profile.h 					\
-	mcm-calibrate.c 				\
-	mcm-calibrate.h 				\
-	mcm-calibrate-argyll.c			\
-	mcm-calibrate-argyll.h			\
-	mcm-calibrate-manual.c			\
-	mcm-calibrate-manual.h 			\
-	mcm-calibrate-dialog.c 			\
-	mcm-calibrate-dialog.h 			\
-	mcm-brightness.c 				\
+	mcm-tables.c				\
+	mcm-tables.h				\
+	mcm-xserver.c				\
+	mcm-xserver.h				\
+	mcm-client.c				\
+	mcm-client.h				\
+	mcm-colorimeter.c			\
+	mcm-colorimeter.h			\
+	mcm-device.c				\
+	mcm-device.h				\
+	mcm-device-xrandr.c			\
+	mcm-device-xrandr.h			\
+	mcm-device-udev.c			\
+	mcm-device-udev.h			\
+	mcm-device-cups.c			\
+	mcm-device-cups.h			\
+	mcm-device-virtual.c		\
+	mcm-device-virtual.h		\
+	mcm-cie-widget.c			\
+	mcm-cie-widget.h			\
+	mcm-trc-widget.c			\
+	mcm-trc-widget.h			\
+	mcm-gamma-widget.c			\
+	mcm-gamma-widget.h			\
+	mcm-profile-store.c			\
+	mcm-profile-store.h			\
+	mcm-profile-lcms1.c			\
+	mcm-profile-lcms1.h			\
+	mcm-profile.c				\
+	mcm-profile.h 				\
+	mcm-calibrate.c 			\
+	mcm-calibrate.h 			\
+	mcm-calibrate-argyll.c		\
+	mcm-calibrate-argyll.h		\
+	mcm-calibrate-manual.c		\
+	mcm-calibrate-manual.h 		\
+	mcm-calibrate-dialog.c 		\
+	mcm-calibrate-dialog.h 		\
+	mcm-brightness.c 			\
 	mcm-brightness.h
 
-libmcmshared_a_SOURCES +=			\
-	mcm-device-sane.c				\
+libmcmshared_a_SOURCES +=		\
+	mcm-device-sane.c			\
 	mcm-device-sane.h
 
-libmcmshared_a_CFLAGS =					\
+libmcmshared_a_CFLAGS =			\
 	$(WARNINGFLAGS_C)
 
-sbin_PROGRAMS =						\
+sbin_PROGRAMS =					\
 	mcm-install-system-wide
 
-bin_PROGRAMS =						\
+bin_PROGRAMS =					\
 	mcm-inspect					\
-	mcm-dump-profile				\
-	mcm-fix-profile					\
-	mcm-dump-edid					\
+	mcm-dump-profile			\
+	mcm-fix-profile				\
+	mcm-dump-edid				\
 	mcm-apply					\
 	mcm-prefs					\
 	mcm-session					\
 	mcm-picker					\
 	mcm-import
+
+if MCM_USE_EXIV
+libexec_PROGRAMS = mcm-helper-exiv
+mcm_helper_exiv_SOURCES = mcm-helper-exiv.cpp
+mcm_helper_exiv_LDADD = $(EXIV_LIBS)
+endif
 
 mcm_install_system_wide_SOURCES =			\
 	mcm-install-system-wide.c

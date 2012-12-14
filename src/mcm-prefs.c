@@ -563,9 +563,16 @@ mcm_prefs_file_chooser_get_icc_profile (void)
 static gboolean
 mcm_prefs_profile_import_file (GFile *file)
 {
-	gboolean ret = FALSE;
+	gboolean ret;
 	GError *error = NULL;
 	GFile *destination = NULL;
+
+	/* check if correct type */
+	ret = mcm_utils_is_icc_profile (file);
+	if (!ret) {
+		egg_debug ("not a ICC profile");
+		goto out;
+	}
 
 	/* copy icc file to ~/.color/icc */
 	destination = mcm_utils_get_profile_destination (file);
@@ -577,7 +584,71 @@ mcm_prefs_profile_import_file (GFile *file)
 		goto out;
 	}
 out:
-	g_object_unref (destination);
+	if (destination != NULL)
+		g_object_unref (destination);
+	return ret;
+}
+
+/**
+ * mcm_prefs_profile_add_virtual_file:
+ **/
+static gboolean
+mcm_prefs_profile_add_virtual_file (GFile *file)
+{
+	gboolean ret;
+	McmExif *exif;
+	GError *error = NULL;
+	McmDevice *device = NULL;
+
+	/* parse file */
+	exif = mcm_exif_new ();
+	ret = mcm_exif_parse (exif, file, &error);
+	if (!ret) {
+		/* TRANSLATORS: could not add virtual device */
+		if (error->domain != MCM_EXIF_ERROR ||
+		    error->code != MCM_EXIF_ERROR_NO_SUPPORT)
+			mcm_prefs_error_dialog (_("Failed to get metadata from image"), error->message);
+		else
+			egg_debug ("not a supported image format: %s", error->message);
+		g_error_free (error);
+		goto out;
+	}
+
+	/* create device */
+	device = mcm_device_virtual_new	();
+	ret = mcm_device_virtual_create_from_params (MCM_DEVICE_VIRTUAL (device),
+						     mcm_exif_get_device_kind (exif),
+						     mcm_exif_get_model (exif),
+						     mcm_exif_get_manufacturer (exif),
+						     /* FIXME: serial?! */
+						     MCM_COLORSPACE_RGB);
+	if (!ret) {
+		/* TRANSLATORS: could not add virtual device */
+		mcm_prefs_error_dialog (_("Failed to create virtual device"), NULL);
+		goto out;
+	}
+
+	/* save what we've got */
+	ret = mcm_device_save (device, &error);
+	if (!ret) {
+		/* TRANSLATORS: could not add virtual device */
+		mcm_prefs_error_dialog (_("Failed to save virtual device"), error->message);
+		g_error_free (error);
+		goto out;
+	}
+
+	/* add to the device list */
+	ret = mcm_client_add_virtual_device (mcm_client, device, &error);
+	if (!ret) {
+		/* TRANSLATORS: could not add virtual device */
+		mcm_prefs_error_dialog (_("Failed to add virtual device"), error->message);
+		g_error_free (error);
+		goto out;
+	}
+out:
+	g_object_unref (exif);
+	if (device != NULL)
+		g_object_unref (device);
 	return ret;
 }
 
@@ -614,13 +685,12 @@ mcm_prefs_drag_data_received_cb (GtkWidget *widget, GdkDragContext *context, gin
 	GFile *file = NULL;
 	guint i;
 	gboolean ret;
+	gboolean success = FALSE;
 
 	/* get filenames */
 	filename = gtk_selection_data_get_data (data);
-	if (filename == NULL) {
-		gtk_drag_finish (context, FALSE, FALSE, _time);
+	if (filename == NULL)
 		goto out;
-	}
 
 	/* import this */
 	egg_debug ("dropped: %p (%s)", data, filename);
@@ -633,31 +703,21 @@ mcm_prefs_drag_data_received_cb (GtkWidget *widget, GdkDragContext *context, gin
 		if (filenames[i][0] == '\0')
 			continue;
 
-		/* check this is an ICC profile */
-		egg_debug ("trying to import %s", filenames[i]);
+		/* convert the URI */
 		file = g_file_new_for_uri (filenames[i]);
-		ret = mcm_utils_is_icc_profile (file);
-		if (!ret) {
-			egg_debug ("%s is not a ICC profile", filenames[i]);
-			gtk_drag_finish (context, FALSE, FALSE, _time);
-			goto out;
-		}
+		if (ret)
+			success = TRUE;
 
-		/* try to import it */
-		ret = mcm_prefs_profile_import_file (file);
-		if (!ret) {
-			egg_debug ("%s did not import correctly", filenames[i]);
-			gtk_drag_finish (context, FALSE, FALSE, _time);
-			goto out;
-		}
+		/* try to add a virtual profile with it */
+		ret = mcm_prefs_profile_add_virtual_file (file);
+		if (ret)
+			success = TRUE;
+
 		g_object_unref (file);
-		file = NULL;
 	}
 
-	gtk_drag_finish (context, TRUE, FALSE, _time);
 out:
-	if (file != NULL)
-		g_object_unref (file);
+	gtk_drag_finish (context, success, FALSE, _time);
 	g_strfreev (filenames);
 }
 

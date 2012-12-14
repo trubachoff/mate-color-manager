@@ -49,10 +49,11 @@ struct _McmDeviceVirtualClass
 GType		 mcm_device_virtual_get_type		  	(void);
 McmDevice	*mcm_device_virtual_new				(void);
 gboolean	 mcm_device_virtual_create_from_params		(McmDeviceVirtual	*device_virtual,
-								 McmDeviceKind	 device_kind,
+								 McmDeviceKind		 device_kind,
 								 const gchar		*model,
 								 const gchar		*manufacturer,
-								 McmColorspace	 colorspace);
+								 const gchar		*serial,
+								 McmColorspace		 colorspace);
 
 G_END_DECLS
 

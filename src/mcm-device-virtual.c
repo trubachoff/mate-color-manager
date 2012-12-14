@@ -41,6 +41,7 @@ mcm_device_virtual_create_from_params (McmDeviceVirtual *device_virtual,
 				       McmDeviceKind	 device_kind,
 				       const gchar      *model,
 				       const gchar      *manufacturer,
+				       const gchar      *serial,
 				       McmColorspace	 colorspace)
 {
 	gchar *id;
@@ -59,6 +60,7 @@ mcm_device_virtual_create_from_params (McmDeviceVirtual *device_virtual,
 		      "id", id,
 		      "manufacturer", manufacturer,
 		      "model", model,
+		      "serial", serial,
 		      "title", title,
 		      "colorspace", colorspace,
 		      "virtual", TRUE,

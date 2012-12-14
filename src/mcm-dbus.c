@@ -27,6 +27,7 @@
 #include "egg-debug.h"
 
 #include "mcm-utils.h"
+#include "mcm-exif.h"
 #include "mcm-dbus.h"
 #include "mcm-device-xrandr.h"
 #include "mcm-client.h"
@@ -157,6 +158,76 @@ mcm_dbus_get_idle_time (McmDbus	*dbus)
 }
 
 #define MCM_DBUS_STRUCT_STRING_STRING (dbus_g_type_get_struct ("GValueArray", G_TYPE_STRING, G_TYPE_STRING, G_TYPE_INVALID))
+
+/**
+ * mcm_dbus_get_profiles_for_file_internal:
+ **/
+static GPtrArray *
+mcm_dbus_get_profiles_for_file_internal (McmDbus *dbus, const gchar *filename, GError **error)
+{
+	guint i;
+	gboolean ret;
+	McmExif *exif;
+	McmDevice *device;
+	GPtrArray *array = NULL;
+	GPtrArray *array_devices;
+	GFile *file;
+	GFile *file_tmp;
+	McmProfile *profile;
+	GError *error_local = NULL;
+
+	exif = mcm_exif_new ();
+	file = g_file_new_for_path (filename);
+	ret = mcm_exif_parse (exif, file, error);
+	if (!ret)
+		goto out;
+
+	/* create a temp array */
+	array = g_ptr_array_new_with_free_func ((GDestroyNotify) g_object_unref);
+
+	/* get list */
+	egg_debug ("query=%s", filename);
+	array_devices = mcm_client_get_devices (dbus->priv->client);
+	for (i=0; i<array_devices->len; i++) {
+		device = g_ptr_array_index (array_devices, i);
+
+		/* match up critical parts */
+		if (g_strcmp0 (mcm_device_get_manufacturer (device), mcm_exif_get_manufacturer (exif)) == 0 &&
+		    g_strcmp0 (mcm_device_get_model (device), mcm_exif_get_model (exif)) == 0 &&
+		    g_strcmp0 (mcm_device_get_serial (device), mcm_exif_get_serial (exif)) == 0) {
+
+			/* we have a profile? */
+			filename = mcm_device_get_profile_filename (device);
+			if (filename == NULL) {
+				egg_warning ("%s does not have a profile set", mcm_device_get_id (device));
+				continue;
+			}
+
+			/* open and parse filename */
+			profile = mcm_profile_default_new ();
+			file_tmp = g_file_new_for_path (filename);
+			ret = mcm_profile_parse (profile, file_tmp, &error_local);
+			if (!ret) {
+				egg_warning ("failed to parse %s: %s", filename, error_local->message);
+				g_clear_error (&error_local);
+			} else {
+				g_ptr_array_add (array, g_object_ref (profile));
+			}
+
+			/* unref */
+			g_object_unref (file_tmp);
+			g_object_unref (profile);
+		}
+	}
+
+	/* unref list of devices */
+	g_ptr_array_unref (array_devices);
+
+out:
+	g_object_unref (file);
+	g_object_unref (exif);
+	return array;
+}
 
 /**
  * mcm_dbus_get_profiles_for_device_internal:
@@ -386,6 +457,58 @@ mcm_dbus_get_profiles_for_type (McmDbus *dbus, const gchar *kind, const gchar *o
 		title = mcm_profile_get_description (profile);
 		filename = mcm_profile_get_filename (profile);
 		dbus_g_type_struct_set (value, 0, title, 1, filename, -1);
+		g_ptr_array_add (array_structs, g_value_get_boxed (value));
+		g_free (value);
+	}
+
+	/* return profiles */
+	dbus_g_method_return (context, array_structs);
+
+	/* reset time */
+	g_timer_reset (dbus->priv->timer);
+
+	g_ptr_array_unref (array_profiles);
+}
+
+/**
+ * mcm_dbus_get_profiles_for_file:
+ **/
+void
+mcm_dbus_get_profiles_for_file (McmDbus *dbus, const gchar *filename, const gchar *options, DBusGMethodInvocation *context)
+{
+	GPtrArray *array_profiles;
+	McmProfile *profile;
+	const gchar *title;
+	const gchar *filename_tmp;
+	guint i;
+	GPtrArray *array_structs;
+	GValue *value;
+	GError *error_local = NULL;
+	GError *error;
+
+	egg_debug ("getting profiles for %s", filename);
+
+	/* get array of profile filenames */
+	array_profiles = mcm_dbus_get_profiles_for_file_internal (dbus, filename, &error_local);
+	if (array_profiles == NULL) {
+		error = g_error_new (1, 0, "failed to find profile for filename: %s", error_local->message);
+		dbus_g_method_return_error (context, error);
+		g_error_free (error);
+		return;
+	}
+
+	/* copy data to dbus struct */
+	array_structs = g_ptr_array_sized_new (array_profiles->len);
+	for (i=0; i<array_profiles->len; i++) {
+		profile = (McmProfile *) g_ptr_array_index (array_profiles, i);
+
+		/* get the data */
+		value = g_new0 (GValue, 1);
+		g_value_init (value, MCM_DBUS_STRUCT_STRING_STRING);
+		g_value_take_boxed (value, dbus_g_type_specialized_construct (MCM_DBUS_STRUCT_STRING_STRING));
+		title = mcm_profile_get_description (profile);
+		filename_tmp = mcm_profile_get_filename (profile);
+		dbus_g_type_struct_set (value, 0, title, 1, filename_tmp, -1);
 		g_ptr_array_add (array_structs, g_value_get_boxed (value));
 		g_free (value);
 	}

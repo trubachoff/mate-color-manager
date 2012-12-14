@@ -323,14 +323,16 @@ mcm_self_test_SOURCES =					\
 mcm_self_test_LDADD =					\
 	libmcmshared.a					\
 	$(GLIB_LIBS)					\
-	$(X11_LIBS)					\
+	$(X11_LIBS)						\
 	$(MATEDESKTOP_LIBS)				\
 	$(UNIQUE_LIBS)					\
 	$(GUDEV_LIBS)					\
 	$(LCMS_LIBS)					\
 	$(DBUS_GLIB_LIBS)				\
 	$(XORG_LIBS)					\
-	$(GTK_LIBS)					\
+	$(GTK_LIBS)						\
+	$(TIFF_LIBS)					\
+	$(EXIF_LIBS)					\
 	$(SANE_LIBS)					\
 	$(CUPS_LIBS)					\
 	$(TIFF_LIBS)					\

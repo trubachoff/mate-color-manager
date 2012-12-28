@@ -1,23 +1,31 @@
+# Translation of mate-color-manager into Indonesian
+# Copyright (C) 2009 mate-color-manager's copyright holder
+# This file is distributed under the same license as the mate-color-manager package.
+# Andika Triwidada <andika@gmail.com>, 2009.
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: mate-color-manager mate-2-32\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=mate-"
-"color-manager\n"
-"POT-Creation-Date: 2010-09-24 20:02+0000\n"
-"PO-Revision-Date: 2010-09-25 14:44+0700\n"
+"Project-Id-Version: mate-color-manager\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=mate-color-manager\n"
+"POT-Creation-Date: 2009-11-24 12:56+0000\n"
+"PO-Revision-Date: 2009-11-24 22:37+0700\n"
 "Last-Translator: Andika Triwidada <andika@gmail.com>\n"
-"Language-Team: MATE Indonesian Translation Team <mate@i15n.org>\n"
+"Language-Team: Indonesian <id@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Language: Indonesian\n"
 "X-Poedit-Country: Indonesia\n"
-"X-Poedit-SourceCharset: UTF-8\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#. Expander label, for use when the user wants to see the VTE widget and what the calibration tool is actually doing
+#: ../data/mcm-calibrate.ui.h:2
+msgid "Details"
+msgstr "Rincian"
 
 #: ../data/mcm-apply.desktop.in.h:1
 msgid "Applies device profile settings at session startup"
-msgstr "Terapkan tatanan profil perangkat saat awal mula sesi"
+msgstr "Terapkan tatanan profil perangkat saat mulai sesi"
 
 #: ../data/mcm-apply.desktop.in.h:2
 msgid "Load device color profiles"
@@ -43,2010 +51,559 @@ msgstr "Profil Warna"
 msgid "Manage ICC color profiles"
 msgstr "Kelola profil warna ICC"
 
+#. Radio buttons in the prefs dialog
+#: ../data/mcm-prefs.ui.h:2
+msgid "Apply _global display correction"
+msgstr "Terapkan koreksi tampilan _global"
+
+#: ../data/mcm-prefs.ui.h:3
+msgid "Brightness:"
+msgstr "Kecerahan:"
+
+#. Section heading for device profile settings
+#: ../data/mcm-prefs.ui.h:5
+msgid "Color Profile:"
+msgstr "Profil Warna:"
+
+#: ../data/mcm-prefs.ui.h:6
+msgid "Color management"
+msgstr "Manajemen warna"
+
+#: ../data/mcm-prefs.ui.h:7
+msgid "Contrast:"
+msgstr "Kontras:"
+
+#. Tab title, system wide defaults to use
+#: ../data/mcm-prefs.ui.h:9
+msgid "Defaults"
+msgstr "Baku"
+
+#. Tab title, currently connected or saved devices
+#: ../data/mcm-prefs.ui.h:11
+msgid "Devices"
+msgstr "Perangkat"
+
+#. What mode to use for display rendering intent
+#: ../data/mcm-prefs.ui.h:13
+msgid "Display:"
+msgstr "Tampilan:"
+
+#. Radio buttons in the prefs dialog
+#: ../data/mcm-prefs.ui.h:15
+msgid "Do global correction and set profile for color managed applications"
+msgstr "Lakukan koreksi global dan tata profil bagi aplikasi yang warnanya dikelola"
+
+#. Radio buttons in the prefs dialog
+#: ../data/mcm-prefs.ui.h:17
+msgid "Do not enable display correction"
+msgstr "Jangan fungsikan koreksi tampilan"
+
+#. Settings that users don't normally have to touch
+#: ../data/mcm-prefs.ui.h:19
+msgid "Fine tuning:"
+msgstr "Penalaan halus:"
+
+#: ../data/mcm-prefs.ui.h:20
+msgid "Gamma:"
+msgstr "Gamma:"
+
+#. The licence of the profile, normally non-free
+#: ../data/mcm-prefs.ui.h:22
+msgid "License:"
+msgstr "Lisensi:"
+
+#. The type of profile, e.g. display, scanner, etc.
+#: ../data/mcm-prefs.ui.h:24
+msgid "Profile type:"
+msgstr "Tipe profil:"
+
+#: ../data/mcm-prefs.ui.h:25
+msgid "Rendering intent:"
+msgstr "Intensi perenderan:"
+
+#. Technical color word for softproof rendering intent
+#: ../data/mcm-prefs.ui.h:27
+msgid "Softproof:"
+msgstr "Softproof:"
+
+#. The manufacturer of the profile
+#: ../data/mcm-prefs.ui.h:29
+msgid "Vendor:"
+msgstr "Vendor:"
+
+#. This is a button to calibrate the device by creating an ICC profile file using a hardware device or a reference image
+#: ../data/mcm-prefs.ui.h:31
+msgid "_Calibrate"
+msgstr "_Kalibrasikan"
+
+#. This is a button to delete the saved device
+#: ../data/mcm-prefs.ui.h:33
+msgid "_Delete"
+msgstr "_Hapus"
+
+#. This resets the device to it's defaults, and removes any user tweaked settings.
+#: ../data/mcm-prefs.ui.h:35
+msgid "_Reset to defaults"
+msgstr "_Kembalikan ke baku"
+
+#. Radio buttons in the prefs dialog
+#: ../data/mcm-prefs.ui.h:37
+msgid "_Set profile only for color managed applications"
+msgstr "Tata profil hanya bagi aplika_si yang warnanya dikelola"
+
 #: ../data/mate-color-manager.schemas.in.h:1
-msgid ""
-"Gamma is adjusted to affect the color of the attached monitor. Traditionally "
-"Linux has used a gamma value of 1.0, but this makes monitors look washed out "
-"compared Windows XP or OS X. Apple traditionally used a value of 1.8 for a "
-"long time, but now use the same value as Microsoft. Microsoft has always "
-"used a value of 2.2."
-msgstr ""
+msgid "Gamma is adjusted to affect the color of the attached monitor. Traditionally Linux has used a gamma value of 1.0, but this makes monitors look washed out compared Windows XP or OSX. Apple traditionally used a value of 1.8 for a long time, but now use the same value as Microsoft. Microsoft has always used a value of 2.2."
+msgstr "Gamma diubah untuk mempengaruhi warna dari monitor terpasang. Secara tradisional Linux telah memakai nilai gamma 1.0, tapi ini membuat monitor terlihat kusam dibanding Windows XP atau OSX. Secara tradisional Apple memakai nilai 1.8 untuk waktu yang lama, tapi kini memakai nilai yang sama dengan Microsoft. Microsoft selalu memakai nilai 2.2."
 
 #: ../data/mate-color-manager.schemas.in.h:2
-msgid ""
-"If set to TRUE then external disks are searched for device ICC profiles at "
-"startup, for instance looking in the OSX library folder or Windows XP system "
-"folders. This may increase startup time if disks need to be spun up to be "
-"searched."
-msgstr ""
+msgid "If set to TRUE then the __ICC_PROFILE atom will be set, which applications use to convert true color to screen color."
+msgstr "Bila diisi TRUE maka atom __ICC_PROFILE akan ditata, yang dipakai oleh aplikasi untuk mengubah warna sebenarnya ke warna layar."
 
 #: ../data/mate-color-manager.schemas.in.h:3
-msgid ""
-"If set to TRUE then the __ICC_PROFILE hint will be set, which applications "
-"use to convert true color to screen color."
-msgstr ""
+msgid "If set to TRUE then the video LUT is set with the display profile"
+msgstr "Bila diisi TRUE maka LUT video ditata dengan profil tampilan"
 
 #: ../data/mate-color-manager.schemas.in.h:4
-msgid ""
-"If set to TRUE then the fine tuning controls are visible. This allows the "
-"user to change the display profile outside of what the ICC profile suggests "
-"and is only recommended for advanced users."
-msgstr ""
+msgid "If the display should be globally corrected or left to applications."
+msgstr "Bila tampilan mesti dikoreksi secara global atau diserahkan ke aplikasi."
 
 #: ../data/mate-color-manager.schemas.in.h:5
-msgid "If set to TRUE then the video LUT is set with the display profile"
-msgstr ""
+msgid "Set the _ICC_PROFILE atom for applications."
+msgstr "Tata atom _ICC_PROFILE bagi aplikasi."
 
 #: ../data/mate-color-manager.schemas.in.h:6
-msgid "Set the _ICC_PROFILE hint for applications."
-msgstr ""
-
-#: ../data/mate-color-manager.schemas.in.h:7
-msgid "Show the fine tuning controls for display devices."
-msgstr "Tunjukkan kendali penalaan halus bagi perangkat tampilan."
-
-#: ../data/mate-color-manager.schemas.in.h:8
-msgid "The CMYK profile filename to be used by applications by default."
-msgstr "Nama berkas profil CMYK yang akan dipakai secara bawaan oleh aplikasi."
-
-#: ../data/mate-color-manager.schemas.in.h:9
-msgid "The RGB profile filename to be used by applications by default."
-msgstr "Nama berkas profil RGB yang akan dipakai secara bawaan oleh aplikasi."
-
-#: ../data/mate-color-manager.schemas.in.h:10
-msgid "The default CMYK profile."
-msgstr "Profil CMYK bawaan."
-
-#: ../data/mate-color-manager.schemas.in.h:11
-msgid "The default RGB profile."
-msgstr "Profil RGB bawaan."
-
-#: ../data/mate-color-manager.schemas.in.h:12
-msgid "The default calibration length."
-msgstr "Panjang kalibrasi bawaan."
-
-#: ../data/mate-color-manager.schemas.in.h:13
-msgid "The default gamma to use for monitors with no previous value set."
-msgstr ""
-"Gamma bawaan untuk dipakai pada monitor yang sebelumnya nilainya tak ditata."
-
-#: ../data/mate-color-manager.schemas.in.h:14
-msgid "The duration between sending notifications to recalibrate a display."
-msgstr ""
-"Durasi antara pengiriman notifikasi untuk mengalibrasi ulang suatu tampilan."
-
-#: ../data/mate-color-manager.schemas.in.h:15
-msgid "The duration between sending notifications to recalibrate a printer."
-msgstr ""
-"Durasi antara pengiriman notifikasi untuk mengalibrasi ulang suatu pencetak."
-
-#: ../data/mate-color-manager.schemas.in.h:16
-msgid ""
-"The length of calibration, as this is proportional to the accuracy. The "
-"option 'short' creates a quick profile, 'normal' a regular one, and 'long' "
-"takes a really long time, but is more precise and creates a better profile. "
-"Use 'ask' if you want the user to choose."
-msgstr ""
-
-#: ../data/mate-color-manager.schemas.in.h:17
-msgid "The rendering intent to use for softproofs, e.g. 'perceptual'."
-msgstr ""
-
-#: ../data/mate-color-manager.schemas.in.h:18
-msgid "The rendering intent to use for the display, e.g. 'perceptual'."
-msgstr ""
-
-#: ../data/mate-color-manager.schemas.in.h:19
-msgid ""
-"This is the number of seconds in between notifying the user to recalibrate "
-"each display device. Set to 0 to disable the notification."
-msgstr ""
-
-#: ../data/mate-color-manager.schemas.in.h:20
-msgid ""
-"This is the number of seconds in between notifying the user to recalibrate "
-"each printer device. Set to 0 to disable the notification."
-msgstr ""
-
-#: ../data/mate-color-manager.schemas.in.h:21
-msgid "Whether ICC profiles should be loaded from external disks."
-msgstr ""
-
-#: ../data/mate-color-manager.schemas.in.h:22
-msgid ""
-"Whether the display should be globally corrected or left to applications."
-msgstr ""
-
-#: ../policy/org.mate.color.policy.in.h:1
-msgid "Authentication is required to install the color profile for all users"
-msgstr "Otentikasi diperlukan untuk memasang profil warna bagi semua pengguna"
-
-#. SECURITY:
-#. - Normal users require admin authentication to install files system
-#. wide to apply color profiles for sessions that have not explicitly
-#. chosen profiles to apply.
-#. - This should not be set to 'yes' as unprivileged users could then
-#. set a profile set to all-white or all-black and thus make the
-#. other sessions unusable.
-#.
-#: ../policy/org.mate.color.policy.in.h:10
-msgid "Install system color profiles"
-msgstr "Pasang profil warna sistem"
+msgid "The default gamma to use for monitors with no previous selection."
+msgstr "Gamma baku untuk dipakai bagi monitor yang sebelumnya belum memilih."
 
 #. TRANSLATORS: turn on all debugging
-#: ../src/egg-debug.c:390
+#: ../src/egg-debug.c:364
 msgid "Show debugging information for all files"
-msgstr "Tampilkan informasi pengawakutuan bagi semua berkas"
+msgstr "Tampilkan informasi pengawa-kutuan bagi semua berkas"
 
 #. TRANSLATORS: a list of modules to debug
-#: ../src/egg-debug.c:461
+#: ../src/egg-debug.c:440
 msgid "Debug these specific modules"
-msgstr "Awakutukan modul spesifik ini"
+msgstr "Awakutu modul spesifik ini"
 
 #. TRANSLATORS: a list of functions to debug
-#: ../src/egg-debug.c:464
+#: ../src/egg-debug.c:443
 msgid "Debug these specific functions"
-msgstr "Awakutukan fungsi spesifik ini"
+msgstr "Awakutu fungsi spesifik ini"
 
 #. TRANSLATORS: save to a log
-#: ../src/egg-debug.c:467
+#: ../src/egg-debug.c:446
 msgid "Log debugging data to a file"
-msgstr "Log data pengawakutuan ke suatu berkas"
+msgstr "Log data pengawa-kutuan ke suatu berkas"
 
-#: ../src/egg-debug.c:471
+#: ../src/egg-debug.c:450
 msgid "Debugging Options"
-msgstr "Opsi Pengawakutuan"
+msgstr "Opsi Pengawa-kutuan"
 
-#: ../src/egg-debug.c:471
+#: ../src/egg-debug.c:450
 msgid "Show debugging options"
-msgstr "Tampilkan opsi pengawakutuan"
+msgstr "Tampilkan opsi pengawa-kutuan (debugging)"
 
-#. TRANSLATORS: we use this mode at login as we're sure there are no previous settings to clear
-#: ../src/mcm-apply.c:54
-msgid "Do not attempt to clear previously applied settings"
-msgstr "Jangan mencoba membersihkan tatanan yang diterapkan sebelumnya"
+#. TRANSLATORS: title, hardware refers to a calibration device
+#: ../src/mcm-calibrate.c:201
+msgid "Setup hardware"
+msgstr "Tata perangkat Keras"
 
-#. TRANSLATORS: title, default paramters needed to calibrate_argyll
-#: ../src/mcm-calibrate-argyll.c:453
+#. TRANSLATORS: dialog message
+#: ../src/mcm-calibrate.c:203
+msgid "Setting up hardware device for use..."
+msgstr "Menata perangkat keras untuk dipakai..."
+
+#. TRANSLATORS: title, usually we can tell based on the EDID data or output name
+#: ../src/mcm-calibrate.c:238
+msgid "Could not auto-detect CRT or LCD"
+msgstr "Tak bisa mendeteksi otomatis CRT atau LCD"
+
+#. TRANSLATORS: dialog message
+#: ../src/mcm-calibrate.c:241
+msgid "Please indicate if the screen you are trying to profile is a CRT (old type) or a LCD (digital flat panel)."
+msgstr "Mohon nyatakan apakah layar yang Anda coba profilkan adalah CRT (tipe lama) atau LCD (layar datar digital)."
+
+#. TRANSLATORS: button, Liquid Crystal Display
+#: ../src/mcm-calibrate.c:244
+msgid "LCD"
+msgstr "LCD"
+
+#. TRANSLATORS: button, Cathode Ray Tube
+#: ../src/mcm-calibrate.c:246
+msgid "CRT"
+msgstr "CRT"
+
+#. TRANSLATORS: dialog message, preface
+#: ../src/mcm-calibrate.c:271
+msgid "Before calibrating the display, it is recommended to configure your display with the following settings to get optimal results."
+msgstr "Sebelum mengkalibrasi tampilan, disarankan untuk mengatur tampilan Anda dengan tatanan berikut untuk memperoleh hasil optimal."
+
+#. TRANSLATORS: dialog message, preface
+#: ../src/mcm-calibrate.c:274
+msgid "You may want to consult the owner's manual for your display on how to achieve these settings."
+msgstr "Anda mungkin perlu membaca panduan pemilik untuk tampilan Anda tentang bagaimana mencapai tatanan ini."
+
+#. TRANSLATORS: dialog message, bullet item
+#: ../src/mcm-calibrate.c:277
+msgid "Reset your display to the factory defaults."
+msgstr "Reset tampilan Anda ke bawaan pabrik."
+
+#. TRANSLATORS: dialog message, bullet item
+#: ../src/mcm-calibrate.c:280
+msgid "Disable dynamic contrast if your display has this feature."
+msgstr "Matikan kontras dinamis bila tampilan Anda memiliki fitur ini."
+
+#. TRANSLATORS: dialog message, bullet item
+#: ../src/mcm-calibrate.c:283
+msgid "Configure your display with custom color settings and ensure the RGB channels are set to the same values."
+msgstr "Atur tampilan Anda dengan tatanan warna gubahan dan pastikan kanal RGB ditata ke nilai yang sama."
+
+#. TRANSLATORS: dialog message, addition to bullet item
+#: ../src/mcm-calibrate.c:286
+msgid "If custom color is not available then use a 6500K color temperature."
+msgstr "Bila warna gubahan tak tersedia maka gunakan temperatur warna 6500K."
+
+#. TRANSLATORS: dialog message, bullet item
+#: ../src/mcm-calibrate.c:289
+msgid "Adjust the display brightness to a comfortable level for prolonged viewing."
+msgstr "Atur kecerahan tampilan ke suatu aras yang nyaman bagi pemakaian dalam jangka waktu lama."
+
+#. TRANSLATORS: dialog message, suffix
+#: ../src/mcm-calibrate.c:292
+msgid "For best results, the display should have been powered for at least 15 minutes before starting the calibration."
+msgstr "Untuk hasil terbaik, tampilan mestinya telah dinyalakan paling tidak selama 15 menit sebelum memulai kalibrasi."
+
+#. TRANSLATORS: title, device is a hardware color calibration sensor
+#: ../src/mcm-calibrate.c:377
+msgid "Please attach device"
+msgstr "Silakan pasang perangkat"
+
+#. TRANSLATORS: dialog message, ask user to attach device
+#: ../src/mcm-calibrate.c:379
+msgid "Please attach the hardware device to the center of the screen on the gray square."
+msgstr "Silakan pasang perangkat keras ke pusat layar pada kotak kelabu."
+
+#. TRANSLATORS: title, default paramters needed to calibrate
+#: ../src/mcm-calibrate.c:400
 msgid "Getting default parameters"
 msgstr "Mengambil parameter baku"
 
 #. TRANSLATORS: dialog message
-#: ../src/mcm-calibrate-argyll.c:456
-msgid ""
-"This pre-calibrates the screen by sending colored and gray patches to your "
-"screen and measuring them with the hardware device."
-msgstr ""
-"Ini memprakalibarasi layar dengan mengirim keping-keping berwarna dan kelabu "
-"ke layar Anda dan mengukur mereka dengan perangkat keras."
+#: ../src/mcm-calibrate.c:402
+msgid "This pre-calibrates the screen by sending colored and gray patches to your screen and measuring them with the hardware device."
+msgstr "Ini memprakalibarasi layar dengan mengirim perca berwarna dan kelabu ke layar Anda dan mengukur mereka dengan perangkat keras."
 
 #. TRANSLATORS: title, patches are specific colours used in calibration
-#: ../src/mcm-calibrate-argyll.c:545
-msgid "Reading the patches"
-msgstr "Membaca keping"
-
-#. TRANSLATORS: dialog message
-#: ../src/mcm-calibrate-argyll.c:547
-msgid "Reading the patches using the color measuring instrument."
-msgstr "Membaca keping-keping memakai instrumen pengukuran warna."
-
-#. TRANSLATORS: title, patches are specific colours used in calibration
-#: ../src/mcm-calibrate-argyll.c:633
+#: ../src/mcm-calibrate.c:467
 msgid "Generating the patches"
-msgstr "Menjangkitkan keping"
+msgstr "Menjangkitkan perca"
 
 #. TRANSLATORS: dialog message
-#: ../src/mcm-calibrate-argyll.c:635
-msgid "Generating the patches that will be measured with the color instrument."
-msgstr "Menjangkitkan keping-keping yang akan diukur dengan instrumen warna."
+#: ../src/mcm-calibrate.c:469
+msgid "Generating the patches that will be measured with the hardware device."
+msgstr "Menjangkitkan perca yang akan diukur dengan perangkat keras."
 
 #. TRANSLATORS: title, drawing means painting to the screen
-#: ../src/mcm-calibrate-argyll.c:738
+#: ../src/mcm-calibrate.c:530
 msgid "Drawing the patches"
-msgstr "Menggambar keping"
+msgstr "Menggambar perca"
 
 #. TRANSLATORS: dialog message
-#: ../src/mcm-calibrate-argyll.c:740
-msgid ""
-"Drawing the generated patches to the screen, which will then be measured by "
-"the hardware device."
-msgstr ""
-"Menggambar keping-keping yang dijangkitkan ke layar, yang kemudian akan "
-"diukur oleh perangkat keras."
+#: ../src/mcm-calibrate.c:532
+msgid "Drawing the generated patches to the screen, which will then be measured by the hardware device."
+msgstr "Menggambar perca yang dijangkitkan ke layar, yang kemudian akan diukur oleh perangkat keras."
 
-#. TRANSLATORS: this is the copyright string, where it might be "Copyright (c) 2009 Edward Scissorhands" - YOU NEED TO STICK TO ASCII
+#. TRANSLATORS: this is the formattted custom profile description. "Custom" refers to the fact that it's user generated"
+#: ../src/mcm-calibrate.c:582
+#: ../src/mcm-calibrate.c:816
+msgid "Custom"
+msgstr "Gubahan"
+
 #. TRANSLATORS: this is the copyright string, where it might be "Copyright (c) 2009 Edward Scissorhands"
-#: ../src/mcm-calibrate-argyll.c:846 ../src/mcm-calibrate-argyll.c:1181
+#: ../src/mcm-calibrate.c:585
+#: ../src/mcm-calibrate.c:819
 msgid "Copyright (c)"
-msgstr "Hak Cipta (c):"
+msgstr "Hak Cipta (c)"
 
 #. TRANSLATORS: title, a profile is a ICC file
-#: ../src/mcm-calibrate-argyll.c:849 ../src/mcm-calibrate-argyll.c:1184
+#: ../src/mcm-calibrate.c:611
+#: ../src/mcm-calibrate.c:841
 msgid "Generating the profile"
 msgstr "Menjangkitkan profil"
 
 #. TRANSLATORS: dialog message
-#: ../src/mcm-calibrate-argyll.c:851
+#: ../src/mcm-calibrate.c:613
 msgid "Generating the ICC color profile that can be used with this screen."
 msgstr "Menjangkitkan profil warna ICC yang dapat dipakai dengan layar ini."
 
 #. TRANSLATORS: title, a profile is a ICC file
-#: ../src/mcm-calibrate-argyll.c:985
+#: ../src/mcm-calibrate.c:654
+msgid "Setting up scanner"
+msgstr "Menyiapkan pelarik"
+
+#. TRANSLATORS: dialog message, preface
+#: ../src/mcm-calibrate.c:657
+msgid "Before calibrating the scanner, you have to manually scan a reference image and save it as a TIFF image file."
+msgstr "Sebelum mengkalibrasi pelarik, Anda mesti melarik secara manual suatu citra acuan dan menyimpannya sebagai sebuah berkas citra TIFF."
+
+#. TRANSLATORS: dialog message, preface
+#: ../src/mcm-calibrate.c:660
+msgid "Ensure that the contrast and brightness is not changed and color correction profiles are not applied."
+msgstr "Pastikan bahwa kontras dan kecerahan tidak diubah dan profil koreksi warna tidak diterapkan."
+
+#. TRANSLATORS: dialog message, suffix
+#: ../src/mcm-calibrate.c:663
+msgid "The scanner glass should have been cleaned prior to scanning and the output file resolution should be at least 200dpi."
+msgstr "Kaca pelarik semestinya telah dibersihkan sebelum melarik dan resolusi berkas luaran mesti paling tidak 200dpi."
+
+#. TRANSLATORS: dialog message, suffix
+#: ../src/mcm-calibrate.c:666
+msgid "For best results, the reference image should also be less than two years old."
+msgstr "Untuk hasil terbaik, citra acuan juga mesti berumur kurang dari dua tahun."
+
+#. TRANSLATORS: dialog question
+#: ../src/mcm-calibrate.c:669
+msgid "Do you have a scanned TIFF file of a IT8.7/2 reference image?"
+msgstr "Apakah Anda punya berkas TIFF terlarik dari citra acuan IT8.7/2?"
+
+#. TRANSLATORS: title, a profile is a ICC file
+#: ../src/mcm-calibrate.c:706
 msgid "Copying files"
 msgstr "Menyalin berkas"
 
 #. TRANSLATORS: dialog message
-#: ../src/mcm-calibrate-argyll.c:987
+#: ../src/mcm-calibrate.c:708
 msgid "Copying source image, chart data and CIE reference values."
-msgstr "Menyalin gambar sumber, data diagram, dan nilai referensi CIE."
+msgstr "Menyalin citra sumber, data diagram, dan nila acuan CIE."
 
 #. TRANSLATORS: title, drawing means painting to the screen
-#: ../src/mcm-calibrate-argyll.c:1062
+#: ../src/mcm-calibrate.c:763
 msgid "Measuring the patches"
-msgstr "Mengukur keping"
+msgstr "Mengukur perca"
 
 #. TRANSLATORS: dialog message
-#: ../src/mcm-calibrate-argyll.c:1064
+#: ../src/mcm-calibrate.c:765
 msgid "Detecting the reference patches and measuring them."
-msgstr "Mendeteksi keping-keping referensi dan mengukur mereka."
+msgstr "Mendeteksi perca acuan dan mengukur mereka."
 
 #. TRANSLATORS: dialog message
-#: ../src/mcm-calibrate-argyll.c:1186
-msgid "Generating the ICC color profile that can be used with this device."
-msgstr ""
-"Menjangkitkan profil warna ICC yang dapat dipakai dengan perangkat ini."
-
-#. TRANSLATORS: title, hardware refers to a calibration device
-#: ../src/mcm-calibrate-argyll.c:1373
-msgid "Set up display"
-msgstr "Menyiapkan tampilan"
-
-#. TRANSLATORS: dialog message
-#: ../src/mcm-calibrate-argyll.c:1376
-msgid "Setting up display device for use…"
-msgstr "Menyiapkan perangkat tampilan untuk dipakai…"
-
-#. TRANSLATORS: title, patches are specific colors used in calibration
-#: ../src/mcm-calibrate-argyll.c:1475
-msgid "Printing patches"
-msgstr "Mencetak keping"
-
-#. TRANSLATORS: dialog message
-#: ../src/mcm-calibrate-argyll.c:1478
-msgid "Rendering the patches for the selected paper and ink."
-msgstr "Merender keping-keping bagi kertas dan tinta yang dipilih."
-
-#. TRANSLATORS: title, patches are specific colours used in calibration
-#: ../src/mcm-calibrate-argyll.c:1814
-msgid "Wait for the ink to dry"
-msgstr "Tunggu sampai tinta kering"
-
-#. TRANSLATORS: dialog message
-#: ../src/mcm-calibrate-argyll.c:1817
-msgid ""
-"Please wait a few minutes for the ink to dry. Profiling damp ink will "
-"produce a poor profile and may damage your color measuring instrument."
-msgstr ""
-"Silakan tunggu beberapa menit sampai tinta kering. Memrofil tinta basah akan "
-"menghasilkan profil yang buruk dan mungkin dapat merusak instrumen "
-"pengukuran warna Anda."
-
-#. TRANSLATORS: the supplied image contains an alpha channel which we have to strip out
-#: ../src/mcm-calibrate-argyll.c:1959
-msgid "Image is not suitable without conversion"
-msgstr "Gambar tak cocok tanpa konversi"
-
-#. TRANSLATORS: dialog message
-#: ../src/mcm-calibrate-argyll.c:1962
-msgid ""
-"The supplied image contains an alpha channel which the profiling tools do "
-"not understand."
-msgstr ""
-"Gambar yang diberikan memuat suatu kanal alfa yang tak dipahami peralatan "
-"pemrofil."
-
-#. TRANSLATORS: dialog message
-#: ../src/mcm-calibrate-argyll.c:1966
-msgid ""
-"It is normally safe to convert the image, although you should ensure that "
-"the generated profile is valid."
-msgstr ""
-"Biasanya aman untuk mengonversi gambar, walaupun Anda mesti memastikan bahwa "
-"profil yang dijangkitkan valid."
-
-#. TRANSLATORS: button text to convert the RGBA image into RGB
-#: ../src/mcm-calibrate-argyll.c:1973
-msgid "Convert"
-msgstr "Konversi"
-
-#. TRANSLATORS: title, instrument refers to a calibration device
-#: ../src/mcm-calibrate-argyll.c:2031
-msgid "Set up instrument"
-msgstr "Menyiapkan instrumen"
-
-#. TRANSLATORS: dialog message
-#: ../src/mcm-calibrate-argyll.c:2034
-msgid "Setting up the instrument for use…"
-msgstr "Menyiapkan instrumen untuk dipakai…"
-
-#. TRANSLATORS: title, instrument is a hardware color calibration sensor
-#: ../src/mcm-calibrate-argyll.c:2127
-msgid "Please attach instrument"
-msgstr "Silakan pasang instrumen"
-
-#. TRANSLATORS: dialog message, ask user to attach device, and there's an example image
-#: ../src/mcm-calibrate-argyll.c:2135
-msgid ""
-"Please attach the measuring instrument to the center of the screen on the "
-"gray square like the image below."
-msgstr ""
-"Silakan pasang instrumen pengukuran di pusat layar pada kotak kelabu seperti "
-"gambar di bawah."
-
-#. TRANSLATORS: dialog message, ask user to attach device
-#: ../src/mcm-calibrate-argyll.c:2138
-msgid ""
-"Please attach the measuring instrument to the center of the screen on the "
-"gray square."
-msgstr "Silakan pasang instrumen pengukuran di pusat layar pada kotak kelabu."
-
-#. TRANSLATORS: button text
-#: ../src/mcm-calibrate-argyll.c:2151 ../src/mcm-calibrate-argyll.c:2205
-#: ../src/mcm-calibrate-argyll.c:2257
-msgid "Continue"
-msgstr "Lanjutkan"
-
-#. TRANSLATORS: this is the application name for libcanberra
-#: ../src/mcm-calibrate-argyll.c:2161 ../src/mcm-calibrate-argyll.c:2211
-#: ../src/mcm-calibrate-argyll.c:2263 ../src/mcm-calibrate-argyll.c:2342
-#: ../src/mcm-calibrate-argyll.c:2402 ../src/mcm-calibrate-argyll.c:2443
-#: ../src/mcm-prefs.c:819 ../src/mcm-prefs.c:1987
-msgid "MATE Color Manager"
-msgstr "MATE Color Manager"
-
-#. TRANSLATORS: title, instrument is a hardware color calibration sensor
-#: ../src/mcm-calibrate-argyll.c:2182 ../src/mcm-calibrate-argyll.c:2234
-msgid "Please configure instrument"
-msgstr "Silakan konfigurasi instrumen"
-
-#. TRANSLATORS: this is when the user has to change a setting on the sensor, and we're showing a picture
-#: ../src/mcm-calibrate-argyll.c:2192
-msgid ""
-"Please set the measuring instrument to calibration mode like the image below."
-msgstr ""
-
-#. TRANSLATORS: this is when the user has to change a setting on the sensor
-#: ../src/mcm-calibrate-argyll.c:2195
-msgid "Please set the measuring instrument to calibration mode."
-msgstr ""
-
-#. TRANSLATORS: this is when the user has to change a setting on the sensor, and we're showing a picture
-#: ../src/mcm-calibrate-argyll.c:2244
-msgid ""
-"Please set the measuring instrument to screen mode like the image below, and "
-"ensure it is attached to the screen."
-msgstr ""
-"Silakan tata instrumen pengukuran ke mode layar seperti gambar di bawah, dan "
-"pastikan itu terpasang ke layar."
-
-#. TRANSLATORS: this is when the user has to change a setting on the sensor
-#: ../src/mcm-calibrate-argyll.c:2247
-msgid ""
-"Please set the measuring instrument to screen mode, and ensure it is "
-"attached to the screen."
-msgstr ""
-"Silakan tata instrumen pengukuran ke mode layar, dan pastikan itu terpasang "
-"ke layar."
-
-#. TRANSLATORS: title, the calibration failed
-#: ../src/mcm-calibrate-argyll.c:2321 ../src/mcm-calibrate-argyll.c:2369
-msgid "Calibration error"
-msgstr "Kesalahan kalibrasi"
-
-#. TRANSLATORS: message, the sample was not read correctly
-#: ../src/mcm-calibrate-argyll.c:2324
-msgid "The sample could not be read at this time."
-msgstr "Sampel tak bisa dibaca kali ini."
-
-#. TRANSLATORS: button text
-#: ../src/mcm-calibrate-argyll.c:2332
-msgid "Try again"
-msgstr "Coba lagi"
-
-#. TRANSLATORS: message, no firmware is available
-#: ../src/mcm-calibrate-argyll.c:2373
-msgid "No firmware is installed for this instrument."
-msgstr "Tak ada firmware terpasang bagi instrumen ini."
-
-#. TRANSLATORS: message, the image wasn't good enough
-#: ../src/mcm-calibrate-argyll.c:2376
-msgid ""
-"The pattern match wasn't good enough. Ensure you have the correct type of "
-"target selected."
-msgstr ""
-
-#. TRANSLATORS: message, the sensor got no readings
-#: ../src/mcm-calibrate-argyll.c:2380
-msgid ""
-"The measuring instrument got no valid readings. Please ensure the aperture "
-"is fully open."
-msgstr ""
-
-#. TRANSLATORS: message, the colorimeter has got confused
-#: ../src/mcm-calibrate-argyll.c:2383
-msgid ""
-"The measuring instrument is busy and is not starting up. Please remove the "
-"USB plug and re-insert before trying to use this device."
-msgstr ""
-
-#. TRANSLATORS: dialog title
-#: ../src/mcm-calibrate-argyll.c:2421
-msgid "Reading target"
-msgstr "Membaca target"
-
-#. TRANSLATORS: message, no firmware is available
-#: ../src/mcm-calibrate-argyll.c:2424
-#, fuzzy
-msgid "Failed to read the strip correctly."
-msgstr "Gagal membaca strip dengan benar."
-
-#. TRANSLATORS: button text
-#: ../src/mcm-calibrate-argyll.c:2433
-msgid "Retry"
-msgstr "Coba lagi"
-
-#. TRANSLATORS: dialog title, where %s is a letter like 'A'
-#: ../src/mcm-calibrate-argyll.c:2456
-#, fuzzy, c-format
-msgid "Read strip %s rather than %s!"
-msgstr "Baca strip %s jangan %s!"
-
-#. TRANSLATORS: dialog message, just follow the hardware instructions
-#: ../src/mcm-calibrate-argyll.c:2461
-#, fuzzy
-msgid "It looks like you've measured the wrong strip."
-msgstr "Sepertinya Anda telah mengukur strip yang salah."
-
-#. TRANSLATORS: dialog message, just follow the hardware instructions
-#: ../src/mcm-calibrate-argyll.c:2465
-msgid ""
-"If you've really measured the right one, it's okay, it could just be unusual "
-"paper."
-msgstr ""
-
-#. TRANSLATORS: button
-#: ../src/mcm-calibrate-argyll.c:2475
-msgid "Use anyway"
-msgstr "Pakai saja"
-
-#. TRANSLATORS: dialog title, where %s is a letter like 'A'
-#: ../src/mcm-calibrate-argyll.c:2487
-#, fuzzy, c-format
-msgid "Ready to read strip %s"
-msgstr "Siap membaca strip %s"
-
-#. TRANSLATORS: dialog message, just follow the hardware instructions
-#: ../src/mcm-calibrate-argyll.c:2492
-msgid ""
-"Place the colorimeter on the area of white next to the letter and click and "
-"hold the measure switch."
-msgstr ""
-
-#. TRANSLATORS: dialog message, just follow the hardware instructions
-#: ../src/mcm-calibrate-argyll.c:2496
-msgid ""
-"Slowly scan the target line from left to right and release the switch when "
-"you get to the end of the page."
-msgstr ""
-
-#. TRANSLATORS: dialog message, the sensor has to be above the line
-#: ../src/mcm-calibrate-argyll.c:2500
-msgid ""
-"Ensure the center of the device is properly aligned with the row you are "
-"trying to measure."
-msgstr ""
-
-#. TRANSLATORS: dialog message, just follow the hardware instructions
-#: ../src/mcm-calibrate-argyll.c:2504
-msgid ""
-"If you make a mistake just release the switch and you'll get a chance to try "
-"again."
-msgstr ""
-
-#. TRANSLATORS: title, printing reference files to media
-#: ../src/mcm-calibrate-argyll.c:2642
-msgid "Printing"
-msgstr "Pencetakan"
-
-#. TRANSLATORS: dialog message
-#: ../src/mcm-calibrate-argyll.c:2649
-msgid "Preparing the data for the printer."
-msgstr "Menyiapkan data bagi pencetak."
-
-#. TRANSLATORS: dialog message
-#: ../src/mcm-calibrate-argyll.c:2655
-msgid "Sending the targets to the printer."
-msgstr "Mengirim target ke pencetak."
-
-#. TRANSLATORS: dialog message
-#: ../src/mcm-calibrate-argyll.c:2659
-msgid "Printing the targets..."
-msgstr "Mencetak target..."
-
-#. TRANSLATORS: dialog message
-#: ../src/mcm-calibrate-argyll.c:2663
-msgid "The printing has finished."
-msgstr "Pencetakan telah selesai."
-
-#. TRANSLATORS: dialog message
-#: ../src/mcm-calibrate-argyll.c:2667
-msgid "The print was aborted."
-msgstr "Pencetakan dibatalkan."
-
-#. TRANSLATORS: this is saved in the profile
-#: ../src/mcm-calibrate.c:134
-msgid "Unknown model"
-msgstr "Model tak dikenal"
-
-#. TRANSLATORS: this is saved in the profile
-#: ../src/mcm-calibrate.c:148
-msgid "Unknown description"
-msgstr "Deskripsi tak dikenal"
-
-#. TRANSLATORS: this is saved in the profile
-#: ../src/mcm-calibrate.c:162
-msgid "Unknown manufacturer"
-msgstr "Pabrikan tak dikenal"
-
-#. TRANSLATORS: this is saved in the profile
-#: ../src/mcm-calibrate.c:176
-msgid "Unknown device"
-msgstr "Perangkat tak dikenal"
-
-#. TRANSLATORS: title, usually we can tell based on the EDID data or output name
-#: ../src/mcm-calibrate.c:391
-msgid "Could not detect screen type"
-msgstr "Tidak dapat mendeteksi jenis layar"
-
-#. TRANSLATORS: dialog message
-#: ../src/mcm-calibrate.c:394
-msgid ""
-"Please indicate if the screen you are trying to profile is an LCD, CRT or a "
-"projector."
-msgstr ""
-"Mohon nyatakan apakah layar yang Anda coba profilkan adalah LCD, CRT, atau "
-"projektor."
-
-#. TRANSLATORS: title, the hardware calibration device does not support projectors
-#: ../src/mcm-calibrate.c:419
-msgid "Could not calibrate and profile using this color measuring instrument"
-msgstr ""
-
-#. TRANSLATORS: dialog message
-#: ../src/mcm-calibrate.c:422
-msgid ""
-"This color measuring instrument is not designed to support calibration and "
-"profiling projectors."
-msgstr ""
-
-#. TRANSLATORS: dialog title
-#: ../src/mcm-calibrate.c:483
-msgid "Profile Precision"
-msgstr "Presisi Profil"
-
-#. TRANSLATORS: this is the message body for the chart selection
-#: ../src/mcm-calibrate.c:486
-msgid ""
-"A higher precision profile provides higher accuracy in color matching but "
-"requires more time for reading the color patches."
-msgstr ""
-
-#. TRANSLATORS: this is the message body for the chart selection
-#: ../src/mcm-calibrate.c:489
-msgid "For a typical workflow, a normal precision profile is sufficient."
-msgstr ""
-
-#. TRANSLATORS: dialog message, preface
-#: ../src/mcm-calibrate.c:494
-msgid "The high precision profile also requires more paper and printer ink."
-msgstr ""
-
-#. TRANSLATORS: this is the formattted custom profile description. "Custom" refers to the fact that it's user generated
-#: ../src/mcm-calibrate.c:568
-msgid "Custom"
-msgstr "Ubahan"
-
-#. TRANSLATORS: dialog message, preface
-#: ../src/mcm-calibrate.c:600
-msgid ""
-"Before calibrating the display, it is recommended to configure your display "
-"with the following settings to get optimal results."
-msgstr ""
-
-#. TRANSLATORS: dialog message, preface
-#: ../src/mcm-calibrate.c:603
-msgid ""
-"You may want to consult the owner's manual for your display on how to "
-"achieve these settings."
-msgstr ""
-
-#. TRANSLATORS: dialog message, bullet item
-#: ../src/mcm-calibrate.c:606
-msgid "Reset your display to the factory defaults."
-msgstr ""
-
-#. TRANSLATORS: dialog message, bullet item
-#: ../src/mcm-calibrate.c:609
-msgid "Disable dynamic contrast if your display has this feature."
-msgstr ""
-
-#. TRANSLATORS: dialog message, bullet item
-#: ../src/mcm-calibrate.c:612
-msgid ""
-"Configure your display with custom color settings and ensure the RGB "
-"channels are set to the same values."
-msgstr ""
-
-#. TRANSLATORS: dialog message, addition to bullet item
-#: ../src/mcm-calibrate.c:615
-msgid "If custom color is not available then use a 6500K color temperature."
-msgstr ""
-
-#. TRANSLATORS: dialog message, bullet item
-#: ../src/mcm-calibrate.c:618
-msgid ""
-"Adjust the display brightness to a comfortable level for prolonged viewing."
-msgstr ""
-
-#. TRANSLATORS: dialog message, suffix
-#: ../src/mcm-calibrate.c:621
-msgid ""
-"For best results, the display should have been powered for at least 15 "
-"minutes before starting the calibration."
-msgstr ""
-
-#: ../src/mcm-calibrate.c:625
-msgid "Display setup"
-msgstr "Pengaturan tampilan"
-
-#. TRANSLATORS: dialog for file->open dialog. A calibration target image is the
-#. * aquired image of the calibration target, e.g. an image file that looks
-#. * a bit like this: http://www.colorreference.de/targets/target.jpg
-#: ../src/mcm-calibrate.c:702
-msgid "Select calibration target image"
-msgstr "Pilih gambar target kalibrasi"
-
-#. TRANSLATORS: filter name on the file->open dialog
-#: ../src/mcm-calibrate.c:715
-msgid "Supported images files"
-msgstr "Berkas gambar yang didukung"
-
-#. TRANSLATORS: filter name on the file->open dialog
-#: ../src/mcm-calibrate.c:722 ../src/mcm-calibrate.c:774
-#: ../src/mcm-prefs.c:543
-msgid "All files"
-msgstr "Semua berkas"
-
-#. TRANSLATORS: dialog for file->open dialog
-#: ../src/mcm-calibrate.c:747
-msgid "Select CIE reference values file"
-msgstr ""
-
-#. TRANSLATORS: filter name on the file->open dialog
-#: ../src/mcm-calibrate.c:767
-msgid "CIE values"
-msgstr "Nilai CIE"
-
-#. TRANSLATORS: dialog for file->open dialog
-#: ../src/mcm-calibrate.c:840 ../src/mcm-prefs.c:515
-msgid "Select ICC Profile File"
-msgstr "Pilih Berkas Profil ICC"
-
 #: ../src/mcm-calibrate.c:843
-msgid "Open"
-msgstr "Buka"
-
-#. TRANSLATORS: title, you can profile all at once, or in steps
-#: ../src/mcm-calibrate.c:879
-msgid "Please choose a profiling mode"
-msgstr "Silakan pilih suatu mode pemrofilan"
-
-#. TRANSLATORS: dialog message. Test patches are pages of colored squares
-#. * that are printed with a printer, and then read in with a calibration
-#. * device to create a profile
-#: ../src/mcm-calibrate.c:884
-msgid ""
-"Please indicate if you want to profile a local printer, generate some test "
-"patches, or profile using existing test patches."
-msgstr ""
-
-#. TRANSLATORS: title, usually we can tell based on the EDID data or output name
-#: ../src/mcm-calibrate.c:996
-msgid "Install missing files?"
-msgstr "Pasang berkas yang kurang?"
-
-#. TRANSLATORS: dialog message saying the color targets are not installed
-#: ../src/mcm-calibrate.c:999
-msgid "Common color target files are not installed on this computer."
-msgstr ""
-
-#. TRANSLATORS: dialog message saying the color targets are not installed
-#: ../src/mcm-calibrate.c:1001
-msgid "Color target files are needed to convert the image to a color profile."
-msgstr ""
-
-#. TRANSLATORS: dialog message, asking if it's okay to install them
-#: ../src/mcm-calibrate.c:1003
-msgid "Do you want them to be installed?"
-msgstr "Anda ingin mereka dipasang?"
-
-#. TRANSLATORS: dialog message, if the user has the target file on a CDROM then there's no need for this package
-#: ../src/mcm-calibrate.c:1005
-msgid "If you already have the correct file, you can skip this step."
-msgstr ""
-
-#. TRANSLATORS: button, skip installing a package
-#: ../src/mcm-calibrate.c:1010 ../src/mcm-prefs.c:702
-msgid "Do not install"
-msgstr "Jangan pasang"
-
-#. TRANSLATORS: button, install a package
-#. TRANSLATORS: button text
-#. TRANSLATORS: button, install a package
-#: ../src/mcm-calibrate.c:1012 ../src/mcm-import.c:188 ../src/mcm-prefs.c:700
-msgid "Install"
-msgstr "Pasang"
-
-#. TRANSLATORS: this is the window title for when the user selects the calibration target.
-#. * A calibration target is an accuratly printed grid of colors, for instance:
-#. * the IT 8.7 targets available here: http://www.targets.coloraid.de/
-#: ../src/mcm-calibrate.c:1027
-msgid "Please select a calibration target"
-msgstr "Silakan pilih target kalibrasi"
-
-#. TRANSLATORS: dialog message, preface. A calibration target looks like
-#. * this: http://www.colorreference.de/targets/target.jpg
-#: ../src/mcm-calibrate.c:1032
-msgid ""
-"Before profiling the device, you have to manually capture an image of a "
-"calibration target and save it as a TIFF image file."
-msgstr ""
-
-#. TRANSLATORS: dialog message, preface
-#: ../src/mcm-calibrate.c:1037
-msgid ""
-"Ensure that the contrast and brightness are not changed and color correction "
-"profiles are not applied."
-msgstr ""
-
-#. TRANSLATORS: dialog message, suffix
-#: ../src/mcm-calibrate.c:1040
-msgid ""
-"The device sensor should have been cleaned prior to scanning and the output "
-"file resolution should be at least 200dpi."
-msgstr ""
-
-#. TRANSLATORS: dialog message, preface
-#: ../src/mcm-calibrate.c:1046
-msgid ""
-"Ensure that the white-balance has not been modified by the camera and that "
-"the lens is clean."
-msgstr ""
-
-#. TRANSLATORS: dialog message, suffix
-#: ../src/mcm-calibrate.c:1050
-msgid ""
-"For best results, the reference target should also be less than two years "
-"old."
-msgstr ""
-
-#. TRANSLATORS: this is the message body for the chart selection
-#: ../src/mcm-calibrate.c:1053
-msgid ""
-"Please select the calibration target type which corresponds to your "
-"reference file."
-msgstr ""
-
-#. TRANSLATORS: this is probably a brand name
-#: ../src/mcm-calibrate-dialog.c:567
-msgid "CMP Digital Target 3"
-msgstr "CMP Digital Target 3"
-
-#. TRANSLATORS: this is probably a brand name
-#: ../src/mcm-calibrate-dialog.c:571
-msgid "CMP DT 003"
-msgstr "CMP DT 003"
-
-#. TRANSLATORS: this is probably a brand name
-#: ../src/mcm-calibrate-dialog.c:575
-msgid "Color Checker"
-msgstr "Color Checker"
-
-#. TRANSLATORS: this is probably a brand name
-#: ../src/mcm-calibrate-dialog.c:579
-msgid "Color Checker DC"
-msgstr "Color Checker DC"
-
-#. TRANSLATORS: this is probably a brand name
-#: ../src/mcm-calibrate-dialog.c:583
-msgid "Color Checker SG"
-msgstr "Color Checker SG"
-
-#. TRANSLATORS: this is probably a brand name
-#: ../src/mcm-calibrate-dialog.c:587
-msgid "Hutchcolor"
-msgstr "Hutchcolor"
-
-#. TRANSLATORS: this is probably a brand name
-#: ../src/mcm-calibrate-dialog.c:591
-msgid "i1 RGB Scan 1.4"
-msgstr "i1 RGB Scan 1.4"
-
-#. TRANSLATORS: this is probably a brand name
-#: ../src/mcm-calibrate-dialog.c:595
-msgid "IT8.7/2"
-msgstr "IT8.7/2"
-
-#. TRANSLATORS: this is probably a brand name
-#: ../src/mcm-calibrate-dialog.c:599
-msgid "Laser Soft DC Pro"
-msgstr "Laser Soft DC Pro"
-
-#. TRANSLATORS: this is probably a brand name
-#: ../src/mcm-calibrate-dialog.c:603
-msgid "QPcard 201"
-msgstr "QPcard 201"
-
-#. TRANSLATORS: dialog title
-#: ../src/mcm-calibrate-manual.c:200
-msgid "Introduction to display calibration"
-msgstr "Pengenalan ke kalibrasi tampilan"
-
-#. TRANSLATORS: message text, an ICC profile is a file that characterizes the device
-#: ../src/mcm-calibrate-manual.c:222
-msgid ""
-"This dialog will help calibrate your display and create a custom ICC profile."
-msgstr ""
-
-#. TRANSLATORS: message text, telling the user they are in for the long haul
-#: ../src/mcm-calibrate-manual.c:225
-msgid ""
-"The calibration will involve several steps so that an accurate profile can "
-"be obtained."
-msgstr ""
-
-#. TRANSLATORS: message text, this is a lie. It will take more than a few minutes, but we don't want to scare the hapless user
-#: ../src/mcm-calibrate-manual.c:228
-msgid "It should only take a few minutes."
-msgstr ""
-
-#. TRANSLATORS: message text, when you're comparing colors, it helps if the image is a bit out of focus otherwise the
-#. * fovea (center bit of the eye) tries to 'pick out' a colour, rather than take the average reading
-#: ../src/mcm-calibrate-manual.c:239
-msgid ""
-"It may help to sit further from the screen or to squint at the calibration "
-"images in order to accurately compare the colors."
-msgstr ""
-
-#. TRANSLATORS: message text, tell the use that they can go back and forwards, as the human eye sucks
-#: ../src/mcm-calibrate-manual.c:242
-msgid "You can repeat the calibration steps as many times as you want."
-msgstr ""
-
-#. TRANSLATORS: dialog title
-#: ../src/mcm-calibrate-manual.c:254
-#, c-format
-msgid "Create table item %i/%i"
-msgstr "Membuat butir tabel %i/%i"
-
-#. TRANSLATORS: message text
-#: ../src/mcm-calibrate-manual.c:275
-msgid ""
-"Please try to match up the gray square with the surrounding alternating "
-"bars. You should match the brightness first, and then if required change the "
-"color tint so it looks plain gray."
-msgstr ""
-
-#. TRANSLATORS: dialog title
-#: ../src/mcm-calibrate-manual.c:372
-msgid "Summary"
-msgstr "Ringkasan"
-
-#. TRANSLATORS: message text
-#: ../src/mcm-calibrate-manual.c:391
-msgid ""
-"This display is now calibrated. You can change the current profile using the "
-"Color Profiles program."
-msgstr ""
-
-#. TRANSLATORS: error message
-#: ../src/mcm-client.c:1103
-msgid "This device already exists"
-msgstr "Perangkat ini sudah ada"
-
-#. TRANSLATORS: this is when the device is not recognized
-#: ../src/mcm-colorimeter.c:391
-msgid "Measuring instrument not recognized"
-msgstr "Instrumen pengukuran tak dikenal"
+msgid "Generating the ICC color profile that can be used with this scanner."
+msgstr "Menjangkitkan profil warna ICC yang dapat dipakai dengan pelarik ini."
 
 #. TRANSLATORS: this is the name of the internal panel
-#: ../src/mcm-device-xrandr.c:128
+#: ../src/mcm-client.c:366
 msgid "Laptop LCD"
-msgstr "LCD Laptop"
+msgstr "LCD laptop"
 
-#. TRANSLATORS: this is when the EDID file cannot be read
-#: ../src/mcm-dump-edid.c:58
-msgid "Cannot load file contents"
-msgstr "Tak bisa memuat isi berkas"
+#. TRANSLATORS: this is the ICC profile description stored in an atom in the XServer
+#: ../src/mcm-inspect.c:64
+msgid "Description:"
+msgstr "Keterangan:"
 
-#. TRANSLATORS: this is when the EDID cannot be parsed
-#: ../src/mcm-dump-edid.c:67
-msgid "Cannot parse EDID contents"
-msgstr "Tak bisa mengurai isi EDID"
+#. TRANSLATORS: this is the ICC profile copyright
+#: ../src/mcm-inspect.c:67
+msgid "Copyright:"
+msgstr "Hak Cipta:"
 
-#. TRANSLATORS: this is debugging output for the supplied EDID file
-#: ../src/mcm-dump-edid.c:75
-msgid "Monitor name"
-msgstr "Nama monitor"
+#. TRANSLATORS: the root window of all the screens
+#: ../src/mcm-inspect.c:106
+msgid "Root window profile (deprecated):"
+msgstr "Profil jendela akar (usang):"
 
-#. TRANSLATORS: this is debugging output for the supplied EDID file
-#: ../src/mcm-dump-edid.c:80
-msgid "Vendor name"
-msgstr "Nama vendor"
-
-#. TRANSLATORS: this is debugging output for the supplied EDID file
-#: ../src/mcm-dump-edid.c:85
-msgid "Serial number"
-msgstr "Nomor seri"
-
-#. TRANSLATORS: this is debugging output for the supplied EDID file
-#: ../src/mcm-dump-edid.c:90
-msgid "Text string"
-msgstr "String teks"
-
-#. TRANSLATORS: this is debugging output for the supplied EDID file
-#: ../src/mcm-dump-edid.c:95
-msgid "PNP identifier"
-msgstr "Identifier PNP"
-
-#. TRANSLATORS: this is debugging output for the supplied EDID file
-#: ../src/mcm-dump-edid.c:101
-msgid "Size"
-msgstr "Ukuran"
-
-#. TRANSLATORS: this is debugging output for the supplied EDID file
-#: ../src/mcm-dump-edid.c:106
-msgid "Gamma"
-msgstr "Gamma"
-
-#. TRANSLATORS: command line option: a list of files to parse
-#: ../src/mcm-dump-edid.c:136
-msgid "EDID dumps to parse"
-msgstr "Dump EDID untuk diurai"
-
-#. TRANSLATORS: this is the filename we are displaying
-#: ../src/mcm-dump-edid.c:159
-msgid "EDID dump"
-msgstr "Dump EDID"
-
-#. TRANSLATORS: we saved the EDID to a file - second parameter is a filename
-#: ../src/mcm-dump-edid.c:196
+#: ../src/mcm-inspect.c:123
 #, c-format
-msgid "Saved %i bytes to %s"
-msgstr "Menyimpan %i byte ke %s"
+msgid "Output profile '%s':"
+msgstr "Profil luaran '%s':"
 
-#. TRANSLATORS: we saved the EDID to a file - parameter is a filename
-#: ../src/mcm-dump-edid.c:201
-#, c-format
-msgid "Failed to save EDID to %s"
-msgstr "Gagal menyimpan EDID ke %s"
+#. TRANSLATORS: this is when the profile has not been set
+#: ../src/mcm-inspect.c:130
+msgid "not set"
+msgstr "tak ditata"
 
-#. TRANSLATORS: command line option: a list of files to install
-#: ../src/mcm-dump-profile.c:108
-msgid "Profiles to view"
-msgstr "Profil untuk ditilik"
+#. TRANSLATORS: no rofile has been asigned to this device
+#: ../src/mcm-inspect.c:191
+msgid "There are no ICC profiles for this device"
+msgstr "Tak ada profil ICC bagi perangkat ini"
 
-#. TRANSLATORS: this just dumps the profile to the screen
-#: ../src/mcm-dump-profile.c:121
-msgid "ICC profile dump program"
-msgstr "Program dump profil ICC"
-
-#. TRANSLATORS: command line option
-#: ../src/mcm-fix-profile.c:124
-msgid "The description of the profile"
-msgstr "Keterangan profil"
+#. TRANSLATORS: this is a list of profiles suitable for the device
+#: ../src/mcm-inspect.c:196
+msgid "Suitable profiles for:"
+msgstr "Profil yang cocok bagi:"
 
 #. TRANSLATORS: command line option
-#: ../src/mcm-fix-profile.c:127
-msgid "The copyright of the profile"
-msgstr "Hak cipta profil"
+#: ../src/mcm-inspect.c:220
+msgid "Show X11 properties"
+msgstr "Tampilkan properti X11"
 
 #. TRANSLATORS: command line option
-#: ../src/mcm-fix-profile.c:130
-msgid "The model of the profile"
-msgstr "Model profil"
+#: ../src/mcm-inspect.c:223
+msgid "Get the profiles for a specific device"
+msgstr "Ambil profil bagi perangkat tertentu"
 
 #. TRANSLATORS: command line option
-#: ../src/mcm-fix-profile.c:133
-msgid "The manufacturer of the profile"
-msgstr "Pabrikan profil"
-
-#. TRANSLATORS: command line option: a list of icc files to fix
-#: ../src/mcm-fix-profile.c:136
-msgid "Profiles to fix"
-msgstr "Profil yang akan diperbaiki"
-
-#. TRANSLATORS: this fixes broken profiles
-#: ../src/mcm-fix-profile.c:147
-msgid "ICC profile fix program"
-msgstr "Program perbaikan profil ICC"
+#: ../src/mcm-inspect.c:226
+msgid "Dump all details about this system"
+msgstr "Keluarkan semua rincian tentang sistem ini"
 
 #. TRANSLATORS: command line option: a list of catalogs to install
-#. TRANSLATORS: command line option: a list of files to install
-#: ../src/mcm-import.c:83 ../src/mcm-install-system-wide.c:126
+#: ../src/mcm-import.c:53
 msgid "ICC profile to install"
 msgstr "Profil ICC untuk dipasang"
 
 #. TRANSLATORS: nothing was specified on the command line
-#: ../src/mcm-import.c:105
+#: ../src/mcm-import.c:69
 msgid "No filename specified"
 msgstr "Tak dinyatakan nama berkas"
 
 #. TRANSLATORS: could not read file
-#: ../src/mcm-import.c:118
+#: ../src/mcm-import.c:81
 msgid "Failed to open ICC profile"
 msgstr "Gagal membuka profil ICC"
 
 #. TRANSLATORS: parsing error
-#: ../src/mcm-import.c:121
+#: ../src/mcm-import.c:84
 #, c-format
 msgid "Failed to parse file: %s"
 msgstr "Gagal mengurai berkas: %s"
 
 #. TRANSLATORS: color profile already been installed
-#: ../src/mcm-import.c:156
+#: ../src/mcm-import.c:102
 msgid "ICC profile already installed"
 msgstr "Profil ICC telah dipasang"
 
 #. TRANSLATORS: message text
-#: ../src/mcm-import.c:173
+#: ../src/mcm-import.c:114
 #, c-format
 msgid "Import ICC color profile %s?"
 msgstr "Impor profil warna ICC %s?"
 
 #. TRANSLATORS: message text
-#: ../src/mcm-import.c:176
+#: ../src/mcm-import.c:117
 msgid "Import ICC color profile?"
 msgstr "Impor profil warna ICC?"
 
 #. ask confirmation
-#: ../src/mcm-import.c:184
+#: ../src/mcm-import.c:125
 msgid "Import ICC profile"
 msgstr "Impor profil ICC"
 
+#. TRANSLATORS: button text
+#: ../src/mcm-import.c:129
+msgid "Install"
+msgstr "Pasang"
+
 #. TRANSLATORS: could not read file
-#: ../src/mcm-import.c:209 ../src/mcm-prefs.c:572
+#: ../src/mcm-import.c:141
 msgid "Failed to copy file"
 msgstr "Gagal menyalin berkas"
 
-#. TRANSLATORS: this is the ICC profile description stored in an atom in the XServer
-#: ../src/mcm-inspect.c:60
-msgid "Description:"
-msgstr "Keterangan:"
+#. TRANSLATORS: dialog for file->open dialog
+#: ../src/mcm-prefs.c:246
+msgid "Select scanned reference file"
+msgstr "Pilih berkas acuan yang dilarik"
 
-#. TRANSLATORS: this is the ICC profile copyright
-#: ../src/mcm-inspect.c:63
-msgid "Copyright:"
-msgstr "Hak Cipta:"
+#. TRANSLATORS: filter name on the file->open dialog
+#: ../src/mcm-prefs.c:260
+msgid "Supported images files"
+msgstr "Berkas citra yang didukung"
 
-#. TRANSLATORS: the root window of all the screens
-#: ../src/mcm-inspect.c:102
-msgid "Root window profile:"
-msgstr "Profil jendela akar:"
+#. TRANSLATORS: dialog for file->open dialog
+#: ../src/mcm-prefs.c:289
+msgid "Select CIE reference values file"
+msgstr "Pilih berkas nilai acuan CIE"
 
-#. TRANSLATORS: the root window of all the screens
-#: ../src/mcm-inspect.c:114
-msgid "Root window protocol version:"
-msgstr "Versi protokol jendela akar:"
+#. TRANSLATORS: filter name on the file->open dialog
+#: ../src/mcm-prefs.c:303
+msgid "CIE values"
+msgstr "Nilai CIE"
 
-#: ../src/mcm-inspect.c:130
-#, c-format
-msgid "Output profile '%s':"
-msgstr "Profil keluaran '%s':"
-
-#. TRANSLATORS: this is when the profile has not been set
-#: ../src/mcm-inspect.c:137
-msgid "not set"
-msgstr "tak ditata"
-
-#. TRANSLATORS: the DBus method failed
-#: ../src/mcm-inspect.c:200 ../src/mcm-inspect.c:269 ../src/mcm-inspect.c:315
-#: ../src/mcm-inspect.c:379 ../src/mcm-inspect.c:472
-msgid "The request failed"
-msgstr "Permintaan gagal"
-
-#. TRANSLATORS: no rofile has been asigned to this device
-#: ../src/mcm-inspect.c:208
-msgid "There are no ICC profiles for this device"
-msgstr "Tak ada profil ICC bagi perangkat ini"
-
-#. TRANSLATORS: this is a list of profiles suitable for the device
-#: ../src/mcm-inspect.c:213 ../src/mcm-inspect.c:328 ../src/mcm-inspect.c:392
-msgid "Suitable profiles for:"
-msgstr "Profil yang cocok bagi:"
-
-#. TRANSLATORS: no profile has been asigned to this window
-#: ../src/mcm-inspect.c:323
-msgid "There are no ICC profiles for this window"
-msgstr "Tidak ada profil ICC bagi jendela ini"
-
-#. TRANSLATORS: no rofile has been asigned to this device type
-#: ../src/mcm-inspect.c:387
-msgid "There are no ICC profiles for this device type"
-msgstr "Tidak ada profil ICC bagi jenis perangkat ini"
-
-#. TRANSLATORS: this is the rendering intent of the output
-#: ../src/mcm-inspect.c:427
-msgid "Rendering intent (display):"
-msgstr "Intensi perenderan (tampilan):"
-
-#. TRANSLATORS: this is the rendering intent of the printer
-#: ../src/mcm-inspect.c:430
-msgid "Rendering intent (softproof):"
-msgstr "Intensi perenderan (softproof):"
-
-#. TRANSLATORS: this is filename of the default colorspace
-#: ../src/mcm-inspect.c:433
-msgid "RGB Colorspace:"
-msgstr "Ruang warna RGB:"
-
-#. TRANSLATORS: this is filename of the default colorspace
-#: ../src/mcm-inspect.c:436
-msgid "CMYK Colorspace:"
-msgstr "Ruang warna CMYK:"
-
-#. TRANSLATORS: command line option
-#: ../src/mcm-inspect.c:506
-msgid "Show X11 properties"
-msgstr "Tampilkan properti X11"
-
-#. TRANSLATORS: command line option
-#: ../src/mcm-inspect.c:509
-msgid "Get the profiles for a specific device"
-msgstr "Ambil profil bagi perangkat tertentu"
-
-#. TRANSLATORS: command line option
-#: ../src/mcm-inspect.c:512
-msgid "Get the profile for a specific window"
-msgstr "Ambil profil bagi jendela tertentu"
-
-#. TRANSLATORS: command line option
-#: ../src/mcm-inspect.c:515
-msgid "Get the profiles for a specific device type"
-msgstr "Ambil profil bagi jenis perangkat tertentu"
-
-#. TRANSLATORS: command line option
-#: ../src/mcm-inspect.c:518
-msgid "Dump all details about this system"
-msgstr "Dump semua rincian tentang sistem ini"
-
-#. TRANSLATORS: just dumps the EDID to disk
-#: ../src/mcm-inspect.c:531
-msgid "EDID inspect program"
-msgstr "Program pemeriksa EDID"
-
-#. TRANSLATORS: this is when the user does --type=mickeymouse
-#: ../src/mcm-inspect.c:548
-msgid "Device type not recognized"
-msgstr "Jenis perangkat tak dikenal"
-
-#. command line argument, the ID of the device
-#: ../src/mcm-install-system-wide.c:123
-msgid "Device ID, e.g. 'xrandr_ibm_france_ltn154p2_l05'"
-msgstr "ID perangkat, mis. 'xrandr_ibm_france_ltn154p2_l05'"
-
-#. TRANSLATORS: tool that is used when copying profiles system-wide
-#: ../src/mcm-install-system-wide.c:141
-msgid "MATE Color Manager ICC profile system-wide installer"
-msgstr "Pemasang profil ICC seluruh-sistem Manajer Warna MATE"
-
-#. TRANSLATORS: user did not specify a valid filename
-#: ../src/mcm-install-system-wide.c:149
-msgid "You need to specify exactly one ICC profile filename."
-msgstr "Anda perlu menyatakan tepat satu nama berkas profil ICC."
-
-#. TRANSLATORS: user did not specify a valid device ID
-#: ../src/mcm-install-system-wide.c:157
-msgid "You need to specify exactly one device ID."
-msgstr "Anda perlu menyatakan tepat satu ID perangkat."
-
-#. TRANSLATORS: user did not specify a valid device ID
-#: ../src/mcm-install-system-wide.c:166
-msgid "The device ID has invalid characters."
-msgstr "ID perangkat memuat karakter tak valid."
-
-#. TRANSLATORS: only able to install profiles as root
-#: ../src/mcm-install-system-wide.c:176
-msgid "This program can only be used by the root user."
-msgstr "Program ini hanya dapat dipakai oleh root."
-
-#. TRANSLATORS: only able to install profiles with an absolute path
-#: ../src/mcm-install-system-wide.c:185
-msgid "The source filename must be absolute."
-msgstr "Nama berkas sumber mesti absolut."
-
-#. TRANSLATORS: error details
-#: ../src/mcm-install-system-wide.c:196
-msgid "Failed to get content type:"
-msgstr "Gagal mendapatkan jenis isi:"
-
-#. TRANSLATORS: the content type is the detected type of file
-#: ../src/mcm-install-system-wide.c:206
-msgid "Content type was incorrect:"
-msgstr "Jenis isi salah:"
-
-#. TRANSLATORS: the program must never be directly run
-#: ../src/mcm-install-system-wide.c:215
-msgid "This program must only be run through pkexec."
-msgstr "Program ini harus dijalankan melalui pkexec."
-
-#. TRANSLATORS: PolicyKit has gone all insane on us, and we refuse to parse junk
-#: ../src/mcm-install-system-wide.c:224
-msgid "PKEXEC_UID must be set to an integer value."
-msgstr "PKEXEC_UID mesti ditata ke suatu nilai bulat."
-
-#. TRANSLATORS: we are complaining that a file must be really owned by the user who called this program
-#: ../src/mcm-install-system-wide.c:233
-msgid "The ICC profile must be owned by the user."
-msgstr "Pemilik profil ICC mesti si pengguna."
-
-#. TRANSLATORS: only able to install profiles with an absolute path
-#: ../src/mcm-install-system-wide.c:246
-msgid "The destination filename must be absolute."
-msgstr "Nama berkas tujuan mesti absolut."
-
-#. TRANSLATORS: error details
-#: ../src/mcm-install-system-wide.c:256
-msgid "Failed to copy:"
-msgstr "Gagal menyalin:"
-
-#. TRANSLATORS: could not save for all users
-#: ../src/mcm-prefs.c:152
-msgid "Failed to save defaults for all users"
-msgstr "Gagal menyimpan bawaan bagi semua pengguna"
-
-#. TRANSLATORS: this is where no profile is selected
-#: ../src/mcm-prefs.c:180
+#. add a clear entry
+#: ../src/mcm-prefs.c:779
 msgid "None"
 msgstr "Tak ada"
 
-#. TRANSLATORS: this is where the user can click and import a profile
-#: ../src/mcm-prefs.c:184
-msgid "Other profile…"
-msgstr "Profil lain…"
-
-#. TRANSLATORS: could not calibrate
-#: ../src/mcm-prefs.c:318
-msgid "Failed to calibrate device"
-msgstr "Gagal mengalibrasi perangkat"
-
-#. TRANSLATORS: could not calibrate
-#: ../src/mcm-prefs.c:353
-msgid "Failed to calibrate printer"
-msgstr "Gagal mengalibrasi pencetak"
-
-#. TRANSLATORS: title, usually we can tell based on the EDID data or output name
-#: ../src/mcm-prefs.c:467
-msgid "Permanently delete profile?"
-msgstr "Hapus profil secara permanen?"
-
-#. TRANSLATORS: dialog message
-#: ../src/mcm-prefs.c:470
-msgid ""
-"Are you sure you want to remove this profile from your system permanently?"
-msgstr ""
-"Anda yakin ingin menghapus profil ini dari sistem Anda secara permanen?"
-
-#. TRANSLATORS: button, delete a profile
-#: ../src/mcm-prefs.c:473
-msgid "Delete"
-msgstr "Hapus"
-
-#: ../src/mcm-prefs.c:518
-msgid "Import"
-msgstr "Impor"
-
-#. TRANSLATORS: filter name on the file->open dialog
-#: ../src/mcm-prefs.c:536
-msgid "Supported ICC profiles"
-msgstr "Profil ICC yang didukung"
-
-#. TRANSLATORS: title, usually we can tell based on the EDID data or output name
-#: ../src/mcm-prefs.c:687
-msgid "Install missing calibration and profiling software?"
-msgstr "Pasang perangkat lunak pemrofilan dan kalibrasi?"
-
-#. TRANSLATORS: dialog message saying the argyllcms is not installed
-#: ../src/mcm-prefs.c:691
-msgid "Calibration and profiling software is not installed on this computer."
-msgstr ""
-"Perangkat lunak pemrofilan dan kalibrasi tak terpasang pada komputer ini."
-
-#. TRANSLATORS: dialog message saying the color targets are not installed
-#: ../src/mcm-prefs.c:693
-msgid "These tools are required to build color profiles for devices."
-msgstr "Peralatan ini diperlukan untuk membangun profil warna bagi perangkat."
-
-#. TRANSLATORS: dialog message, asking if it's okay to install it
-#: ../src/mcm-prefs.c:695
-msgid "Do you want them to be automatically installed?"
-msgstr "Apakah Anda ingin mereka dipasang secara otomatis?"
-
-#. TRANSLATORS: this is the sound description
-#: ../src/mcm-prefs.c:821
-msgid "Profiling completed"
-msgstr "Pemrofilan komplit"
-
-#. TRANSLATORS: could not add virtual device
-#: ../src/mcm-prefs.c:877
-msgid "Failed to create virtual device"
-msgstr "Gagal membuat perangkat virtual"
-
-#. TRANSLATORS: could not add virtual device
-#: ../src/mcm-prefs.c:885
-msgid "Failed to save virtual device"
-msgstr "Gagal menyimpan perangkat virtual"
-
-#. TRANSLATORS: could not add virtual device
-#: ../src/mcm-prefs.c:894
-msgid "Failed to add virtual device"
-msgstr "Gagal menambah perangkat virtual"
-
-#. TRANSLATORS: could not read file
-#: ../src/mcm-prefs.c:938
-msgid "Failed to delete file"
-msgstr "Gagal menghapus berkas"
-
-#. TRANSLATORS: this is when the button is sensitive
-#: ../src/mcm-prefs.c:1069
-msgid "Create a color profile for the selected device"
-msgstr "Buat profil warna bagi perangkat yang dipilih"
-
-#. TRANSLATORS: this is when the button is insensitive
-#: ../src/mcm-prefs.c:1074
-msgid "Cannot profile: No device is selected"
-msgstr "Tak bisa memrofil: Tak ada perangkat yang dipilih"
-
-#. TRANSLATORS: this is when the button is insensitive
-#: ../src/mcm-prefs.c:1086
-msgid "Cannot calibrate: The device is not connected"
-msgstr "Tak bisa mengalibrasi: Perangkat tak tersambung"
-
-#. TRANSLATORS: this is when the button is insensitive
-#: ../src/mcm-prefs.c:1094
-msgid "Cannot calibrate: The display driver does not support XRandR 1.3"
-msgstr "Tak bisa mengalibrasi: Penggerak tampilan tak mendukung XRandR 1.3"
-
-#. TRANSLATORS: this is when the button is insensitive
-#: ../src/mcm-prefs.c:1102
-msgid "Cannot calibrate: The measuring instrument is not plugged in"
-msgstr "Tak bisa mengalibrasi: Instrumen pengukuran tak ditancapkan"
-
-#. TRANSLATORS: this is when the button is insensitive
-#: ../src/mcm-prefs.c:1117
-msgid "Cannot profile: The measuring instrument is not plugged in"
-msgstr "Tak bisa memrofil: Instrumen pengukuran tak ditancapkan"
-
-#. TRANSLATORS: this is when the button is insensitive
-#: ../src/mcm-prefs.c:1125
-msgid ""
-"Cannot profile: The measuring instrument does not support printer profiling"
-msgstr ""
-"Tak bisa memrofil: Instrumen pengukuran tak mendukung pemrofilan pencetak"
-
-#. TRANSLATORS: this is when the button is insensitive
-#: ../src/mcm-prefs.c:1132
-msgid "Cannot profile this type of device"
-msgstr "Tak bisa memrofil jenis perangkat ini"
-
-#. TRANSLATORS: Some shitty binary drivers do not support per-head gamma controls.
-#. * Whilst this does not matter if you only have one monitor attached, it means you
-#. * can't color correct additional monitors or projectors.
-#: ../src/mcm-prefs.c:1296
-msgid "Per-device settings not supported. Check your display driver."
-msgstr "Tatanan per perangkat tak didukung. Periksa penggerak tampilan Anda."
-
-#. TRANSLATORS: this the ICC profile type
-#: ../src/mcm-prefs.c:1381
-msgid "Input device"
-msgstr "Perangkat masukan"
-
-#. TRANSLATORS: this the ICC profile type
-#: ../src/mcm-prefs.c:1385
-msgid "Display device"
-msgstr "Perangkat tampilan"
-
-#. TRANSLATORS: this the ICC profile type
-#: ../src/mcm-prefs.c:1389
-msgid "Output device"
-msgstr "Perangkat keluaran"
-
-#. TRANSLATORS: this the ICC profile type
-#: ../src/mcm-prefs.c:1393
-msgid "Devicelink"
-msgstr "Devicelink"
-
-#. TRANSLATORS: this the ICC profile type
-#: ../src/mcm-prefs.c:1397
-msgid "Colorspace conversion"
-msgstr "Konversi ruang warna"
-
-#. TRANSLATORS: this the ICC profile kind
-#: ../src/mcm-prefs.c:1401
-msgid "Abstract"
-msgstr "Abstrak"
-
-#. TRANSLATORS: this the ICC profile type
-#: ../src/mcm-prefs.c:1405
-msgid "Named color"
-msgstr "Warna bernama"
-
-#. TRANSLATORS: this the ICC profile type
-#. TRANSLATORS: this the ICC colorspace type
-#: ../src/mcm-prefs.c:1408 ../src/mcm-prefs.c:1458
-msgid "Unknown"
-msgstr "Tak diketahui"
-
-#. TRANSLATORS: this the ICC colorspace type
-#: ../src/mcm-prefs.c:1419
-msgid "XYZ"
-msgstr "XYZ"
-
-#. TRANSLATORS: this the ICC colorspace type
-#: ../src/mcm-prefs.c:1423
-msgid "LAB"
-msgstr "LAB"
-
-#. TRANSLATORS: this the ICC colorspace type
-#: ../src/mcm-prefs.c:1427
-msgid "LUV"
-msgstr "LUV"
-
-#. TRANSLATORS: this the ICC colorspace type
-#: ../src/mcm-prefs.c:1431
-msgid "YCbCr"
-msgstr "YCbCr"
-
-#. TRANSLATORS: this the ICC colorspace type
-#: ../src/mcm-prefs.c:1435
-msgid "Yxy"
-msgstr "Yxy"
-
-#. TRANSLATORS: this the ICC colorspace type
-#. TRANSLATORS: this is the colorspace, e.g. red, green, blue
-#: ../src/mcm-prefs.c:1439 ../src/mcm-prefs.c:2204 ../data/mcm-prefs.ui.h:59
-msgid "RGB"
-msgstr "RGB"
-
-#. TRANSLATORS: this the ICC colorspace type
-#: ../src/mcm-prefs.c:1443
-msgid "Gray"
-msgstr "Kelabu"
-
-#. TRANSLATORS: this the ICC colorspace type
-#: ../src/mcm-prefs.c:1447
-msgid "HSV"
-msgstr "HSV"
-
-#. TRANSLATORS: this the ICC colorspace type
-#. TRANSLATORS: this is the colorspace, e.g. cyan, magenta, yellow, black
-#: ../src/mcm-prefs.c:1451 ../src/mcm-prefs.c:2208 ../data/mcm-prefs.ui.h:5
-msgid "CMYK"
-msgstr "CMYK"
-
-#. TRANSLATORS: this the ICC colorspace type
-#: ../src/mcm-prefs.c:1455
-msgid "CMY"
-msgstr "CMY"
-
-#. TRANSLATORS: if the device has a VCGT profile
-#: ../src/mcm-prefs.c:1576
-msgid "Yes"
-msgstr "Ya"
-
-#. TRANSLATORS: if the device has a VCGT profile
-#: ../src/mcm-prefs.c:1579
-msgid "No"
-msgstr "Tidak"
-
 #. TRANSLATORS: this is where an output is not settable, but we are showing it in the UI
-#: ../src/mcm-prefs.c:1723
+#: ../src/mcm-prefs.c:940
 msgid "No hardware support"
 msgstr "Tak ada dukungan perangkat keras"
 
 #. TRANSLATORS: this is where the device has been setup but is not connected
-#: ../src/mcm-prefs.c:1727 ../src/mcm-prefs.c:2039
+#: ../src/mcm-prefs.c:944
+#: ../src/mcm-prefs.c:1312
 msgid "disconnected"
 msgstr "terputus"
 
-#. TRANSLATORS: the profile was of the wrong sort for this device
-#: ../src/mcm-prefs.c:1839
-msgid "Could not import profile"
-msgstr "Tidak bisa mengimpor profil"
+#. TRANSLATORS: this the ICC profile type
+#: ../src/mcm-prefs.c:1023
+msgid "Input device"
+msgstr "Perangkat masukan"
 
-#: ../src/mcm-prefs.c:1839
-msgid "The profile was of the wrong type for this device"
-msgstr "Profil yang salah bagi jenis perangkat ini"
+#. TRANSLATORS: this the ICC profile type
+#: ../src/mcm-prefs.c:1027
+msgid "Display device"
+msgstr "Perangkat tampilan"
 
-#. TRANSLATORS: this is a sound description
-#: ../src/mcm-prefs.c:1975
-msgid "Device added"
-msgstr "Perangkat ditambahkan"
+#. TRANSLATORS: this the ICC profile type
+#: ../src/mcm-prefs.c:1031
+msgid "Output device"
+msgstr "Perangkat luaran"
 
-#. TRANSLATORS: this is a sound description
-#: ../src/mcm-prefs.c:1979
-msgid "Device removed"
-msgstr "Perangkat dilepas"
+#. TRANSLATORS: this the ICC profile type
+#: ../src/mcm-prefs.c:1035
+msgid "Devicelink"
+msgstr "Devicelink"
 
-#. TRANSLATORS: this is when there are no profiles that can be used; the search term is either "RGB" or "CMYK"
-#: ../src/mcm-prefs.c:2261
-#, c-format
-msgid "No %s color spaces available"
-msgstr "Ruang warna %s tak tersedia"
+#. TRANSLATORS: this the ICC profile type
+#: ../src/mcm-prefs.c:1039
+msgid "Colorspace conversion"
+msgstr "Konversi ruang warna"
 
-#. TRANSLATORS: device type
-#: ../src/mcm-prefs.c:2616 ../data/mcm-prefs.ui.h:32
-msgid "Display"
-msgstr "Tampilan"
+#. TRANSLATORS: this the ICC profile type
+#: ../src/mcm-prefs.c:1043
+msgid "Abstract"
+msgstr "Abstrak"
 
-#. TRANSLATORS: device type
-#: ../src/mcm-prefs.c:2620
-msgid "Scanner"
-msgstr "Pemindai"
+#. TRANSLATORS: this the ICC profile type
+#: ../src/mcm-prefs.c:1047
+msgid "Named color"
+msgstr "Warna bernama"
 
-#. TRANSLATORS: device type
-#: ../src/mcm-prefs.c:2624
-msgid "Printer"
-msgstr "Pencetak"
+#. TRANSLATORS: this the ICC profile type
+#: ../src/mcm-prefs.c:1050
+msgid "Unknown"
+msgstr "Tak dikenal"
 
-#. TRANSLATORS: device type
-#: ../src/mcm-prefs.c:2628
-msgid "Camera"
-msgstr "Kamera"
+#. TRANSLATORS: this is where the required software has not been written yet
+#: ../src/mcm-prefs.c:1318
+msgid "No software support"
+msgstr "Tak ada dukungan perangkat lunak"
 
 #. TRANSLATORS: we can make this modal (stay on top of) another window
-#: ../src/mcm-prefs.c:2695
+#: ../src/mcm-prefs.c:1582
 msgid "Set the parent window to make this modal"
 msgstr "Tata jendela induk untuk membuat ini modal"
 
-#. TRANSLATORS: button for more details about the vcgt failure
-#: ../src/mcm-prefs.c:2991
-msgid "More Information"
-msgstr "Informasi Lebih"
-
 #. TRANSLATORS: this is displayed while the devices are being probed
-#: ../src/mcm-prefs.c:2994
-msgid "Loading list of devices…"
-msgstr "Memuat daftar perangkat…"
+#: ../src/mcm-prefs.c:1734
+msgid "Loading list of devices..."
+msgstr "Memuat senarai perangkat..."
 
-#. TRANSLATORS: this is displayed when the profile is crap
-#: ../src/mcm-prefs.c:3001
-msgid ""
-"This profile does not have the information required for whole-screen color "
-"correction."
-msgstr ""
-"Profil ini tak punya informasi yang diperlukan untuk koreksi warna seluruh-"
-"layar."
-
-#. TRANSLATORS: this is where the ICC profile_lcms1 has no description
-#: ../src/mcm-profile.c:130
+#. TRANSLATORS: this is where the ICC profile has no description
+#: ../src/mcm-profile.c:666
 msgid "Missing description"
-msgstr "Keterangan belum ada"
+msgstr "Deskripsi tak ditemukan"
 
-#. TRANSLATORS: button: this is to open MCM
-#: ../src/mcm-session.c:153
-msgid "Recalibrate now"
-msgstr "Kalibrasi ulang sekarang"
-
-#. TRANSLATORS: button: this is to ignore the recalibrate notifications
-#: ../src/mcm-session.c:156
-msgid "Ignore"
-msgstr "Abaikan"
-
-#. TRANSLATORS: this is when the device has not been recalibrated in a while
-#: ../src/mcm-session.c:183
-msgid "Recalibration required"
-msgstr "Perlu kalibrasi ulang"
-
-#. TRANSLATORS: this is when the display has not been recalibrated in a while
-#: ../src/mcm-session.c:193
-#, c-format
-msgid "The display '%s' should be recalibrated soon."
-msgstr "Tampilan '%s' mesti segera dikalibrasi ulang."
-
-#. TRANSLATORS: this is when the printer has not been recalibrated in a while
-#: ../src/mcm-session.c:200
-#, c-format
-msgid "The printer '%s' should be recalibrated soon."
-msgstr "Pencetak '%s' mesti segera dikalibrasi ulang."
-
-#: ../src/mcm-session.c:263
+#: ../src/mcm-session.c:123
 msgid "Do not exit after the request has been processed"
 msgstr "Jangan keluar setelah permintaan telah diproses"
 
 #. TRANSLATORS: program name, a session wide daemon to watch for updates and changing system state
-#: ../src/mcm-session.c:280 ../data/mcm-prefs.ui.h:9
+#: ../src/mcm-session.c:133
 msgid "Color Management"
 msgstr "Manajemen Warna"
 
-#: ../src/mcm-session.c:282
-msgid "Color Management D-Bus Service"
-msgstr "Layanan D-Bus Manajemen Warna"
+#: ../src/mcm-session.c:135
+msgid "Color Management DBus Service"
+msgstr "Layanan DBus Manajemen Warna"
 
-#. TRANSLATORS: this is the profile creation date strftime format
-#: ../src/mcm-utils.c:520
-msgid "%B %e %Y, %I:%M:%S %p"
-msgstr "%e %B %Y, %H:%M:%S"
-
-#. TRANSLATORS: rendering intent: you probably want to google this
-#: ../src/mcm-utils.c:533
-msgid "Perceptual"
-msgstr ""
-
-#. TRANSLATORS: rendering intent: you probably want to google this
-#: ../src/mcm-utils.c:537
-msgid "Relative colormetric"
-msgstr "Colormetric relatif"
-
-#. TRANSLATORS: rendering intent: you probably want to google this
-#: ../src/mcm-utils.c:541
-msgid "Saturation"
-msgstr "Saturasi"
-
-#. TRANSLATORS: rendering intent: you probably want to google this
-#: ../src/mcm-utils.c:545
-msgid "Absolute colormetric"
-msgstr "Colormetric absolut"
-
-#: ../data/mcm-calibrate.ui.h:1
-msgid "Blue:"
-msgstr "Biru:"
-
-#: ../data/mcm-calibrate.ui.h:2 ../data/mcm-prefs.ui.h:4
-msgid "Brightness:"
-msgstr "Kecerahan:"
-
-#: ../data/mcm-calibrate.ui.h:3
-msgid "CRT"
-msgstr "CRT"
-
-#. The user wants to create images suitable to send to a photo-processing lab
-#: ../data/mcm-calibrate.ui.h:5
-msgid "Create images for printing"
-msgstr "Buat gambar untuk pencetakan"
-
-#. Expander label, for use when the user wants to see the VTE widget and what the calibration tool is actually doing
-#: ../data/mcm-calibrate.ui.h:6 ../data/mcm-spawn.ui.h:2
-msgid "Details"
-msgstr "Rincian"
-
-#. window title
-#: ../data/mcm-calibrate.ui.h:8
-msgid "Device Calibration"
-msgstr "Kalibrasi Perangkat"
-
-#. The user wants to analyse images that have been printed by a photo-processing lab
-#: ../data/mcm-calibrate.ui.h:10
-msgid "Generate profile from printed images"
-msgstr "Jangkitkan profile dari gambar tercetak"
-
-#: ../data/mcm-calibrate.ui.h:11
-msgid "Green:"
-msgstr "Hijau:"
-
-#. The precision of the calibration
-#: ../data/mcm-calibrate.ui.h:13
-msgid "High"
-msgstr "Tinggi"
-
-#: ../data/mcm-calibrate.ui.h:14
-msgid "LCD"
-msgstr "LCD"
-
-#. The precision of the calibration
-#: ../data/mcm-calibrate.ui.h:16
-msgid "Low"
-msgstr "Rendah"
-
-#. The length of the translation
-#: ../data/mcm-calibrate.ui.h:18
-msgid "Normal"
-msgstr "Normal"
-
-#. The user is trying to create an ICC profile of a printer that is connected to the computer
-#: ../data/mcm-calibrate.ui.h:20
-msgid "Profile locally attached printer"
-msgstr "Profilkan pencetak yang tersambung secara lokal"
-
-#: ../data/mcm-calibrate.ui.h:21
-msgid "Projector"
-msgstr "Projektor"
-
-#: ../data/mcm-calibrate.ui.h:22
-msgid "Red:"
-msgstr "Merah:"
-
-#: ../data/mcm-calibrate.ui.h:23
-msgid "precision"
-msgstr "presisi"
-
-#: ../data/mcm-prefs.ui.h:1
-msgid ""
-"A working space is the range of colors that can be encoded into an image."
-msgstr ""
-"Suatu ruang kerja adalah jangkauan warna yang dapat dienkode ke dalam suatu "
-"gambar."
-
-#: ../data/mcm-prefs.ui.h:2
-msgid "Add Virtual Device"
-msgstr "Tambahkan Perangkat Virtual"
-
-#: ../data/mcm-prefs.ui.h:3
-msgid "Adds a virtual device that is not connected."
-msgstr "Tambahkan suatu perangkat virtual yang tak tersambung"
-
-#. Technical color word for softproof rendering intent
-#: ../data/mcm-prefs.ui.h:7
-msgid "CMYK:"
-msgstr "CMYK:"
-
-#: ../data/mcm-prefs.ui.h:8
-msgid "Close this dialog"
-msgstr "Tutup dialog ini"
-
-#. Section heading for device profile settings
-#: ../data/mcm-prefs.ui.h:11
-msgid "Color Profile"
-msgstr "Profil Warna"
-
-#. The profile colorspace, e.g. RGB
-#: ../data/mcm-prefs.ui.h:13
-msgid "Colorspace:"
-msgstr "Ruang warna:"
-
-#: ../data/mcm-prefs.ui.h:14
-msgid "Contrast:"
-msgstr "Kontras:"
-
-#. This is a button to calibrate the device by creating an ICC profile file using a hardware device or a reference image
-#: ../data/mcm-prefs.ui.h:16
-msgid "Create _Profile for Device"
-msgstr "Buat _Profil bagi Perangkat"
-
-#. When the profile was created
-#: ../data/mcm-prefs.ui.h:18
-msgid "Created:"
-msgstr "Dibuat:"
-
-#. Tab title, system wide defaults to use
-#: ../data/mcm-prefs.ui.h:20
-msgid "Defaults"
-msgstr "Bawaan"
-
-#: ../data/mcm-prefs.ui.h:21
-msgid "Delete the currently selected color profile"
-msgstr "Hapus profil warna yang kini dipilih"
-
-#: ../data/mcm-prefs.ui.h:22
-msgid ""
-"Delete the disconnected device - if you reconnect the device it will "
-"reappear in the list"
-msgstr ""
-"Hapus perangkat yang terputus - bila Anda menyambung kembali, perangkat akan "
-"muncul kembali di dalam daftar."
-
-#. Section heading for device settings
-#: ../data/mcm-prefs.ui.h:24
-msgid "Device"
-msgstr "Perangkat"
-
-#. The manufacturer of the profile
-#: ../data/mcm-prefs.ui.h:26
-msgid "Device manufacturer:"
-msgstr "Pabrikan perangkat:"
-
-#. The manufacturer of the profile
-#: ../data/mcm-prefs.ui.h:28
-msgid "Device model:"
-msgstr "Model perangkat:"
-
-#: ../data/mcm-prefs.ui.h:29
-msgid "Device type:"
-msgstr "Tipe perangkat:"
-
-#. Tab title, currently connected or saved devices
-#: ../data/mcm-prefs.ui.h:31
-msgid "Devices"
-msgstr "Perangkat"
-
-#. If the profile contains a display correction table
-#: ../data/mcm-prefs.ui.h:34
-msgid "Display correction:"
-msgstr "Koreksi tampilan:"
-
-#. What mode to use for display rendering intent
-#: ../data/mcm-prefs.ui.h:36
-msgid "Display:"
-msgstr "Tampilan:"
-
-#. The file size in bytes of the profile
-#: ../data/mcm-prefs.ui.h:38
-msgid "File size:"
-msgstr "Ukuran berkas:"
-
-#. The basename (the last section of the filename) of the profile
-#: ../data/mcm-prefs.ui.h:40
-msgid "Filename:"
-msgstr "Nama berkas:"
-
-#. Settings that users don't normally have to touch
-#: ../data/mcm-prefs.ui.h:42
-msgid "Fine tuning"
-msgstr "Penalaan halus"
-
-#: ../data/mcm-prefs.ui.h:43
-msgid "Gamma:"
-msgstr "Gamma:"
-
-#: ../data/mcm-prefs.ui.h:44
-msgid "Import an ICC file from another location"
-msgstr "Impor berkas ICC dari lokasi lain"
-
-#. The licence of the profile, normally non-free
-#: ../data/mcm-prefs.ui.h:46
-msgid "License:"
-msgstr "Lisensi:"
-
-#. The manufacturer of the device
-#: ../data/mcm-prefs.ui.h:48
-msgid "Manufacturer:"
-msgstr "Pabrikan:"
-
-#. The model of the device
-#: ../data/mcm-prefs.ui.h:50
-msgid "Model:"
-msgstr "Model:"
-
-#: ../data/mcm-prefs.ui.h:51
-msgid "More details"
-msgstr "Lebih terinci"
-
-#: ../data/mcm-prefs.ui.h:52
-msgid "Open the documentation"
-msgstr "Buka dokumentasi"
-
-#: ../data/mcm-prefs.ui.h:53
-msgid "Profile Graphs"
-msgstr "Grafik Profil"
-
-#. The type of profile, e.g. display, scanner, etc.
-#: ../data/mcm-prefs.ui.h:55
-msgid "Profile type:"
-msgstr "Jenis profil:"
-
-#. Tab title, currently installed profiles
-#: ../data/mcm-prefs.ui.h:57
-msgid "Profiles"
-msgstr "Profil"
-
-#: ../data/mcm-prefs.ui.h:58
-msgid ""
-"Program the video card with the adjusted color values so all windows are "
-"color corrected"
-msgstr ""
-"Memrogram kartu video dengan nilai warna yang disesuaikan sehingga semua "
-"jendela warnanya dikoreksi"
-
-#. What mode to use for display rendering intent
-#: ../data/mcm-prefs.ui.h:61
-msgid "RGB:"
-msgstr "RGB:"
-
-#: ../data/mcm-prefs.ui.h:62
-msgid "Rendering intent"
-msgstr "Intensi perenderan"
-
-#: ../data/mcm-prefs.ui.h:63
-msgid "Save these profiles for all users"
-msgstr "Simpan profil-profil ini bagi semua pengguna"
-
-#. The serial number of the device
-#: ../data/mcm-prefs.ui.h:65
-msgid "Serial number:"
-msgstr "Nomor seri:"
-
-#: ../data/mcm-prefs.ui.h:66
-msgid ""
-"Set a property on the system so applications use the default display profile"
-msgstr ""
-"Tata suatu properti pada sistem sehingga aplikasi memakai profil tampilan "
-"bawaan"
-
-#. Technical color word for softproof rendering intent
-#: ../data/mcm-prefs.ui.h:68
-msgid "Softproof:"
-msgstr "Softproof:"
-
-#: ../data/mcm-prefs.ui.h:69
-msgid "The rendering intent is how one gamut size is mapped to another."
-msgstr ""
-"Intensi perenderan adalah bagaimana ukuran satu gamut dipetakan ke yang lain."
-
-#: ../data/mcm-prefs.ui.h:70
-msgid ""
-"The rendering intent to use when transforming from the image gamut to the "
-"device output gamut"
-msgstr ""
-"Intensi perenderan yang dipakai ketika menransformasi dari gamut gambar ke "
-"gamut keluaran perangkat"
-
-#: ../data/mcm-prefs.ui.h:71
-msgid ""
-"The rendering intent to use when transforming from the image gamut to the "
-"display gamut"
-msgstr ""
-"Intensi perenderan yang dipakai ketika menransformasi dari gamut gambar ke "
-"gamut tampilan"
-
-#: ../data/mcm-prefs.ui.h:72
-msgid "These settings control how color management is applied to your desktop."
-msgstr ""
-"Tatanan ini mengendalikan bagaimana manajemen warna diterapkan pada desktop "
-"Anda."
-
-#: ../data/mcm-prefs.ui.h:73
-msgid "This is the default CMYK working space to use in applications"
-msgstr "Ini adalah ruang kerja CMYK bawaan untuk dipakai di aplikasi"
-
-#: ../data/mcm-prefs.ui.h:74
-msgid "This is the default RGB working space to use in applications"
-msgstr "Ini adalah ruang kerja RGB bawaan untuk dipakai di aplikasi"
-
-#: ../data/mcm-prefs.ui.h:75
-msgid "Working space"
-msgstr "Ruang kerja"
-
-#. This is a button to add a virtual device
-#: ../data/mcm-prefs.ui.h:77
-msgid "_Add Device"
-msgstr "T_ambah Perangkat"
-
-#: ../data/mcm-prefs.ui.h:78
-msgid "_Apply display correction"
-msgstr "Ter_apkan koreksi tampilan"
-
-#. This is a button to delete the saved or virtual device
-#: ../data/mcm-prefs.ui.h:80
-msgid "_Delete Device"
-msgstr "_Hapus Perangkat"
-
-#: ../data/mcm-prefs.ui.h:81
-msgid "_Delete Profile"
-msgstr "_Hapus Profil"
-
-#: ../data/mcm-prefs.ui.h:82
-msgid "_Import Profile"
-msgstr "Impor Profil"
-
-#: ../data/mcm-prefs.ui.h:83
-msgid "_Make Default"
-msgstr "Jadikan _Bawaan"
-
-#. This resets the device to it's defaults, and removes any user tweaked settings.
-#: ../data/mcm-prefs.ui.h:85
-msgid "_Reset to defaults"
-msgstr "Atu_r ulang ke bawaan"
-
-#: ../data/mcm-prefs.ui.h:86
-msgid "_Set profile for color managed applications"
-msgstr "Tata profil bagi aplika_si yang warnanya dikelola"

@@ -1,5 +1,5 @@
 <schemalist>
-  <schema id="org.mate.color-manager" path="/apps/mate-color-manager/">
+  <schema id="org.mate.color-manager" path="/org/mate/color-manager/">
     <key name="default-gamma" type="d">
       <default>1.0</default>
       <summary>The default gamma to use for monitors with no previous value set</summary>

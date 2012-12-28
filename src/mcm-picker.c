@@ -129,6 +129,10 @@ mcm_picker_refresh_results (void)
 	cmsHTRANSFORM transform_lab;
 	cmsHTRANSFORM transform_error;
 
+	/* nothing set yet */
+	if (profile_filename == NULL)
+		goto out;
+
 	/* get new value */
 	g_object_get (calibrate, "xyz", &xyz, NULL);
 
@@ -155,8 +159,14 @@ mcm_picker_refresh_results (void)
 
 	/* create transforms */
 	transform_rgb = cmsCreateTransform (profile_xyz, TYPE_XYZ_DBL, profile_rgb, TYPE_RGB_8, INTENT_PERCEPTUAL, 0);
+	if (transform_rgb == NULL)
+		goto out;
 	transform_lab = cmsCreateTransform (profile_xyz, TYPE_XYZ_DBL, profile_lab, TYPE_Lab_DBL, INTENT_PERCEPTUAL, 0);
+	if (transform_lab == NULL)
+		goto out;
 	transform_error = cmsCreateTransform (profile_rgb, TYPE_RGB_8, profile_xyz, TYPE_XYZ_DBL, INTENT_PERCEPTUAL, 0);
+	if (transform_error == NULL)
+		goto out;
 
 	cmsDoTransform (transform_rgb, color_xyz, color_rgb, 1);
 	cmsDoTransform (transform_lab, color_xyz, color_lab, 1);
@@ -199,7 +209,7 @@ mcm_picker_refresh_results (void)
 	/* set image */
 	image = GTK_IMAGE (gtk_builder_get_object (builder, "image_preview"));
 	gtk_image_set_from_pixbuf (image, pixbuf);
-
+out:
 	g_free (text_xyz);
 	g_free (text_lab);
 	g_free (text_rgb);

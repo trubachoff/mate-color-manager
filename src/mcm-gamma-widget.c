@@ -171,7 +171,6 @@ mcm_gamma_widget_class_init (McmGammaWidgetClass *class)
 static void
 mcm_gamma_widget_init (McmGammaWidget *gama)
 {
-	PangoFontMap *fontmap;
 	PangoContext *context;
 
 	gama->priv = MCM_GAMMA_WIDGET_GET_PRIVATE (gama);
@@ -182,8 +181,7 @@ mcm_gamma_widget_init (McmGammaWidget *gama)
 	gama->priv->color_blue = 0.5f;
 
 	/* do pango stuff */
-	fontmap = pango_cairo_font_map_get_default ();
-	context = pango_cairo_font_map_create_context (PANGO_CAIRO_FONT_MAP (fontmap));
+	context = gtk_widget_get_pango_context (GTK_WIDGET (gama));
 	pango_context_set_base_gravity (context, PANGO_GRAVITY_AUTO);
 }
 

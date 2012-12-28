@@ -531,7 +531,6 @@ mcm_cie_widget_class_init (McmCieWidgetClass *class)
 static void
 mcm_cie_widget_init (McmCieWidget *cie)
 {
-	PangoFontMap *fontmap;
 	PangoContext *context;
 	PangoFontDescription *desc;
 
@@ -552,8 +551,7 @@ mcm_cie_widget_init (McmCieWidget *cie)
 	cie->priv->gamma = 0.0;
 
 	/* do pango stuff */
-	fontmap = pango_cairo_font_map_get_default ();
-	context = pango_cairo_font_map_create_context (PANGO_CAIRO_FONT_MAP (fontmap));
+	context = gtk_widget_get_pango_context (GTK_WIDGET (cie));
 	pango_context_set_base_gravity (context, PANGO_GRAVITY_AUTO);
 
 	cie->priv->layout = pango_layout_new (context);
@@ -568,12 +566,9 @@ mcm_cie_widget_init (McmCieWidget *cie)
 static void
 mcm_cie_widget_finalize (GObject *object)
 {
-	PangoContext *context;
 	McmCieWidget *cie = (McmCieWidget*) object;
 
-	context = pango_layout_get_context (cie->priv->layout);
 	g_object_unref (cie->priv->layout);
-	g_object_unref (context);
 	g_ptr_array_unref (cie->priv->tongue_buffer);
 	G_OBJECT_CLASS (mcm_cie_widget_parent_class)->finalize (object);
 }

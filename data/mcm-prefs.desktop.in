@@ -1,6 +1,5 @@
 [Desktop Entry]
 _Name=Color Profiles
-_GenericName=Color Profiles
 _Comment=Manage ICC color profiles
 Icon=mate-color-manager
 Exec=mcm-prefs

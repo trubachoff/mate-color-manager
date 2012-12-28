@@ -111,10 +111,8 @@ bin_PROGRAMS =					\
 	mcm-apply					\
 	mcm-prefs					\
 	mcm-session					\
+	mcm-picker					\
 	mcm-import
-
-noinst_PROGRAMS = \
-	mcm-picker
 
 if MCM_USE_EXIV
 libexec_PROGRAMS = mcm-helper-exiv

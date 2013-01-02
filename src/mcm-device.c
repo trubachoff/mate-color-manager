@@ -1122,9 +1122,9 @@ mcm_device_class_init (McmDeviceClass *klass)
 	g_object_class_install_property (object_class, PROP_CONTRAST, pspec);
 
 	/**
-	 * McmDevice:profile-filename:
+	 * McmDevice:profiles:
 	 */
-	pspec = g_param_spec_pointer ("profile-filename", NULL, NULL,
+	pspec = g_param_spec_pointer ("profiles", NULL, NULL,
 				      G_PARAM_READWRITE);
 	g_object_class_install_property (object_class, PROP_PROFILES, pspec);
 

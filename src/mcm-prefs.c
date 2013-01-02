@@ -2784,11 +2784,15 @@ mcm_prefs_setup_rendering_combobox (GtkWidget *widget, const gchar *intent)
 {
 	guint i;
 	gboolean ret = FALSE;
+	gchar *label;
 	const gchar *text;
 
 	for (i=1; i<MCM_INTENT_LAST; i++) {
-		text = mcm_intent_to_localized_text (i);
-		gtk_combo_box_append_text (GTK_COMBO_BOX (widget), text);
+		label = g_strdup_printf ("%s - %s",
+					 mcm_intent_to_localized_text (i),
+					 mcm_intent_to_localized_description (i));
+		gtk_combo_box_append_text (GTK_COMBO_BOX (widget), label);
+		g_free (label);
 		text = mcm_intent_to_string (i);
 		if (g_strcmp0 (text, intent) == 0) {
 			ret = TRUE;

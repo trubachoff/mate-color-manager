@@ -524,6 +524,20 @@ mcm_device_get_default_profile_filename (McmDevice *device)
 }
 
 /**
+ * mcm_device_get_default_profile:
+ **/
+McmProfile *
+mcm_device_get_default_profile (McmDevice *device)
+{
+	McmProfile *profile;
+	g_return_val_if_fail (MCM_IS_DEVICE (device), NULL);
+	if (device->priv->profiles->len == 0)
+		return NULL;
+	profile = g_ptr_array_index (device->priv->profiles, 0);
+	return profile;
+}
+
+/**
  * mcm_device_set_default_profile_filename:
  **/
 void

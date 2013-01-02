@@ -243,6 +243,8 @@ mcm_import_CFLAGS =					\
 	$(WARNINGFLAGS_C)
 
 mcm_prefs_SOURCES =					\
+	mcm-cell-renderer-profile.c			\
+	mcm-cell-renderer-profile.h			\
 	mcm-prefs.c
 
 mcm_prefs_LDADD =					\

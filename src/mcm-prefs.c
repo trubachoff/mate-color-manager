@@ -33,6 +33,7 @@
 
 #include "egg-debug.h"
 
+#include "mcm-cell-renderer-profile.h"
 #include "mcm-calibrate-argyll.h"
 #include "mcm-cie-widget.h"
 #include "mcm-client.h"
@@ -73,7 +74,6 @@ enum {
 	MCM_PROFILES_COLUMN_ID,
 	MCM_PROFILES_COLUMN_SORT,
 	MCM_PROFILES_COLUMN_ICON,
-	MCM_PROFILES_COLUMN_TITLE,
 	MCM_PROFILES_COLUMN_PROFILE,
 	MCM_PROFILES_COLUMN_LAST
 };
@@ -139,7 +139,7 @@ mcm_prefs_set_default (McmDevice *device)
 
 	/* nothing set */
 	id = mcm_device_get_id (device);
-	filename = mcm_device_get_profile_filename (device);
+	filename = mcm_device_get_default_profile_filename (device);
 	if (filename == NULL) {
 		egg_debug ("no filename for %s", id);
 		goto out;
@@ -436,7 +436,6 @@ mcm_prefs_update_profile_list (void)
 		gtk_list_store_set (list_store_profiles, &iter,
 				    MCM_PROFILES_COLUMN_ID, filename,
 				    MCM_PROFILES_COLUMN_SORT, sort,
-				    MCM_PROFILES_COLUMN_TITLE, description,
 				    MCM_PROFILES_COLUMN_ICON, icon_name,
 				    MCM_PROFILES_COLUMN_PROFILE, profile,
 				    -1);
@@ -953,7 +952,7 @@ mcm_prefs_calibrate_cb (GtkWidget *widget, gpointer data)
 		egg_debug ("adding: %s", destination);
 
 		/* set this default */
-		mcm_device_set_profile_filename (current_device, destination);
+		mcm_device_set_default_profile_filename (current_device, destination);
 		ret = mcm_device_save (current_device, &error);
 		if (!ret) {
 			egg_warning ("failed to save default: %s", error->message);
@@ -1200,13 +1199,13 @@ mcm_prefs_add_profiles_columns (GtkTreeView *treeview)
 	gtk_widget_set_size_request (GTK_WIDGET (treeview), MCM_PREFS_TREEVIEW_WIDTH, -1);
 
 	/* column for text */
-	renderer = gtk_cell_renderer_text_new ();
+	renderer = mcm_cell_renderer_profile_new ();
 	g_object_set (renderer,
 		      "wrap-mode", PANGO_WRAP_WORD,
 		      "wrap-width", MCM_PREFS_TREEVIEW_WIDTH - 62,
 		      NULL);
 	column = gtk_tree_view_column_new_with_attributes ("", renderer,
-							   "markup", MCM_PROFILES_COLUMN_TITLE, NULL);
+							   "profile", MCM_PROFILES_COLUMN_PROFILE, NULL);
 	gtk_tree_view_column_set_sort_column_id (column, MCM_PROFILES_COLUMN_SORT);
 	gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (list_store_profiles), MCM_PROFILES_COLUMN_SORT, GTK_SORT_ASCENDING);
 	gtk_tree_view_append_column (treeview, column);
@@ -1522,7 +1521,7 @@ mcm_prefs_devices_treeview_clicked_cb (GtkTreeSelection *selection, gpointer use
 
 	/* add profiles of the right kind */
 	widget = GTK_WIDGET (gtk_builder_get_object (builder, "combobox_profile"));
-	profile_filename = mcm_device_get_profile_filename (current_device);
+	profile_filename = mcm_device_get_default_profile_filename (current_device);
 	mcm_prefs_add_profiles_suitable_for_devices (widget, profile_filename);
 
 	/* make sure selectable */
@@ -2051,7 +2050,7 @@ mcm_prefs_profile_combo_changed_cb (GtkWidget *widget, gpointer data)
 	}
 
 	/* see if it's changed */
-	profile_old = mcm_device_get_profile_filename (current_device);
+	profile_old = mcm_device_get_default_profile_filename (current_device);
 	egg_debug ("old: %s, new:%s", profile_old, filename);
 	changed = ((g_strcmp0 (profile_old, filename) != 0));
 
@@ -2059,7 +2058,7 @@ mcm_prefs_profile_combo_changed_cb (GtkWidget *widget, gpointer data)
 	if (changed) {
 
 		/* save new profile */
-		mcm_device_set_profile_filename (current_device, filename);
+		mcm_device_set_default_profile_filename (current_device, filename);
 		ret = mcm_device_save (current_device, &error);
 		if (!ret) {
 			egg_warning ("failed to save config: %s", error->message);
@@ -2860,8 +2859,8 @@ main (int argc, char **argv)
 	/* create list stores */
 	list_store_devices = gtk_list_store_new (MCM_DEVICES_COLUMN_LAST, G_TYPE_STRING, G_TYPE_STRING,
 						 G_TYPE_STRING, G_TYPE_STRING);
-	list_store_profiles = gtk_list_store_new (MCM_PROFILES_COLUMN_LAST, G_TYPE_STRING, G_TYPE_STRING,
-						  G_TYPE_STRING, G_TYPE_STRING, G_TYPE_POINTER);
+	list_store_profiles = gtk_list_store_new (MCM_PROFILES_COLUMN_LAST, G_TYPE_STRING,
+						  G_TYPE_STRING, G_TYPE_STRING, MCM_TYPE_PROFILE);
 
 	/* create device tree view */
 	widget = GTK_WIDGET (gtk_builder_get_object (builder, "treeview_devices"));

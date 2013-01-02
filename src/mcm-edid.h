@@ -63,7 +63,7 @@ gboolean	 mcm_edid_parse				(McmEdid		*edid,
 const gchar	*mcm_edid_get_monitor_name		(McmEdid		*edid);
 const gchar	*mcm_edid_get_vendor_name		(McmEdid		*edid);
 const gchar	*mcm_edid_get_serial_number		(McmEdid		*edid);
-const gchar	*mcm_edid_get_ascii_string		(McmEdid		*edid);
+const gchar	*mcm_edid_get_eisa_id			(McmEdid		*edid);
 const gchar	*mcm_edid_get_pnp_id			(McmEdid		*edid);
 guint		 mcm_edid_get_width			(McmEdid		*edid);
 guint		 mcm_edid_get_height			(McmEdid		*edid);

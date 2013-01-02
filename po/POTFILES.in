@@ -9,6 +9,7 @@ src/mcm-calibrate-argyll.c
 src/mcm-calibrate.c
 src/mcm-calibrate-dialog.c
 src/mcm-calibrate-manual.c
+src/mcm-cell-renderer-profile.c
 src/mcm-client.c
 src/mcm-colorimeter.c
 src/mcm-device-xrandr.c

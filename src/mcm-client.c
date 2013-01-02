@@ -58,8 +58,8 @@ static void     mcm_client_finalize	(GObject     *object);
 
 static void mcm_client_xrandr_add (McmClient *client, MateRROutput *output);
 #ifdef MCM_USE_SANE
-static gboolean mcm_client_add_connected_devices_sane (McmClient *client, GError **error);
-static gpointer mcm_client_add_connected_devices_sane_thrd (McmClient *client);
+static gboolean mcm_client_coldplug_devices_sane (McmClient *client, GError **error);
+static gpointer mcm_client_coldplug_devices_sane_thrd (McmClient *client);
 #endif
 /**
  * McmClientPrivate:
@@ -253,12 +253,51 @@ mcm_client_get_id_for_udev_device (GUdevDevice *udev_device)
 }
 
 /**
+ * mcm_client_remove_device_internal:
+ **/
+static gboolean
+mcm_client_remove_device_internal (McmClient *client, McmDevice *device, gboolean emit_signal, GError **error)
+{
+	gboolean ret = FALSE;
+	const gchar *device_id;
+
+	g_return_val_if_fail (MCM_IS_CLIENT (client), FALSE);
+	g_return_val_if_fail (MCM_IS_DEVICE (device), FALSE);
+
+	/* check device is not connected */
+	device_id = mcm_device_get_id (device);
+	if (mcm_device_get_connected (device)) {
+		g_set_error (error, 1, 0, "device %s is still connected", device_id);
+		goto out;
+	}
+
+	/* try to remove from array */
+	ret = g_ptr_array_remove (client->priv->array, device);
+	if (!ret) {
+		g_set_error_literal (error, 1, 0, "not found in device array");
+		goto out;
+	}
+
+	/* ensure signal handlers are disconnected */
+	g_signal_handlers_disconnect_by_func (device, G_CALLBACK (mcm_client_device_changed_cb), client);
+
+	/* emit a signal */
+	if (emit_signal) {
+		egg_debug ("emit removed: %s", device_id);
+		g_signal_emit (client, signals[SIGNAL_REMOVED], 0, device);
+	}
+out:
+	return ret;
+}
+
+/**
  * mcm_client_gudev_remove:
  **/
 static gboolean
 mcm_client_gudev_remove (McmClient *client, GUdevDevice *udev_device)
 {
 	McmDevice *device;
+	GError *error = NULL;
 	gchar *id;
 	gboolean ret = FALSE;
 
@@ -274,6 +313,16 @@ mcm_client_gudev_remove (McmClient *client, GUdevDevice *udev_device)
 
 	/* set disconnected */
 	mcm_device_set_connected (device, FALSE);
+
+	/* remove device as it never had a profile assigned */
+	if (!mcm_device_get_saved (device)) {
+		ret = mcm_client_remove_device_internal (client, device, TRUE, &error);
+		if (!ret) {
+			egg_warning ("failed to remove: %s", error->message);
+			g_error_free (error);
+			goto out;
+		}
+	}
 
 	/* success */
 	ret = TRUE;
@@ -291,11 +340,9 @@ static gboolean
 mcm_client_gudev_add (McmClient *client, GUdevDevice *udev_device)
 {
 	McmDevice *device = NULL;
-	McmDevice *device_tmp = NULL;
 	gboolean ret = FALSE;
 	const gchar *value;
 	GError *error = NULL;
-	McmClientPrivate *priv = client->priv;
 
 	/* matches our udev rules, which we can change without recompiling */
 	value = g_udev_device_get_property (udev_device, "MCM_DEVICE");
@@ -311,37 +358,16 @@ mcm_client_gudev_add (McmClient *client, GUdevDevice *udev_device)
 		goto out;
 	}
 
-	/* we might have a previous saved device with this ID, in which case nuke it */
-	device_tmp = mcm_client_get_device_by_id (client, mcm_device_get_id (device));
-	if (device_tmp != NULL) {
-		/* already disconnected device now connected */
-		g_object_unref (device);
-		device = g_object_ref (device_tmp);
-		mcm_device_set_connected (device, TRUE);
-	}
-
-	/* load the device */
-	ret = mcm_device_load (device, &error);
+	/* add device */
+	ret = mcm_client_add_device (client, device, &error);
 	if (!ret) {
-		egg_warning ("failed to load: %s", error->message);
+		egg_debug ("failed to set for device: %s", error->message);
 		g_error_free (error);
 		goto out;
 	}
-
-	/* add to list */
-	g_ptr_array_add (priv->array, g_object_ref (device));
-
-	/* signal the addition */
-	egg_debug ("emit: added %s to device list", mcm_device_get_id (device));
-	g_signal_emit (client, signals[SIGNAL_ADDED], 0, device);
-
-	/* connect to the changed signal */
-	g_signal_connect (device, "changed", G_CALLBACK (mcm_client_device_changed_cb), client);
 out:
 	if (device != NULL)
 		g_object_unref (device);
-	if (device_tmp != NULL)
-		g_object_unref (device_tmp);
 	return ret;
 }
 
@@ -363,14 +389,14 @@ mcm_client_sane_refresh_cb (McmClient *client)
 	/* rescan */
 	egg_debug ("rescanning sane");
 	if (client->priv->use_threads) {
-		thread = g_thread_create ((GThreadFunc) mcm_client_add_connected_devices_sane_thrd, client, FALSE, &error);
+		thread = g_thread_create ((GThreadFunc) mcm_client_coldplug_devices_sane_thrd, client, FALSE, &error);
 		if (thread == NULL) {
 			egg_debug ("failed to rescan sane devices: %s", error->message);
 			g_error_free (error);
 			goto out;
 		}
 	} else {
-		ret = mcm_client_add_connected_devices_sane (client, &error);
+		ret = mcm_client_coldplug_devices_sane (client, &error);
 		if (!ret) {
 			egg_debug ("failed to rescan sane devices: %s", error->message);
 			g_error_free (error);
@@ -433,10 +459,10 @@ mcm_client_uevent_cb (GUdevClient *gudev_client, const gchar *action, GUdevDevic
 }
 
 /**
- * mcm_client_add_connected_devices_udev:
+ * mcm_client_coldplug_devices_udev:
  **/
 static gboolean
-mcm_client_add_connected_devices_udev (McmClient *client, GError **error)
+mcm_client_coldplug_devices_udev (McmClient *client, GError **error)
 {
 	GList *devices;
 	GList *l;
@@ -467,12 +493,12 @@ mcm_client_add_connected_devices_udev (McmClient *client, GError **error)
 }
 
 /**
- * mcm_client_add_connected_devices_udev_thrd:
+ * mcm_client_coldplug_devices_udev_thrd:
  **/
 static gpointer
-mcm_client_add_connected_devices_udev_thrd (McmClient *client)
+mcm_client_coldplug_devices_udev_thrd (McmClient *client)
 {
-	mcm_client_add_connected_devices_udev (client, NULL);
+	mcm_client_coldplug_devices_udev (client, NULL);
 	return NULL;
 }
 
@@ -602,11 +628,8 @@ static void
 mcm_client_xrandr_add (McmClient *client, MateRROutput *output)
 {
 	gboolean ret;
-	gboolean connected;
 	GError *error = NULL;
 	McmDevice *device = NULL;
-	McmDevice *device_tmp = NULL;
-	McmClientPrivate *priv = client->priv;
 
 	/* if nothing connected then ignore */
 	ret = mate_rr_output_is_connected (output);
@@ -624,51 +647,23 @@ mcm_client_xrandr_add (McmClient *client, MateRROutput *output)
 		goto out;
 	}
 
-	/* we might have a previous saved device with this ID, in which use that instead */
-	device_tmp = mcm_client_get_device_by_id (client, mcm_device_get_id (device));
-	if (device_tmp != NULL) {
-
-		/* this is just a dupe */
-		connected = mcm_device_get_connected (device_tmp);
-		if (connected) {
-			egg_debug ("ignoring dupe");
-			goto out;
-		}
-
-		/* use original device */
-		g_object_unref (device);
-		device = g_object_ref (device_tmp);
-	}
-
-	/* load the device */
-	ret = mcm_device_load (device, &error);
+	/* add device */
+	ret = mcm_client_add_device (client, device, &error);
 	if (!ret) {
-		egg_warning ("failed to load: %s", error->message);
+		egg_debug ("failed to set for device: %s", error->message);
 		g_error_free (error);
 		goto out;
 	}
-
-	/* add to the array */
-	g_ptr_array_add (priv->array, g_object_ref (device));
-
-	/* signal the addition */
-	egg_debug ("emit: added %s to device list", mcm_device_get_id (device));
-	g_signal_emit (client, signals[SIGNAL_ADDED], 0, device);
-
-	/* connect to the changed signal */
-	g_signal_connect (device, "changed", G_CALLBACK (mcm_client_device_changed_cb), client);
 out:
 	if (device != NULL)
 		g_object_unref (device);
-	if (device_tmp != NULL)
-		g_object_unref (device_tmp);
 }
 
 /**
- * mcm_client_add_connected_devices_xrandr:
+ * mcm_client_coldplug_devices_xrandr:
  **/
 static gboolean
-mcm_client_add_connected_devices_xrandr (McmClient *client, GError **error)
+mcm_client_coldplug_devices_xrandr (McmClient *client, GError **error)
 {
 	MateRROutput **outputs;
 	guint i;
@@ -706,33 +701,23 @@ mcm_client_cups_add (McmClient *client, cups_dest_t dest)
 		goto out;
 	}
 
-	/* load the device */
-	ret = mcm_device_load (device, &error);
+	/* add device */
+	ret = mcm_client_add_device (client, device, &error);
 	if (!ret) {
-		egg_warning ("failed to load: %s", error->message);
+		egg_debug ("failed to set for device: %s", error->message);
 		g_error_free (error);
 		goto out;
 	}
-
-	/* add to the array */
-	g_ptr_array_add (priv->array, g_object_ref (device));
-
-	/* signal the addition */
-	egg_debug ("emit: added %s to device list", mcm_device_get_id (device));
-	g_signal_emit (client, signals[SIGNAL_ADDED], 0, device);
-
-	/* connect to the changed signal */
-	g_signal_connect (device, "changed", G_CALLBACK (mcm_client_device_changed_cb), client);
 out:
 	if (device != NULL)
 		g_object_unref (device);
 }
 
 /**
- * mcm_client_add_connected_devices_cups:
+ * mcm_client_coldplug_devices_cups:
  **/
 static gboolean
-mcm_client_add_connected_devices_cups (McmClient *client, GError **error)
+mcm_client_coldplug_devices_cups (McmClient *client, GError **error)
 {
 	gint num_dests;
 	cups_dest_t *dests;
@@ -761,12 +746,12 @@ mcm_client_add_connected_devices_cups (McmClient *client, GError **error)
 }
 
 /**
- * mcm_client_add_connected_devices_cups_thrd:
+ * mcm_client_coldplug_devices_cups_thrd:
  **/
 static gpointer
-mcm_client_add_connected_devices_cups_thrd (McmClient *client)
+mcm_client_coldplug_devices_cups_thrd (McmClient *client)
 {
-	mcm_client_add_connected_devices_cups (client, NULL);
+	mcm_client_coldplug_devices_cups (client, NULL);
 	return NULL;
 }
 
@@ -780,8 +765,6 @@ mcm_client_sane_add (McmClient *client, const SANE_Device *sane_device)
 	gboolean ret;
 	GError *error = NULL;
 	McmDevice *device = NULL;
-	McmDevice *device_tmp = NULL;
-	McmClientPrivate *priv = client->priv;
 
 	/* create new device */
 	device = mcm_device_sane_new ();
@@ -792,43 +775,23 @@ mcm_client_sane_add (McmClient *client, const SANE_Device *sane_device)
 		goto out;
 	}
 
-	/* we might have a previous saved device with this ID, in which use that instead */
-	device_tmp = mcm_client_get_device_by_id (client, mcm_device_get_id (device));
-	if (device_tmp != NULL) {
-		mcm_device_set_connected (device_tmp, TRUE);
-		g_object_unref (device);
-		device = g_object_ref (device_tmp);
-	}
-
-	/* load the device */
-	ret = mcm_device_load (device, &error);
+	/* add device */
+	ret = mcm_client_add_device (client, device, &error);
 	if (!ret) {
-		egg_warning ("failed to load: %s", error->message);
+		egg_debug ("failed to set for device: %s", error->message);
 		g_error_free (error);
 		goto out;
 	}
-
-	/* add to the array */
-	g_ptr_array_add (priv->array, g_object_ref (device));
-
-	/* signal the addition */
-	egg_debug ("emit: added %s to device list", mcm_device_get_id (device));
-	g_signal_emit (client, signals[SIGNAL_ADDED], 0, device);
-
-	/* connect to the changed signal */
-	g_signal_connect (device, "changed", G_CALLBACK (mcm_client_device_changed_cb), client);
 out:
 	if (device != NULL)
 		g_object_unref (device);
-	if (device_tmp != NULL)
-		g_object_unref (device_tmp);
 }
 
 /**
- * mcm_client_add_connected_devices_sane:
+ * mcm_client_coldplug_devices_sane:
  **/
 static gboolean
-mcm_client_add_connected_devices_sane (McmClient *client, GError **error)
+mcm_client_coldplug_devices_sane (McmClient *client, GError **error)
 {
 	gint i;
 	gboolean ret = TRUE;
@@ -872,12 +835,12 @@ out:
 }
 
 /**
- * mcm_client_add_connected_devices_sane_thrd:
+ * mcm_client_coldplug_devices_sane_thrd:
  **/
 static gpointer
-mcm_client_add_connected_devices_sane_thrd (McmClient *client)
+mcm_client_coldplug_devices_sane_thrd (McmClient *client)
 {
-	mcm_client_add_connected_devices_sane (client, NULL);
+	mcm_client_coldplug_devices_sane (client, NULL);
 	return NULL;
 }
 #endif
@@ -897,7 +860,6 @@ mcm_client_add_unconnected_device (McmClient *client, GKeyFile *keyfile, const g
 	gboolean ret;
 	gboolean virtual;
 	GError *error = NULL;
-	McmClientPrivate *priv = client->priv;
 
 	/* add new device */
 	title = g_key_file_get_string (keyfile, id, "title", NULL);
@@ -948,23 +910,13 @@ mcm_client_add_unconnected_device (McmClient *client, GKeyFile *keyfile, const g
 		      "colorspace", colorspace,
 		      NULL);
 
-	/* load the device */
-	ret = mcm_device_load (device, &error);
+	/* add device */
+	ret = mcm_client_add_device (client, device, &error);
 	if (!ret) {
-		egg_warning ("failed to load: %s", error->message);
+		egg_debug ("failed to set for device: %s", error->message);
 		g_error_free (error);
 		goto out;
 	}
-
-	/* add to list */
-	g_ptr_array_add (priv->array, g_object_ref (device));
-
-	/* signal the addition */
-	egg_debug ("emit: added %s to device list", id);
-	g_signal_emit (client, signals[SIGNAL_ADDED], 0, device);
-
-	/* connect to the changed signal */
-	g_signal_connect (device, "changed", G_CALLBACK (mcm_client_device_changed_cb), client);
 out:
 	if (device != NULL)
 		g_object_unref (device);
@@ -1051,7 +1003,7 @@ out:
 /**
  * mcm_client_add_saved:
  **/
-gboolean
+static gboolean
 mcm_client_add_saved (McmClient *client, GError **error)
 {
 	gboolean ret;
@@ -1101,10 +1053,10 @@ out:
 }
 
 /**
- * mcm_client_add_connected:
+ * mcm_client_coldplug:
  **/
 gboolean
-mcm_client_add_connected (McmClient *client, McmClientColdplug coldplug, GError **error)
+mcm_client_coldplug (McmClient *client, McmClientColdplug coldplug, GError **error)
 {
 	gboolean ret = TRUE;
 	GThread *thread;
@@ -1121,7 +1073,7 @@ mcm_client_add_connected (McmClient *client, McmClientColdplug coldplug, GError 
 	if (!coldplug || coldplug & MCM_CLIENT_COLDPLUG_XRANDR) {
 		mcm_client_add_loading (client);
 		egg_debug ("adding devices of type XRandR");
-		ret = mcm_client_add_connected_devices_xrandr (client, error);
+		ret = mcm_client_coldplug_devices_xrandr (client, error);
 		if (!ret)
 			goto out;
 	}
@@ -1131,11 +1083,11 @@ mcm_client_add_connected (McmClient *client, McmClientColdplug coldplug, GError 
 		mcm_client_add_loading (client);
 		egg_debug ("adding devices of type UDEV");
 		if (client->priv->use_threads) {
-			thread = g_thread_create ((GThreadFunc) mcm_client_add_connected_devices_udev_thrd, client, FALSE, error);
+			thread = g_thread_create ((GThreadFunc) mcm_client_coldplug_devices_udev_thrd, client, FALSE, error);
 			if (thread == NULL)
 				goto out;
 		} else {
-			ret = mcm_client_add_connected_devices_udev (client, error);
+			ret = mcm_client_coldplug_devices_udev (client, error);
 			if (!ret)
 				goto out;
 		}
@@ -1146,11 +1098,11 @@ mcm_client_add_connected (McmClient *client, McmClientColdplug coldplug, GError 
 		mcm_client_add_loading (client);
 		egg_debug ("adding devices of type CUPS");
 		if (client->priv->use_threads) {
-			thread = g_thread_create ((GThreadFunc) mcm_client_add_connected_devices_cups_thrd, client, FALSE, error);
+			thread = g_thread_create ((GThreadFunc) mcm_client_coldplug_devices_cups_thrd, client, FALSE, error);
 			if (thread == NULL)
 				goto out;
 		} else {
-			ret = mcm_client_add_connected_devices_cups (client, error);
+			ret = mcm_client_coldplug_devices_cups (client, error);
 			if (!ret)
 				goto out;
 		}
@@ -1162,11 +1114,11 @@ mcm_client_add_connected (McmClient *client, McmClientColdplug coldplug, GError 
 		mcm_client_add_loading (client);
 		egg_debug ("adding devices of type SANE");
 		if (client->priv->use_threads) {
-			thread = g_thread_create ((GThreadFunc) mcm_client_add_connected_devices_sane_thrd, client, FALSE, error);
+			thread = g_thread_create ((GThreadFunc) mcm_client_coldplug_devices_sane_thrd, client, FALSE, error);
 			if (thread == NULL)
 				goto out;
 		} else {
-			ret = mcm_client_add_connected_devices_sane (client, error);
+			ret = mcm_client_coldplug_devices_sane (client, error);
 			if (!ret)
 				goto out;
 		}
@@ -1177,43 +1129,39 @@ out:
 }
 
 /**
- * mcm_client_add_virtual_device:
+ * mcm_client_add_device:
  **/
 gboolean
-mcm_client_add_virtual_device (McmClient *client, McmDevice *device, GError **error)
+mcm_client_add_device (McmClient *client, McmDevice *device, GError **error)
 {
 	gboolean ret = FALSE;
-	const gchar *id;
-	gboolean virtual;
+	const gchar *device_id;
 	McmDevice *device_tmp = NULL;
 
 	g_return_val_if_fail (MCM_IS_CLIENT (client), FALSE);
 	g_return_val_if_fail (MCM_IS_DEVICE (device), FALSE);
 
-	/* check removable */
-	virtual = mcm_device_get_virtual (device);
-	if (!virtual) {
-		g_set_error_literal (error, 1, 0, "cannot add non-virtual devices");
-		goto out;
+	device_id = mcm_device_get_id (device);
+	device_tmp = mcm_client_get_device_by_id (client, device_id);
+	if (device_tmp != NULL) {
+		egg_debug ("already exists, copy settings and remove old device: %s", device_id);
+		mcm_device_set_profile_filename (device, mcm_device_get_profile_filename (device_tmp));
+		mcm_device_set_saved (device, mcm_device_get_saved (device_tmp));
+		ret = mcm_client_remove_device_internal (client, device_tmp, FALSE, error);
+		if (!ret)
+			goto out;
 	}
 
-	/* look to see if device already exists */
-	id = mcm_device_get_id (device);
-	device_tmp = mcm_client_get_device_by_id (client, id);
-	if (device_tmp != NULL) {
-		/* TRANSLATORS: error message */
-		g_set_error_literal (error, 1, 0, _("This device already exists"));
+	/* load the device */
+	ret = mcm_device_load (device, error);
+	if (!ret)
 		goto out;
-	}
 
 	/* add to the array */
 	g_ptr_array_add (client->priv->array, g_object_ref (device));
 
-	/* update status */
-	mcm_device_set_saved (device, FALSE);
-
 	/* emit a signal */
-	egg_debug ("emit added: %s", id);
+	egg_debug ("emit added: %s", device_id);
 	g_signal_emit (client, signals[SIGNAL_ADDED], 0, device);
 
 	/* connect to the changed signal */
@@ -1228,45 +1176,37 @@ out:
 }
 
 /**
+ * mcm_client_remove_device:
+ **/
+gboolean
+mcm_client_remove_device (McmClient *client, McmDevice *device, GError **error)
+{
+	return mcm_client_remove_device_internal (client, device, TRUE, error);
+}
+
+/**
  * mcm_client_delete_device:
  **/
 gboolean
 mcm_client_delete_device (McmClient *client, McmDevice *device, GError **error)
 {
 	gboolean ret = FALSE;
-	const gchar *id;
+	const gchar *device_id;
 	gchar *data = NULL;
 	gchar *filename = NULL;
 	GKeyFile *keyfile = NULL;
-	gboolean saved;
-	gboolean connected;
 
 	g_return_val_if_fail (MCM_IS_CLIENT (client), FALSE);
 	g_return_val_if_fail (MCM_IS_DEVICE (device), FALSE);
 
-	/* check device is not connected */
-	connected = mcm_device_get_connected (device);
-	if (connected) {
-		g_set_error_literal (error, 1, 0, "device is still connected");
-		goto out;
-	}
-
-	/* try to remove from array */
-	ret = g_ptr_array_remove (client->priv->array, device);
-	if (!ret) {
-		g_set_error_literal (error, 1, 0, "not found in device array");
-		goto out;
-	}
-
 	/* check device is saved */
-	id = mcm_device_get_id (device);
-	saved = mcm_device_get_saved (device);
-	if (!saved)
-		goto not_saved;
+	device_id = mcm_device_get_id (device);
+	if (!mcm_device_get_saved (device))
+		goto out;
 
 	/* get the config file */
 	filename = mcm_utils_get_default_config_location ();
-	egg_debug ("removing %s from %s", id, filename);
+	egg_debug ("removing %s from %s", device_id, filename);
 
 	/* load the config file */
 	keyfile = g_key_file_new ();
@@ -1275,7 +1215,7 @@ mcm_client_delete_device (McmClient *client, McmDevice *device, GError **error)
 		goto out;
 
 	/* remove from the config file */
-	ret = g_key_file_remove_group (keyfile, id, error);
+	ret = g_key_file_remove_group (keyfile, device_id, error);
 	if (!ret)
 		goto out;
 
@@ -1294,10 +1234,10 @@ mcm_client_delete_device (McmClient *client, McmDevice *device, GError **error)
 	/* update status */
 	mcm_device_set_saved (device, FALSE);
 
-not_saved:
-	/* emit a signal */
-	egg_debug ("emit removed: %s", id);
-	g_signal_emit (client, signals[SIGNAL_REMOVED], 0, device);
+	/* remove device */
+	ret = mcm_client_remove_device_internal (client, device, TRUE, error);
+	if (!ret)
+		goto out;
 out:
 	g_free (data);
 	g_free (filename);

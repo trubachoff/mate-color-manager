@@ -72,7 +72,7 @@ main (int argc, char **argv)
 
 	/* get devices */
 	client = mcm_client_new ();
-	ret = mcm_client_add_connected (client, MCM_CLIENT_COLDPLUG_XRANDR, &error);
+	ret = mcm_client_coldplug (client, MCM_CLIENT_COLDPLUG_XRANDR, &error);
 	if (!ret) {
 		egg_warning ("failed to get devices: %s", error->message);
 		g_error_free (error);

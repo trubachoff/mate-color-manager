@@ -28,9 +28,11 @@
 #include "mcm-calibrate-dialog.h"
 #include "mcm-calibrate-manual.h"
 #include "mcm-cie-widget.h"
+#include "mcm-client.h"
 #include "mcm-clut.h"
 #include "mcm-device.h"
 #include "mcm-device-udev.h"
+#include "mcm-device-xrandr.h"
 #include "mcm-dmi.h"
 #include "mcm-edid.h"
 #include "mcm-exif.h"
@@ -1054,6 +1056,102 @@ mcm_test_xyz_func (void)
 	g_object_unref (xyz);
 }
 
+static void
+mcm_test_client_func (void)
+{
+	McmClient *client;
+	GError *error = NULL;
+	gboolean ret;
+	GPtrArray *array;
+	McmDevice *device;
+	gchar *filename;
+	gchar *data = NULL;
+
+	client = mcm_client_new ();
+	g_assert (client != NULL);
+
+	/* ensure file is gone */
+	g_setenv ("MCM_TEST", "1", TRUE);
+	filename = mcm_utils_get_default_config_location ();
+	g_unlink (filename);
+
+	/* ensure we don't fail with no config file */
+	ret = mcm_client_coldplug (client, MCM_CLIENT_COLDPLUG_SAVED, &error);
+	g_assert_no_error (error);
+	g_assert (ret);
+
+	array = mcm_client_get_devices (client);
+	g_assert_cmpint (array->len, ==, 0);
+	g_ptr_array_unref (array);
+
+	/* ensure we get one device */
+	ret = g_file_set_contents (filename,
+				   "[xrandr_goldstar]\n"
+				   "profile=dave.icc\n"
+				   "title=Goldstar\n"
+				   "type=display\n"
+				   "colorspace=rgb\n", -1, &error);
+	g_assert_no_error (error);
+	g_assert (ret);
+
+	ret = mcm_client_coldplug (client, MCM_CLIENT_COLDPLUG_SAVED, &error);
+	g_assert_no_error (error);
+	g_assert (ret);
+
+	array = mcm_client_get_devices (client);
+	g_assert_cmpint (array->len, ==, 1);
+	device = g_ptr_array_index (array, 0);
+	g_assert_cmpstr (mcm_device_get_id (device), ==, "xrandr_goldstar");
+	g_assert_cmpstr (mcm_device_get_title (device), ==, "Goldstar");
+	g_assert_cmpstr (mcm_device_get_profile_filename (device), ==, "dave.icc");
+	g_assert (mcm_device_get_saved (device));
+	g_assert (!mcm_device_get_connected (device));
+	g_assert (MCM_IS_DEVICE_XRANDR (device));
+	g_ptr_array_unref (array);
+
+	device = mcm_device_udev_new ();
+	mcm_device_set_id (device, "xrandr_goldstar");
+	mcm_device_set_title (device, "Slightly different");
+	mcm_device_set_connected (device, TRUE);
+	ret = mcm_client_add_device (client, device, &error);
+	g_assert_no_error (error);
+	g_assert (ret);
+
+	/* ensure we merge saved properties into current devices */
+	array = mcm_client_get_devices (client);
+	g_assert_cmpint (array->len, ==, 1);
+	device = g_ptr_array_index (array, 0);
+	g_assert_cmpstr (mcm_device_get_id (device), ==, "xrandr_goldstar");
+	g_assert_cmpstr (mcm_device_get_title (device), ==, "Slightly different");
+	g_assert_cmpstr (mcm_device_get_profile_filename (device), ==, "dave.icc");
+	g_assert (mcm_device_get_saved (device));
+	g_assert (mcm_device_get_connected (device));
+	g_assert (MCM_IS_DEVICE_UDEV (device));
+	g_ptr_array_unref (array);
+
+	/* delete */
+	mcm_device_set_connected (device, FALSE);
+	ret = mcm_client_delete_device (client, device, &error);
+	g_assert_no_error (error);
+	g_assert (ret);
+
+	array = mcm_client_get_devices (client);
+	g_assert_cmpint (array->len, ==, 0);
+	g_ptr_array_unref (array);
+
+	ret = g_file_get_contents (filename, &data, NULL, &error);
+	g_assert_no_error (error);
+	g_assert (ret);
+
+	g_assert_cmpstr (data, ==, "");
+
+	g_object_unref (client);
+	g_object_unref (device);
+	g_unlink (filename);
+	g_free (filename);
+	g_free (data);
+}
+
 int
 main (int argc, char **argv)
 {
@@ -1063,6 +1161,7 @@ main (int argc, char **argv)
 	gtk_init (&argc, &argv);
 	g_test_init (&argc, &argv, NULL);
 
+	g_test_add_func ("/color/client", mcm_test_client_func);
 	g_test_add_func ("/color/dmi", mcm_test_dmi_func);
 	g_test_add_func ("/color/calibrate", mcm_test_calibrate_func);
 	g_test_add_func ("/color/edid", mcm_test_edid_func);

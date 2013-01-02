@@ -66,6 +66,7 @@ typedef enum {
 	MCM_CLIENT_COLDPLUG_CUPS	= 0x02,
 	MCM_CLIENT_COLDPLUG_SANE	= 0x04,
 	MCM_CLIENT_COLDPLUG_UDEV	= 0x08,
+	MCM_CLIENT_COLDPLUG_SAVED	= 0x10,
 	MCM_CLIENT_COLDPLUG_LAST,
 } McmClientColdplug;
 
@@ -76,16 +77,17 @@ McmDevice	*mcm_client_get_device_by_id			(McmClient		*client,
 								 const gchar		*id);
 McmDevice	*mcm_client_get_device_by_window		(McmClient		*client,
 								 GdkWindow		*window);
-gboolean	 mcm_client_add_virtual_device			(McmClient		*client,
+gboolean	 mcm_client_add_device				(McmClient		*client,
+								 McmDevice		*device,
+								 GError			**error);
+gboolean	 mcm_client_remove_device			(McmClient		*client,
 								 McmDevice		*device,
 								 GError			**error);
 gboolean	 mcm_client_delete_device			(McmClient		*client,
 								 McmDevice		*device,
 								 GError			**error);
-gboolean	 mcm_client_add_connected			(McmClient		*client,
+gboolean	 mcm_client_coldplug				(McmClient		*client,
 								 McmClientColdplug	 coldplug,
-								 GError			**error);
-gboolean	 mcm_client_add_saved				(McmClient		*client,
 								 GError			**error);
 GPtrArray	*mcm_client_get_devices				(McmClient		*client);
 void		 mcm_client_set_use_threads			(McmClient		*client,

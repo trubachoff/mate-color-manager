@@ -141,7 +141,7 @@ mcm_device_cups_set_from_dest (McmDevice *device, http_t *http, cups_dest_t dest
 			egg_warning ("remap %s?", profile_filename);
 		}
 
-		egg_debug ("keyword: %s, value: %s, spec: %s", keyword, value, ppd_file->attrs[i]->spec);
+//		egg_debug ("keyword: %s, value: %s, spec: %s", keyword, value, ppd_file->attrs[i]->spec);
 	}
 
 	/* convert device_id 'MFG:HP;MDL:deskjet d1300 series;DES:deskjet d1300 series;' to suitable id */

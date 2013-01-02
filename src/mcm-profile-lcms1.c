@@ -172,8 +172,6 @@ mcm_parser_load_icc_vcgt_formula (McmProfileLcms1 *profile_lcms1, const guint8 *
 	gboolean ret = FALSE;
 	McmClutData *vcgt_data;
 
-	egg_debug ("loading a formula encoded gamma table");
-
 	/* just load in data into a temporary array */
 	profile_lcms1->priv->vcgt_data = g_new0 (McmClutData, 4);
 	vcgt_data = profile_lcms1->priv->vcgt_data;
@@ -226,8 +224,6 @@ mcm_parser_load_icc_vcgt_table (McmProfileLcms1 *profile_lcms1, const guint8 *da
 	guint i;
 	McmClutData *vcgt_data;
 
-	egg_debug ("loading a table encoded gamma table");
-
 	num_channels = mcm_parser_decode_16 (data + MCM_VCGT_TABLE_NUM_CHANNELS);
 	num_entries = mcm_parser_decode_16 (data + MCM_VCGT_TABLE_NUM_ENTRIES);
 	entry_size = mcm_parser_decode_16 (data + MCM_VCGT_TABLE_NUM_SIZE);
@@ -239,10 +235,6 @@ mcm_parser_load_icc_vcgt_table (McmProfileLcms1 *profile_lcms1, const guint8 *da
 		num_entries = 256;
 		num_channels = 3;
 	}
-
-	egg_debug ("channels: %u", num_channels);
-	egg_debug ("entry size: %ubits", entry_size * 8);
-	egg_debug ("entries/channel: %u", num_entries);
 
 	/* only able to parse RGB data */
 	if (num_channels != 3) {
@@ -651,7 +643,6 @@ mcm_profile_lcms1_parse_data (McmProfile *profile, const guint8 *data, gsize len
 
 	/* get the number of tags in the file */
 	num_tags = mcm_parser_decode_32 (data + MCM_NUMTAGS);
-	egg_debug ("number of tags: %i", num_tags);
 
 	for (i=0; i<num_tags; i++) {
 		offset = MCM_TAG_WIDTH * i;
@@ -683,7 +674,6 @@ mcm_profile_lcms1_parse_data (McmProfile *profile, const guint8 *data, gsize len
 			g_free (text);
 		}
 		if (tag_id == icSigMachineLookUpTableTag) {
-			egg_debug ("found MLUT which is a fixed size block");
 			ret = mcm_parser_load_icc_mlut (profile_lcms1, data + tag_offset, tag_size);
 			if (!ret) {
 				g_set_error_literal (error, 1, 0, "failed to load mlut");
@@ -691,7 +681,6 @@ mcm_profile_lcms1_parse_data (McmProfile *profile, const guint8 *data, gsize len
 			}
 		}
 		if (tag_id == icSigVideoCartGammaTableTag) {
-			egg_debug ("found VCGT");
 			if (tag_size == 1584)
 				priv->adobe_gamma_workaround = TRUE;
 			ret = mcm_parser_load_icc_vcgt (profile_lcms1, data + tag_offset, tag_size);
@@ -707,10 +696,6 @@ mcm_profile_lcms1_parse_data (McmProfile *profile, const guint8 *data, gsize len
 
 	/* set properties */
 	mcm_profile_set_has_vcgt (profile, priv->has_vcgt_formula || priv->has_vcgt_table);
-
-	egg_debug ("Has MLUT:         %s", priv->has_mlut ? "YES" : "NO");
-	egg_debug ("Has VCGT formula: %s", priv->has_vcgt_formula ? "YES" : "NO");
-	egg_debug ("Has VCGT table:   %s", priv->has_vcgt_table ? "YES" : "NO");
 out:
 	return ret;
 }

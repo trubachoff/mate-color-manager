@@ -1219,23 +1219,13 @@ out:
 }
 
 /**
- * mcm_prefs_assign_make_default_cb:
+ * mcm_prefs_assign_make_default_internal:
  **/
 static void
-mcm_prefs_assign_make_default_cb (GtkWidget *widget, gpointer data)
+mcm_prefs_assign_make_default_internal (GtkTreeModel *model, GtkTreeIter *iter_selected)
 {
 	GtkTreeIter iter;
-	GtkTreeIter iter_selected;
-	GtkTreeModel *model;
-	GtkTreeSelection *selection;
-
-	/* get the selected row */
-	widget = GTK_WIDGET (gtk_builder_get_object (builder, "treeview_assign"));
-	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (widget));
-	if (!gtk_tree_selection_get_selected (selection, &model, &iter_selected)) {
-		egg_debug ("no row selected");
-		goto out;
-	}
+	GtkWidget *widget;
 
 	/* make none of the devices default */
 	gtk_tree_model_get_iter_first (model, &iter);
@@ -1247,7 +1237,7 @@ mcm_prefs_assign_make_default_cb (GtkWidget *widget, gpointer data)
 	} while (gtk_tree_model_iter_next (model, &iter));
 
 	/* make the selected device default */
-	gtk_list_store_set (list_store_assign, &iter_selected,
+	gtk_list_store_set (list_store_assign, iter_selected,
 			    MCM_ASSIGN_COLUMN_IS_DEFAULT, TRUE,
 			    MCM_ASSIGN_COLUMN_SORT, "0",
 			    -1);
@@ -1258,8 +1248,28 @@ mcm_prefs_assign_make_default_cb (GtkWidget *widget, gpointer data)
 
 	/* save device */
 	mcm_prefs_assign_save_profiles_for_device (current_device);
-out:
-	return;
+}
+
+/**
+ * mcm_prefs_assign_make_default_cb:
+ **/
+static void
+mcm_prefs_assign_make_default_cb (GtkWidget *widget, gpointer data)
+{
+	GtkTreeIter iter;
+	GtkTreeModel *model;
+	GtkTreeSelection *selection;
+
+	/* get the selected row */
+	widget = GTK_WIDGET (gtk_builder_get_object (builder, "treeview_assign"));
+	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (widget));
+	if (!gtk_tree_selection_get_selected (selection, &model, &iter)) {
+		egg_debug ("no row selected");
+		return;
+	}
+
+	/* make this profile the default */
+	mcm_prefs_assign_make_default_internal (model, &iter);
 }
 
 /**
@@ -1909,6 +1919,27 @@ mcm_prefs_profile_colorspace_to_string (McmColorspace colorspace)
 	}
 	/* TRANSLATORS: this the ICC colorspace type */
 	return _("Unknown");
+}
+
+/**
+ * mcm_prefs_assign_treeview_row_activated_cb:
+ **/
+static void
+mcm_prefs_assign_treeview_row_activated_cb (GtkTreeView *tree_view, GtkTreePath *path,
+					    GtkTreeViewColumn *column, gpointer userdata)
+{
+	GtkTreeModel *model;
+	GtkTreeIter iter;
+	gboolean ret;
+
+	/* get the iter */
+	model = GTK_TREE_MODEL (list_store_assign);
+	ret = gtk_tree_model_get_iter (model, &iter, path);
+	if (!ret)
+		return;
+
+	/* make this profile the default */
+	mcm_prefs_assign_make_default_internal (model, &iter);
 }
 
 /**
@@ -3187,6 +3218,8 @@ main (int argc, char **argv)
 	widget = GTK_WIDGET (gtk_builder_get_object (builder, "treeview_assign"));
 	gtk_tree_view_set_model (GTK_TREE_VIEW (widget),
 				 GTK_TREE_MODEL (list_store_assign));
+	g_signal_connect (GTK_TREE_VIEW (widget), "row-activated",
+			  G_CALLBACK (mcm_prefs_assign_treeview_row_activated_cb), NULL);
 	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (widget));
 	g_signal_connect (selection, "changed",
 			  G_CALLBACK (mcm_prefs_assign_treeview_clicked_cb), NULL);

@@ -50,6 +50,8 @@
 #define MCM_SETTINGS_MIGRATE_CONFIG_VERSION		"migrate-config-version"
 #define MCM_SETTINGS_RECALIBRATE_PRINTER_THRESHOLD 	"recalibrate-printer-threshold"
 #define MCM_SETTINGS_RECALIBRATE_DISPLAY_THRESHOLD 	"recalibrate-display-threshold"
+#define MCM_SETTINGS_ENABLE_SANE			"enable-sane"
+#define MCM_SETTINGS_ENABLE_CUPS			"enable-cups"
 
 #define MCM_CONFIG_VERSION_ORIGINAL 			0
 #define MCM_CONFIG_VERSION_SHARED_SPEC			1

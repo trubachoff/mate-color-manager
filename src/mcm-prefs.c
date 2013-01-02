@@ -50,6 +50,7 @@
 static GtkBuilder *builder = NULL;
 static GtkListStore *list_store_devices = NULL;
 static GtkListStore *list_store_profiles = NULL;
+static GtkListStore *list_store_assign = NULL;
 static McmDevice *current_device = NULL;
 static McmProfileStore *profile_store = NULL;
 static McmClient *mcm_client = NULL;
@@ -79,6 +80,13 @@ enum {
 };
 
 enum {
+	MCM_ASSIGN_COLUMN_SORT,
+	MCM_ASSIGN_COLUMN_PROFILE,
+	MCM_ASSIGN_COLUMN_IS_DEFAULT,
+	MCM_ASSIGN_COLUMN_LAST
+};
+
+enum {
 	MCM_PREFS_COMBO_COLUMN_TEXT,
 	MCM_PREFS_COMBO_COLUMN_PROFILE,
 	MCM_PREFS_COMBO_COLUMN_TYPE,
@@ -88,14 +96,14 @@ enum {
 
 typedef enum {
 	MCM_PREFS_ENTRY_TYPE_PROFILE,
-	MCM_PREFS_ENTRY_TYPE_NONE,
 	MCM_PREFS_ENTRY_TYPE_IMPORT,
 	MCM_PREFS_ENTRY_TYPE_LAST
 } McmPrefsEntryType;
 
 static void mcm_prefs_devices_treeview_clicked_cb (GtkTreeSelection *selection, gpointer userdata);
 
-#define MCM_PREFS_TREEVIEW_WIDTH 350 /* px */
+#define MCM_PREFS_TREEVIEW_MAIN_WIDTH		350 /* px */
+#define MCM_PREFS_TREEVIEW_PROFILES_WIDTH	450 /* px */
 
 /**
  * mcm_prefs_error_dialog:
@@ -178,11 +186,7 @@ mcm_prefs_combobox_add_profile (GtkWidget *widget, McmProfile *profile, McmPrefs
 		iter = &iter_tmp;
 
 	/* use description */
-	if (entry_type == MCM_PREFS_ENTRY_TYPE_NONE) {
-		/* TRANSLATORS: this is where no profile is selected */
-		description = _("None");
-		sortable = g_strdup ("1");
-	} else if (entry_type == MCM_PREFS_ENTRY_TYPE_IMPORT) {
+	if (entry_type == MCM_PREFS_ENTRY_TYPE_IMPORT) {
 		/* TRANSLATORS: this is where the user can click and import a profile */
 		description = _("Other profile…");
 		sortable = g_strdup ("9");
@@ -1003,6 +1007,256 @@ mcm_prefs_device_add_cb (GtkWidget *widget, gpointer data)
 }
 
 /**
+ * mcm_prefs_is_profile_suitable_for_device:
+ **/
+static gboolean
+mcm_prefs_is_profile_suitable_for_device (McmProfile *profile, McmDevice *device)
+{
+	McmProfileKind profile_kind_tmp;
+	McmProfileKind profile_kind;
+	McmColorspace profile_colorspace;
+	McmColorspace device_colorspace;
+	gboolean ret = FALSE;
+	McmDeviceKind device_kind;
+
+	/* not the right colorspace */
+	device_colorspace = mcm_device_get_colorspace (device);
+	profile_colorspace = mcm_profile_get_colorspace (profile);
+	if (device_colorspace != profile_colorspace)
+		goto out;
+
+	/* not the correct kind */
+	device_kind = mcm_device_get_kind (device);
+	profile_kind_tmp = mcm_profile_get_kind (profile);
+	profile_kind = mcm_utils_device_kind_to_profile_kind (device_kind);
+	if (profile_kind_tmp != profile_kind)
+		goto out;
+
+	/* success */
+	ret = TRUE;
+out:
+	return ret;
+}
+
+/**
+ * mcm_prefs_add_profiles_suitable_for_devices:
+ **/
+static void
+mcm_prefs_add_profiles_suitable_for_devices (GtkWidget *widget, const gchar *profile_filename)
+{
+	GtkTreeModel *model;
+	guint i;
+	gboolean ret;
+	McmProfile *profile;
+	GPtrArray *profile_array;
+	GtkTreeIter iter;
+
+	/* clear existing entries */
+	model = gtk_combo_box_get_model (GTK_COMBO_BOX (widget));
+	gtk_list_store_clear (GTK_LIST_STORE (model));
+
+	/* get new list */
+	profile_array = mcm_profile_store_get_array (profile_store);
+
+	/* add profiles of the right kind */
+	for (i=0; i<profile_array->len; i++) {
+		profile = g_ptr_array_index (profile_array, i);
+
+		/* don't add the current profile */
+		if (g_strcmp0 (mcm_profile_get_filename (profile), profile_filename) == 0)
+			continue;
+
+		/* only add correct types */
+		ret = mcm_prefs_is_profile_suitable_for_device (profile, current_device);
+		if (!ret)
+			continue;
+
+		/* add */
+		mcm_prefs_combobox_add_profile (widget, profile, MCM_PREFS_ENTRY_TYPE_PROFILE, &iter);
+	}
+
+	/* add a import entry */
+	mcm_prefs_combobox_add_profile (widget, NULL, MCM_PREFS_ENTRY_TYPE_IMPORT, NULL);
+	gtk_combo_box_set_active (GTK_COMBO_BOX (widget), 0);
+	g_ptr_array_unref (profile_array);
+}
+
+/**
+ * mcm_prefs_assign_save_profiles_for_device:
+ **/
+static void
+mcm_prefs_assign_save_profiles_for_device (McmDevice *device)
+{
+	GtkTreeIter iter;
+	GtkTreeModel *model;
+	gboolean is_default;
+	McmProfile *profile;
+	GPtrArray *array;
+	gboolean ret;
+	GError *error = NULL;
+
+	/* create empty array */
+	array = g_ptr_array_new_with_free_func ((GDestroyNotify) g_object_unref);
+
+	/* get first element */
+	model = GTK_TREE_MODEL (list_store_assign);
+	ret = gtk_tree_model_get_iter_first (model, &iter);
+	if (!ret)
+		goto set_profiles;
+
+	/* add default device first */
+	do {
+		gtk_tree_model_get (model, &iter,
+				    MCM_ASSIGN_COLUMN_PROFILE, &profile,
+				    MCM_ASSIGN_COLUMN_IS_DEFAULT, &is_default,
+				    -1);
+		if (is_default)
+			g_ptr_array_add (array, g_object_ref (profile));
+		g_object_unref (profile);
+	} while (gtk_tree_model_iter_next (model, &iter));
+
+	/* add non-default devices next */
+	gtk_tree_model_get_iter_first (model, &iter);
+	do {
+		gtk_tree_model_get (model, &iter,
+				    MCM_ASSIGN_COLUMN_PROFILE, &profile,
+				    MCM_ASSIGN_COLUMN_IS_DEFAULT, &is_default,
+				    -1);
+		if (!is_default)
+			g_ptr_array_add (array, g_object_ref (profile));
+		g_object_unref (profile);
+	} while (gtk_tree_model_iter_next (model, &iter));
+
+set_profiles:
+	/* save new array */
+	mcm_device_set_profiles (device, array);
+
+	/* save */
+	ret = mcm_device_save (current_device, &error);
+	if (!ret) {
+		egg_warning ("failed to save config: %s", error->message);
+		g_error_free (error);
+		goto out;
+	}
+
+	/* set the profile */
+	ret = mcm_device_apply (current_device, &error);
+	if (!ret) {
+		egg_warning ("failed to apply profile: %s", error->message);
+		g_error_free (error);
+		goto out;
+	}
+out:
+	g_ptr_array_unref (array);
+}
+
+/**
+ * mcm_prefs_assign_add_cb:
+ **/
+static void
+mcm_prefs_assign_add_cb (GtkWidget *widget, gpointer data)
+{
+	const gchar *profile_filename;
+
+	/* add profiles of the right kind */
+	widget = GTK_WIDGET (gtk_builder_get_object (builder, "combobox_profile"));
+	profile_filename = mcm_device_get_default_profile_filename (current_device);
+	mcm_prefs_add_profiles_suitable_for_devices (widget, profile_filename);
+
+	/* show the dialog */
+	widget = GTK_WIDGET (gtk_builder_get_object (builder, "dialog_assign"));
+	gtk_widget_show (widget);
+}
+
+/**
+ * mcm_prefs_assign_remove_cb:
+ **/
+static void
+mcm_prefs_assign_remove_cb (GtkWidget *widget, gpointer data)
+{
+	GtkTreeIter iter;
+	GtkTreeSelection *selection;
+	GtkTreeModel *model;
+	gboolean is_default;
+	gboolean ret;
+
+	/* get the selected row */
+	widget = GTK_WIDGET (gtk_builder_get_object (builder, "treeview_assign"));
+	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (widget));
+	if (!gtk_tree_selection_get_selected (selection, &model, &iter)) {
+		egg_debug ("no row selected");
+		goto out;
+	}
+
+	/* if the profile is default, then we'll have to make the first profile default */
+	gtk_tree_model_get (model, &iter,
+			    MCM_ASSIGN_COLUMN_IS_DEFAULT, &is_default,
+			    -1);
+
+	/* remove this entry */
+	gtk_list_store_remove (GTK_LIST_STORE(model), &iter);
+
+	/* /something/ has to be the default profile */
+	if (is_default) {
+		ret = gtk_tree_model_get_iter_first (model, &iter);
+		if (ret) {
+			gtk_list_store_set (list_store_assign, &iter,
+					    MCM_ASSIGN_COLUMN_IS_DEFAULT, TRUE,
+					    -1);
+		}
+	}
+
+	/* save device */
+	mcm_prefs_assign_save_profiles_for_device (current_device);
+out:
+	return;
+}
+
+/**
+ * mcm_prefs_assign_make_default_cb:
+ **/
+static void
+mcm_prefs_assign_make_default_cb (GtkWidget *widget, gpointer data)
+{
+	GtkTreeIter iter;
+	GtkTreeIter iter_selected;
+	GtkTreeModel *model;
+	GtkTreeSelection *selection;
+
+	/* get the selected row */
+	widget = GTK_WIDGET (gtk_builder_get_object (builder, "treeview_assign"));
+	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (widget));
+	if (!gtk_tree_selection_get_selected (selection, &model, &iter_selected)) {
+		egg_debug ("no row selected");
+		goto out;
+	}
+
+	/* make none of the devices default */
+	gtk_tree_model_get_iter_first (model, &iter);
+	do {
+		gtk_list_store_set (list_store_assign, &iter,
+				    MCM_ASSIGN_COLUMN_SORT, "1",
+				    MCM_ASSIGN_COLUMN_IS_DEFAULT, FALSE,
+				    -1);
+	} while (gtk_tree_model_iter_next (model, &iter));
+
+	/* make the selected device default */
+	gtk_list_store_set (list_store_assign, &iter_selected,
+			    MCM_ASSIGN_COLUMN_IS_DEFAULT, TRUE,
+			    MCM_ASSIGN_COLUMN_SORT, "0",
+			    -1);
+
+	/* set button insensitive */
+	widget = GTK_WIDGET (gtk_builder_get_object (builder, "button_assign_make_default"));
+	gtk_widget_set_sensitive (widget, FALSE);
+
+	/* save device */
+	mcm_prefs_assign_save_profiles_for_device (current_device);
+out:
+	return;
+}
+
+/**
  * mcm_prefs_button_virtual_add_cb:
  **/
 static void
@@ -1075,6 +1329,68 @@ static gboolean
 mcm_prefs_virtual_delete_event_cb (GtkWidget *widget, GdkEvent *event, gpointer data)
 {
 	mcm_prefs_button_virtual_cancel_cb (widget, data);
+	return TRUE;
+}
+
+/**
+ * mcm_prefs_button_assign_cancel_cb:
+ **/
+static void
+mcm_prefs_button_assign_cancel_cb (GtkWidget *widget, gpointer data)
+{
+	widget = GTK_WIDGET (gtk_builder_get_object (builder, "dialog_assign"));
+	gtk_widget_hide (widget);
+}
+
+/**
+ * mcm_prefs_button_assign_ok_cb:
+ **/
+static void
+mcm_prefs_button_assign_ok_cb (GtkWidget *widget, gpointer data)
+{
+	GtkTreeIter iter;
+	GtkTreeModel *model;
+	McmProfile *profile;
+	gboolean is_default = FALSE;
+	gboolean ret;
+
+	/* hide window */
+	widget = GTK_WIDGET (gtk_builder_get_object (builder, "dialog_assign"));
+	gtk_widget_hide (widget);
+
+	/* get entry */
+	widget = GTK_WIDGET (gtk_builder_get_object (builder, "combobox_profile"));
+	ret = gtk_combo_box_get_active_iter (GTK_COMBO_BOX(widget), &iter);
+	if (!ret)
+		return;
+	model = gtk_combo_box_get_model (GTK_COMBO_BOX(widget));
+	gtk_tree_model_get (model, &iter,
+			    MCM_PREFS_COMBO_COLUMN_PROFILE, &profile,
+			    -1);
+
+	/* if list is empty, we want this to be the default item */
+	model = GTK_TREE_MODEL (list_store_assign);
+	is_default = !gtk_tree_model_get_iter_first (model, &iter);
+
+	/* add profile */
+	gtk_list_store_append (list_store_assign, &iter);
+	gtk_list_store_set (list_store_assign, &iter,
+			    MCM_ASSIGN_COLUMN_PROFILE, profile,
+			    MCM_ASSIGN_COLUMN_SORT, "1",
+			    MCM_ASSIGN_COLUMN_IS_DEFAULT, is_default,
+			    -1);
+
+	/* save device */
+	mcm_prefs_assign_save_profiles_for_device (current_device);
+}
+
+/**
+ * mcm_prefs_assign_delete_event_cb:
+ **/
+static gboolean
+mcm_prefs_assign_delete_event_cb (GtkWidget *widget, GdkEvent *event, gpointer data)
+{
+	mcm_prefs_button_assign_cancel_cb (widget, data);
 	return TRUE;
 }
 
@@ -1163,13 +1479,13 @@ mcm_prefs_add_devices_columns (GtkTreeView *treeview)
 	gtk_tree_view_append_column (treeview, column);
 
 	/* set minimum width */
-	gtk_widget_set_size_request (GTK_WIDGET (treeview), MCM_PREFS_TREEVIEW_WIDTH, -1);
+	gtk_widget_set_size_request (GTK_WIDGET (treeview), MCM_PREFS_TREEVIEW_MAIN_WIDTH, -1);
 
 	/* column for text */
 	renderer = gtk_cell_renderer_text_new ();
 	g_object_set (renderer,
 		      "wrap-mode", PANGO_WRAP_WORD,
-		      "wrap-width", MCM_PREFS_TREEVIEW_WIDTH - 62,
+		      "wrap-width", MCM_PREFS_TREEVIEW_MAIN_WIDTH - 62,
 		      NULL);
 	column = gtk_tree_view_column_new_with_attributes ("", renderer,
 							   "markup", MCM_DEVICES_COLUMN_TITLE, NULL);
@@ -1196,18 +1512,46 @@ mcm_prefs_add_profiles_columns (GtkTreeView *treeview)
 	gtk_tree_view_append_column (treeview, column);
 
 	/* set minimum width */
-	gtk_widget_set_size_request (GTK_WIDGET (treeview), MCM_PREFS_TREEVIEW_WIDTH, -1);
+	gtk_widget_set_size_request (GTK_WIDGET (treeview), MCM_PREFS_TREEVIEW_MAIN_WIDTH, -1);
 
 	/* column for text */
 	renderer = mcm_cell_renderer_profile_new ();
 	g_object_set (renderer,
 		      "wrap-mode", PANGO_WRAP_WORD,
-		      "wrap-width", MCM_PREFS_TREEVIEW_WIDTH - 62,
+		      "wrap-width", MCM_PREFS_TREEVIEW_MAIN_WIDTH - 62,
 		      NULL);
 	column = gtk_tree_view_column_new_with_attributes ("", renderer,
 							   "profile", MCM_PROFILES_COLUMN_PROFILE, NULL);
 	gtk_tree_view_column_set_sort_column_id (column, MCM_PROFILES_COLUMN_SORT);
 	gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (list_store_profiles), MCM_PROFILES_COLUMN_SORT, GTK_SORT_ASCENDING);
+	gtk_tree_view_append_column (treeview, column);
+	gtk_tree_view_column_set_expand (column, TRUE);
+}
+
+/**
+ * mcm_prefs_add_assign_columns:
+ **/
+static void
+mcm_prefs_add_assign_columns (GtkTreeView *treeview)
+{
+	GtkCellRenderer *renderer;
+	GtkTreeViewColumn *column;
+
+	/* set minimum width */
+	gtk_widget_set_size_request (GTK_WIDGET (treeview), MCM_PREFS_TREEVIEW_PROFILES_WIDTH, -1);
+
+	/* column for text */
+	renderer = mcm_cell_renderer_profile_new ();
+	g_object_set (renderer,
+		      "wrap-mode", PANGO_WRAP_WORD,
+		      "wrap-width", MCM_PREFS_TREEVIEW_PROFILES_WIDTH - 62,
+		      NULL);
+	column = gtk_tree_view_column_new_with_attributes ("", renderer,
+							   "profile", MCM_ASSIGN_COLUMN_PROFILE,
+							   "is-default", MCM_ASSIGN_COLUMN_IS_DEFAULT,
+							   NULL);
+	gtk_tree_view_column_set_sort_column_id (column, MCM_ASSIGN_COLUMN_SORT);
+	gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (list_store_assign), MCM_ASSIGN_COLUMN_SORT, GTK_SORT_ASCENDING);
 	gtk_tree_view_append_column (treeview, column);
 	gtk_tree_view_column_set_expand (column, TRUE);
 }
@@ -1299,104 +1643,15 @@ out:
 }
 
 /**
- * mcm_prefs_is_profile_suitable_for_device:
- **/
-static gboolean
-mcm_prefs_is_profile_suitable_for_device (McmProfile *profile, McmDevice *device)
-{
-	McmProfileKind profile_kind_tmp;
-	McmProfileKind profile_kind;
-	McmColorspace profile_colorspace;
-	McmColorspace device_colorspace;
-	gboolean ret = FALSE;
-	McmDeviceKind device_kind;
-
-	/* not the right colorspace */
-	device_colorspace = mcm_device_get_colorspace (device);
-	profile_colorspace = mcm_profile_get_colorspace (profile);
-	if (device_colorspace != profile_colorspace)
-		goto out;
-
-	/* not the correct kind */
-	device_kind = mcm_device_get_kind (device);
-	profile_kind_tmp = mcm_profile_get_kind (profile);
-	profile_kind = mcm_utils_device_kind_to_profile_kind (device_kind);
-	if (profile_kind_tmp != profile_kind)
-		goto out;
-
-	/* success */
-	ret = TRUE;
-out:
-	return ret;
-}
-
-/**
- * mcm_prefs_add_profiles_suitable_for_devices:
- **/
-static void
-mcm_prefs_add_profiles_suitable_for_devices (GtkWidget *widget, const gchar *profile_filename)
-{
-	GtkTreeModel *model;
-	guint i;
-	const gchar *filename;
-	gboolean ret;
-	gboolean set_active = FALSE;
-	McmProfile *profile;
-	GPtrArray *profile_array = NULL;
-	GtkTreeIter iter;
-
-	/* clear existing entries */
-	model = gtk_combo_box_get_model (GTK_COMBO_BOX (widget));
-	gtk_list_store_clear (GTK_LIST_STORE (model));
-
-	/* add a 'None' entry */
-	mcm_prefs_combobox_add_profile (widget, NULL, MCM_PREFS_ENTRY_TYPE_NONE, NULL);
-
-	/* get new list */
-	profile_array = mcm_profile_store_get_array (profile_store);
-
-	/* add profiles of the right kind */
-	for (i=0; i<profile_array->len; i++) {
-		profile = g_ptr_array_index (profile_array, i);
-
-		/* only add correct types */
-		ret = mcm_prefs_is_profile_suitable_for_device (profile, current_device);
-		if (ret) {
-			/* add */
-			mcm_prefs_combobox_add_profile (widget, profile, MCM_PREFS_ENTRY_TYPE_PROFILE, &iter);
-
-			/* set active option */
-			filename = mcm_profile_get_filename (profile);
-			if (g_strcmp0 (filename, profile_filename) == 0) {
-				//FIXME: does not work for sorted lists
-				gtk_combo_box_set_active_iter (GTK_COMBO_BOX (widget), &iter);
-				set_active = TRUE;
-			}
-		}
-	}
-
-	/* add a import entry */
-	mcm_prefs_combobox_add_profile (widget, NULL, MCM_PREFS_ENTRY_TYPE_IMPORT, NULL);
-
-	/* select 'None' if there was no match */
-	if (!set_active) {
-		if (profile_filename != NULL)
-			egg_warning ("no match for %s", profile_filename);
-		gtk_combo_box_set_active (GTK_COMBO_BOX (widget), 0);
-	}
-	if (profile_array != NULL)
-		g_ptr_array_unref (profile_array);
-}
-
-/**
  * mcm_prefs_devices_treeview_clicked_cb:
  **/
 static void
 mcm_prefs_devices_treeview_clicked_cb (GtkTreeSelection *selection, gpointer userdata)
 {
+	guint i;
 	GtkTreeModel *model;
 	GtkTreeIter iter;
-	const gchar *profile_filename = NULL;
+	GtkTreePath *path;
 	GtkWidget *widget;
 	gfloat localgamma;
 	gfloat brightness;
@@ -1409,6 +1664,8 @@ mcm_prefs_devices_treeview_clicked_cb (GtkTreeSelection *selection, gpointer use
 	const gchar *device_model = NULL;
 	const gchar *device_manufacturer = NULL;
 	const gchar *eisa_id = NULL;
+	GPtrArray *profiles;
+	McmProfile *profile;
 
 	/* This will only work in single or browse selection mode! */
 	if (!gtk_tree_selection_get_selected (selection, &model, &iter)) {
@@ -1519,10 +1776,27 @@ mcm_prefs_devices_treeview_clicked_cb (GtkTreeSelection *selection, gpointer use
 	gtk_range_set_value (GTK_RANGE (widget), contrast);
 	setting_up_device = FALSE;
 
-	/* add profiles of the right kind */
-	widget = GTK_WIDGET (gtk_builder_get_object (builder, "combobox_profile"));
-	profile_filename = mcm_device_get_default_profile_filename (current_device);
-	mcm_prefs_add_profiles_suitable_for_devices (widget, profile_filename);
+	/* clear existing list */
+	gtk_list_store_clear (list_store_assign);
+
+	/* add profiles for the device */
+	profiles = mcm_device_get_profiles (current_device);
+	for (i=0; i<profiles->len; i++) {
+		profile = g_ptr_array_index (profiles, i);
+		gtk_list_store_append (list_store_assign, &iter);
+		gtk_list_store_set (list_store_assign, &iter,
+				    MCM_ASSIGN_COLUMN_PROFILE, profile,
+				    MCM_ASSIGN_COLUMN_SORT, "0",
+				    MCM_ASSIGN_COLUMN_IS_DEFAULT, (i == 0),
+				    -1);
+	}
+
+	/* select the default profile to display */
+	widget = GTK_WIDGET (gtk_builder_get_object (builder, "treeview_assign"));
+	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (widget));
+	path = gtk_tree_path_new_from_string ("0");
+	gtk_tree_selection_select_path (selection, path);
+	gtk_tree_path_free (path);
 
 	/* make sure selectable */
 	widget = GTK_WIDGET (gtk_builder_get_object (builder, "combobox_profile"));
@@ -1629,6 +1903,54 @@ mcm_prefs_profile_colorspace_to_string (McmColorspace colorspace)
 	}
 	/* TRANSLATORS: this the ICC colorspace type */
 	return _("Unknown");
+}
+
+/**
+ * mcm_prefs_assign_treeview_clicked_cb:
+ **/
+static void
+mcm_prefs_assign_treeview_clicked_cb (GtkTreeSelection *selection, gpointer userdata)
+{
+	GtkTreeModel *model;
+	GtkTreeIter iter;
+	gboolean is_default;
+	GtkWidget *widget;
+	McmProfile *profile;
+
+	/* This will only work in single or browse selection mode! */
+	if (!gtk_tree_selection_get_selected (selection, &model, &iter)) {
+
+		widget = GTK_WIDGET (gtk_builder_get_object (builder, "button_assign_make_default"));
+		gtk_widget_set_sensitive (widget, FALSE);
+		widget = GTK_WIDGET (gtk_builder_get_object (builder, "button_assign_remove"));
+		gtk_widget_set_sensitive (widget, FALSE);
+
+		egg_debug ("no row selected");
+		return;
+	}
+
+	/* get profile */
+	gtk_tree_model_get (model, &iter,
+			    MCM_ASSIGN_COLUMN_PROFILE, &profile,
+			    MCM_ASSIGN_COLUMN_IS_DEFAULT, &is_default,
+			    -1);
+	egg_debug ("selected profile = %s", mcm_profile_get_filename (profile));
+
+	/* is the element the first in the list */
+	widget = GTK_WIDGET (gtk_builder_get_object (builder, "button_assign_make_default"));
+	gtk_widget_set_sensitive (widget, !is_default);
+
+	/* we can remove it now */
+	widget = GTK_WIDGET (gtk_builder_get_object (builder, "button_assign_remove"));
+	gtk_widget_set_sensitive (widget, TRUE);
+
+	/* show a warning if the profile is crap */
+	if (mcm_device_get_kind (current_device) == MCM_DEVICE_KIND_DISPLAY &&
+	    !mcm_profile_get_has_vcgt (profile)) {
+		gtk_widget_show (info_bar_vcgt);
+	} else {
+		gtk_widget_hide (info_bar_vcgt);
+	}
 }
 
 /**
@@ -1951,19 +2273,14 @@ mcm_prefs_set_combo_simple_text (GtkWidget *combo_box)
 static void
 mcm_prefs_profile_combo_changed_cb (GtkWidget *widget, gpointer data)
 {
-	const gchar *profile_old;
 	GFile *file = NULL;
 	GFile *dest = NULL;
 	gboolean ret;
 	GError *error = NULL;
 	McmProfile *profile = NULL;
-	McmProfile *profile_tmp = NULL;
-	gboolean changed;
-	McmDeviceKind kind;
 	GtkTreeIter iter;
 	GtkTreeModel *model;
 	McmPrefsEntryType entry_type;
-	gboolean has_vcgt;
 	gchar *filename = NULL;
 
 	/* no devices */
@@ -1978,7 +2295,6 @@ mcm_prefs_profile_combo_changed_cb (GtkWidget *widget, gpointer data)
 	/* get entry */
 	model = gtk_combo_box_get_model (GTK_COMBO_BOX(widget));
 	gtk_tree_model_get (model, &iter,
-			    MCM_PREFS_COMBO_COLUMN_PROFILE, &profile,
 			    MCM_PREFS_COMBO_COLUMN_TYPE, &entry_type,
 			    -1);
 
@@ -1992,18 +2308,17 @@ mcm_prefs_profile_combo_changed_cb (GtkWidget *widget, gpointer data)
 		}
 
 		/* check the file is suitable */
-		profile_tmp = mcm_profile_default_new ();
+		profile = mcm_profile_default_new ();
 		filename = g_file_get_path (file);
-		ret = mcm_profile_parse (profile_tmp, file, &error);
+		ret = mcm_profile_parse (profile, file, &error);
 		if (!ret) {
-			/* set to 'None' */
+			/* set to first entry */
 			gtk_combo_box_set_active (GTK_COMBO_BOX (widget), 0);
-
 			egg_warning ("failed to parse ICC file: %s", error->message);
 			g_error_free (error);
 			goto out;
 		}
-		ret = mcm_prefs_is_profile_suitable_for_device (profile_tmp, current_device);
+		ret = mcm_prefs_is_profile_suitable_for_device (profile, current_device);
 		if (!ret) {
 			/* set to 'None' */
 			gtk_combo_box_set_active (GTK_COMBO_BOX (widget), 0);
@@ -2029,58 +2344,22 @@ mcm_prefs_profile_combo_changed_cb (GtkWidget *widget, gpointer data)
 		/* now use the new profile as the device default */
 		dest = mcm_utils_get_profile_destination (file);
 		filename = g_file_get_path (dest);
-	}
 
-	/* get the device kind */
-	kind = mcm_device_get_kind (current_device);
-
-	/* get profile filename */
-	if (entry_type == MCM_PREFS_ENTRY_TYPE_PROFILE) {
-
-		/* show a warning if the profile is crap */
-		filename = g_strdup (mcm_profile_get_filename (profile));
-		has_vcgt = mcm_profile_get_has_vcgt (profile);
-		if (kind == MCM_DEVICE_KIND_DISPLAY && !has_vcgt && filename != NULL) {
-			gtk_widget_show (info_bar_vcgt);
-		} else {
-			gtk_widget_hide (info_bar_vcgt);
-		}
-	} else {
-		gtk_widget_hide (info_bar_vcgt);
-	}
-
-	/* see if it's changed */
-	profile_old = mcm_device_get_default_profile_filename (current_device);
-	egg_debug ("old: %s, new:%s", profile_old, filename);
-	changed = ((g_strcmp0 (profile_old, filename) != 0));
-
-	/* set new profile */
-	if (changed) {
-
-		/* save new profile */
-		mcm_device_set_default_profile_filename (current_device, filename);
-		ret = mcm_device_save (current_device, &error);
-		if (!ret) {
-			egg_warning ("failed to save config: %s", error->message);
-			g_error_free (error);
-			goto out;
-		}
-
-		/* set the profile */
-		ret = mcm_device_apply (current_device, &error);
-		if (!ret) {
-			egg_warning ("failed to apply profile: %s", error->message);
-			g_error_free (error);
-			goto out;
-		}
+		/* add to combobox */
+		gtk_list_store_append (GTK_LIST_STORE(model), &iter);
+		gtk_list_store_set (GTK_LIST_STORE(model), &iter,
+				    MCM_PREFS_COMBO_COLUMN_PROFILE, profile,
+				    MCM_PREFS_COMBO_COLUMN_SORTABLE, "0",
+				    -1);
+		gtk_combo_box_set_active_iter (GTK_COMBO_BOX (widget), &iter);
 	}
 out:
 	if (file != NULL)
 		g_object_unref (file);
 	if (dest != NULL)
 		g_object_unref (dest);
-	if (profile_tmp != NULL)
-		g_object_unref (profile_tmp);
+	if (profile != NULL)
+		g_object_unref (profile);
 }
 
 /**
@@ -2228,7 +2507,6 @@ mcm_prefs_add_device_kind (McmDevice *device)
 	g_free (sort);
 	g_string_free (string, TRUE);
 }
-
 
 /**
  * mcm_prefs_remove_device:
@@ -2469,7 +2747,6 @@ out:
 	if (profile != NULL)
 		g_object_unref (profile);
 }
-
 
 /**
  * mcm_prefs_renderer_combo_changed_cb:
@@ -2861,6 +3138,18 @@ main (int argc, char **argv)
 						 G_TYPE_STRING, G_TYPE_STRING);
 	list_store_profiles = gtk_list_store_new (MCM_PROFILES_COLUMN_LAST, G_TYPE_STRING,
 						  G_TYPE_STRING, G_TYPE_STRING, MCM_TYPE_PROFILE);
+	list_store_assign = gtk_list_store_new (MCM_ASSIGN_COLUMN_LAST, G_TYPE_STRING, MCM_TYPE_PROFILE, G_TYPE_BOOLEAN);
+
+	/* assign buttons */
+	widget = GTK_WIDGET (gtk_builder_get_object (builder, "button_assign_add"));
+	g_signal_connect (widget, "clicked",
+			  G_CALLBACK (mcm_prefs_assign_add_cb), NULL);
+	widget = GTK_WIDGET (gtk_builder_get_object (builder, "button_assign_remove"));
+	g_signal_connect (widget, "clicked",
+			  G_CALLBACK (mcm_prefs_assign_remove_cb), NULL);
+	widget = GTK_WIDGET (gtk_builder_get_object (builder, "button_assign_make_default"));
+	g_signal_connect (widget, "clicked",
+			  G_CALLBACK (mcm_prefs_assign_make_default_cb), NULL);
 
 	/* create device tree view */
 	widget = GTK_WIDGET (gtk_builder_get_object (builder, "treeview_devices"));
@@ -2884,6 +3173,18 @@ main (int argc, char **argv)
 
 	/* add columns to the tree view */
 	mcm_prefs_add_profiles_columns (GTK_TREE_VIEW (widget));
+	gtk_tree_view_columns_autosize (GTK_TREE_VIEW (widget));
+
+	/* create assign tree view */
+	widget = GTK_WIDGET (gtk_builder_get_object (builder, "treeview_assign"));
+	gtk_tree_view_set_model (GTK_TREE_VIEW (widget),
+				 GTK_TREE_MODEL (list_store_assign));
+	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (widget));
+	g_signal_connect (selection, "changed",
+			  G_CALLBACK (mcm_prefs_assign_treeview_clicked_cb), NULL);
+
+	/* add columns to the tree view */
+	mcm_prefs_add_assign_columns (GTK_TREE_VIEW (widget));
 	gtk_tree_view_columns_autosize (GTK_TREE_VIEW (widget));
 
 	main_window = GTK_WIDGET (gtk_builder_get_object (builder, "dialog_prefs"));
@@ -2967,6 +3268,17 @@ main (int argc, char **argv)
 	widget = GTK_WIDGET (gtk_builder_get_object (builder, "combobox_virtual_type"));
 	mcm_prefs_set_combo_simple_text (widget);
 	mcm_prefs_setup_virtual_combobox (widget);
+
+	/* set up assign dialog */
+	widget = GTK_WIDGET (gtk_builder_get_object (builder, "dialog_assign"));
+	g_signal_connect (widget, "delete-event",
+			  G_CALLBACK (mcm_prefs_assign_delete_event_cb), NULL);
+	widget = GTK_WIDGET (gtk_builder_get_object (builder, "button_assign_cancel"));
+	g_signal_connect (widget, "clicked",
+			  G_CALLBACK (mcm_prefs_button_assign_cancel_cb), NULL);
+	widget = GTK_WIDGET (gtk_builder_get_object (builder, "button_assign_ok"));
+	g_signal_connect (widget, "clicked",
+			  G_CALLBACK (mcm_prefs_button_assign_ok_cb), NULL);
 
 	/* disable the add button if nothing in either box */
 	widget = GTK_WIDGET (gtk_builder_get_object (builder, "entry_virtual_model"));

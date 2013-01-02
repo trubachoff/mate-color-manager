@@ -214,7 +214,7 @@ mcm_exif_parse_exiv (McmExif *exif, const gchar *filename, GError **error)
 	gchar **split = NULL;
 	McmExifPrivate *priv = exif->priv;
 
-	command_line = g_strdup_printf (LIBEXECDIR "/mcm-helper-exiv %s", filename);
+	command_line = g_strdup_printf (LIBEXECDIR "/mcm-helper-exiv \"%s\"", filename);
 	ret = g_spawn_command_line_sync (command_line, &standard_output, NULL, &exit_status, error);
 	if (!ret)
 		goto out;

@@ -497,7 +497,7 @@ mcm_device_xrandr_apply (McmDevice *device, GError **error)
 	if (profile != NULL)
 		g_object_ref (profile);
 	if (!saved && profile == NULL) {
-		filename_systemwide = g_strdup_printf ("%s/%s.icc", MCM_SYSTEM_PROFILES_DIR, id);
+		filename_systemwide = g_strdup_printf ("%s/icc/%s.icc", MCM_SYSTEM_PROFILES_DIR, id);
 		ret = g_file_test (filename_systemwide, G_FILE_TEST_EXISTS);
 		if (ret) {
 			egg_debug ("using systemwide %s as profile", filename_systemwide);

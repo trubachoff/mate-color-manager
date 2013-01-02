@@ -533,6 +533,11 @@ mcm_profile_store_search_default (McmProfileStore *profile_store)
 	if (ret)
 		success = TRUE;
 	g_free (path);
+
+	/* get machine specific profiles */
+	ret = mcm_profile_store_search_by_path (profile_store, "/var/lib/color/icc");
+	if (ret)
+		success = TRUE;
 	return success;
 }
 

@@ -1153,6 +1153,7 @@ mcm_client_add_device (McmClient *client, McmDevice *device, GError **error)
 	gboolean ret = FALSE;
 	const gchar *device_id;
 	McmDevice *device_tmp = NULL;
+	GPtrArray *array;
 
 	g_return_val_if_fail (MCM_IS_CLIENT (client), FALSE);
 	g_return_val_if_fail (MCM_IS_DEVICE (device), FALSE);
@@ -1161,7 +1162,9 @@ mcm_client_add_device (McmClient *client, McmDevice *device, GError **error)
 	device_tmp = mcm_client_get_device_by_id (client, device_id);
 	if (device_tmp != NULL) {
 		egg_debug ("already exists, copy settings and remove old device: %s", device_id);
-		mcm_device_set_profiles (device, mcm_device_get_profiles (device_tmp));
+		array = mcm_device_get_profiles (device_tmp);
+		if (array != NULL)
+			mcm_device_set_profiles (device, array);
 		mcm_device_set_saved (device, mcm_device_get_saved (device_tmp));
 		ret = mcm_client_remove_device_internal (client, device_tmp, FALSE, error);
 		if (!ret)

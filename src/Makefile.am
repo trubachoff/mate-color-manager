@@ -14,7 +14,6 @@ INCLUDES =							\
 	$(EXIV_CFLAGS)					\
 	$(NOTIFY_CFLAGS)				\
 	$(CANBERRA_CFLAGS)				\
-	$(DBUS_GLIB_CFLAGS)				\
 	-DG_UDEV_API_IS_SUBJECT_TO_CHANGE		\
 	-DMATE_DESKTOP_USE_UNSTABLE_API	\
 	$(GUDEV_CFLAGS)					\
@@ -27,6 +26,9 @@ INCLUDES =							\
 	-DLOCALEDIR=\""$(localedir)"\"	\
 	-DMCM_SYSTEM_PROFILES_DIR="\"$(MCM_SYSTEM_PROFILES_DIR)"\" \
 	-DMCM_DATA=\"$(pkgdatadir)\"
+
+introspectiondir = $(datadir)/dbus-1/interfaces
+introspection_DATA = org.mate.ColorManager.xml
 
 noinst_LIBRARIES = libmcmshared.a
 libmcmshared_a_SOURCES =		\
@@ -140,7 +142,6 @@ mcm_dump_edid_LDADD =				\
 	$(GUDEV_LIBS)					\
 	$(LCMS_LIBS)					\
 	$(XORG_LIBS)					\
-	$(DBUS_GLIB_LIBS)				\
 	$(GTK_LIBS)						\
 	$(SANE_LIBS)					\
 	$(CUPS_LIBS)					\
@@ -160,7 +161,6 @@ mcm_dump_profile_LDADD =			\
 	$(GUDEV_LIBS)					\
 	$(LCMS_LIBS)					\
 	$(XORG_LIBS)					\
-	$(DBUS_GLIB_LIBS)				\
 	$(GTK_LIBS)						\
 	$(SANE_LIBS)					\
 	$(CUPS_LIBS)					\
@@ -195,7 +195,6 @@ mcm_inspect_LDADD =					\
 	$(GUDEV_LIBS)					\
 	$(LCMS_LIBS)					\
 	$(XORG_LIBS)					\
-	$(DBUS_GLIB_LIBS)				\
 	$(GTK_LIBS)						\
 	$(SANE_LIBS)					\
 	$(CUPS_LIBS)					\
@@ -215,7 +214,6 @@ mcm_apply_LDADD =					\
 	$(GUDEV_LIBS)					\
 	$(LCMS_LIBS)					\
 	$(XORG_LIBS)					\
-	$(DBUS_GLIB_LIBS)				\
 	$(GTK_LIBS)						\
 	$(SANE_LIBS)					\
 	$(CUPS_LIBS)					\
@@ -235,7 +233,6 @@ mcm_import_LDADD =					\
 	$(GUDEV_LIBS)					\
 	$(LCMS_LIBS)					\
 	$(XORG_LIBS)					\
-	$(DBUS_GLIB_LIBS)				\
 	$(GTK_LIBS)						\
 	$(SANE_LIBS)					\
 	$(CUPS_LIBS)					\
@@ -256,7 +253,6 @@ mcm_prefs_LDADD =					\
 	$(VTE_LIBS)						\
 	$(GUDEV_LIBS)					\
 	$(LCMS_LIBS)					\
-	$(DBUS_GLIB_LIBS)				\
 	$(XORG_LIBS)					\
 	$(GTK_LIBS)						\
 	$(SANE_LIBS)					\
@@ -282,7 +278,6 @@ mcm_picker_LDADD = \
 	$(VTE_LIBS) \
 	$(GUDEV_LIBS) \
 	$(LCMS_LIBS) \
-	$(DBUS_GLIB_LIBS) \
 	$(XORG_LIBS) \
 	$(GTK_LIBS) \
 	$(SANE_LIBS) \
@@ -296,8 +291,6 @@ mcm_picker_CFLAGS = \
 	$(WARNINGFLAGS_C)
 
 mcm_session_SOURCES =				\
-	mcm-dbus.c						\
-	mcm-dbus.h						\
 	mcm-session.c
 
 mcm_session_LDADD =					\
@@ -308,7 +301,6 @@ mcm_session_LDADD =					\
 	$(UNIQUE_LIBS)					\
 	$(GUDEV_LIBS)					\
 	$(LCMS_LIBS)					\
-	$(DBUS_GLIB_LIBS)				\
 	$(XORG_LIBS)					\
 	$(GTK_LIBS)						\
 	$(SANE_LIBS)					\
@@ -338,7 +330,6 @@ mcm_self_test_LDADD =				\
 	$(UNIQUE_LIBS)					\
 	$(GUDEV_LIBS)					\
 	$(LCMS_LIBS)					\
-	$(DBUS_GLIB_LIBS)				\
 	$(XORG_LIBS)					\
 	$(GTK_LIBS)						\
 	$(TIFF_LIBS)					\
@@ -355,13 +346,6 @@ TESTS = mcm-self-test
 
 endif
 
-org.mate.ColorManager.h: org.mate.ColorManager.xml
-	$(LIBTOOL) --mode=execute dbus-binding-tool	\
-		--prefix=mcm_dbus			\
-		--mode=glib-server			\
-		--output=org.mate.ColorManager.h	\
-		$(srcdir)/org.mate.ColorManager.xml
-
 install-data-hook:
 	if test -w $(DESTDIR)$(prefix)/; then \
 		mkdir -p $(DESTDIR)$(MCM_SYSTEM_PROFILES_DIR); \
@@ -375,10 +359,4 @@ CLEANFILES = $(BUILT_SOURCES)
 MAINTAINERCLEANFILES =				\
 	*~								\
 	Makefile.in
-
-EXTRA_DIST =						\
-	org.mate.ColorManager.xml
-
-BUILT_SOURCES =						\
-	org.mate.ColorManager.h
 

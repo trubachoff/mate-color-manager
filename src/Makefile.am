@@ -28,7 +28,7 @@ INCLUDES =							\
 	-DMCM_DATA=\"$(pkgdatadir)\"
 
 introspectiondir = $(datadir)/dbus-1/interfaces
-introspection_DATA = org.mate.ColorManager.xml
+dist_introspection_DATA = org.mate.ColorManager.xml
 
 noinst_LIBRARIES = libmcmshared.a
 libmcmshared_a_SOURCES =		\

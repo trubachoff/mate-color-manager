@@ -120,6 +120,7 @@ if MCM_USE_EXIV
 libexec_PROGRAMS = mcm-helper-exiv
 mcm_helper_exiv_SOURCES = mcm-helper-exiv.cpp
 mcm_helper_exiv_LDADD = $(EXIV_LIBS)
+mcm_helper_exiv_CXXFLAGS = -Wall
 endif
 
 mcm_install_system_wide_SOURCES =	\

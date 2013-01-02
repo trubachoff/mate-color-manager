@@ -493,7 +493,7 @@ mcm_device_xrandr_apply (McmDevice *device, GError **error)
 
 	/* if not saved, try to find default filename */
 	saved = mcm_device_get_saved (device);
-	filename = mcm_device_get_default_profile_filename (device);
+	filename = mcm_device_get_profile_filename (device);
 	if (!saved && filename == NULL) {
 		filename_systemwide = g_strdup_printf ("%s/%s.icc", MCM_SYSTEM_PROFILES_DIR, id);
 		ret = g_file_test (filename_systemwide, G_FILE_TEST_EXISTS);

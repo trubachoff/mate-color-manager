@@ -107,15 +107,10 @@ void			 mcm_device_set_model			(McmDevice	*device,
 const gchar		*mcm_device_get_title			(McmDevice	*device);
 void			 mcm_device_set_title			(McmDevice	*device,
 								 const gchar 	*title);
-gchar			**mcm_device_get_profile_filenames	(McmDevice	*device);
-void			 mcm_device_set_profile_filenames	(McmDevice	*device,
-								 gchar 		**profile_filenames);
-glong			 mcm_device_get_modified_time		(McmDevice	*device);
-
-/* helpers */
-const gchar		*mcm_device_get_default_profile_filename (McmDevice	*device);
-void			 mcm_device_set_default_profile_filename (McmDevice	*device,
+const gchar		*mcm_device_get_profile_filename	(McmDevice	*device);
+void			 mcm_device_set_profile_filename	(McmDevice	*device,
 								 const gchar 	*profile_filename);
+glong			 mcm_device_get_modified_time		(McmDevice	*device);
 
 G_END_DECLS
 

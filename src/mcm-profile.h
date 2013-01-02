@@ -83,6 +83,7 @@ gboolean	 mcm_profile_parse_data			(McmProfile	*profile,
 gboolean	 mcm_profile_save			(McmProfile	*profile,
 							 const gchar	*filename,
 							 GError		**error);
+const gchar	*mcm_profile_get_checksum		(McmProfile	*profile);
 gboolean	 mcm_profile_get_can_delete		(McmProfile	*profile);
 McmClut		*mcm_profile_generate_vcgt		(McmProfile	*profile,
 							 guint		 size);

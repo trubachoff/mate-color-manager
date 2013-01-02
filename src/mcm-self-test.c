@@ -40,6 +40,7 @@
 #include "mcm-image.h"
 #include "mcm-print.h"
 #include "mcm-profile.h"
+#include "mcm-profile-store.h"
 #include "mcm-profile-lcms1.h"
 #include "mcm-tables.h"
 #include "mcm-trc-widget.h"
@@ -821,6 +822,7 @@ typedef struct {
 	McmProfileKind kind;
 	McmColorspace colorspace;
 	gfloat luminance;
+	gboolean has_vcgt;
 } McmProfileTestData;
 
 static void
@@ -854,6 +856,7 @@ mcm_test_profile_test_parse_file (const gchar *datafile, McmProfileTestData *tes
 	g_assert_cmpstr (mcm_profile_get_checksum (profile_lcms1), ==, test_data->checksum);
 	g_assert_cmpint (mcm_profile_get_kind (profile_lcms1), ==, test_data->kind);
 	g_assert_cmpint (mcm_profile_get_colorspace (profile_lcms1), ==, test_data->colorspace);
+	g_assert_cmpint (mcm_profile_get_has_vcgt (profile_lcms1), ==, test_data->has_vcgt);
 
 	g_object_get (profile_lcms1,
 		      "red", &xyz,
@@ -881,6 +884,7 @@ mcm_test_profile_func (void)
 	test_data.luminance = 0.648454;
 	test_data.datetime = "February  9 1998, 06:49:00 AM";
 	test_data.checksum = "8e2aed5dac6f8b5d8da75610a65b7f27";
+	test_data.has_vcgt = TRUE;
 	mcm_test_profile_test_parse_file ("bluish.icc", &test_data);
 
 	/* Adobe test */
@@ -893,7 +897,45 @@ mcm_test_profile_func (void)
 	test_data.luminance = 0.648446;
 	test_data.datetime = "August 16 2005, 09:49:54 PM";
 	test_data.checksum = "bd847723f676e2b846daaf6759330624";
+	test_data.has_vcgt = TRUE;
 	mcm_test_profile_test_parse_file ("AdobeGammaTest.icm", &test_data);
+}
+
+static void
+mcm_test_profile_store_func (void)
+{
+	McmProfileStore *store;
+	GPtrArray *array;
+	McmProfile *profile;
+	gboolean ret;
+	gchar *filename;
+
+	store = mcm_profile_store_new ();
+	g_assert (store != NULL);
+
+	/* add test files */
+	filename = mcm_test_get_data_file (".");
+	ret = mcm_profile_store_search_by_path (store, filename);
+	g_assert (ret);
+	g_free (filename);
+
+	/* profile does not exist */
+	profile = mcm_profile_store_get_by_filename (store, "xxxxxxxxx");
+	g_assert (profile == NULL);
+
+	/* profile does exist */
+	profile = mcm_profile_store_get_by_checksum (store, "8e2aed5dac6f8b5d8da75610a65b7f27");
+	g_assert (profile != NULL);
+	g_assert_cmpstr (mcm_profile_get_checksum (profile), ==, "8e2aed5dac6f8b5d8da75610a65b7f27");
+	g_object_unref (profile);
+
+	/* get array of profiles */
+	array = mcm_profile_store_get_array (store);
+	g_assert (array != NULL);
+	g_assert_cmpint (array->len, ==, 3);
+	g_ptr_array_unref (array);
+
+	g_object_unref (store);
 }
 
 static void
@@ -1204,6 +1246,7 @@ main (int argc, char **argv)
 	g_test_add_func ("/color/utils", mcm_test_utils_func);
 	g_test_add_func ("/color/device", mcm_test_device_func);
 	g_test_add_func ("/color/profile", mcm_test_profile_func);
+	g_test_add_func ("/color/profile_store", mcm_test_profile_store_func);
 	g_test_add_func ("/color/clut", mcm_test_clut_func);
 	g_test_add_func ("/color/xyz", mcm_test_xyz_func);
 	g_test_add_func ("/color/calibrate_dialog", mcm_test_calibrate_dialog_func);

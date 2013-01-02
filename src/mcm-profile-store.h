@@ -64,7 +64,12 @@ McmProfileStore	*mcm_profile_store_new			(void);
 
 McmProfile	*mcm_profile_store_get_by_filename	(McmProfileStore	*profile_store,
 							 const gchar		*filename);
+McmProfile	*mcm_profile_store_get_by_checksum	(McmProfileStore	*profile_store,
+							 const gchar		*checksum);
 GPtrArray	*mcm_profile_store_get_array		(McmProfileStore	*profile_store);
+gboolean	 mcm_profile_store_search_default	(McmProfileStore	*profile_store);
+gboolean	 mcm_profile_store_search_by_path	(McmProfileStore	*profile_store,
+							 const gchar		*path);
 
 G_END_DECLS
 

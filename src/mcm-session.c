@@ -316,9 +316,6 @@ mcm_session_get_profiles_for_file (const gchar *filename, GError **error)
 	GPtrArray *array = NULL;
 	GPtrArray *array_devices;
 	GFile *file;
-	GFile *file_tmp;
-	McmProfile *profile;
-	GError *error_local = NULL;
 
 	/* get file type */
 	exif = mcm_exif_new ();
@@ -326,9 +323,6 @@ mcm_session_get_profiles_for_file (const gchar *filename, GError **error)
 	ret = mcm_exif_parse (exif, file, error);
 	if (!ret)
 		goto out;
-
-	/* create a temp array */
-	array = g_ptr_array_new_with_free_func ((GDestroyNotify) g_object_unref);
 
 	/* get list */
 	egg_debug ("query=%s", filename);
@@ -341,27 +335,8 @@ mcm_session_get_profiles_for_file (const gchar *filename, GError **error)
 		    g_strcmp0 (mcm_device_get_model (device), mcm_exif_get_model (exif)) == 0 &&
 		    g_strcmp0 (mcm_device_get_serial (device), mcm_exif_get_serial (exif)) == 0) {
 
-			/* TODO: get an array of McmProfiles */
-			filename = mcm_device_get_default_profile_filename (device);
-			if (filename == NULL) {
-				egg_warning ("%s does not have a profile set", mcm_device_get_id (device));
-				continue;
-			}
-
-			/* open and parse filename */
-			profile = mcm_profile_default_new ();
-			file_tmp = g_file_new_for_path (filename);
-			ret = mcm_profile_parse (profile, file_tmp, &error_local);
-			if (!ret) {
-				egg_warning ("failed to parse %s: %s", filename, error_local->message);
-				g_clear_error (&error_local);
-			} else {
-				g_ptr_array_add (array, g_object_ref (profile));
-			}
-
-			/* unref */
-			g_object_unref (file_tmp);
-			g_object_unref (profile);
+			array = mcm_device_get_profiles (device);
+			break;
 		}
 	}
 
@@ -379,16 +354,11 @@ out:
 static GPtrArray *
 mcm_session_get_profiles_for_device (const gchar *device_id_with_prefix, GError **error)
 {
-	gboolean ret;
-	const gchar *filename;
 	const gchar *device_id;
 	const gchar *device_id_tmp;
 	guint i;
 	gboolean use_native_device = FALSE;
 	McmDevice *device;
-	McmProfile *profile;
-	GFile *file;
-	GError *error_local = NULL;
 	GPtrArray *array;
 	GPtrArray *array_devices;
 
@@ -404,9 +374,6 @@ mcm_session_get_profiles_for_device (const gchar *device_id_with_prefix, GError 
 	/* use the sysfs path to be backwards compatible */
 	if (g_str_has_prefix (device_id_with_prefix, "/"))
 		use_native_device = TRUE;
-
-	/* create a temp array */
-	array = g_ptr_array_new_with_free_func ((GDestroyNotify) g_object_unref);
 
 	/* get list */
 	egg_debug ("query=%s [%s] %i", device_id_with_prefix, device_id, use_native_device);
@@ -429,27 +396,8 @@ mcm_session_get_profiles_for_device (const gchar *device_id_with_prefix, GError 
 		egg_debug ("comparing %s with %s", device_id_tmp, device_id);
 		if (g_strcmp0 (device_id_tmp, device_id) == 0) {
 
-			/* TODO: get an array of McmProfiles */
-			filename = mcm_device_get_default_profile_filename (device);
-			if (filename == NULL) {
-				egg_warning ("%s does not have a profile set", device_id);
-				continue;
-			}
-
-			/* open and parse filename */
-			profile = mcm_profile_default_new ();
-			file = g_file_new_for_path (filename);
-			ret = mcm_profile_parse (profile, file, &error_local);
-			if (!ret) {
-				egg_warning ("failed to parse %s: %s", filename, error_local->message);
-				g_clear_error (&error_local);
-			} else {
-				g_ptr_array_add (array, g_object_ref (profile));
-			}
-
-			/* unref */
-			g_object_unref (file);
-			g_object_unref (profile);
+			array = mcm_device_get_profiles (device);
+			break;
 		}
 	}
 

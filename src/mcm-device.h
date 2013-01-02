@@ -107,9 +107,9 @@ void			 mcm_device_set_model			(McmDevice	*device,
 const gchar		*mcm_device_get_title			(McmDevice	*device);
 void			 mcm_device_set_title			(McmDevice	*device,
 								 const gchar 	*title);
-gchar			**mcm_device_get_profile_filenames	(McmDevice	*device);
-void			 mcm_device_set_profile_filenames	(McmDevice	*device,
-								 gchar 		**profile_filenames);
+GPtrArray		*mcm_device_get_profiles		(McmDevice	*device);
+void			 mcm_device_set_profiles		(McmDevice	*device,
+								 GPtrArray	*profiles);
 glong			 mcm_device_get_modified_time		(McmDevice	*device);
 
 /* helpers */

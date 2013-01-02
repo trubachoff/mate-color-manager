@@ -64,25 +64,25 @@ mcm_test_get_data_file (const gchar *filename)
 		return full;
 	g_free (full);
 
-	/* check to see if we are being run in the build root */
-	full = g_build_filename ("..", "..", "data", "tests", filename, NULL);
-	ret = g_file_test (full, G_FILE_TEST_EXISTS);
-	if (ret)
-		return full;
-	g_free (full);
-
 	/* check to see if we are being run in make check */
 	full = g_build_filename ("..", "..", "data", "tests", filename, NULL);
 	ret = g_file_test (full, G_FILE_TEST_EXISTS);
 	if (ret)
 		return full;
 	g_free (full);
-	full = g_build_filename ("..", "..", "..", "data", "tests", filename, NULL);
-	ret = g_file_test (full, G_FILE_TEST_EXISTS);
-	if (ret)
-		return full;
-	g_free (full);
 	return NULL;
+}
+
+static void
+mcm_test_assert_basename (const gchar *filename1, const gchar *filename2)
+{
+	gchar *basename1;
+	gchar *basename2;
+	basename1 = g_path_get_basename (filename1);
+	basename2 = g_path_get_basename (filename2);
+	g_assert_cmpstr (basename1, ==, basename2);
+	g_free (basename1);
+	g_free (basename2);
 }
 
 static void
@@ -348,10 +348,18 @@ mcm_test_device_func (void)
 	gboolean ret;
 	GError *error = NULL;
 	gchar *filename;
-	const gchar *profile;
-	gchar **profiles;
+	McmProfile *profile;
+	const gchar *profile_filename;
+	GPtrArray *profiles;
 	gchar *data;
 	gchar **split;
+	gchar *contents;
+	gchar *icc_filename1;
+	gchar *icc_filename2;
+
+	/* get test files */
+	icc_filename1 = mcm_test_get_data_file ("bluish.icc");
+	icc_filename2 = mcm_test_get_data_file ("AdobeGammaTest.icm");
 
 	device = mcm_device_udev_new ();
 	g_assert (device != NULL);
@@ -409,11 +417,12 @@ mcm_test_device_func (void)
 	g_assert (ret);
 
 	/* set default file */
-	g_file_set_contents (filename,
-			     "[sysfs_dummy_device]\n"
-			     "title=Canon - CanoScan\n"
-			     "type=scanner\n"
-			     "profile=/srv/sysfs_canon_canoscan.icc;/home/generic.icc\n", -1, NULL);
+	contents = g_strdup_printf ("[sysfs_dummy_device]\n"
+				    "title=Canon - CanoScan\n"
+				    "type=scanner\n"
+				    "profile=%s;%s\n",
+				    icc_filename1, icc_filename2);
+	g_file_set_contents (filename, contents, -1, NULL);
 
 	ret = mcm_device_load (device, &error);
 	g_assert_no_error (error);
@@ -425,15 +434,21 @@ mcm_test_device_func (void)
 	g_assert_cmpint (_changes, ==, 3);
 
 	/* get some properties */
-	profile = mcm_device_get_default_profile_filename (device);
-	g_assert_cmpstr (profile, ==, "/srv/sysfs_canon_canoscan.icc");
-	profiles = mcm_device_get_profile_filenames (device);
-	g_assert_cmpstr (profiles[0], ==, "/srv/sysfs_canon_canoscan.icc");
-	g_assert_cmpstr (profiles[1], ==, "/home/generic.icc");
-	g_assert_cmpstr (profiles[2], ==, NULL);
+	profile_filename = mcm_device_get_default_profile_filename (device);
+	mcm_test_assert_basename (profile_filename, icc_filename1);
+	profiles = mcm_device_get_profiles (device);
+	g_assert_cmpint (profiles->len, ==, 2);
+
+	profile = g_ptr_array_index (profiles, 0);
+	g_assert (profile != NULL);
+	mcm_test_assert_basename (mcm_profile_get_filename (profile), icc_filename1);
+
+	profile = g_ptr_array_index (profiles, 1);
+	g_assert (profile != NULL);
+	mcm_test_assert_basename (mcm_profile_get_filename (profile), icc_filename2);
 
 	/* set some properties */
-	mcm_device_set_default_profile_filename (device, "/srv/sysfs_canon_canoscan.icc");
+	mcm_device_set_default_profile_filename (device, icc_filename1);
 
 	/* ensure the file is nuked, again */
 	g_unlink (filename);
@@ -448,7 +463,6 @@ mcm_test_device_func (void)
 
 	split = g_strsplit (data, "\n", -1);
 	g_assert_cmpstr (split[1], ==, "[sysfs_dummy_device]");
-	g_assert_cmpstr (split[4], ==, "profile=/srv/sysfs_canon_canoscan.icc;");
 	g_assert_cmpstr (split[5], ==, "serial=0123456789");
 	g_assert_cmpstr (split[6], ==, "type=scanner");
 	g_assert_cmpstr (split[7], ==, "colorspace=rgb");
@@ -459,6 +473,9 @@ mcm_test_device_func (void)
 	g_unlink (filename);
 	g_main_loop_unref (_loop);
 	g_free (filename);
+	g_free (icc_filename1);
+	g_free (icc_filename2);
+	g_free (contents);
 
 	g_object_unref (device);
 }
@@ -1068,8 +1085,13 @@ mcm_test_client_func (void)
 	gboolean ret;
 	GPtrArray *array;
 	McmDevice *device;
+	gchar *contents;
 	gchar *filename;
+	gchar *icc_filename;
 	gchar *data = NULL;
+
+	/* get test file */
+	icc_filename = mcm_test_get_data_file ("bluish.icc");
 
 	client = mcm_client_new ();
 	g_assert (client != NULL);
@@ -1085,16 +1107,17 @@ mcm_test_client_func (void)
 	g_assert (ret);
 
 	array = mcm_client_get_devices (client);
+	g_assert (array != NULL);
 	g_assert_cmpint (array->len, ==, 0);
 	g_ptr_array_unref (array);
 
 	/* ensure we get one device */
-	ret = g_file_set_contents (filename,
-				   "[xrandr_goldstar]\n"
-				   "profile=dave.icc\n"
-				   "title=Goldstar\n"
-				   "type=display\n"
-				   "colorspace=rgb\n", -1, &error);
+	contents = g_strdup_printf ("[xrandr_goldstar]\n"
+				    "profile=%s\n"
+				    "title=Goldstar\n"
+				    "type=display\n"
+				    "colorspace=rgb\n", icc_filename);
+	ret = g_file_set_contents (filename, contents, -1, &error);
 	g_assert_no_error (error);
 	g_assert (ret);
 
@@ -1103,11 +1126,12 @@ mcm_test_client_func (void)
 	g_assert (ret);
 
 	array = mcm_client_get_devices (client);
+	g_assert (array != NULL);
 	g_assert_cmpint (array->len, ==, 1);
 	device = g_ptr_array_index (array, 0);
 	g_assert_cmpstr (mcm_device_get_id (device), ==, "xrandr_goldstar");
 	g_assert_cmpstr (mcm_device_get_title (device), ==, "Goldstar");
-	g_assert_cmpstr (mcm_device_get_default_profile_filename (device), ==, "dave.icc");
+	mcm_test_assert_basename (mcm_device_get_default_profile_filename (device), icc_filename);
 	g_assert (mcm_device_get_saved (device));
 	g_assert (!mcm_device_get_connected (device));
 	g_assert (MCM_IS_DEVICE_XRANDR (device));
@@ -1127,7 +1151,7 @@ mcm_test_client_func (void)
 	device = g_ptr_array_index (array, 0);
 	g_assert_cmpstr (mcm_device_get_id (device), ==, "xrandr_goldstar");
 	g_assert_cmpstr (mcm_device_get_title (device), ==, "Slightly different");
-	g_assert_cmpstr (mcm_device_get_default_profile_filename (device), ==, "dave.icc");
+	mcm_test_assert_basename (mcm_device_get_default_profile_filename (device), icc_filename);
 	g_assert (mcm_device_get_saved (device));
 	g_assert (mcm_device_get_connected (device));
 	g_assert (MCM_IS_DEVICE_UDEV (device));
@@ -1152,7 +1176,9 @@ mcm_test_client_func (void)
 	g_object_unref (client);
 	g_object_unref (device);
 	g_unlink (filename);
+	g_free (contents);
 	g_free (filename);
+	g_free (icc_filename);
 	g_free (data);
 }
 

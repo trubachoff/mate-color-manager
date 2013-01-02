@@ -1161,7 +1161,7 @@ mcm_client_add_device (McmClient *client, McmDevice *device, GError **error)
 	device_tmp = mcm_client_get_device_by_id (client, device_id);
 	if (device_tmp != NULL) {
 		egg_debug ("already exists, copy settings and remove old device: %s", device_id);
-		mcm_device_set_profile_filenames (device, mcm_device_get_profile_filenames (device_tmp));
+		mcm_device_set_profiles (device, mcm_device_get_profiles (device_tmp));
 		mcm_device_set_saved (device, mcm_device_get_saved (device_tmp));
 		ret = mcm_client_remove_device_internal (client, device_tmp, FALSE, error);
 		if (!ret)

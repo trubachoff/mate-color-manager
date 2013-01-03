@@ -1,7 +1,7 @@
 [Desktop Entry]
 _Name=ICC Profile Installer
 _Comment=Install ICC profiles
-Categories=System;X-Red-Hat-Base;X-Fedora;
+Categories=System;
 Exec=/usr/bin/mcm-import %F
 Terminal=false
 Type=Application

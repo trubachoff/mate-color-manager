@@ -120,14 +120,9 @@ PKG_CHECK_MODULES(VTE, vte >= $VTE_REQUIRED)
 PKG_CHECK_MODULES(GUDEV, gudev-1.0)
 PKG_CHECK_MODULES(LCMS, lcms)
 PKG_CHECK_MODULES(X11, x11)
-PKG_CHECK_MODULES(NOTIFY, libnotify)
 
-dnl **** Check for NOTIFY ****
-PKG_CHECK_MODULES(NOTIFY, libnotify >= 0.5.0, has_libnotify=yes, has_libnotify=no)
-AM_CONDITIONAL(HAVE_NOTIFY, test x$libnotify = xyes)
-if test x$has_libnotify = xyes; then
-	AC_DEFINE(HAVE_NOTIFY,1,[Use session notifications])
-fi
++dnl **** Check for libnotify ****
++PKG_CHECK_MODULES(NOTIFY, libnotify >= 0.7.0)
 
 dnl **** Check for SANE ****
 AC_ARG_ENABLE(sane, AS_HELP_STRING([--enable-sane],[Enable SANE support for scanner support]), enable_sane=$enableval,

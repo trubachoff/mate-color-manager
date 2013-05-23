@@ -24,9 +24,8 @@
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
 #include <locale.h>
-#ifdef HAVE_NOTIFY
 #include <libnotify/notify.h>
-#endif
+
 #include "egg-debug.h"
 #include "mcm-client.h"
 #include "mcm-device-xrandr.h"
@@ -68,7 +67,6 @@ mcm_session_check_idle_cb (gpointer user_data)
 }
 
 
-#ifdef HAVE_NOTIFY
 /**
  * mcm_session_notify_cb:
  **/
@@ -90,7 +88,6 @@ mcm_session_notify_cb (NotifyNotification *notification, gchar *action, gpointer
 		}
 	}
 }
-#endif
 
 /**
  * mcm_session_notify_recalibrate:
@@ -103,7 +100,7 @@ mcm_session_notify_recalibrate (const gchar *title, const gchar *message, McmDev
 	NotifyNotification *notification;
 
 	/* show a bubble */
-	notification = notify_notification_new (title, message, MCM_STOCK_ICON, NULL);
+	notification = notify_notification_new (title, message, MCM_STOCK_ICON);
 	notify_notification_set_timeout (notification, MCM_SESSION_NOTIFY_TIMEOUT);
 	notify_notification_set_urgency (notification, NOTIFY_URGENCY_LOW);
 

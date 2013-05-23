@@ -24,8 +24,9 @@
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
 #include <locale.h>
+#ifdef HAVE_LIBNOTIFY
 #include <libnotify/notify.h>
-
+#endif
 #include "egg-debug.h"
 #include "mcm-client.h"
 #include "mcm-device-xrandr.h"
@@ -66,6 +67,8 @@ mcm_session_check_idle_cb (gpointer user_data)
 	return TRUE;
 }
 
+
+#ifdef HAVE_LIBNOTIFY
 /**
  * mcm_session_notify_cb:
  **/
@@ -87,6 +90,7 @@ mcm_session_notify_cb (NotifyNotification *notification, gchar *action, gpointer
 		}
 	}
 }
+#endif
 
 /**
  * mcm_session_notify_recalibrate:

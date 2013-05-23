@@ -122,9 +122,16 @@ PKG_CHECK_MODULES(LCMS, lcms)
 PKG_CHECK_MODULES(X11, x11)
 PKG_CHECK_MODULES(NOTIFY, libnotify)
 
+dnl **** Check for LIBNOTIFY ****
+PKG_CHECK_MODULES(LIBNOTIFY, libnotify3 >= 0.4.3, has_libnotify=yes, has_libnotify=no)
+AM_CONDITIONAL(HAVE_LIBNOTIFY, test x$libnotify = xyes)
+if test x$has_libnotify = xyes; then
+	AC_DEFINE(HAVE_LIBNOTIFY,1,[Use session notifications])
+fi
+
+dnl **** Check for SANE ****
 AC_ARG_ENABLE(sane, AS_HELP_STRING([--enable-sane],[Enable SANE support for scanner support]), enable_sane=$enableval,
 				   enable_sane=yes)
-dnl **** Check for SANE ****
 if test x$enable_sane != xno; then
 	PKG_CHECK_MODULES(SANE, sane-backends, has_sane=yes, has_sane=no)
 	if test $has_sane = "no"; then
@@ -138,9 +145,9 @@ if test x$enable_sane != xno; then
 		AC_SUBST(SANE_LIBS)
 	fi
 fi
-AM_CONDITIONAL(MCM_USE_SANE, test x$enable_sane = xyes)
+AM_CONDITIONAL(HAVE_SANE, test x$enable_sane = xyes)
 if test x$enable_sane = xyes; then
-	AC_DEFINE(MCM_USE_SANE,1,[Use SANE support for detecting scanners])
+	AC_DEFINE(HAVE_SANE,1,[Use SANE support for detecting scanners])
 fi
 
 AC_ARG_ENABLE(exiv, AS_HELP_STRING([--enable-exiv],[Enable EXIV support for RAW support]), enable_exiv=$enableval,

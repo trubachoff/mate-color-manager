@@ -24,7 +24,7 @@
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
 #include <locale.h>
-#include <libmatenotify/notify.h>
+#include <libnotify/notify.h>
 
 #include "egg-debug.h"
 #include "mcm-client.h"

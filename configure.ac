@@ -120,7 +120,7 @@ PKG_CHECK_MODULES(VTE, vte >= $VTE_REQUIRED)
 PKG_CHECK_MODULES(GUDEV, gudev-1.0)
 PKG_CHECK_MODULES(LCMS, lcms)
 PKG_CHECK_MODULES(X11, x11)
-PKG_CHECK_MODULES(NOTIFY, libmatenotify)
+PKG_CHECK_MODULES(NOTIFY, libnotify)
 
 AC_ARG_ENABLE(sane, AS_HELP_STRING([--enable-sane],[Enable SANE support for scanner support]), enable_sane=$enableval,
 				   enable_sane=yes)

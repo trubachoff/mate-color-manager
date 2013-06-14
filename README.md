@@ -17,7 +17,7 @@ Build dependencies:
 gtk2-devel, rarian-compat, vte-devel, mate-doc-utils, unique-devel, libgudev1-devel,
 dbus-glib-devel, libXxf86vm-devel, libXrandr-devel, mate-desktop-devel, lcms-devel,
 cups-devel, sane-backends-devel, libtiff-devel, libcanberra-devel, mate-common,
-libnotify-devel, exiv2-devel, libexif-devel
+libnotify-devel, exiv2-devel, libexif-devel, glib2-devel
 
 Note: the names of the packages could be differ on debian based distros.
 

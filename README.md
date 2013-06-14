@@ -14,10 +14,12 @@ sudo make install
 
 Build dependencies:
 
-gtk2-devel, scrollkeeper, desktop-file-utils, gettext, libtool, vte-devel, mate-doc-utils,
-unique-devel, intltool, libgudev1-devel, dbus-glib-devel, libXxf86vm-devel, libXrandr-devel,
-mate-desktop-devel, lcms-devel, cups-devel, sane-backends-devel, libtiff-devel, libcanberra-devel,
-mate-common, gtk-doc, mate-conf-devel, libnotify-devel
+gtk2-devel, rarian-compat, vte-devel, mate-doc-utils, unique-devel, libgudev1-devel,
+dbus-glib-devel, libXxf86vm-devel, libXrandr-devel, mate-desktop-devel, lcms-devel,
+cups-devel, sane-backends-devel, libtiff-devel, libcanberra-devel, mate-common,
+libnotify-devel, exiv2-devel, libexif-devel
+
+Note: the names of the packages could be differ on debian based distros.
 
 If start of mcm-prefs fails after installation use the --sync option
 

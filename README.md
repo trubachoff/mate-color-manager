@@ -13,6 +13,7 @@ sudo make install
 
 
 Build dependencies:
+
 -- fedora
 
 gtk2-devel, rarian-compat, vte-devel, mate-doc-utils, unique-devel, libgudev1-devel,

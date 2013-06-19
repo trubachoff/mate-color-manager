@@ -13,13 +13,19 @@ sudo make install
 
 
 Build dependencies:
+-- fedora
 
 gtk2-devel, rarian-compat, vte-devel, mate-doc-utils, unique-devel, libgudev1-devel,
 dbus-glib-devel, libXxf86vm-devel, libXrandr-devel, mate-desktop-devel, lcms-devel,
 cups-devel, sane-backends-devel, libtiff-devel, libcanberra-devel, mate-common,
 libnotify-devel, exiv2-devel, libexif-devel, glib2-devel
 
-Note: the names of the packages could be differ on debian based distros.
+--debian based
+
+libgtk2.0-dev rarian-compat libvte-dev mate-doc-utils libunique-dev libgudev-1.0-dev, 
+libdbus-glib-1-dev libxxf86vm-dev libxrandr-dev libmatedesktop-dev liblcms-dev,
+libcups2-dev libsane-dev libtiff-dev libcanberra-gtk-dev mate-common libnotify-dev,
+libexiv2-dev libglib2.0-dev
 
 If start of mcm-prefs fails after installation use the --sync option
 

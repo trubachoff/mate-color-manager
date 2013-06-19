@@ -23,10 +23,10 @@ libnotify-devel, exiv2-devel, libexif-devel, glib2-devel
 
 --debian based
 
-libgtk2.0-dev rarian-compat libvte-dev mate-doc-utils libunique-dev libgudev-1.0-dev, 
-libdbus-glib-1-dev libxxf86vm-dev libxrandr-dev libmatedesktop-dev liblcms-dev,
-libcups2-dev libsane-dev libtiff-dev libcanberra-gtk-dev mate-common libnotify-dev,
-libexiv2-dev libglib2.0-dev
+libgtk2.0-dev, rarian-compat, libvte-dev, mate-doc-utils, libunique-dev, libgudev-1.0-dev,
+libdbus-glib-1-dev, libxxf86vm-dev, libxrandr-dev, libmatedesktop-dev, liblcms-dev,
+libcups2-dev, libsane-dev, libtiff-dev, libcanberra-gtk-dev, mate-common,
+libnotify-dev, libexiv2-dev, libglib2.0-dev
 
 If start of mcm-prefs fails after installation use the --sync option
 
